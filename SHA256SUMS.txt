@@ -28,6 +28,6 @@ ee0a1f1c22ef3632c67a3c4aec288b53c29d9b5e7c0b96a93e1bb57faf7bdf98  ./certificates
 c857d55aefc581adc2b1839de7088baf07b7007094b455b9d8b775238c653f49  ./lake-manifest.json
 aa946fa14585f681c2a4e3e1b33e9dd659d9ffe63f36dac50975c48867ff9e44  ./lakefile.toml
 72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed  ./lean-toolchain
-86e255993a34db4bf689a9eb41135145c66eef71ad0865b7e38a8093a98385c1  ./paper/agrawal-certified-core.pdf
-ab9c944c44783a1b7ae0c7daaf7c1caba48efc7587c09f914374c63705b0324e  ./paper/agrawal-certified-core.tex
+ca05b575d14eefbc8dd488bb131d3df90b4c110036b7c5430f305ec16e6ffbb4  ./paper/agrawal-certified-core.pdf
+fb7ee0fca4adf0c46fcd10d985263589d594181921f900dee83b3218fc598c2c  ./paper/agrawal-certified-core.tex
 d9c4b8f662bca6eb31d359240bd0398f0a6da89cff15f8f2a945c4e3d9c0625f  ./tools/verify_certificates.py
