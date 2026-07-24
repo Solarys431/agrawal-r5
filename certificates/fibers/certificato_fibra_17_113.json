@@ -1,0 +1,503 @@
+{
+  "A": 1920,
+  "branch": "puro",
+  "candidate_filter": {
+    "checked": [],
+    "conditions": [
+      "q > p2",
+      "q != p1,p2",
+      "q mod 5 in {2,3}",
+      "q in one exact detector class",
+      "all three original-field rows true"
+    ],
+    "survivors": []
+  },
+  "detector": {
+    "classes": [
+      {
+        "j1": 0,
+        "j2": 2,
+        "modulus": 383040,
+        "nu": 2,
+        "residue": 203537
+      },
+      {
+        "j1": 2,
+        "j2": 0,
+        "modulus": 383040,
+        "nu": 3,
+        "residue": 165233
+      }
+    ],
+    "definition": "for nu in {2,3}, j_i=0 iff p_i=nu (mod 5), otherwise j_i=2; q solves p2*q=p1^j1 (mod T1), p1*q=p2^j2 (mod T2), and p1*p2*q=nu (mod 5)",
+    "order_certificates": [
+      {
+        "T": 2880,
+        "T_factorization": {
+          "2": 6,
+          "3": 2,
+          "5": 1
+        },
+        "group_order": 83520,
+        "group_order_factorization": {
+          "2": 6,
+          "29": 1,
+          "3": 2,
+          "5": 1
+        },
+        "p": 17,
+        "power_T_is_one": true,
+        "power_T_over_prime_witnesses": {
+          "2": [
+            16,
+            0,
+            0,
+            0
+          ],
+          "3": [
+            12,
+            0,
+            8,
+            8
+          ],
+          "5": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      {
+        "T": 42560,
+        "T_factorization": {
+          "19": 1,
+          "2": 6,
+          "5": 1,
+          "7": 1
+        },
+        "group_order": 163047360,
+        "group_order_factorization": {
+          "1277": 1,
+          "19": 1,
+          "2": 6,
+          "3": 1,
+          "5": 1,
+          "7": 1
+        },
+        "p": 113,
+        "power_T_is_one": true,
+        "power_T_over_prime_witnesses": {
+          "19": [
+            0,
+            0,
+            15,
+            15
+          ],
+          "2": [
+            112,
+            0,
+            0,
+            0
+          ],
+          "5": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "7": [
+            16,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "witness_checks": [
+      {
+        "first_prime_witness": 586577,
+        "j1": 0,
+        "j2": 2,
+        "modulus": 383040,
+        "nu": 2,
+        "original_field_checks": {
+          "row_p1": true,
+          "row_p2": true,
+          "row_q": false
+        },
+        "residue": 203537
+      },
+      {
+        "first_prime_witness": 165233,
+        "j1": 2,
+        "j2": 0,
+        "modulus": 383040,
+        "nu": 3,
+        "original_field_checks": {
+          "row_p1": true,
+          "row_p2": true,
+          "row_q": false
+        },
+        "residue": 165233
+      }
+    ]
+  },
+  "exponent": 192,
+  "factorization": {
+    "all_primes_proven": true,
+    "factors": {
+      "1012019761": 1,
+      "109": 1,
+      "11": 2,
+      "114667374401": 1,
+      "119689328401": 1,
+      "1201": 1,
+      "1536965113249": 1,
+      "16017780697921": 1,
+      "160529640001": 1,
+      "1644660481": 1,
+      "19": 1,
+      "2": 14,
+      "201920321": 1,
+      "21121": 1,
+      "215521": 1,
+      "218521": 1,
+      "22115997243095632860001": 1,
+      "23041": 1,
+      "241": 2,
+      "247601": 1,
+      "271": 1,
+      "281": 1,
+      "3": 4,
+      "31": 2,
+      "331841": 1,
+      "3361": 1,
+      "37441": 1,
+      "3765905281": 1,
+      "401": 1,
+      "41": 2,
+      "420001": 1,
+      "5373761": 1,
+      "544001": 1,
+      "547085002646231639668712550776809691850000001": 1,
+      "5854561": 1,
+      "61": 2,
+      "6145608521202498182866550401": 1,
+      "641": 1,
+      "661": 1,
+      "7": 2,
+      "7265281": 1,
+      "8641": 1,
+      "87899741634609601": 1,
+      "881": 1,
+      "89": 1,
+      "963121": 1
+    },
+    "full_resultant_completely_factorized": false,
+    "full_target_digits": 672,
+    "full_target_sha256": "ffe46b9181684e81d9de275e49789cef8c32cabb42d442c2cc5f8dcddd75b4cc",
+    "logical_fibre_coverage_complete": true,
+    "pari_factorback": true,
+    "primality_engine": "PARI isprime; default(factor_proven,1)",
+    "proven_primality": {
+      "1012019761": true,
+      "109": true,
+      "11": true,
+      "114667374401": true,
+      "119689328401": true,
+      "1201": true,
+      "1536965113249": true,
+      "16017780697921": true,
+      "160529640001": true,
+      "1644660481": true,
+      "19": true,
+      "2": true,
+      "201920321": true,
+      "21121": true,
+      "215521": true,
+      "218521": true,
+      "22115997243095632860001": true,
+      "23041": true,
+      "241": true,
+      "247601": true,
+      "271": true,
+      "281": true,
+      "3": true,
+      "31": true,
+      "331841": true,
+      "3361": true,
+      "37441": true,
+      "3765905281": true,
+      "401": true,
+      "41": true,
+      "420001": true,
+      "5373761": true,
+      "544001": true,
+      "547085002646231639668712550776809691850000001": true,
+      "5854561": true,
+      "61": true,
+      "6145608521202498182866550401": true,
+      "641": true,
+      "661": true,
+      "7": true,
+      "7265281": true,
+      "8641": true,
+      "87899741634609601": true,
+      "881": true,
+      "89": true,
+      "963121": true
+    },
+    "python_exact_reconstruction": true,
+    "scope": "complete factorization of every non-excluded level; completed excluded levels may be included as a harmless superset",
+    "scope_product_digits": 336,
+    "scope_product_sha256": "19f538271a044553d4ca23f7091dfcbf70b1d2bf6e0933c00b5d76c36e3ec78f"
+  },
+  "legacy_source": {
+    "completed_levels_reconstruction": true,
+    "path": "mietitura/certificato_17_113.json",
+    "sha256": "9fd292310b4634dcd404fec4f2c4fab0fae13fd81611ab4b1b3e5055b684aba8"
+  },
+  "level_summary": {
+    "all_levels": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64,
+      96,
+      192
+    ],
+    "excluded_without_factorization": [
+      64,
+      192
+    ],
+    "factor_failures": [],
+    "factorized_levels": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      96
+    ],
+    "missing_required_levels": [],
+    "newly_factorized": []
+  },
+  "levels": [
+    {
+      "d": 1,
+      "nonprimitive_checks": [],
+      "piece_digits": 4,
+      "piece_sha256": "c4fc2f43eaa0527ac86e1801ce5736aaf92af648d450cbbf4cca98c368682eb6",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 2,
+      "nonprimitive_checks": [],
+      "piece_digits": 4,
+      "piece_sha256": "dafff407d7450f62b0dd0c413f9f0745d70071b8ba4d731d093804be0502184e",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 3,
+      "nonprimitive_checks": [],
+      "piece_digits": 7,
+      "piece_sha256": "25a9fbccb1aff8eefc68006d925ec5556138dd8f433af990e73b7102103786f0",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 4,
+      "nonprimitive_checks": [],
+      "piece_digits": 8,
+      "piece_sha256": "aa0dd3ca0004243375ffb37f6b83a4cb1bbd249d954fcb80abed019aaf7edb7f",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 6,
+      "nonprimitive_checks": [],
+      "piece_digits": 8,
+      "piece_sha256": "4a272fb4928f485313ed3b5969ec8b9b5276436aed39f4d594d21794daad3e2e",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 8,
+      "nonprimitive_checks": [],
+      "piece_digits": 14,
+      "piece_sha256": "135c1d5ef8c6bf34dad0459020f68691fec533d553a927513b648018511a0aab",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 12,
+      "nonprimitive_checks": [],
+      "piece_digits": 14,
+      "piece_sha256": "6b24da7bbf1fabca4442636a4717f669174348d6964079fcde864bb15c938ac0",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 16,
+      "nonprimitive_checks": [],
+      "piece_digits": 28,
+      "piece_sha256": "c535ce351d5a454862d8ccedfaa092527fe823d93f3c7768ff243cdeaf9bf684",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 24,
+      "nonprimitive_checks": [],
+      "piece_digits": 28,
+      "piece_sha256": "839aa677f68f076f91dcf40f8741c22d2e3e1d149239de4f7efd1d7232fad270",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 32,
+      "nonprimitive_checks": [],
+      "piece_digits": 56,
+      "piece_sha256": "764456797cd310d3803cac55521ea03e8d8eb3d8f3b0f162fc48d0abf2bfd835",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 48,
+      "nonprimitive_checks": [],
+      "piece_digits": 56,
+      "piece_sha256": "b49ee8ae6c2a836437d2241c07cf89b2ad29cadf4d2f070c81f1a223d0abc70c",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 64,
+      "nonprimitive_checks": [],
+      "piece_digits": 112,
+      "piece_sha256": "31b1ecd1794aa175ad35d4794468f0a5fb938bc361d10372718c0076f309a33e",
+      "primitive_eliminated": true,
+      "requires_factorization": false,
+      "root_counts_by_nu": {
+        "2": 0,
+        "3": 0
+      }
+    },
+    {
+      "d": 96,
+      "nonprimitive_checks": [],
+      "piece_digits": 112,
+      "piece_sha256": "09a48b72be43a7809895f79674b97eaeea255470317f62416c5062f93ddd1759",
+      "primitive_eliminated": false,
+      "requires_factorization": true,
+      "root_counts_by_nu": {
+        "2": 1,
+        "3": 1
+      }
+    },
+    {
+      "d": 192,
+      "nonprimitive_checks": [],
+      "piece_digits": 224,
+      "piece_sha256": "5e1314774f0868298f0c0bf21c5c8b15fbe9f73748c34392bafee2c642c05f10",
+      "primitive_eliminated": true,
+      "requires_factorization": false,
+      "root_counts_by_nu": {
+        "2": 0,
+        "3": 0
+      }
+    }
+  ],
+  "mandatory_certificate_fields": {
+    "complete_factorization": {
+      "all_nonexcluded_levels": true,
+      "full_resultant": false,
+      "note": "a full resultant factorization is unnecessary when every omitted level is excluded exactly by S6 and its nonprimitive prime divisors are checked directly"
+    },
+    "exact_reconstruction": {
+      "pari_factorback": true,
+      "python": true
+    },
+    "original_field_check": {
+      "detector_witness_third_rows_evaluated": 2,
+      "detector_witnesses_first_two_rows_pass": true,
+      "every_filtered_candidate_has_three_checks": true,
+      "filtered_candidates_checked": 0
+    },
+    "proven_primality": true,
+    "sha256": {
+      "algorithm": "SHA-256",
+      "file_hash_location": "fibre_s40/MANIFEST.json",
+      "payload_hash_field": "payload_sha256"
+    }
+  },
+  "pair": [
+    17,
+    113
+  ],
+  "payload_sha256": "26e6204d3d05dd59b20ea3422e00649ec2dc5d585ad7fbc3d6cf6e17925137b4",
+  "schema": 1,
+  "status": "fibra_vuota_certificata",
+  "theorem_scope": "S7 finite fibre + S6 exact level sieve; all q are ordered q>p2",
+  "version": "S40 fibre batch certificate v1"
+}

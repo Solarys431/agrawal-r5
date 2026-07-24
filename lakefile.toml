@@ -1,0 +1,10 @@
+name = "AgrawalCore"
+defaultTargets = ["AgrawalCore"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "144b65e0b6dfc0d1f3ebee3598920b5437863900"
+
+[[lean_lib]]
+name = "AgrawalCore"
