@@ -1,0 +1,30 @@
+N=100000
+primi canonici p=2 mod 5, p<=2N-1: 4503
+primi p=3 mod 5, p<=199999, con testimone <=N: 19
+lista p=3 mod 5:
+  p=     3  n_min=     14  E=      8  R=      2  periodo=20
+  p=    13  n_min=    119  E=     28  R=      4  periodo=140
+  p=    23  n_min=    804  E=     48  R=     22  periodo=1320
+  p=    43  n_min=   2794  E=     88  R=     42  periodo=4620
+  p=    53  n_min=   4239  E=    108  R=     52  periodo=7020
+  p=    73  n_min=   8029  E=    148  R=     72  periodo=13320
+  p=    83  n_min=  10374  E=    168  R=     82  periodo=17220
+  p=   103  n_min=  15964  E=    208  R=    102  periodo=26520
+  p=   113  n_min=   8569  E=     76  R=    112  periodo=10640
+  p=   163  n_min=  17794  E=    328  R=     54  periodo=22140
+  p=   173  n_min=  44979  E=    348  R=    172  periodo=74820
+  p=   193  n_min=  55969  E=    388  R=    192  periodo=93120
+  p=   223  n_min=  74704  E=    448  R=    222  periodo=124320
+  p=   233  n_min=   6149  E=     52  R=    232  periodo=15080
+  p=   263  n_min=  46244  E=    176  R=    262  periodo=57640
+  p=   313  n_min=   2669  E=    628  R=      8  periodo=6280
+  p=   353  n_min=  83249  E=    236  R=    352  periodo=103840
+  p=   883  n_min=  56134  E=   1768  R=    126  periodo=278460
+  p=  1973  n_min=  23359  E=   1316  R=     68  periodo=111860
+totale nel range prime-first: 4522
+manifest status: complete
+fattori distinti nel manifest: 4522
+massimo fattore nel manifest: 199967
+mancanti rispetto al prime-first: []
+extra rispetto al prime-first: []
+CONFRONTO_INSIEMISTICO_ESATTO=True

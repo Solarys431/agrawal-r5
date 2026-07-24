@@ -3,7 +3,7 @@
 <details open>
 <summary><strong>English</strong></summary>
 
-A structural study of Agrawal's conjecture (2002) at r = 5, produced by
+A structural study of Agrawal's conjecture at r = 5, produced by
 an autonomous multi-model pipeline with external review. This
 repository is the verification surface: the Lean core, the paper, and
 the computational certificates. We do **not** prove the conjecture;
@@ -36,9 +36,10 @@ lake build
 
 ## Paper
 
-`paper/agrawal-local-structure-v17.pdf`: the full study, with every
-statement carrying its exact status (theorem / theorem under GRH /
-open) and its pointer to a certificate or a Lean declaration.
+`paper/agrawal-certified-core.pdf`: the kernel-certified core of the
+study. Everything called a theorem in it is checked by Lean, every
+computational claim carries a certificate, and the two central open
+problems are posed without any claim of proof.
 
 ## Certificates
 
@@ -47,14 +48,17 @@ case (each certificate embeds its own detector criterion and level
 factorizations, all prime factors proven), the self-certifying census
 manifest (n ≤ 100000, proven factorizations, zero split factors), the
 reproducibility manifest, and the SHA-256 sums of the 10^9 prime-first
-corpus. Everything is replayable; nothing depends on trusting us.
+corpus. Everything is replayable; nothing depends on trusting us. Run
+`python3 tools/verify_certificates.py` to re-check every fiber
+certificate (primality cross-check, detector-class emptiness,
+internal consistency) and the census manifest.
 
 </details>
 
 <details>
 <summary><strong>Italiano</strong></summary>
 
-Uno studio strutturale della congettura di Agrawal (2002) per r = 5,
+Uno studio strutturale della congettura di Agrawal per r = 5,
 prodotto da una pipeline autonoma multi-modello con revisione esterna.
 Questo repository è la superficie di verifica: il nucleo Lean, il
 paper e i certificati computazionali. La congettura **non** è
@@ -76,9 +80,10 @@ teorema del paper sulla sua dichiarazione Lean.
 
 ## Paper
 
-`paper/agrawal-local-structure-v17.pdf`: lo studio completo, con lo
-status esatto di ogni enunciato (teorema / teorema sotto GRH / aperto)
-e il puntatore al certificato o alla dichiarazione Lean.
+`paper/agrawal-certified-core.pdf`: il nucleo certificato dal kernel
+dello studio. Tutto ciò che vi è chiamato teorema è verificato da
+Lean, ogni claim computazionale ha il suo certificato, e i due
+problemi aperti centrali sono posti senza alcuna pretesa di prova.
 
 ## Certificati
 
@@ -88,6 +93,9 @@ rilevazione e le fattorizzazioni di livello, con tutti i fattori
 primi provati), il manifest autocertificante del censimento
 (n ≤ 100000, fattorizzazioni provate, zero fattori split), il
 manifest di riproducibilità e le somme SHA-256 del corpus prime-first
-a 10^9. Tutto è rieseguibile; nulla richiede fiducia in noi.
+a 10^9. Tutto è rieseguibile; nulla richiede fiducia in noi. Con
+`python3 tools/verify_certificates.py` si ricontrollano tutti i
+certificati di fibra (primalità, vuotezza nelle classi del
+rilevatore, coerenza interna) e il manifest del censimento.
 
 </details>
