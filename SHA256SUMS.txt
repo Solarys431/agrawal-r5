@@ -24,3 +24,4 @@ ee0a1f1c22ef3632c67a3c4aec288b53c29d9b5e7c0b96a93e1bb57faf7bdf98  ./certificates
 c857d55aefc581adc2b1839de7088baf07b7007094b455b9d8b775238c653f49  ./lake-manifest.json
 aa946fa14585f681c2a4e3e1b33e9dd659d9ffe63f36dac50975c48867ff9e44  ./lakefile.toml
 72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed  ./lean-toolchain
+baa73f364a85ee40b9ed08ed18d86c31e65aa3c9ac9fa9813632c543bdfb665c  ./paper/agrawal-certified-core.pdf
