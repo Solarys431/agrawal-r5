@@ -4,7 +4,7 @@ defaultTargets = ["AgrawalCore"]
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "ac0a0f3c36152900b2a005e72298bb2179f82f70"
+rev = "4a7edd35ec64de7117995da659e9d4d80e6cca19"
 
 [[lean_lib]]
 name = "AgrawalCore"
