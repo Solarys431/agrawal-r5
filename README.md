@@ -12,7 +12,7 @@ emptiness of the fibers) are stated precisely in the paper.
 
 ## Lean core
 
-Nine modules over plain Mathlib (pinned), no `sorry`, no extra
+Ten modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -33,6 +33,9 @@ lake build
 | Canonical support witness: p ≡ 2 (mod 5) ⟹ p ∣ H_((p+1)/2) | `support_witness` | `SupportBridge.lean` |
 | Fermat shadow (arithmetic glue) | `fermat_shadow` | `FermatShadow.lean` |
 | **The bridge: for squarefree n with 5 ∤ n, Agrawal's congruence at r = 5 ⟹ n ∣ 5^(n−1) − 1** | `agrawal_fermat_shadow` | `AgrawalBridge.lean` |
+| **The two-adic jaw: v₂(q−1) ≤ v₂(n−1) for every inert prime factor q of a counterexample** | `agrawal_two_adic_jaw` | `TwoAdicJaw.lean` |
+| Mod-4 corollary: n ≡ 3 (mod 4) ⟹ every inert factor is ≡ 3 (mod 4) | `agrawal_inert_mod_four` | `TwoAdicJaw.lean` |
+| 2-adic saturation of a divisor | `pow_two_dvd_of_not_dvd_half` | `TwoAdicJaw.lean` |
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 
@@ -86,7 +89,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Nove moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Dieci moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```

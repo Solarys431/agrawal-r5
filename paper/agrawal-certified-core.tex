@@ -200,6 +200,46 @@ and the squarefree gluing finishes. No Frobenius descent and no norm
 maps are needed.
 \end{proof}
 
+\section{The two-adic jaw}
+
+The bridge constrains a squarefree solution of the Agrawal congruence
+only through the multiplicative order of \(5\). On the primes that are
+inert in \(\mathbf{Q}(\sqrt5)\) that constraint is rigid at the
+prime \(2\).
+
+\begin{theorem}[\lean{agrawal\_two\_adic\_jaw}]\label{thm:jaw}
+Let \(n\) be squarefree with \(5\nmid n\) and suppose the Agrawal
+congruence at \(r=5\) holds. Let \(q\mid n\) be an odd prime with
+\(q\equiv\pm2\pmod5\). Then
+\[
+v_2(q-1)\;\le\;v_2(n-1).
+\]
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+By Theorem~\ref{thm:bridge}, \(\operatorname{ord}_q(5)\) divides
+\(n-1\). Since \(q\equiv\pm2\pmod5\), quadratic reciprocity gives
+\((5/q)=-1\) (\lean{not\_isSquare\_five}), so \(5^{(q-1)/2}=-1\)
+(\lean{euler\_nonsquare}) and the order does \emph{not} divide
+\((q-1)/2\). A divisor of \(2^{a}u\) with \(u\) odd that fails to
+divide \(2^{a-1}u\) is 2-adically saturated
+(\lean{pow\_two\_dvd\_of\_not\_dvd\_half}), whence
+\(v_2(\operatorname{ord}_q5)=v_2(q-1)\), and the claim follows.
+\end{proof}
+
+\begin{corollary}[\lean{agrawal\_inert\_mod\_four}]\label{cor:modfour}
+Under the same hypotheses, if \(n\equiv3\pmod4\) then every prime
+factor of \(n\) that is inert in \(\mathbf{Q}(\sqrt5)\) satisfies
+\(q\equiv3\pmod4\).
+\end{corollary}
+
+\begin{remark}
+The split primes behave in the opposite way: for \(q\equiv\pm1\pmod5\)
+one has \((5/q)=+1\), hence \(\operatorname{ord}_q(5)\mid(q-1)/2\) and
+\(v_2(\operatorname{ord}_q5)<v_2(q-1)\), so no constraint is
+transmitted. Both statements above are unconditional.
+\end{remark}
+
 \section{Computational certificates}
 
 Independently of the kernel-checked statements above, the repository
@@ -250,7 +290,7 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Nine modules, \(834\) source lines, \(56\) named declarations; no
+Ten modules, \(977\) source lines, \(59\) named declarations; no
 \lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build}. The table mapping each

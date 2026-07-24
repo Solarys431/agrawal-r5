@@ -7,3 +7,4 @@ import AgrawalCore.SupportBridge
 import AgrawalCore.FermatShadow
 import AgrawalCore.Corollaries
 import AgrawalCore.AgrawalBridge
+import AgrawalCore.TwoAdicJaw
