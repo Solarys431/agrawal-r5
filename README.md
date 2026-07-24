@@ -41,8 +41,7 @@ lake build
 
 ## Paper
 
-`paper/agrawal-certified-core.pdf`: the kernel-certified core of the
-study. Everything called a theorem in it is checked by Lean, every
+`paper/agrawal-r5.pdf`: the kernel-certified part of the study. Everything called a theorem in it is checked by Lean, every
 computational claim carries a certificate, and the two central open
 problems are posed without any claim of proof.
 
@@ -102,8 +101,7 @@ teorema del paper sulla sua dichiarazione Lean.
 
 ## Paper
 
-`paper/agrawal-certified-core.pdf`: il nucleo certificato dal kernel
-dello studio. Tutto ciò che vi è chiamato teorema è verificato da
+`paper/agrawal-r5.pdf`: la parte dello studio certificata dal kernel. Tutto ciò che vi è chiamato teorema è verificato da
 Lean, ogni claim computazionale ha il suo certificato, e i due
 problemi aperti centrali sono posti senza alcuna pretesa di prova.
 
