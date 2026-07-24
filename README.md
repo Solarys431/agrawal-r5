@@ -12,7 +12,7 @@ emptiness of the fibers) are stated precisely in the paper.
 
 ## Lean core
 
-Eight modules over plain Mathlib (pinned), no `sorry`, no extra
+Nine modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -32,6 +32,8 @@ lake build
 | Quadratic reciprocity bridge for 5 | `not_isSquare_five` | `Reciprocity.lean` |
 | Canonical support witness: p ≡ 2 (mod 5) ⟹ p ∣ H_((p+1)/2) | `support_witness` | `SupportBridge.lean` |
 | Fermat shadow (arithmetic glue) | `fermat_shadow` | `FermatShadow.lean` |
+| **The bridge: Agrawal's congruence ⟹ base-5 pseudoprime** | `agrawal_fermat_shadow` | `AgrawalBridge.lean` |
+| Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 
 ## Paper
@@ -67,7 +69,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Otto moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Nove moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```

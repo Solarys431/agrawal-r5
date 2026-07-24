@@ -6,3 +6,4 @@ import AgrawalCore.Reciprocity
 import AgrawalCore.SupportBridge
 import AgrawalCore.FermatShadow
 import AgrawalCore.Corollaries
+import AgrawalCore.AgrawalBridge
