@@ -36188,7 +36188,7 @@
       "total_multiplicity": 1
     }
   },
-  "elapsed_seconds": 348.875308,
+  "elapsed_seconds": 415.387163,
   "errors": [],
   "factorizations": [
     {
@@ -140555,9 +140555,9 @@
     }
   ],
   "factors_above_2n_max": [],
-  "finished_at_utc": "2026-07-24T09:14:34.369032+00:00",
-  "gp_path": "/opt/homebrew/bin/gp",
-  "gp_version": "",
+  "finished_at_utc": "2026-07-24T21:42:42.317882+00:00",
+  "gp_command": "gp",
+  "gp_version": "GP/PARI CALCULATOR Version 2.17.4 (released)\n         arm64 running darwin (aarch64/GMP-6.3.0 kernel) 64-bit version\n    compiled: Jun 20 2026, Apple clang version 21.0.0 (clang-2100.0.123.102)\n                           threading engine: pthread\n                (readline v8.3 disabled, extended help enabled)",
   "max_distinct_factor": 199967,
   "n_max": 100000,
   "noncanonical_occurrences": 7000,
@@ -140565,10 +140565,10 @@
   "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
   "python_version": "3.14.5",
   "schema": 2,
-  "script_sha256": "1f654d7e22532c6b01ce2df7cbd25d821ae9e9ab1185a42ca62c969dc8859680",
+  "script_sha256": "31002191aa7297062759dffa6fdbd8669bec445f67bffab1644d944bfa69c436",
   "split_factor_count": 0,
   "split_factors": [],
-  "started_at_utc": "2026-07-24T09:08:45.502576+00:00",
+  "started_at_utc": "2026-07-24T21:35:46.933487+00:00",
   "status": "complete",
   "tested_indices": 20000,
   "timeouts": []

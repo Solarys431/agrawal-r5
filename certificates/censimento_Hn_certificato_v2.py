@@ -81,7 +81,9 @@ def gp_version(gp: str) -> str:
         text=True,
         check=True,
     )
-    return completed.stdout.strip()
+    # gp scrive la versione su stderr in alcuni ambienti: si accetta
+    # il primo dei due flussi non vuoto.
+    return completed.stdout.strip() or completed.stderr.strip()
 
 
 def pari_factor_proven(n: int, gp: str, timeout: int) -> dict[int, int]:
@@ -171,7 +173,7 @@ def main() -> None:
         "started_at_utc": datetime.now(timezone.utc).isoformat(),
         "python_version": platform.python_version(),
         "platform": platform.platform(),
-        "gp_path": gp,
+        "gp_command": "gp",
         "gp_version": gp_version(gp),
         "n_max": args.n_max,
         "tested_indices": 0,

@@ -1,22 +1,59 @@
 #!/usr/bin/env python3
 """Independent re-verifier for the certificates shipped in this repo.
 
-What it re-checks, certificate by certificate:
-  - fiber certificates (both schemas): status field, no missing
-    required level, primality of every listed prime factor
-    (sympy.isprime: deterministic below 2^64, BPSW above; the original
-    certificates additionally carry factor_proven primality from
-    PARI), and EMPTINESS, i.e. no listed factor that is inert mod 5,
-    larger than p2 and inside one of the certificate's own detector
-    classes;
-  - exact reconstruction of every level whose factorization embeds
-    its value (schema with explicit level values);
-  - the census manifest: status complete, zero split factors, count
-    coherence.
+Default mode re-checks, certificate by certificate:
 
-Exit code 0 iff every check passes. No network, no trust required.
+  fiber certificates (both schemas):
+    - file bytes against the SHA-256 recorded in fibers/MANIFEST.json;
+    - status field and absence of missing required levels (checked both
+      at top level and inside level_summary, where schema 1 stores it);
+    - primality of every listed prime factor (sympy.isprime:
+      deterministic below 2^64, BPSW above; the original certificates
+      additionally carry factor_proven primality from PARI);
+    - EMPTINESS: no listed factor that is inert mod 5, larger than p2
+      and inside one of the certificate's own detector classes;
+    - schema 2: exact reconstruction of EVERY level value from its
+      factorization, checked against the embedded value_sha256
+      (SHA-256 of the decimal string);
+    - schema 1: the scope product rebuilt from the global factor map
+      (digit count check), the certificate's self-hash
+      (payload_sha256, canonical compact JSON), and full verification
+      of the embedded multiplicative-order certificates: in
+      F_p[X]/(X^4+X^3+X^2+X+1) it recomputes (X-1)^T = 1 and, for
+      every prime l | T, (X-1)^(T/l) against the recorded witness
+      (which must differ from 1), plus T | p^4 - 1 for inert p and
+      the factorback of T's own factorization.
+
+  census manifest:
+    - status complete, zero split factors, and full coherence of the
+      counters with the 9,725 embedded rows (recount, factorback of
+      every row, class-mod-5 scan of every listed factor).
+
+--full additionally REPLAYS the census from scratch: for every
+n = 4 mod 5 up to n_max it recomputes A_n (Lucas for even n via
+2*F_(n+1)-F_n, Fibonacci for odd n), H_n = gcd(A_n, 5^(n-1)+1) with
+the factors 2 and 5 stripped, and demands that the recomputed value
+match the manifest row exactly, with every factor proven prime.
+
+Not covered (documented limits): the schema 2 self-hash field
+(payload_sha256_without_hash_field: its serialization convention is
+not shipped) and the schema 1 per-level piece hashes (the per-level
+factorizations are not embedded in schema 1). Neither carries
+mathematical content beyond what the checks above already rebuild.
+
+The separate 10^9 corpus listed in SHA256SUMS_S28_1E9.txt is
+HASH-ONLY provenance: the artifacts are not distributed in this
+repository and are NOT verified by this tool.
+
+Exit code 0 iff every check passes. No network access required.
 """
-import json, sys, glob, os
+import argparse
+import hashlib
+import json
+import math
+import os
+import sys
+import glob
 
 try:
     from sympy import isprime
@@ -34,6 +71,83 @@ def fail(msg):
     print("FAIL:", msg)
 
 
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def sha256_str(s):
+    return hashlib.sha256(s.encode()).hexdigest()
+
+
+# --- arithmetic in F_p[X] / (X^4 + X^3 + X^2 + X + 1) -----------------
+
+ONE = (1, 0, 0, 0)
+
+
+def phi5_mul(a, b, p):
+    """Multiply two elements given as coefficient 4-tuples."""
+    raw = [0] * 7
+    for i in range(4):
+        if a[i]:
+            for j in range(4):
+                raw[i + j] = (raw[i + j] + a[i] * b[j]) % p
+    for k in (6, 5, 4):  # X^k = -(X^(k-1)+X^(k-2)+X^(k-3)+X^(k-4))
+        c = raw[k]
+        if c:
+            raw[k] = 0
+            for t in range(k - 4, k):
+                raw[t] = (raw[t] - c) % p
+    return tuple(raw[:4])
+
+
+def phi5_pow(a, e, p):
+    r = ONE
+    while e:
+        if e & 1:
+            r = phi5_mul(r, a, p)
+        a = phi5_mul(a, a, p)
+        e >>= 1
+    return r
+
+
+def check_order_certificate(name, oc):
+    p = oc["p"]
+    T = oc["T"]
+    if p % 5 not in (2, 3):
+        fail(f"{name}: order certificate p={p} is not inert mod 5")
+        return
+    if oc.get("group_order") != p ** 4 - 1:
+        fail(f"{name}: group_order for p={p} is not p^4-1")
+    if (p ** 4 - 1) % T != 0:
+        fail(f"{name}: T={T} does not divide p^4-1 for p={p}")
+    back = 1
+    for q, e in oc["T_factorization"].items():
+        if not isprime(int(q)):
+            fail(f"{name}: T factor {q} is not prime")
+        back *= int(q) ** int(e)
+    if back != T:
+        fail(f"{name}: factorback of T_factorization != T for p={p}")
+    x_minus_1 = ((p - 1) % p, 1, 0, 0)
+    if phi5_pow(x_minus_1, T, p) != ONE:
+        fail(f"{name}: (X-1)^T != 1 for p={p}")
+    if not oc.get("power_T_is_one"):
+        fail(f"{name}: power_T_is_one flag is false for p={p}")
+    for q, wit in oc["power_T_over_prime_witnesses"].items():
+        got = phi5_pow(x_minus_1, T // int(q), p)
+        want = tuple(int(c) % p for c in wit)
+        if got != want:
+            fail(f"{name}: witness (X-1)^(T/{q}) mismatch for p={p}")
+        if want == ONE:
+            fail(f"{name}: witness (X-1)^(T/{q}) equals 1 for p={p}: "
+                 f"T is not the exact order")
+
+
+# --- fiber certificates ----------------------------------------------
+
 def detector_classes(c):
     if "detector" in c:  # schema 1
         return [(cl["modulus"], cl["residue"]) for cl in c["detector"]["classes"]]
@@ -45,21 +159,35 @@ def factors_of(c):
     if "factorization" in c:  # schema 1: global factor map
         for q, e in c["factorization"]["factors"].items():
             out[int(q)] = max(out.get(int(q), 0), int(e))
-    else:  # schema 2: per-level maps, values may be embedded
+    else:  # schema 2: per-level maps
         for lv in c["level_factorizations"].values():
             for q, e in lv["factorization"].items():
                 out[int(q)] = max(out.get(int(q), 0), int(e))
     return out
 
 
-def check_fiber(path):
+def missing_levels(c):
+    if c.get("missing_required_levels"):
+        return c["missing_required_levels"]
+    ls = c.get("level_summary", {})
+    return ls.get("missing_required_levels") or []
+
+
+def check_fiber(path, manifest_hashes):
     c = json.load(open(path))
     name = os.path.basename(path)
+    if name in manifest_hashes:
+        got = sha256_file(path)
+        if got != manifest_hashes[name]:
+            fail(f"{name}: file hash differs from fibers/MANIFEST.json")
+    else:
+        fail(f"{name}: not listed in fibers/MANIFEST.json")
     p1, p2 = c["pair"]
     if c.get("status") != "fibra_vuota_certificata":
         fail(f"{name}: unexpected status {c.get('status')}")
-    if c.get("missing_required_levels"):
-        fail(f"{name}: missing required levels {c['missing_required_levels']}")
+    miss = missing_levels(c)
+    if miss:
+        fail(f"{name}: missing required levels {miss}")
     fac = factors_of(c)
     det = detector_classes(c)
     for q in fac:
@@ -69,34 +197,160 @@ def check_fiber(path):
             and any(q % m == r for (m, r) in det)]
     if surv:
         fail(f"{name}: survivors in detector classes: {surv}")
-    # reconstruction where level values are embedded
-    if "level_factorizations" in c:
+    n_orders = 0
+    if "level_factorizations" in c:  # schema 2
         for d, lv in c["level_factorizations"].items():
+            prod = 1
+            for q, e in lv["factorization"].items():
+                prod *= int(q) ** int(e)
             if "value" in lv:
-                prod = 1
-                for q, e in lv["factorization"].items():
-                    prod *= int(q) ** int(e)
                 if prod != int(lv["value"]):
                     fail(f"{name}: level {d} reconstruction mismatch")
-    print(f"ok   {name}: pair ({p1},{p2}), {len(fac)} primes, empty")
+            elif "value_sha256" in lv:
+                if sha256_str(str(prod)) != lv["value_sha256"]:
+                    fail(f"{name}: level {d} value hash mismatch")
+            else:
+                fail(f"{name}: level {d} carries no value and no hash")
+            if not lv.get("exact_reconstruction", True):
+                fail(f"{name}: level {d} exact_reconstruction flag false")
+            if not lv.get("all_prime_factors_certified", True):
+                fail(f"{name}: level {d} primality flag false")
+        req = set(map(int, c.get("required_universal_levels", [])))
+        have = set(map(int, c["level_factorizations"].keys()))
+        if not req <= have:
+            fail(f"{name}: required levels absent: {sorted(req - have)}")
+    else:  # schema 1
+        fz = c["factorization"]
+        prod = 1
+        for q, e in fz["factors"].items():
+            prod *= int(q) ** int(e)
+        if len(str(prod)) != fz.get("scope_product_digits"):
+            fail(f"{name}: scope product digit count mismatch")
+        if "payload_sha256" in c:
+            d = {k: v for k, v in c.items() if k != "payload_sha256"}
+            enc = json.dumps(d, sort_keys=True, separators=(",", ":"),
+                             ensure_ascii=False)
+            if sha256_str(enc) != c["payload_sha256"]:
+                fail(f"{name}: payload self-hash mismatch")
+        for oc in c.get("detector", {}).get("order_certificates", []):
+            check_order_certificate(name, oc)
+            n_orders += 1
+    extra = f", {n_orders} order certs" if n_orders else ""
+    print(f"ok   {name}: pair ({p1},{p2}), {len(fac)} primes, empty{extra}")
 
 
-def check_census():
+# --- census -----------------------------------------------------------
+
+def fib_pair(n):
+    """(F_n, F_(n+1)) by fast doubling."""
+    if n == 0:
+        return (0, 1)
+    a, b = fib_pair(n >> 1)
+    c = a * (2 * b - a)
+    d = a * a + b * b
+    return (d, c + d) if n & 1 else (c, d)
+
+
+def strip_2_5(m):
+    while m % 2 == 0:
+        m //= 2
+    while m % 5 == 0:
+        m //= 5
+    return m
+
+
+def census_H(n):
+    f_n, f_np1 = fib_pair(n)
+    a_n = 2 * f_np1 - f_n if n % 2 == 0 else f_n
+    residue = (pow(5, n - 1, a_n) + 1) % a_n
+    return strip_2_5(math.gcd(a_n, residue))
+
+
+def check_census(full):
     path = os.path.join(CERT, "manifest_censimento_Hn_certificato.json")
     m = json.load(open(path))
     if m.get("status") != "complete":
         fail("census: status is not complete")
     if m.get("split_factor_count", -1) != 0 or m.get("split_factors"):
         fail("census: split factors present")
+    rows = m["factorizations"]
+    if len(rows) != m.get("complete_factorizations"):
+        fail("census: row count != complete_factorizations")
     if m.get("nontrivial_H") != m.get("complete_factorizations"):
         fail("census: factorization count mismatch")
-    print(f"ok   census: {m['tested_indices']} indices, "
-          f"{m['nontrivial_H']} nontrivial H, 0 split factors")
+    distinct = {}
+    for row in rows:
+        h = int(row["H"])
+        back = 1
+        for f in row["factors"]:
+            p, e = int(f["p"]), int(f["exponent"])
+            back *= p ** e
+            distinct[p] = distinct.get(p, 0) + e
+            if p % 5 in (1, 4):
+                fail(f"census: split factor {p} at n={row['n']}")
+            if p in (2, 5):
+                fail(f"census: stripped prime {p} survives at n={row['n']}")
+        if back != h:
+            fail(f"census: factorback mismatch at n={row['n']}")
+    if len(distinct) != m.get("distinct_factor_count"):
+        fail("census: distinct factor count mismatch")
+    if distinct and max(distinct) != m.get("max_distinct_factor"):
+        fail("census: max distinct factor mismatch")
+    listed = set(map(int, m["distinct_factors"].keys()))
+    if listed != set(distinct):
+        fail("census: distinct_factors keys differ from the rows")
+    for p in distinct:
+        if not isprime(p):
+            fail(f"census: factor {p} is not prime")
+    mode = "smoke + row coherence"
+    if full:
+        by_n = {int(r["n"]): int(r["H"]) for r in rows}
+        n_max = m["n_max"]
+        tested = nontriv = 0
+        for n in range(4, n_max + 1, 5):
+            tested += 1
+            h = census_H(n)
+            if h > 1:
+                nontriv += 1
+                if by_n.get(n) != h:
+                    fail(f"census replay: H_{n} = {h} != manifest "
+                         f"{by_n.get(n)}")
+            elif n in by_n:
+                fail(f"census replay: manifest lists trivial n={n}")
+            if tested % 4000 == 0:
+                print(f"     ... census replay {tested}/{(n_max - 4)//5 + 1}",
+                      flush=True)
+        if tested != m.get("tested_indices"):
+            fail("census replay: tested index count mismatch")
+        if nontriv != m.get("nontrivial_H"):
+            fail("census replay: nontrivial count mismatch")
+        mode = "FULL REPLAY"
+    print(f"ok   census ({mode}): {m['tested_indices']} indices, "
+          f"{m['nontrivial_H']} nontrivial H, "
+          f"{m['distinct_factor_count']} distinct primes, 0 split")
 
 
-for f in sorted(glob.glob(os.path.join(CERT, "fibers", "certificato_fibra_*.json"))):
-    check_fiber(f)
-check_census()
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--full", action="store_true",
+                    help="additionally replay the whole census from scratch "
+                         "(recompute every H_n; a couple of minutes)")
+    args = ap.parse_args()
 
-print("ALL CHECKS PASSED" if ok else "CHECKS FAILED")
-sys.exit(0 if ok else 1)
+    mpath = os.path.join(CERT, "fibers", "MANIFEST.json")
+    fm = json.load(open(mpath))
+    manifest_hashes = {os.path.basename(k): v
+                       for k, v in fm.get("files", {}).items()}
+    if fm.get("certified_empty_fibers") != len(manifest_hashes):
+        fail("fibers/MANIFEST.json: fiber count mismatch")
+
+    for f in sorted(glob.glob(os.path.join(CERT, "fibers",
+                                           "certificato_fibra_*.json"))):
+        check_fiber(f, manifest_hashes)
+    check_census(args.full)
+
+    print("ALL CHECKS PASSED" if ok else "CHECKS FAILED")
+    sys.exit(0 if ok else 1)
+
+
+main()

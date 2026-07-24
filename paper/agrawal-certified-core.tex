@@ -17,6 +17,7 @@
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\F}{\mathbf{F}}
 \newcommand{\lean}[1]{\texttt{#1}}
+\emergencystretch=1.5em
 
 \begin{document}
 
@@ -29,7 +30,7 @@ Opus~4.8, GPT-5.6-Sol, with an independent external review pass),
 orchestrated by Daniele Cappello, who carried the messages, audited
 the artifacts and made no mathematical contribution. Repository with
 the Lean sources and all computational certificates:
-\texttt{github.com/Solarys431/agrawal-r5}.}
+\url{https://github.com/Solarys431/agrawal-r5}.}
 
 \begin{abstract}
 This note collects the part of our structural study of Agrawal's
@@ -57,7 +58,8 @@ statements are elementary, and their interest lies in the role they
 play in the wider study and in the fact that a proof assistant has
 checked every one of them.
 
-Throughout, \(p\) is an odd prime. Let
+In Sections 2--4, \(p\) is an odd prime; in Section~5, \(q\) denotes
+an arbitrary prime factor of \(n\), with \(q=2\) allowed. Let
 \[
 R_p \;=\; (\Z/p)[X]\,/\,(X^2-X-1),
 \qquad
@@ -84,11 +86,14 @@ Assume \(5\) is not a square in \(\Z/p\) and \(p\neq2\). Then
 \end{theorem}
 
 \begin{proof}[Certified proof sketch]
-By Euler's criterion \(5^{(p-1)/2}=-1\) in \(\Z/p\)
-(\lean{euler\_nonsquare}), hence
-\((\sqrt5)^p=(5)^{(p-1)/2}\sqrt5=-\sqrt5\)
-(\lean{sqrt5\_pow\_p}). Expanding \((2\eps-1)^p\) by the Frobenius
-endomorphism and cancelling the unit \(2\) gives the claim.
+By Euler's criterion (\lean{euler\_nonsquare}) we have
+\(5^{(p-1)/2}=-1\) in \(\Z/p\), hence
+\[
+(\sqrt5)^p=(5)^{(p-1)/2}\sqrt5=-\sqrt5
+\qquad(\lean{sqrt5\_pow\_p}).
+\]
+Expanding \((2\eps-1)^p\) by the Frobenius endomorphism and
+cancelling the unit \(2\) gives the claim.
 \end{proof}
 
 \begin{corollary}[\lean{golden\_pow\_p\_succ}]\label{cor:halfperiod}
@@ -109,9 +114,10 @@ comparing with \((\eps^{p+1})^n=(-1)^n=-1\) gives \(1=-1\), absurd for
 \end{proof}
 
 Via the identity \(\eps^{\,n+1}=F_{n+1}\eps+F_n\) in \(R_p\)
-(\lean{golden\_pow\_fib}, \lean{golden\_pow\_pred}) one obtains the
-divisibility forms, in which the hypothesis is purely arithmetic by
-quadratic reciprocity (\lean{not\_isSquare\_five}):
+(\lean{golden\_pow\_fib} and its predecessor form
+\lean{golden\_pow\_pred}) one obtains the divisibility forms, in
+which the hypothesis is purely arithmetic by quadratic reciprocity
+(\lean{not\_isSquare\_five}):
 
 \begin{theorem}[\lean{inertia\_J\_fib\_mod5},
 \lean{inertia\_J\_lucas\_mod5}]\label{thm:inertiadvd}
@@ -155,9 +161,9 @@ If \(x\mid M\) and \(y\mid M\), then \(xy\mid\gcd(x,y)\,M\).
 
 \begin{theorem}[\lean{fermat\_shadow}]\label{thm:shadow}
 Let \(n\) be squarefree with \(5\nmid n\), and suppose that for every
-prime \(p\mid n\)
+prime \(q\mid n\)
 \[
-5^{\,n/p-1}\equiv1\pmod p .
+5^{\,n/q-1}\equiv1\pmod q .
 \tag{\(\ast\)}
 \]
 Then \(n\mid 5^{\,n-1}-1\); that is, \(n\) is a Fermat pseudoprime to
@@ -181,16 +187,17 @@ a Fermat pseudoprime to base \(5\).
 \end{theorem}
 
 \begin{proof}[Certified proof sketch]
-Reduce the congruence mod a prime \(p\mid n\); it becomes a
-polynomial identity in \((\Z/p)[X]\), which can be evaluated at the
-four points \(x^j\) (\(j=1,\dots,4\)) of \((\Z/p)[X]/\Phi_5\), where
-\(x^5=1\) kills the modulus. Multiplying the four evaluated
-congruences and using the explicit-cofactor identity
-\((x-1)(x^2-1)(x^3-1)(x^4-1)=5\)
-(\lean{prod\_pow\_sub\_one}) gives \(5^{\,n}=5\) in \(\Z/p\), hence
-\(5^{\,n-1}=1\); the squarefree gluing finishes
-(\lean{agrawal\_local}). No Frobenius descent and no norm maps are
-needed.
+Reduce the congruence mod a prime \(q\mid n\); it becomes a
+polynomial identity in \((\Z/q)[X]\), which can be evaluated at the
+four elements \(z^j\) (\(j=1,\dots,4\)) of the quotient ring
+\((\Z/q)[X]/\Phi_5\) (not a field in general), where \(z^5=1\) kills
+the modulus. Multiplying the four evaluated identities and using the
+explicit-cofactor identity \((z-1)(z^2-1)(z^3-1)(z^4-1)=5\)
+(\lean{prod\_pow\_sub\_one}) gives \(5^{\,n}=5\) in the quotient
+ring; injectivity of the constant embedding descends this equality
+to \(\Z/q\), hence \(5^{\,n-1}=1\) there (\lean{agrawal\_local}),
+and the squarefree gluing finishes. No Frobenius descent and no norm
+maps are needed.
 \end{proof}
 
 \section{Computational certificates}
@@ -210,13 +217,15 @@ classes survives;
 \item a self-certifying census of \(H_n\) for all
 \(n\equiv4\pmod5\), \(n\le10^5\): \(9{,}725\) nontrivial values,
 all factorizations proven, and \emph{no} prime factor
-\(\equiv\pm1\pmod5\) occurs;
-\item SHA-256 sums for a prime-by-prime corpus up to \(10^9\) used by
-the working study.
+\(\equiv\pm1\pmod5\) occurs.
 \end{enumerate}
 
 These are certificates of finite computations; they prove exactly
-what they state and nothing beyond.
+what they state and nothing beyond, and both replay from the
+repository alone. Separately, the repository freezes as
+\emph{hash-only provenance} (hashes, not artifacts) a SHA-256 index
+of the working material of the study, including a prime-by-prime
+corpus up to \(10^9\); nothing in this note relies on it.
 
 \section{Two open problems}
 

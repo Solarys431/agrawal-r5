@@ -32,7 +32,7 @@ lake build
 | Quadratic reciprocity bridge for 5 | `not_isSquare_five` | `Reciprocity.lean` |
 | Canonical support witness: p ≡ 2 (mod 5) ⟹ p ∣ H_((p+1)/2) | `support_witness` | `SupportBridge.lean` |
 | Fermat shadow (arithmetic glue) | `fermat_shadow` | `FermatShadow.lean` |
-| **The bridge: Agrawal's congruence ⟹ base-5 pseudoprime** | `agrawal_fermat_shadow` | `AgrawalBridge.lean` |
+| **The bridge: for squarefree n with 5 ∤ n, Agrawal's congruence at r = 5 ⟹ n ∣ 5^(n−1) − 1** | `agrawal_fermat_shadow` | `AgrawalBridge.lean` |
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 
@@ -46,14 +46,31 @@ problems are posed without any claim of proof.
 ## Certificates
 
 `certificates/`: seven certified-empty fibers of the three-factor
-case (each certificate embeds its own detector criterion and level
-factorizations, all prime factors proven), the self-certifying census
-manifest (n ≤ 100000, proven factorizations, zero split factors), the
-reproducibility manifest, and the SHA-256 sums of the 10^9 prime-first
-corpus. Everything is replayable; nothing depends on trusting us. Run
-`python3 tools/verify_certificates.py` to re-check every fiber
-certificate (primality cross-check, detector-class emptiness,
-internal consistency) and the census manifest.
+case (each certificate embeds its own detector criterion, level
+factorizations and, in schema 1, multiplicative-order certificates;
+all prime factors proven) and the self-certifying census manifest
+(n ≤ 100000, all 9,725 factorizations embedded and proven, zero
+split factors). Re-check everything shipped here with
+
+```
+python3 tools/verify_certificates.py          # certificate replay
+python3 tools/verify_certificates.py --full   # + full census replay
+```
+
+The default mode re-verifies file hashes against the fiber manifest,
+primality of every listed factor, detector-class emptiness, level
+reconstructions against the embedded value hashes, the embedded
+multiplicative-order certificates (recomputed in F_p[X]/Φ₅) and the
+row-by-row coherence of the census manifest. `--full` additionally
+recomputes every H_n from scratch and compares it with the manifest;
+the census can also be regenerated wholesale with
+`certificates/censimento_Hn_certificato_v2.py` (requires PARI/GP).
+
+Two files are provenance only and are NOT replayable from this
+clone: `certificates/INDICE_PROVENIENZA_ESTERNA_AGRAWAL.json` (a
+SHA-256 index of the working artifacts of the wider study) and
+`certificates/SHA256SUMS_S28_1E9.txt` (hash-only commitments for the
+10^9 prime-first corpus). They ship hashes, not artifacts.
 
 </details>
 
@@ -91,13 +108,31 @@ problemi aperti centrali sono posti senza alcuna pretesa di prova.
 
 `certificates/`: le sette fibre certificate vuote del caso a tre
 fattori (ogni certificato incorpora il proprio criterio di
-rilevazione e le fattorizzazioni di livello, con tutti i fattori
-primi provati), il manifest autocertificante del censimento
-(n ≤ 100000, fattorizzazioni provate, zero fattori split), il
-manifest di riproducibilità e le somme SHA-256 del corpus prime-first
-a 10^9. Tutto è rieseguibile; nulla richiede fiducia in noi. Con
-`python3 tools/verify_certificates.py` si ricontrollano tutti i
-certificati di fibra (primalità, vuotezza nelle classi del
-rilevatore, coerenza interna) e il manifest del censimento.
+rilevazione, le fattorizzazioni di livello e, nello schema 1, i
+certificati di ordine moltiplicativo, con tutti i fattori primi
+provati) e il manifest autocertificante del censimento (n ≤ 100000,
+tutte le 9.725 fattorizzazioni incorporate e provate, zero fattori
+split). Tutto ciò che è distribuito qui si ricontrolla con
+
+```
+python3 tools/verify_certificates.py          # replay dei certificati
+python3 tools/verify_certificates.py --full   # + replay integrale del censimento
+```
+
+La modalità base riverifica gli hash dei file contro il manifest
+delle fibre, la primalità di ogni fattore elencato, la vuotezza
+nelle classi del rilevatore, le ricostruzioni dei livelli contro gli
+hash incorporati, i certificati di ordine moltiplicativo (ricalcolati
+in F_p[X]/Φ₅) e la coerenza riga per riga del manifest del
+censimento. `--full` ricalcola in aggiunta ogni H_n da zero e lo
+confronta col manifest; il censimento si può anche rigenerare per
+intero con `certificates/censimento_Hn_certificato_v2.py` (richiede
+PARI/GP).
+
+Due file sono di sola provenienza e NON sono rieseguibili da questo
+clone: `certificates/INDICE_PROVENIENZA_ESTERNA_AGRAWAL.json` (un
+indice SHA-256 degli artefatti di lavoro dello studio più ampio) e
+`certificates/SHA256SUMS_S28_1E9.txt` (impegni hash-only per il
+corpus prime-first a 10^9). Contengono hash, non artefatti.
 
 </details>
