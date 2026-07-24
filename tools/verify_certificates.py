@@ -46,7 +46,7 @@ def factors_of(c):
         for q, e in c["factorization"]["factors"].items():
             out[int(q)] = max(out.get(int(q), 0), int(e))
     else:  # schema 2: per-level maps, values may be embedded
-        for d, lv in c["level_factorizations"].items():
+        for lv in c["level_factorizations"].values():
             for q, e in lv["factorization"].items():
                 out[int(q)] = max(out.get(int(q), 0), int(e))
     return out

@@ -27,4 +27,4 @@ c857d55aefc581adc2b1839de7088baf07b7007094b455b9d8b775238c653f49  ./lake-manifes
 aa946fa14585f681c2a4e3e1b33e9dd659d9ffe63f36dac50975c48867ff9e44  ./lakefile.toml
 72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed  ./lean-toolchain
 5bfe84b6c9273348dd9deed9bdc09b9d12498f26513aba38c2c2c44684837f45  ./paper/agrawal-certified-core.pdf
-14dd4c6e031adeba722aadb07262dd387ee196b74e8524b54609acd4bde5d792  ./tools/verify_certificates.py
+4e57adc90b9a011465184b741cd97dcd14f210cf058cc4477fff414940fbf1cf  ./tools/verify_certificates.py
