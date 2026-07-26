@@ -30,6 +30,8 @@ human mathematician has yet read the paper end to end.
 - Private remote verified: `Solarys431/agrawal-r5`, visibility `PRIVATE`.
 - Pushed baseline audited: `eb8f6b8b9eb57b091c515e422a708d079d15437b`.
 - Remote and local `main` agreed exactly at the start of the audit.
+- Repaired commit pushed: `e51cd1601520ba69d7cf698b16e09b11767f08af`.
+- Clean-clone private CI: **PASS**, run `30201970510` (7m48s).
 - `lake build --wfail`: **PASS**, 2,866 jobs.
 - Scan for `sorry`, `admit`, `axiom` and `opaque`: no project escape hatch.
 - The flagship declarations use only ordinary Mathlib/Lean foundations
@@ -245,7 +247,7 @@ novelty claims.
 - continued work in the private repository;
 - private specialist circulation;
 - a private Lean/formalization review;
-- reproduction from a clean clone once the repaired CI is green.
+- reproduction from a clean clone (now confirmed by private CI).
 
 ### Not authorized yet
 
@@ -258,5 +260,4 @@ novelty claims.
 
 1. human specialist priority review of the golden-moment bridge;
 2. independent human mathematical reading of the paper;
-3. final authorship and AI-disclosure decision;
-4. green clean-clone CI on the repaired private commit.
+3. final authorship and AI-disclosure decision.

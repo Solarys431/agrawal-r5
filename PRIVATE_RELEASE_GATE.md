@@ -25,8 +25,8 @@ single controlled transition rather than a scramble.
 - [x] Full census replay available.
 - [x] Private CI workflow builds with warnings as errors and replays
       certificates.
-- [ ] Clean-clone CI run observed on the private remote after the next
-      authorized push.
+- [x] Clean-clone CI run observed on the private remote: commit `e51cd16`,
+      workflow run `30201970510`, green on 2026-07-26.
 
 ## Gate C — scientific presentation
 
