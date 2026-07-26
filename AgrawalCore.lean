@@ -25,3 +25,4 @@ import AgrawalCore.CardBridge
 import AgrawalCore.Partition
 import AgrawalCore.H4Core
 import AgrawalCore.LocalTransport
+import AgrawalCore.ScalarCompleteness

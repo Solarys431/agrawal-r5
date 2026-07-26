@@ -677,9 +677,54 @@ u_1\longmapsto u_2\longmapsto u_4\longmapsto u_3\longmapsto u_1.
 The cycle implies, without division,
 \(\eps^{2n}=-1\) and \(5^{n-1}=-1\) in the cyclotomic quotient; the
 Fibonacci--Lucas recurrences then descend these identities to
-\(p\mid H_n\).  The converse construction of a labelled transport from
-\(p\mid H_n\), including the common-sign repair, is not asserted by the
-Lean theorem and remains outside the release kernel.
+\(p\mid H_n\).
+
+\begin{theorem}[kernel-checked scalar completeness]
+\label{thm:scalarcomplete}
+Let \(p\ne2,5\) be prime. Then the following are equivalent:
+\begin{enumerate}
+\item there exists \(n\ge1\), \(n\equiv4\pmod5\), such that, with
+      \(m=2n-1\),
+      \[
+      (\zeta-1)^m=\zeta^m-1\qquad\text{in }T_p;
+      \]
+\item there exists \(n\ge1\), \(n\equiv4\pmod5\), such that \(p\mid H_n\).
+\end{enumerate}
+\end{theorem}
+
+The converse is existential: it does not claim that the same index works.
+Starting from \(p\mid H_n\), define the common cyclotomic defect
+\[
+ w=\frac{(\zeta-1)^{2n-1}}{\zeta^2-1}.
+\]
+The formal proof avoids division by representing the denominator as a
+unit. It proves that \(w\) is fixed by \(\zeta\mapsto\zeta^2\) and
+\(w^2=1\). A trace argument, valid also when \(\Phi_5\) splits modulo
+\(p\), gives \(w=1\) or \(w=-1\).  The positive sign yields the original
+index.  For the negative sign, putting \(m=2n-1\) and
+\[
+ d=\left\lfloor\frac{m^2}{2}\right\rfloor
+   =\frac{m^2-1}{2},
+ \qquad n'=n+5d,
+\]
+one obtains
+\[
+ (\zeta-1)^{\,2n'-1}=\zeta^{\,2n'-1}-1,
+ \qquad n'\equiv4\pmod5.
+\]
+Thus the sign ambiguity is repaired constructively.
+
+The declarations are
+\begin{center}
+\small
+\lean{commonDefect\_eq\_one\_or\_neg\_one},\\
+\lean{localS5\_sign\_repair},\\
+\lean{dvd\_goldenH\_imp\_hasOrderFourTransport},\\
+\lean{hasOrderFourTransport\_iff\_goldenH\_support}.
+\end{center}
+This theorem closes the local scalar-completeness reduction. It does
+\emph{not} prove golden inertia: the universal exclusion of split prime
+factors from the support of \(H_n\) remains Conjecture~\ref{conj:inertia}.
 
 \begin{theorem}[kernel-checked scalar profile]
 \label{thm:hprofile}
@@ -752,8 +797,8 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-At the release state audited for this version there are twenty-seven modules
-and \(3520\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+At the release state audited for this version there are twenty-eight modules
+and \(4241\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each
@@ -769,8 +814,10 @@ collapse into one another:
   \lean{lake build --wfail}; its flagship modules cover the moment
   obstruction, the golden moment, and the forced partition;
 \item the finite-computation layer is replayed by running
-  \path{tools/verify_certificates.py}; the optional \lean{--full} flag
-  recomputes the complete \(H_n\) census;
+  \path{tools/verify_certificates.py}; the separate script
+  \path{tools/verify_scalar.py} independently tests the
+  common-sign repair in a four-tuple quotient implementation; the optional
+  \lean{--full} flag recomputes the complete \(H_n\) census;
 \item the literature layer is recorded claim by claim in
   \path{NOVELTY_AND_PRIOR_ART.md}, including negative novelty findings.
 \end{enumerate}

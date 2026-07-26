@@ -35,6 +35,9 @@ jobs:
       - name: Replay shipped certificates
         run: python3 tools/verify_certificates.py
 
+      - name: Independent scalar-completeness regression
+        run: python3 tools/verify_scalar.py
+
       - name: Recompute the complete census
         if: github.event_name == 'workflow_dispatch'
         run: python3 tools/verify_certificates.py --full

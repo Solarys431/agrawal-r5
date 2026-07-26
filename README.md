@@ -24,7 +24,7 @@ publication checklist is in
 
 ## Lean core
 
-Twenty-seven modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-eight modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -82,6 +82,9 @@ lake build
 | Exact local definition of the residue-2 transport in `S(p,5)` | `LocalS5`, `OrderFourTransportWitness` | `LocalTransport.lean` |
 | Four labelled T5 rows from the universal cyclotomic row | `localS5_row`, `orderFourTransport_rows` | `LocalTransport.lean` |
 | **End-to-end necessary bridge: local order-4 transport ⟹ p ∣ Hₙ** | `orderFourTransport_dvd_goldenH`, `hasOrderFourTransport_imp_goldenH_support` | `LocalTransport.lean` |
+| Common cyclotomic defect is globally `+1` or `−1` | `commonDefect_eq_one_or_neg_one` | `ScalarCompleteness.lean` |
+| Constructive repair of the negative defect | `localS5_sign_repair` | `ScalarCompleteness.lean` |
+| **Complete existential bridge: local order-4 transport ↔ support of Hₙ** | `hasOrderFourTransport_iff_goldenH_support` | `ScalarCompleteness.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -149,6 +152,7 @@ pinned:
 ```
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # certificate replay
+python3 tools/verify_scalar.py                # independent quotient-ring regression
 python3 tools/verify_certificates.py --full   # + full census replay
 ```
 
@@ -217,6 +221,7 @@ pinnata:
 ```
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # replay dei certificati
+python3 tools/verify_scalar.py                # regressione indipendente nel quoziente
 python3 tools/verify_certificates.py --full   # + replay integrale del censimento
 ```
 

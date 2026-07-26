@@ -252,14 +252,9 @@ boundaries recorded above.
   The descent to integer divisibility is reproved in the cyclotomic ring;
   it does not assume that the quotient is a field.
 
-Adversarial boundary: the converse
-\[
-p\mid H_n\Longrightarrow\text{existence of a labelled local transport}
-\]
-is **not** a Lean theorem. In particular the common-defect/sign-repair
-argument in the wider manuscript has not been accepted into the release
-kernel. The new module narrows, but does not erase, the formal gap and does
-not prove H4.
+This was the boundary at the end of the `LocalTransport.lean` audit. It is
+superseded by the separately audited converse in §4-quater below. H4 itself
+remains open.
 
 An independent implementation of
 \((\mathbf Z/p\mathbf Z)[X]/\Phi_5\), with its own degree-four reduction
@@ -268,6 +263,44 @@ all \(n\le800\), \(n\equiv4\pmod5\). It found 140 positive local
 transport witnesses on 65 distinct primes. Every witness satisfied all
 four labelled rows and \(p\mid H_n\); there were zero violations. This is
 a falsification check, not part of the proof.
+
+## 4-quater. Scalar-completeness converse audit
+
+The module `AgrawalCore/ScalarCompleteness.lean` closes the converse at the
+correct logical strength. The initially tempting same-index statement is
+false: an independent quotient-ring implementation found scalar hits whose
+literal local row has common defect `-1`. The theorem is therefore
+existential in the index.
+
+The kernel proof establishes:
+
+- the four labelled defects coincide (`scalar_common_defect_cross`);
+- the common defect is fixed by `ζ ↦ ζ²`;
+- its square is one;
+- a trace calculation prevents componentwise mixed signs even when `Φ₅`
+  splits, so the common defect is globally `+1` or `−1`;
+- the positive branch is already a literal local row;
+- in the negative branch, for `m=2n-1` and
+  `d=⌊m²/2⌋=(m²-1)/2`, the shifted index `n'=n+5d` is a literal local
+  witness in the same residue class modulo five.
+
+The end-to-end declaration is
+`hasOrderFourTransport_iff_goldenH_support`. Its right-hand side and
+left-hand side both quantify existentially over an admissible index.
+No same-index converse is claimed.
+
+The independent regression
+`tools/verify_scalar.py` implements the quotient arithmetic
+from four-tuples rather than importing any Lean result. For all primes
+`p < 5000`, `p ≠ 2,5`, and all admissible `n ≤ 1000`, it found 144 scalar
+hits: 110 already worked at the same index and 34 had negative defect.
+All 34 negative cases passed the explicit shifted-index repair; there were
+zero mixed signs and zero failed repairs.
+
+Adversarial boundary: this equivalence proves the reduction of local
+order-four transport to the support of `Hₙ`; it does **not** establish
+that all prime factors in that support are inert. Golden inertia/H4
+therefore remains an open universal assertion.
 
 ## 5. Prior-art attack
 
@@ -305,7 +338,7 @@ review.
 ### Formalization value: high
 
 The repository is a nontrivial, pinned, warning-clean Lean development with
-27 substantive modules, 3,520 source lines and 193 named declarations. Its
+28 substantive modules, 4,241 source lines and 218 named declarations. Its
 strongest formal contribution is not line count but the end-to-end
 organization of:
 

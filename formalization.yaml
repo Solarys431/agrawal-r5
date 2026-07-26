@@ -108,15 +108,19 @@ sources:
       `dvd_goldenH_nonsquare_iff_two_adic_saturation`. The separate module
       `LocalTransport.lean` defines the literal local row in
       (Z/p)[X]/Phi_5, derives the four labelled T5 rows, and proves
-      `orderFourTransport_dvd_goldenH`. For a prime p
+      `orderFourTransport_dvd_goldenH`; `ScalarCompleteness.lean` proves
+      the converse existentially, including a constructive repair when the
+      common cyclotomic defect is negative, and packages both directions as
+      `hasOrderFourTransport_iff_goldenH_support`. For a prime p
       distinct from 2 and 5, divisibility by
       H_n=gcd(A_n,5^(n-1)+1) is equivalent to the two negative scalar
       semiperiods. Under that divisibility, inertia of 5 is equivalent to
       v_2(p-1)=v_2(n-1)+1. This is an exact reduction, not a proof of the
-      universal golden-inertia conjecture. The end-to-end necessary direction
-      from a residue-2 order-four transport in S(p,5) to p|H_n is now
-      kernel-checked; the converse sign-repair direction is not. We make no
-      mathematical priority claim for the elementary order calculation.
+      universal golden-inertia conjecture. Both directions between existence
+      of a residue-2 order-four transport in S(p,5) and support of H_n are now
+      kernel-checked; the universal exclusion of split support remains open.
+      We make no mathematical priority claim for the elementary order
+      calculation.
 
   - title: "The Lenstra–Pomerance proposition on counterexamples to Agrawal's conjecture at r = 5"
     authors:

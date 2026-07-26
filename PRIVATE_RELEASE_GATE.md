@@ -11,6 +11,8 @@ single controlled transition rather than a scramble.
 - [x] Quintic-index consequence checked for every character and for the
       explicit prime-field index.
 - [x] Lenstra–Pomerance attribution corrected to the primary source.
+- [x] Both directions of the local transport / \(H_n\)-support bridge
+      checked in Lean, including the negative-sign repair.
 - [x] Every open statement labelled as conjecture.
 - [ ] Golden-moment priority checked by a human specialist in cyclotomy.
 - [ ] Paper read end-to-end by a human mathematician independent of the
