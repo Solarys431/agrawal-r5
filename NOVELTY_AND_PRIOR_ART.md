@@ -53,7 +53,7 @@ novelty should be claimed for their underlying arguments.
 | Two-adic jaw on inert prime factors | Lean-checked | Useful corollary and good formal theorem; no priority claim |
 | Canonical inert support witness for `H_n` | Lean-checked | Useful exact explanation of the census; no broad novelty claim |
 | Golden–cyclotomic entanglement identity | Lean-checked | Structural identity supporting the main story; priority unassessed |
-| Forced odd-\(q\) partition for simultaneous Carmichael/Lucas–Carmichael conditions | Lean-checked | The congruence \(n\equiv p\bmod (p^2-1)/2\) and the mod-12 consequence appear in Leng (2017); the contribution is the explicit general odd-\(q\) extraction and its kernel proof |
+| Forced odd-\(q\) partition for simultaneous Carmichael/Lucas–Carmichael conditions | Lean-checked | **Classical mathematics, new formalization.** McIntosh (2014) explicitly records the Williams-set compatibility \(\gcd(p_i-1,p_j+1)=2\); Leng (2017) records \(n\equiv p\bmod (p^2-1)/2\) and the mod-12 consequence. The present contribution is a reusable kernel proof, including the arbitrary-common-divisor form `common_divisor_forced` and the named mod-3 corollary. |
 
 ## Computational results
 
@@ -103,5 +103,15 @@ They should enter the public theorem table only after each has:
 - A. Leng,
   [Independence of the Miller–Rabin and Lucas probable prime tests](https://math.mit.edu/research/highschool/primes/materials/2016/Leng.pdf),
   2017.
+- H. C. Williams,
+  [On numbers analogous to the Carmichael numbers](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/23629FB455C460AE7626ACE4486A3274/S0008439500065024a.pdf/on-numbers-analogous-to-the-carmichael-numbers.pdf),
+  *Canadian Mathematical Bulletin* 20 (1977), 133–143.
+- R. J. McIntosh,
+  [Carmichael numbers with \(p+1\mid n-1\)](https://ftp.icm.edu.pl/packages/EMIS/journals/INTEGERS/papers/o59/o59.pdf),
+  *Integers* 14 (2014), Paper A59; Section 4 explicitly
+  records \(\gcd(p_i-1,p_j+1)=2\).
+- R. J. McIntosh and S. Mitra Dipra,
+  [Carmichael numbers with \(p+1\mid n+1\)](https://www.sciencedirect.com/science/article/pii/S0022314X14002108),
+  *Journal of Number Theory* 147 (2015), 81–91.
 - The current Formal Conjectures entry contains the statement of Agrawal’s
   conjecture with `sorry`; it does not contain this verified core.

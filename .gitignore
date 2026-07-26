@@ -2,3 +2,6 @@
 MANDATO_VERIFICA_SOL.md
 VERDETTO_SOL_PREVOLO.md
 ZULIP_REVIEW_INVITE_DRAFT.md
+paper/*.aux
+paper/*.log
+paper/*.out

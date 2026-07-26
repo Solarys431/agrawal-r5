@@ -18,11 +18,17 @@ vede lo stesso `q`, allora `p ≡ n ≡ p' (mod q)`; ma se `q ∣ p−1` e
 
   · `dvd_sub_of_korselt_pair` : entrambe le condizioni si leggono su `m−1`
   · `dvd_of_dvd_sq_sub_one`   : `q ∣ p²−1` ⟹ `q ∣ m−1`
-  · `partition_forced`        : **il teorema** — nessun primo dispari può
-                                dividere un `p−1` e un `p'+1` insieme
+  · `common_divisor_forced`   : la forma esatta — ogni divisore comune
+                                trasversale divide `2`
+  · `partition_forced`        : il corollario per un primo `q`
   · `three_dvd_sq_sub_one`    : 3 divide sempre `p²−1`, quindi il vincolo per
                                 `q = 3` è universale: tutti i fattori sono
                                 congrui fra loro modulo 3
+
+Prior art: la compatibilità `gcd(pᵢ - 1, pⱼ + 1) = 2` per insiemi di
+Williams compare esplicitamente in McIntosh (2014). Il contributo di questo
+modulo è la sua verifica kernel-pura e la scomposizione in lemmi riusabili,
+non una rivendicazione di priorità matematica.
 
 Campagna UNICO, 26 luglio 2026.
 -/
@@ -51,35 +57,47 @@ theorem dvd_of_dvd_sq_sub_one {p m q : ℤ} (hq : Prime q)
   · exact h.trans h1
   · exact h.trans h2
 
-/-- **LA PARTIZIONE FORZATA.** Se un primo `q` divide `p−1` per un fattore e
-`p'+1` per un altro, e se entrambi soddisfano le condizioni di Korselt
-rispetto allo stesso `n`, allora `q ∣ 2`. Per `q` dispari è assurdo: i due
-lati non possono coesistere, e ogni primo dispari sta o tutto fra i `p−1` o
-tutto fra i `p+1`. -/
-theorem partition_forced {p p' m m' q : ℤ} (hq : Prime q)
+/-- **La forma esatta della partizione forzata.** Se `d` divide `p−1` per un
+fattore e `p'+1` per un altro, e se entrambi soddisfano le condizioni di
+Korselt rispetto allo stesso `n`, allora `d ∣ 2`. Non servono né primalità
+né disparità di `d`. -/
+theorem common_divisor_forced {p p' m m' d : ℤ}
+    (hcar : (p - 1) ∣ (p * m - 1)) (hluc : (p + 1) ∣ (p * m + 1))
+    (hcar' : (p' - 1) ∣ (p' * m' - 1)) (hluc' : (p' + 1) ∣ (p' * m' + 1))
+    (hsame : p * m = p' * m')
+    (hleft : d ∣ (p - 1)) (hright : d ∣ (p' + 1)) :
+    d ∣ 2 := by
+  obtain ⟨hp, _⟩ := dvd_sub_of_korselt_pair hcar hluc
+  obtain ⟨_, hp'⟩ := dvd_sub_of_korselt_pair hcar' hluc'
+  -- n ≡ p (mod q) da sinistra, n ≡ p' (mod q) da destra
+  have hm : d ∣ (m - 1) := hleft.trans hp
+  have hm' : d ∣ (m' - 1) := hright.trans hp'
+  -- n − p = p·m − p = p(m−1), quindi q ∣ n − p; analogamente q ∣ n − p'
+  have h1 : d ∣ (p * m - p) := by
+    have : p * m - p = p * (m - 1) := by ring
+    exact this ▸ hm.mul_left p
+  have h2 : d ∣ (p' * m' - p') := by
+    have : p' * m' - p' = p' * (m' - 1) := by ring
+    exact this ▸ hm'.mul_left p'
+  -- da q ∣ n−p e q ∣ n−p' segue q ∣ p' − p
+  have h3 : d ∣ (p' - p) := by
+    have : p' - p = (p * m - p) - (p' * m' - p') := by rw [hsame]; ring
+    exact this ▸ dvd_sub h1 h2
+  -- e da q ∣ p−1, q ∣ p'+1 segue q ∣ (p'+1) − (p−1) = (p'−p) + 2
+  have h4 : d ∣ ((p' + 1) - (p - 1)) := dvd_sub hright hleft
+  have : (2 : ℤ) = ((p' + 1) - (p - 1)) - (p' - p) := by ring
+  exact this ▸ dvd_sub h4 h3
+
+/-- **La partizione forzata, forma prima.** Un primo `q` che divide
+trasversalmente `p−1` e `p'+1` deve dividere `2`; per `q` dispari le due
+famiglie non possono coesistere. -/
+theorem partition_forced {p p' m m' q : ℤ} (_hq : Prime q)
     (hcar : (p - 1) ∣ (p * m - 1)) (hluc : (p + 1) ∣ (p * m + 1))
     (hcar' : (p' - 1) ∣ (p' * m' - 1)) (hluc' : (p' + 1) ∣ (p' * m' + 1))
     (hsame : p * m = p' * m')
     (hleft : q ∣ (p - 1)) (hright : q ∣ (p' + 1)) :
-    q ∣ 2 := by
-  -- n ≡ p (mod q) da sinistra, n ≡ p' (mod q) da destra
-  have hp : q ∣ (m - 1) := (dvd_of_dvd_sq_sub_one hq hcar hluc (hleft.mul_right _))
-  have hp' : q ∣ (m' - 1) := (dvd_of_dvd_sq_sub_one hq hcar' hluc' (hright.mul_left _))
-  -- n − p = p·m − p = p(m−1), quindi q ∣ n − p; analogamente q ∣ n − p'
-  have h1 : q ∣ (p * m - p) := by
-    have : p * m - p = p * (m - 1) := by ring
-    exact this ▸ hp.mul_left p
-  have h2 : q ∣ (p' * m' - p') := by
-    have : p' * m' - p' = p' * (m' - 1) := by ring
-    exact this ▸ hp'.mul_left p'
-  -- da q ∣ n−p e q ∣ n−p' segue q ∣ p' − p
-  have h3 : q ∣ (p' - p) := by
-    have : p' - p = (p * m - p) - (p' * m' - p') := by rw [hsame]; ring
-    exact this ▸ dvd_sub h1 h2
-  -- e da q ∣ p−1, q ∣ p'+1 segue q ∣ (p'+1) − (p−1) = (p'−p) + 2
-  have h4 : q ∣ ((p' + 1) - (p - 1)) := dvd_sub hright hleft
-  have : (2 : ℤ) = ((p' + 1) - (p - 1)) - (p' - p) := by ring
-  exact this ▸ dvd_sub h4 h3
+    q ∣ 2 :=
+  common_divisor_forced hcar hluc hcar' hluc' hsame hleft hright
 
 /-- Tre divide sempre `p²−1` per `p` non multiplo di 3: il vincolo della
 partizione per `q = 3` è dunque universale, e in un Carmichael ∩
@@ -90,5 +108,30 @@ theorem three_dvd_sq_sub_one {p : ℤ} (hp : ¬ ((3 : ℤ) ∣ p)) :
   rcases h with h | h
   · exact Dvd.dvd.mul_right (by omega) _
   · exact Dvd.dvd.mul_left (by omega) _
+
+/-- **Corollario universale modulo 3.** Due fattori non divisibili per `3`
+che soddisfano entrambe le condizioni di Korselt rispetto allo stesso `n`
+sono congrui modulo `3`. -/
+theorem three_congruence_forced {p p' m m' : ℤ}
+    (hp3 : ¬ ((3 : ℤ) ∣ p)) (hp3' : ¬ ((3 : ℤ) ∣ p'))
+    (hcar : (p - 1) ∣ (p * m - 1)) (hluc : (p + 1) ∣ (p * m + 1))
+    (hcar' : (p' - 1) ∣ (p' * m' - 1)) (hluc' : (p' + 1) ∣ (p' * m' + 1))
+    (hsame : p * m = p' * m') :
+    (3 : ℤ) ∣ (p' - p) := by
+  have hprime : Prime (3 : ℤ) := by norm_num
+  have hm : (3 : ℤ) ∣ (m - 1) :=
+    dvd_of_dvd_sq_sub_one hprime hcar hluc (three_dvd_sq_sub_one hp3)
+  have hm' : (3 : ℤ) ∣ (m' - 1) :=
+    dvd_of_dvd_sq_sub_one hprime hcar' hluc' (three_dvd_sq_sub_one hp3')
+  have h1 : (3 : ℤ) ∣ (p * m - p) := by
+    have : p * m - p = p * (m - 1) := by ring
+    exact this ▸ hm.mul_left p
+  have h2 : (3 : ℤ) ∣ (p' * m' - p') := by
+    have : p' * m' - p' = p' * (m' - 1) := by ring
+    exact this ▸ hm'.mul_left p'
+  have : p' - p = (p * m - p) - (p' * m' - p') := by
+    rw [hsame]
+    ring
+  exact this ▸ dvd_sub h1 h2
 
 end AgrawalCore

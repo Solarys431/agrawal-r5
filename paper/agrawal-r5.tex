@@ -531,8 +531,9 @@ by each \(p\mid n\), hence by \(n\) (\lean{congruence\_of\_local}).
 \begin{remark}
 Nothing here asserts that a composite such \(n\) exists. A composite number
 satisfying the hypotheses would be simultaneously a Carmichael and a
-Lucas--Carmichael number; no such integer is known. Pomerance's 1984
-Baillie--PSW heuristic imposed the same paired Korselt conditions
+Lucas--Carmichael number; no such integer is known. Williams posed this
+existence problem in 1977 \cite{Williams1977,McIntoshDipra2015}; Pomerance's 1984
+Baillie--PSW heuristic later imposed the same paired Korselt conditions
 \cite{Pomerance1984}. Note also that the proposition gives a \emph{sufficient}
 condition for producing a counterexample, not a necessary one: it does not say
 where all counterexamples must lie. It certifies the tool used to look for
@@ -544,44 +545,62 @@ them; it does not decide Agrawal's conjecture in either direction.
 The simultaneous Carmichael and Lucas--Carmichael conditions impose a
 prime-by-prime separation on the factors of any hypothetical witness.
 
-\begin{theorem}[\lean{partition\_forced}]\label{thm:partition}
+\begin{theorem}[\lean{common\_divisor\_forced}]\label{thm:partition}
 Let \(n=pm=p'm'\), and suppose that both Korselt divisibilities hold
 at \(p\) and at \(p'\):
 \[
 p-1\mid n-1,\quad p+1\mid n+1,\qquad
 p'-1\mid n-1,\quad p'+1\mid n+1.
 \]
-If \(q\) is prime, \(q\mid p-1\), and \(q\mid p'+1\), then \(q\mid2\).
-Consequently, for odd \(q\), the two sets
+If \(d\mid p-1\) and \(d\mid p'+1\), then \(d\mid2\). Consequently, for an
+odd prime \(q\), the two sets
 \[
 \{p\mid n:q\mid p-1\},\qquad
 \{p\mid n:q\mid p+1\}
 \]
-cannot both be nonempty.
+cannot both be nonempty (\lean{partition\_forced}).
 \end{theorem}
 
 \begin{proof}[Certified proof sketch]
 Writing \(n=pm\), the two divisibilities at \(p\) give
 \(p-1\mid m-1\) and \(p+1\mid m-1\)
-(\lean{dvd\_sub\_of\_korselt\_pair}). Hence every prime divisor of
-\((p-1)(p+1)\) divides \(m-1\)
-(\lean{dvd\_of\_dvd\_sq\_sub\_one}), and therefore
-\(n\equiv p\pmod q\). The same argument gives
-\(n\equiv p'\pmod q\), so \(p\equiv p'\pmod q\). But the two side
-conditions give \(p\equiv1\pmod q\) and \(p'\equiv-1\pmod q\).
-Thus \(q\mid2\).
+(\lean{dvd\_sub\_of\_korselt\_pair}). Since \(d\mid p-1\), it follows
+that \(d\mid m-1\), and therefore \(n\equiv p\pmod d\). The same
+argument at \(p'\), using \(d\mid p'+1\), gives
+\(n\equiv p'\pmod d\), so \(p\equiv p'\pmod d\). But the two side
+conditions give \(p\equiv1\pmod d\) and \(p'\equiv-1\pmod d\).
+Thus \(d\mid2\).
 \end{proof}
 
 \begin{remark}[Scope and prior art]
-The intermediate congruence
+The compatibility condition
+\(\gcd(p_i-1,p_j+1)=2\) for Williams sets is stated explicitly by
+McIntosh \cite[\S4]{McIntosh2014}; it is not a new mathematical claim of
+this paper. The contribution here is a kernel-checked arbitrary-divisor
+form and its reusable corollaries. The intermediate congruence
 \(n\equiv p\pmod{(p^2-1)/2}\), and the stronger consequence that all
 prime factors of a simultaneous Carmichael and Lucas--Carmichael number
 are congruent modulo \(12\), already appear in Leng's 2017 study
-\cite{Leng2017}. Theorem~\ref{thm:partition} extracts and kernel-checks
-the general odd-\(q\) separation that follows from that mechanism. It is
+\cite{Leng2017}; the named mod-\(3\) corollary is
+\lean{three\_congruence\_forced}. Theorem~\ref{thm:partition} is
 a useful structural sieve, not a proof that simultaneous numbers do not
 exist. In particular, the exclusions contributed by different \(q\)
 need not be statistically independent.
+
+There is also no contradiction from size alone. If
+\(L=\operatorname{lcm}_{p\mid n}(p-1)\) and
+\(M=\operatorname{lcm}_{p\mid n}(p+1)\), then \(LM\mid n^2-1\), but
+\[
+ LM\le\prod_{p\mid n}(p^2-1)<n^2
+\]
+is automatic. The non-tautological information is instead at each prime-power
+level: if \(I^-_{\ell,e}=\{i:\ell^e\mid p_i-1\}\), then
+\(\prod_{i\notin I^-_{\ell,e}}p_i\equiv1\pmod{\ell^e}\); if
+\(I^+_{\ell,e}=\{i:\ell^e\mid p_i+1\}\), then
+\(\prod_{i\notin I^+_{\ell,e}}p_i
+\equiv(-1)^{|I^+_{\ell,e}|+1}\pmod{\ell^e}\).
+These incidence congruences, rather than the global inequality, are the
+next structural sieve.
 \end{remark}
 
 \section{Computational certificates}
@@ -635,7 +654,7 @@ the corresponding fibre is empty.
 \section{Formalization data}
 
 At the release state audited for this version there are twenty-five modules
-and \(2614\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+and \(2657\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each
@@ -703,6 +722,24 @@ C.~Pomerance,
 \emph{Are there counter-examples to the Baillie--PSW primality test?},
 1984,
 \url{https://math.dartmouth.edu/~carlp/dopo.pdf}.
+
+\bibitem{Williams1977}
+H.~C. Williams,
+\emph{On numbers analogous to the Carmichael numbers},
+Canad. Math. Bull. 20 (1977), 133--143,
+\url{https://doi.org/10.4153/CMB-1977-019-8}.
+
+\bibitem{McIntosh2014}
+R.~J. McIntosh,
+\emph{Carmichael numbers with \(p+1\mid n-1\)},
+Integers 14 (2014), Paper A59,
+\url{https://ftp.icm.edu.pl/packages/EMIS/journals/INTEGERS/papers/o59/o59.pdf}.
+
+\bibitem{McIntoshDipra2015}
+R.~J. McIntosh and S.~Mitra Dipra,
+\emph{Carmichael numbers with \(p+1\mid n+1\)},
+J. Number Theory 147 (2015), 81--91,
+\url{https://doi.org/10.1016/j.jnt.2014.06.005}.
 
 \bibitem{Leng2017}
 A.~Leng,

@@ -69,8 +69,10 @@ lake build
 | Bridge: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ n ≡ 3 (mod 80) | `mod_eighty_of_card` | `CardBridge.lean` |
 | **The Lenstra–Pomerance proposition, original hypotheses** | `lenstra_proposition_card` | `CardBridge.lean` |
 | The same with n ≡ 3 (mod 80) assumed directly | `lenstra_proposition` | `Lenstra.lean` |
+| Exact transverse gcd obstruction: every common divisor of p−1 and p′+1 divides 2 | `common_divisor_forced` | `Partition.lean` |
 | **Forced partition: an odd q cannot divide p−1 for one factor and p′+1 for another** | `partition_forced` | `Partition.lean` |
 | Prime divisors of p²−1 force n ≡ p (mod q) under both Korselt conditions | `dvd_of_dvd_sq_sub_one` | `Partition.lean` |
+| Universal mod-3 congruence of two factors under the paired Korselt conditions | `three_congruence_forced` | `Partition.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -112,7 +114,8 @@ and closed the same day.)
 **Primes satisfy the hypotheses.** n = 83 is a witness, and is obviously not a
 counterexample. Only a **composite** witness would be one, and none is known:
 it would be simultaneously a Carmichael and a Lucas–Carmichael number, a
-question open since Pomerance raised it in 1984. The proposition is a
+question posed by Williams in 1977. Pomerance connected the paired Korselt
+conditions to the Baillie–PSW problem in 1984. The proposition is a
 *sufficient* condition for building a counterexample, not a necessary condition
 on all of them.
 
