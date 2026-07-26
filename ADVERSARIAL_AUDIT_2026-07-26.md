@@ -338,7 +338,7 @@ review.
 ### Formalization value: high
 
 The repository is a nontrivial, pinned, warning-clean Lean development with
-28 substantive modules, 4,241 source lines and 218 named declarations. Its
+28 substantive modules, 4,239 source lines and 218 named declarations. Its
 strongest formal contribution is not line count but the end-to-end
 organization of:
 
