@@ -58,8 +58,9 @@ conjecture.
 \section{Setting}
 
 Agrawal's conjecture (arising from the AKS primality test
-\cite{AKS}; see also \cite{LPremarks,LPgauss,Vana}) states: if \(r\) is prime,
-\(r\nmid n\), and
+\cite{AKS}; see also \cite{LPremarks,LPgauss,Vana}) is stated for coprime
+positive integers \(n,r\). We use its prime-\(r\) specialization: if \(r\)
+is prime, \(r\nmid n\), and
 \((X-1)^n\equiv X^n-1 \pmod{n,\,X^r-1}\),
 then \(n\) is prime or \(n^2\equiv1\pmod r\). Our study concerns
 \(r=5\). This note isolates its mechanically certified core; the
@@ -67,8 +68,8 @@ statements are elementary, and their interest lies in the role they
 play in the wider study and in the fact that a proof assistant has
 checked every one of them.
 
-In Sections 2--5, \(p\) is an odd prime; in Section~6, \(q\) denotes
-an arbitrary prime factor of \(n\), with \(q=2\) allowed. Let
+Local notation and all parity hypotheses are introduced at the point of
+use. In the first sections, let
 \[
 R_p \;=\; (\Z/p)[X]\,/\,(X^2-X-1),
 \qquad
@@ -132,8 +133,8 @@ which the hypothesis is purely arithmetic by quadratic reciprocity
 \lean{inertia\_J\_lucas\_mod5}]\label{thm:inertiadvd}
 Let \(p\equiv\pm2\pmod5\), \(p\neq2\). For even \(n\ge2\), \(p\) does
 not divide \(\gcd(F_n,\,5^{\,n-1}-1)\); for odd \(n\ge1\), \(p\) does
-not divide \(\gcd(L_n,\,5^{\,n-1}-1)\). Equivalently, no prime inert
-in \(\mathbf{Q}(\sqrt5)\) divides any \(J_n\).
+not divide \(\gcd(L_n,\,5^{\,n-1}-1)\). Equivalently, no \emph{odd}
+prime inert in \(\mathbf{Q}(\sqrt5)\) divides any \(J_n\).
 \end{theorem}
 
 \section{The canonical support witness}
@@ -294,22 +295,23 @@ prime \(q\mid n\)
 5^{\,n/q-1}\equiv1\pmod q .
 \tag{\(\ast\)}
 \]
-Then \(n\mid 5^{\,n-1}-1\); that is, \(n\) is a Fermat pseudoprime to
-base \(5\).
+Then \(n\mid 5^{\,n-1}-1\). Thus \(n\) satisfies the base-\(5\)
+Fermat congruence; if \(n\) is composite, it is a Fermat pseudoprime
+to base \(5\).
 \end{theorem}
 
 \begin{remark}
 Hypothesis \((\ast)\) is the local norm constraint of the wider study;
 in Theorem~\ref{thm:shadow} it is an explicit hypothesis. The next
-theorem removes it: the Agrawal congruence itself forces base-\(5\)
-pseudoprimality, unconditionally.
+theorem removes it: in our squarefree \(r=5\) setting, the Agrawal
+congruence itself forces the base-\(5\) Fermat congruence.
 \end{remark}
 
 \begin{theorem}[\lean{agrawal\_fermat\_shadow}]\label{thm:bridge}
 Let \(n\) be squarefree with \(5\nmid n\), and suppose the Agrawal
 congruence at \(r=5\) holds:
 \((X-1)^n\equiv X^n-1\pmod{n,\,X^5-1}\).
-Then \(n\mid 5^{\,n-1}-1\). In particular every squarefree
+Then \(n\mid 5^{\,n-1}-1\). In particular, every squarefree composite
 counterexample to Agrawal's conjecture at \(r=5\) prime to \(10\) is
 a Fermat pseudoprime to base \(5\).
 \end{theorem}
@@ -327,6 +329,14 @@ to \(\Z/q\), hence \(5^{\,n-1}=1\) there (\lean{agrawal\_local}),
 and the squarefree gluing finishes. No Frobenius descent and no norm
 maps are needed.
 \end{proof}
+
+\begin{remark}[Prior art]
+Lenstra observed the more general implication
+\(r^n\equiv r\pmod n\) directly from Agrawal's congruence
+\cite[Remark~5]{LPproblems}. Theorem~\ref{thm:bridge} is therefore not
+claimed as new mathematics: its contribution here is an end-to-end Lean
+formalization of the squarefree \(r=5\) specialization.
+\end{remark}
 
 \section{The two-adic jaw}
 
@@ -384,9 +394,14 @@ stays irreducible modulo \(p\), and let \(\zeta\) be the class of
 \[
 (\zeta-1)^{10p^2}=(\zeta-1)^{10}.
 \]
-Equivalently, the multiplicative order of \(\zeta-1\) divides
-\(10(p^2-1)\).
 \end{theorem}
+
+The displayed identity is the statement checked by the cited Lean
+declaration. Mathematically, irreducibility makes \(T\) a field and
+\(\zeta-1\neq0\); cancellation therefore gives the finite-field
+corollary that the multiplicative order of \(\zeta-1\) divides
+\(10(p^2-1)\). This order formulation is not bundled into
+\lean{order\_bounded}.
 
 \begin{proof}[Certified proof sketch]
 Write \(u=\zeta-1\). In characteristic \(p\) the Frobenius is
@@ -486,6 +501,7 @@ genuine counterexample: Agrawal's conjecture allows the escape
 hypotheses trivially---\(n=83\) is one---and are of course not
 counterexamples. Only a composite witness would be one, and none is known.
 
+\par\smallskip
 \begin{proof}[Certified proof sketch]
 The route is the one of the original proof, which already contains the
 identity \((\zeta_5-1)^{p^2}=-\zeta_5^{-1}(\zeta_5-1)\), the resulting bound
@@ -515,12 +531,57 @@ by each \(p\mid n\), hence by \(n\) (\lean{congruence\_of\_local}).
 \begin{remark}
 Nothing here asserts that a composite such \(n\) exists. A composite number
 satisfying the hypotheses would be simultaneously a Carmichael and a
-Lucas--Carmichael number; no such integer is known, and the question is open
-since Pomerance raised it in 1984 in connection with the Baillie--PSW
-primality test. Note also that the proposition gives a \emph{sufficient}
+Lucas--Carmichael number; no such integer is known. Pomerance's 1984
+Baillie--PSW heuristic imposed the same paired Korselt conditions
+\cite{Pomerance1984}. Note also that the proposition gives a \emph{sufficient}
 condition for producing a counterexample, not a necessary one: it does not say
 where all counterexamples must lie. It certifies the tool used to look for
 them; it does not decide Agrawal's conjecture in either direction.
+\end{remark}
+
+\section{The forced partition}
+
+The simultaneous Carmichael and Lucas--Carmichael conditions impose a
+prime-by-prime separation on the factors of any hypothetical witness.
+
+\begin{theorem}[\lean{partition\_forced}]\label{thm:partition}
+Let \(n=pm=p'm'\), and suppose that both Korselt divisibilities hold
+at \(p\) and at \(p'\):
+\[
+p-1\mid n-1,\quad p+1\mid n+1,\qquad
+p'-1\mid n-1,\quad p'+1\mid n+1.
+\]
+If \(q\) is prime, \(q\mid p-1\), and \(q\mid p'+1\), then \(q\mid2\).
+Consequently, for odd \(q\), the two sets
+\[
+\{p\mid n:q\mid p-1\},\qquad
+\{p\mid n:q\mid p+1\}
+\]
+cannot both be nonempty.
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+Writing \(n=pm\), the two divisibilities at \(p\) give
+\(p-1\mid m-1\) and \(p+1\mid m-1\)
+(\lean{dvd\_sub\_of\_korselt\_pair}). Hence every prime divisor of
+\((p-1)(p+1)\) divides \(m-1\)
+(\lean{dvd\_of\_dvd\_sq\_sub\_one}), and therefore
+\(n\equiv p\pmod q\). The same argument gives
+\(n\equiv p'\pmod q\), so \(p\equiv p'\pmod q\). But the two side
+conditions give \(p\equiv1\pmod q\) and \(p'\equiv-1\pmod q\).
+Thus \(q\mid2\).
+\end{proof}
+
+\begin{remark}[Scope and prior art]
+The intermediate congruence
+\(n\equiv p\pmod{(p^2-1)/2}\), and the stronger consequence that all
+prime factors of a simultaneous Carmichael and Lucas--Carmichael number
+are congruent modulo \(12\), already appear in Leng's 2017 study
+\cite{Leng2017}. Theorem~\ref{thm:partition} extracts and kernel-checks
+the general odd-\(q\) separation that follows from that mechanism. It is
+a useful structural sieve, not a proof that simultaneous numbers do not
+exist. In particular, the exclusions contributed by different \(q\)
+need not be statistically independent.
 \end{remark}
 
 \section{Computational certificates}
@@ -573,22 +634,22 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Twenty-four modules, \(2520\) source lines, \(139\) named declarations; no
-\lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
+At the release state audited for this version there are twenty-five modules
+and \(2614\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
-\lean{lake exe cache get \&\& lake build}. The table mapping each
+\lean{lake exe cache get \&\& lake build --wfail}. The table mapping each
 statement of this note to its declaration and file is in the
 repository \lean{README}.
 
-\clearpage
 \section{Reproducibility map}
 
 The repository is organized so that the three kinds of evidence never
 collapse into one another:
 \begin{enumerate}
 \item the kernel layer is rebuilt with
-  \lean{lake build --wfail}; its flagship files are
-  \lean{MomentObstruction.lean} and \lean{GoldenMoment.lean};
+  \lean{lake build --wfail}; its flagship modules cover the moment
+  obstruction, the golden moment, and the forced partition;
 \item the finite-computation layer is replayed by running
   \path{tools/verify_certificates.py}; the optional \lean{--full} flag
   recomputes the complete \(H_n\) census;
@@ -604,27 +665,50 @@ specialist has reviewed the golden-moment priority claim.
 \bibitem{AKS}
 M.~Agrawal, N.~Kayal, and N.~Saxena,
 \emph{PRIMES is in P},
-Ann. of Math. 160 (2004), 781--793.
+Ann. of Math. 160 (2004), 781--793,
+\url{https://doi.org/10.4007/annals.2004.160.781}.
 
 \bibitem{LPremarks}
 H.~W. Lenstra, Jr. and C.~Pomerance,
 \emph{Remarks on Agrawal's conjecture},
-AIM note, 2003.
+AIM note, 2003,
+\url{https://aimath.org/WWN/primesinp/articles/html/50a/}.
+
+\bibitem{LPproblems}
+H.~W. Lenstra, Jr. and C.~Pomerance,
+\emph{Problems concerning Agrawal's conjecture},
+AIM note, 2003,
+\url{https://aimath.org/WWN/primesinp/articles/html/38a/}.
 
 \bibitem{LPgauss}
 H.~W. Lenstra, Jr. and C.~Pomerance,
 \emph{Primality testing with Gaussian periods},
-J. Eur. Math. Soc. 21 (2019), 1229--1269.
+J. Eur. Math. Soc. 21 (2019), 1229--1269,
+\url{https://doi.org/10.4171/JEMS/861}.
 
 \bibitem{Vana}
 T.~V\'a\v na,
 \emph{Agrawal's conjecture and Carmichael numbers},
-Student Scientific Conference, Comenius University Bratislava, 2009.
+Student Scientific Conference, Comenius University Bratislava, 2009,
+\url{https://jcmf.cz/sites/default/files/cms/archiv_svoc/2009/prace/7/Vana.pdf}.
 
 \bibitem{WH}
 K.~S. Williams and K.~Hardy,
 \emph{A congruence for the index of a unit of a real abelian number field},
-Acta Arith. 46 (1985), 57--72.
+Acta Arith. 46 (1985), 57--72,
+\url{https://eudml.org/doc/205987}.
+
+\bibitem{Pomerance1984}
+C.~Pomerance,
+\emph{Are there counter-examples to the Baillie--PSW primality test?},
+1984,
+\url{https://math.dartmouth.edu/~carlp/dopo.pdf}.
+
+\bibitem{Leng2017}
+A.~Leng,
+\emph{Independence of the Miller--Rabin and Lucas probable prime tests},
+2017,
+\url{https://math.mit.edu/research/highschool/primes/materials/2016/Leng.pdf}.
 
 \end{thebibliography}
 

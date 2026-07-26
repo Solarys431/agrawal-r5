@@ -54,7 +54,7 @@ lake build
 | 2-adic saturation of a divisor | `pow_two_dvd_of_not_dvd_half` | `TwoAdicJaw.lean` |
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
-| Bounded order: ord(ζ−1) divides 10(p²−1), both inert classes | `order_bounded` | `OrderBound.lean` |
+| Kernel form of the order bound: (ζ−1)^(10p²) = (ζ−1)^10, both inert classes | `order_bounded` | `OrderBound.lean` |
 | Box identity and its arithmetic corollary | `prod_pairs_sub_prod_squares`, `lt_two_mul_of_sq_le` | `BoxLemma.lean` |
 | Carmichael and Lucas–Carmichael numbers (Korselt) | `IsCarmichael`, `IsLucasCarmichael` | `Korselt.lean` |
 | Korselt's criterion: Carmichael ⟹ Fermat pseudoprime in every coprime base | `IsCarmichael.fermatPsp` | `Korselt.lean` |
@@ -69,6 +69,8 @@ lake build
 | Bridge: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ n ≡ 3 (mod 80) | `mod_eighty_of_card` | `CardBridge.lean` |
 | **The Lenstra–Pomerance proposition, original hypotheses** | `lenstra_proposition_card` | `CardBridge.lean` |
 | The same with n ≡ 3 (mod 80) assumed directly | `lenstra_proposition` | `Lenstra.lean` |
+| **Forced partition: an odd q cannot divide p−1 for one factor and p′+1 for another** | `partition_forced` | `Partition.lean` |
+| Prime divisors of p²−1 force n ≡ p (mod q) under both Korselt conditions | `dvd_of_dvd_sq_sub_one` | `Partition.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -127,7 +129,7 @@ case (each certificate embeds its own detector criterion, level
 factorizations and, in schema 1, multiplicative-order certificates;
 all prime factors proven) and the self-certifying census manifest
 (n ≤ 100000, all 9,725 factorizations embedded and proven, zero
-split factors). Re-check everything shipped here with
+split factors). Re-check everything shipped here with the commands below.
 
 Python 3 and PARI/GP (`gp` on `PATH`) are required; the Python dependency is
 pinned:
