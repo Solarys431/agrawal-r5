@@ -54,6 +54,7 @@ novelty should be claimed for their underlying arguments.
 | Canonical inert support witness for `H_n` | Lean-checked | Useful exact explanation of the census; no broad novelty claim |
 | Golden–cyclotomic entanglement identity | Lean-checked | Structural identity supporting the main story; priority unassessed |
 | Forced odd-\(q\) partition for simultaneous Carmichael/Lucas–Carmichael conditions | Lean-checked | **Classical mathematics, new formalization.** McIntosh (2014) explicitly records the Williams-set compatibility \(\gcd(p_i-1,p_j+1)=2\); Leng (2017) records \(n\equiv p\bmod (p^2-1)/2\) and the mod-12 consequence. The present contribution is a reusable kernel proof, including the arbitrary-common-divisor form `common_divisor_forced` and the named mod-3 corollary. |
+| Cubic Lenstra signature versus the strong complementary row | Lean-checked | Elementary equivalence, included as a negative result of orientation: the cubic parameters repackage the row and must not be counted as an independent obstruction |
 
 ## Computational results
 

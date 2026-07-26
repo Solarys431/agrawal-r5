@@ -601,6 +601,19 @@ level: if \(I^-_{\ell,e}=\{i:\ell^e\mid p_i-1\}\), then
 \equiv(-1)^{|I^+_{\ell,e}|+1}\pmod{\ell^e}\).
 These incidence congruences, rather than the global inequality, are the
 next structural sieve.
+
+The cubic parametrization used in the five-factor search does not provide
+an independent constraint: the strong complementary row
+\(10(p^2-1)\mid m-1\) is equivalent, for \(p\neq0\), to
+\[
+ pm=p+10u(p^3-p)
+\]
+for some \(u\). Both directions are kernel-checked:
+\begin{center}
+\small
+\lean{cubic\_signature\_of\_strong\_row}\\
+\lean{strong\_row\_of\_cubic\_signature}.
+\end{center}
 \end{remark}
 
 \section{Computational certificates}
@@ -654,7 +667,7 @@ the corresponding fibre is empty.
 \section{Formalization data}
 
 At the release state audited for this version there are twenty-five modules
-and \(2657\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+and \(2682\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each

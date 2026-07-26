@@ -134,4 +134,29 @@ theorem three_congruence_forced {p p' m m' : ℤ}
     ring
   exact this ▸ dvd_sub h1 h2
 
+/-- **Dalla riga forte alla firma cubica.** La divisibilità sul complemento
+`10(p²−1) ∣ m−1` è esattamente la parametrizzazione
+`p*m = p + 10*u*(p³−p)` usata nel ramo Lenstra a cinque fattori. -/
+theorem cubic_signature_of_strong_row {p m : ℤ}
+    (hrow : 10 * (p * p - 1) ∣ (m - 1)) :
+    ∃ u : ℤ, p * m = p + 10 * u * (p * p * p - p) := by
+  obtain ⟨u, hu⟩ := hrow
+  refine ⟨u, ?_⟩
+  have hm : m = 1 + 10 * (p * p - 1) * u := by linarith
+  rw [hm]
+  ring
+
+/-- **La firma cubica restituisce la riga forte.** Per `p ≠ 0`, la
+parametrizzazione cubica non contiene informazione ulteriore rispetto alla
+divisibilità sul complemento. -/
+theorem strong_row_of_cubic_signature {p m u : ℤ} (hp : p ≠ 0)
+    (hsig : p * m = p + 10 * u * (p * p * p - p)) :
+    10 * (p * p - 1) ∣ (m - 1) := by
+  refine ⟨u, ?_⟩
+  apply mul_left_cancel₀ hp
+  calc
+    p * (m - 1) = p * m - p := by ring
+    _ = 10 * u * (p * p * p - p) := by linarith
+    _ = p * (10 * (p * p - 1) * u) := by ring
+
 end AgrawalCore

@@ -73,6 +73,8 @@ lake build
 | **Forced partition: an odd q cannot divide p−1 for one factor and p′+1 for another** | `partition_forced` | `Partition.lean` |
 | Prime divisors of p²−1 force n ≡ p (mod q) under both Korselt conditions | `dvd_of_dvd_sq_sub_one` | `Partition.lean` |
 | Universal mod-3 congruence of two factors under the paired Korselt conditions | `three_congruence_forced` | `Partition.lean` |
+| Strong complementary row gives the cubic Lenstra signature | `cubic_signature_of_strong_row` | `Partition.lean` |
+| The cubic signature contains no extra information when p ≠ 0 | `strong_row_of_cubic_signature` | `Partition.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
