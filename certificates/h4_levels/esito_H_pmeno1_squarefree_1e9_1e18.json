@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "search_family": "p-1=2^b*N with N squarefree on the declared support",
+  "coverage_complete_for_family": true,
+  "minimum_p": 1000000000,
+  "maximum_p": 1000000000000000000,
+  "support_primes": [3,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101],
+  "odd_parts": 5786157,
+  "primality_tests": 13292642,
+  "prime_candidates": 1313692,
+  "diadic_candidates": 139134,
+  "coprime_half_orders": 0,
+  "minimum_half_order_gcd": 2117,
+  "expected_H_conditioned_actual_2adic": 0.00073593912847606433,
+  "full_H_profiles": 0,
+  "elapsed_seconds": 2.5001530000000001,
+  "near_profiles": [],
+  "hits": []
+}

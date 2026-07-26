@@ -173,6 +173,29 @@ SHA-256 index of the working artifacts of the wider study) and
 `certificates/SHA256SUMS_S28_1E9.txt` (hash-only commitments for the
 10^9 prime-first corpus). They ship hashes, not artifacts.
 
+### Exact level-intersection reduction of H4
+
+`certificates/h4_levels/` contains the current private audit surface
+for the remaining golden-inertia wall. With
+
+```text
+x   = ε²,
+B_s = x^(-φ(2s)/2) Φ_(2s)(x) ∈ Z,
+G_(r,s) = gcd(Φ_(2r)(5), B_s),
+```
+
+H4 is equivalent to the absence of a split prime
+`p ∤ 10rs` dividing `G_(r,s)` for
+`gcd(r,s)=1`, `r+s` odd and `5 ∤ rs`. A primitive split factor would
+necessarily satisfy `p ≡ 1 (mod 4rs)`. The full proof, generator and
+falsifiers are shipped together with SHA-256 commitments.
+
+The certified box `r,s ≤ 5000` contains 6,754,610 admissible pairs,
+717 nontrivial gcds and no split prime factor. Every factor was proven
+prime and every factorization reconstructed. This is a finite
+certificate, **not a proof of H4**; the universal inertia statement
+remains open.
+
 </details>
 
 <details>
