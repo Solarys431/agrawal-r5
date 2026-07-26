@@ -12,7 +12,7 @@ emptiness of the fibers) are stated precisely in the paper.
 
 ## Lean core
 
-Twenty-one modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-two modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -50,7 +50,9 @@ lake build
 | Recomposition: (X−1) ∣ f and Φ₅ ∣ f ⟹ (X⁵−1) ∣ f | `dvd_of_dvd_both` | `Recompose.lean` |
 | The congruence modulo p | `agrawal_mod_p` | `LocalGlue.lean` |
 | Local to global for squarefree n | `congruence_of_local` | `GlobalGlue.lean` |
-| **The Lenstra–Pomerance proposition (see the caveat below)** | `lenstra_proposition` | `Lenstra.lean` |
+| Bridge: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ n ≡ 3 (mod 80) | `mod_eighty_of_card` | `CardBridge.lean` |
+| **The Lenstra–Pomerance proposition, original hypotheses** | `lenstra_proposition_card` | `CardBridge.lean` |
+| The same with n ≡ 3 (mod 80) assumed directly | `lenstra_proposition` | `Lenstra.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -65,11 +67,12 @@ reduction to n ≡ p (mod 10(p²−1)). Our route is the same one, repackaged
 through the identity lcm(p−1, p+1, 80) = 10(p²−1). We claim only the mechanical
 verification.
 
-**Our statement is slightly weaker than theirs.** The original assumes
-k ≡ 1 (mod 4) prime factors and derives n ≡ 3 (mod 80); we assume that
-consequence directly. The bridge from `n.primeFactors.card % 4 = 1` to
-`n % 80 = 3` is not yet formalized. This is recorded under `fidelity` in
-`formalization.yaml`.
+**The statement covers the original hypotheses.** `lenstra_proposition_card`
+assumes exactly what the source assumes: k ≡ 1 (mod 4) prime factors, all
+≡ 3 (mod 80), and the two Korselt conditions. That n ≡ 3 (mod 80) follows is
+proved in `mod_eighty_of_card`, not assumed. (An earlier version of this
+repository assumed it; the gap was found by adversarial review on 2026-07-26
+and closed the same day.)
 
 **Primes satisfy the hypotheses.** n = 83 is a witness, and is obviously not a
 counterexample. Only a **composite** witness would be one, and none is known:
@@ -176,3 +179,9 @@ indice SHA-256 degli artefatti di lavoro dello studio più ampio) e
 corpus prime-first a 10^9). Contengono hash, non artefatti.
 
 </details>
+
+---
+
+Direction and operation of the pipeline: **Daniele Cappello**.
+Formalization: Claude (Anthropic), orchestrated multi-model pipeline; every
+declaration checked by the Lean 4 kernel.

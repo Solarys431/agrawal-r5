@@ -19,3 +19,4 @@ import AgrawalCore.LcmIdentity
 import AgrawalCore.LenstraProp
 import AgrawalCore.GlobalGlue
 import AgrawalCore.Lenstra
+import AgrawalCore.CardBridge

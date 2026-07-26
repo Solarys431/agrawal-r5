@@ -5,7 +5,7 @@ project:
   name: "agrawal-r5"
   authors:
     - "Claude (Anthropic) — formalization"
-    - "Solarys431 — direction and operation of the pipeline"
+    - "Daniele Cappello — direction and operation of the pipeline"
   license: "Apache-2.0"
 
 automation:
@@ -24,7 +24,7 @@ automation:
       80 below 100000).
 
 review:
-  status: "adversarially reviewed, corrections pending"
+  status: "adversarially reviewed, corrections applied"
   details: >-
     Two independent pre-publication reviews on 2026-07-26, both instructed to
     find faults rather than confirm. Both returned NOT READY. The substantive
@@ -35,17 +35,16 @@ review:
 
 fidelity:
   divergences:
-    - statement: "lenstra_proposition"
+    - statement: "lenstra_proposition_card"
       source_hypothesis: "k ≡ 1 (mod 4) prime factors, all ≡ 3 (mod 80)"
-      formalized_hypothesis: "n ≡ 3 (mod 80), together with all prime factors ≡ 3 (mod 80)"
+      formalized_hypothesis: "identical"
       note: >-
-        The source derives n ≡ 3 (mod 80) from the count of prime factors,
-        since 3^4 ≡ 1 (mod 80). The formalized theorem assumes that consequence
-        directly. The bridge from n.primeFactors.card % 4 = 1 to n % 80 = 3 is
-        NOT yet proved in Lean: prod_class_mod_eighty proves the corresponding
-        statement for lists, but it is not connected to Nat.primeFactors. Until
-        that gap is closed, this is a formalization of a slightly weaker
-        statement than the original proposition, and it is described as such.
+        RESOLVED on 2026-07-26. An earlier version assumed the consequence
+        n ≡ 3 (mod 80) instead of deriving it; the gap was found by adversarial
+        review and closed the same day by mod_eighty_of_card, which proves the
+        derivation for squarefree n via the product of the prime factors and
+        3^4 ≡ 1 (mod 80). lenstra_proposition_card now assumes exactly what the
+        source assumes. The weaker variant survives as lenstra_proposition.
     - statement: "lenstra_local and downstream"
       source_hypothesis: "p ≡ 3 (mod 80)"
       formalized_hypothesis: "p ≡ 3 (mod 80)"

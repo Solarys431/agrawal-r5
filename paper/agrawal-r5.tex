@@ -313,16 +313,22 @@ prime by an explicit multiple of the smallest one.
 The statement below is the one on which the search for counterexamples at
 \(r=5\) rests. It appears in the AIM notes of Lenstra and Pomerance
 \cite[pp.~30--32]{LPremarks} and is quoted throughout the subsequent
-literature; to our knowledge it had not been machine-checked before. Note
-that Mathlib does not currently contain Carmichael numbers or Korselt's
-criterion, so those had to be introduced (\lean{IsCarmichael},
-\lean{IsLucasCarmichael}, \lean{IsCarmichael.fermatPsp}).
+literature; to our knowledge it had not been machine-checked before.
 
-\begin{theorem}[\lean{lenstra\_proposition}]\label{thm:lenstra}
-Let \(n\) be squarefree with \(n\equiv3\pmod{80}\), suppose every prime
-\(p\mid n\) satisfies \(p\equiv3\pmod{80}\), and suppose Korselt's two
-conditions hold: \((p-1)\mid(n-1)\) and \((p+1)\mid(n+1)\) for every
-\(p\mid n\). Then
+Mathlib does not currently contain Carmichael numbers or Korselt's criterion,
+so those had to be introduced: \lean{IsCarmichael} and
+\lean{IsLucasCarmichael} package the two divisibility conditions used below,
+while \lean{IsCarmichael.fermatPsp} — Korselt's criterion proper, that a
+Carmichael number is a Fermat pseudoprime to every coprime base — is proved
+for completeness and is \emph{not} used in the proof of
+Theorem~\ref{thm:lenstra}, which needs only the divisibility conditions
+themselves.
+
+\begin{theorem}[\lean{lenstra\_proposition\_card}]\label{thm:lenstra}
+Let \(n\) be squarefree, suppose the number \(k\) of its prime factors
+satisfies \(k\equiv1\pmod4\), suppose every prime \(p\mid n\) satisfies
+\(p\equiv3\pmod{80}\), and suppose Korselt's two conditions hold:
+\((p-1)\mid(n-1)\) and \((p+1)\mid(n+1)\) for every \(p\mid n\). Then
 \[
 (X-1)^n\equiv X^n-1 \pmod{n,\ X^5-1}
 \qquad\text{and}\qquad
@@ -330,12 +336,12 @@ n^2\not\equiv1\pmod5 .
 \]
 \end{theorem}
 
-The hypothesis \(n\equiv3\pmod{80}\) is a consequence, in the original, of
-having \(k\equiv1\pmod4\) prime factors all \(\equiv3\pmod{80}\), since
-\(3^4\equiv1\pmod{80}\); the list-level form of that step is
-\lean{prod\_class\_mod\_eighty}, but the bridge to \lean{Nat.primeFactors}
-is not yet formalized, so Theorem~\ref{thm:lenstra} assumes the consequence
-directly and is to that extent weaker than the original statement.
+These are the hypotheses of the original statement. That \(n\equiv3\pmod{80}\)
+follows from them is itself proved (\lean{mod\_eighty\_of\_card}): for
+squarefree \(n\) the product of the prime factors is \(n\), each factor is
+\(3\) modulo 80, and \(3^4=81\equiv1\pmod{80}\) reduces the exponent to the
+class of \(k\) modulo 4. A variant assuming \(n\equiv3\pmod{80}\) directly
+is available as \lean{lenstra\_proposition}.
 
 The second conclusion is what makes such an \(n\), \emph{if composite}, a
 genuine counterexample: Agrawal's conjecture allows the escape
@@ -431,7 +437,7 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Twenty-one modules, \(2212\) source lines, \(123\) named declarations; no
+Twenty-two modules, \(2312\) source lines, \(126\) named declarations; no
 \lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build}. The table mapping each
