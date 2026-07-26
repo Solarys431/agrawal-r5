@@ -8,3 +8,5 @@ import AgrawalCore.FermatShadow
 import AgrawalCore.Corollaries
 import AgrawalCore.AgrawalBridge
 import AgrawalCore.TwoAdicJaw
+import AgrawalCore.BoxLemma
+import AgrawalCore.OrderBound

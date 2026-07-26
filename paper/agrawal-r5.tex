@@ -241,6 +241,73 @@ one has \((5/q)=+1\), hence \(\operatorname{ord}_q(5)\mid(q-1)/2\) and
 transmitted. Both statements above are unconditional.
 \end{remark}
 
+\section{The bounded order}
+
+The bridge and the jaw both read the congruence through the
+multiplicative order of an element. The element that carries the
+congruence itself is \(\zeta-1\), where \(\zeta\) is the class of
+\(X\) in \(T=\mathbf{F}_p[X]/\Phi_5\). A priori its order is only
+known to divide \(|T^\times|=p^4-1\). It divides much less.
+
+\begin{theorem}[\lean{order\_bounded}]\label{thm:order}
+Let \(p\) be a prime with \(p\equiv\pm2\pmod5\), so that \(\Phi_5\)
+stays irreducible modulo \(p\), and let \(\zeta\) be the class of
+\(X\) in \(T=\mathbf{F}_p[X]/\Phi_5\). Then
+\[
+(\zeta-1)^{10p^2}=(\zeta-1)^{10}.
+\]
+Equivalently, the multiplicative order of \(\zeta-1\) divides
+\(10(p^2-1)\).
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+Write \(u=\zeta-1\). In characteristic \(p\) the Frobenius is
+additive, so \(u^p=\zeta^p-1\), and since \(\zeta^5=1\) the exponent
+only matters modulo \(5\) (\lean{zeta5\_pow\_mod}), giving
+\(u^p=\zeta^{p\bmod 5}-1\) (\lean{zeta\_sub\_one\_pow\_p}). Applying
+the Frobenius once more multiplies that exponent by \(p\) again, and
+here the two inert classes merge: \(2^2\equiv3^2\equiv4\pmod5\), so in
+both cases \(u^{p^2}=\zeta^4-1\)
+(\lean{zeta\_sub\_one\_pow\_sq}). Finally \(\zeta^4=\zeta^{-1}\)
+turns that into
+\[
+u^{p^2}=\zeta^{-1}-1=-(\zeta-1)\zeta^{-1}=-\zeta^4\,u
+\]
+(\lean{order\_bound\_relation}): the square of the Frobenius merely
+scales \(u\) by \(-\zeta^4\). Raising to the tenth power kills the
+scalar, since \((-1)^{10}=1\) and \(\zeta^{40}=(\zeta^5)^8=1\).
+\end{proof}
+
+\begin{remark}
+The statement is phrased as \(u^{10p^2}=u^{10}\) rather than as a
+divisibility of the order, so that no invertibility of \(u\) is
+needed. It is the form actually used downstream: the factor \(10\) is
+what forces the modulus \(80\) to appear in the congruence conditions
+on the prime factors of a putative counterexample, and it is what
+makes an exact-order computation factor a ten-digit integer instead of
+a twenty-digit one.
+\end{remark}
+
+\section{An elementary box}
+
+The following identity is used to confine the largest prime factor of
+a three-factor solution to an interval. It is stated over any
+commutative ring and proved by expansion.
+
+\begin{theorem}[\lean{prod\_pairs\_sub\_prod\_squares}]\label{thm:box}
+In any commutative ring, for all \(p,q,r\),
+\[
+2\bigl[(pq-1)(pr-1)(qr-1)-(p^2-1)(q^2-1)(r^2-1)\bigr]
+=(p^2-1)(q-r)^2+(q^2-1)(p-r)^2+(r^2-1)(p-q)^2 .
+\]
+In particular the left-hand side is non-negative whenever
+\(p,q,r\ge1\) (\lean{prod\_pairs\_ge\_prod\_squares}).
+\end{theorem}
+
+\noindent Combined with \lean{lt\_two\_mul\_of\_sq\_le}, which turns
+\(r^2\le 2I(pq)\) with \(q<r\) into \(r<2Ip\), this bounds the third
+prime by an explicit multiple of the smallest one.
+
 \section{Computational certificates}
 
 Independently of the kernel-checked statements above, the repository
@@ -291,7 +358,7 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Ten modules, \(977\) source lines, \(59\) named declarations; no
+Twelve modules, \(1148\) source lines, \(73\) named declarations; no
 \lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build}. The table mapping each
