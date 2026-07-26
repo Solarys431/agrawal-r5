@@ -7,16 +7,18 @@ Default mode re-checks, certificate by certificate:
     - file bytes against the SHA-256 recorded in fibers/MANIFEST.json;
     - status field and absence of missing required levels (checked both
       at top level and inside level_summary, where schema 1 stores it);
-    - primality of every listed prime factor (sympy.isprime:
-      deterministic below 2^64, BPSW above; the original certificates
-      additionally carry factor_proven primality from PARI);
+    - primality of every listed prime factor (sympy.isprime, deterministic
+      below 2^64, followed by PARI isprime for every larger factor);
     - EMPTINESS: no listed factor that is inert mod 5, larger than p2
       and inside one of the certificate's own detector classes;
-    - schema 2: exact reconstruction of EVERY level value from its
-      factorization, checked against the embedded value_sha256
-      (SHA-256 of the decimal string);
-    - schema 1: the scope product rebuilt from the global factor map
-      (digit count check), the certificate's self-hash
+    - independent recomputation of every universal level value
+      N(Phi_d(U)) as the resultant of Phi_d with
+      X^2 + 625 X + 3125, the minimal polynomial of U;
+    - schema 2: exact equality of every recomputed level value with its
+      listed factorization and embedded value_sha256;
+    - schema 1: equality of every recomputed piece hash and digit count,
+      followed by exact equality of the recomputed scope product with the
+      global factor map, scope hash and digit count; the certificate's self-hash
       (payload_sha256, canonical compact JSON), and full verification
       of the embedded multiplicative-order certificates: in
       F_p[X]/(X^4+X^3+X^2+X+1) it recomputes (X-1)^T = 1 and, for
@@ -35,11 +37,10 @@ n = 4 mod 5 up to n_max it recomputes A_n (Lucas for even n via
 the factors 2 and 5 stripped, and demands that the recomputed value
 match the manifest row exactly, with every factor proven prime.
 
-Not covered (documented limits): the schema 2 self-hash field
-(payload_sha256_without_hash_field: its serialization convention is
-not shipped) and the schema 1 per-level piece hashes (the per-level
-factorizations are not embedded in schema 1). Neither carries
-mathematical content beyond what the checks above already rebuild.
+Not covered (documented limit): the schema 2 self-hash field
+(payload_sha256_without_hash_field), whose serialization convention is
+not shipped. It carries no mathematical content beyond the independently
+recomputed values and checks above.
 
 The separate 10^9 corpus listed in SHA256SUMS_S28_1E9.txt is
 HASH-ONLY provenance: the artifacts are not distributed in this
@@ -52,23 +53,84 @@ import hashlib
 import json
 import math
 import os
+import shutil
+import subprocess
 import sys
 import glob
+from functools import lru_cache
 
 try:
-    from sympy import isprime
+    from sympy import cyclotomic_poly, isprime, resultant, symbols
 except ImportError:
     sys.exit("please install sympy (pip install sympy)")
+
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(100_000)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CERT = os.path.join(HERE, "..", "certificates")
 ok = True
+large_prime_contexts = {}
+LEVEL_X = symbols("x")
+LEVEL_MINPOLY = LEVEL_X ** 2 + 625 * LEVEL_X + 3125
 
 
 def fail(msg):
     global ok
     ok = False
     print("FAIL:", msg)
+
+
+def check_prime(n, context):
+    """Screen a factor and queue large ones for a PARI proof."""
+    n = int(n)
+    if not isprime(n):
+        fail(f"{context}: {n} is not prime")
+        return False
+    if n >= 2 ** 64:
+        large_prime_contexts.setdefault(n, []).append(context)
+    return True
+
+
+def prove_large_primes_with_pari():
+    """Prove every queued factor above 2^64 with PARI's isprime."""
+    if not large_prime_contexts:
+        print("ok   primality: all factors below 2^64")
+        return
+    gp = shutil.which("gp")
+    if gp is None:
+        fail("large-factor primality requires PARI/GP (install pari-gp)")
+        return
+    nums = sorted(large_prime_contexts)
+    program = "".join(f'print({n}, " ", isprime({n}));\n' for n in nums)
+    try:
+        run = subprocess.run(
+            [gp, "-q", "-f"],
+            input=program,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=600,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        fail(f"PARI primality batch failed: {exc}")
+        return
+    if run.returncode != 0:
+        fail(f"PARI primality batch exited {run.returncode}: "
+             f"{run.stderr.strip()}")
+        return
+    proven = {}
+    for line in run.stdout.splitlines():
+        fields = line.strip().split()
+        if len(fields) == 2 and fields[0].isdigit() and fields[1] in ("0", "1"):
+            proven[int(fields[0])] = fields[1] == "1"
+    for n in nums:
+        if not proven.get(n, False):
+            where = "; ".join(large_prime_contexts[n][:3])
+            fail(f"PARI did not prove {n} prime ({where})")
+    if all(proven.get(n, False) for n in nums):
+        print(f"ok   primality: PARI proved {len(nums)} factors above 2^64")
 
 
 def sha256_file(path):
@@ -81,6 +143,13 @@ def sha256_file(path):
 
 def sha256_str(s):
     return hashlib.sha256(s.encode()).hexdigest()
+
+
+@lru_cache(maxsize=None)
+def universal_level_value(d):
+    """N(Phi_d(U)) for Tr(U)=-625 and N(U)=3125."""
+    phi = cyclotomic_poly(int(d), LEVEL_X)
+    return abs(int(resultant(LEVEL_MINPOLY, phi, LEVEL_X)))
 
 
 # --- arithmetic in F_p[X] / (X^4 + X^3 + X^2 + X + 1) -----------------
@@ -126,8 +195,7 @@ def check_order_certificate(name, oc):
         fail(f"{name}: T={T} does not divide p^4-1 for p={p}")
     back = 1
     for q, e in oc["T_factorization"].items():
-        if not isprime(int(q)):
-            fail(f"{name}: T factor {q} is not prime")
+        check_prime(int(q), f"{name}: T factor")
         back *= int(q) ** int(e)
     if back != T:
         fail(f"{name}: factorback of T_factorization != T for p={p}")
@@ -191,8 +259,7 @@ def check_fiber(path, manifest_hashes):
     fac = factors_of(c)
     det = detector_classes(c)
     for q in fac:
-        if q > 3 and not isprime(q):
-            fail(f"{name}: listed factor {q} is not prime")
+        check_prime(q, f"{name}: listed factor")
     surv = [q for q in fac if q % 5 in (2, 3) and q > p2
             and any(q % m == r for (m, r) in det)]
     if surv:
@@ -200,14 +267,18 @@ def check_fiber(path, manifest_hashes):
     n_orders = 0
     if "level_factorizations" in c:  # schema 2
         for d, lv in c["level_factorizations"].items():
+            expected = universal_level_value(int(d))
             prod = 1
             for q, e in lv["factorization"].items():
                 prod *= int(q) ** int(e)
+            if prod != expected:
+                fail(f"{name}: level {d} factorization differs from "
+                     "independently recomputed N(Phi_d(U))")
             if "value" in lv:
-                if prod != int(lv["value"]):
+                if expected != int(lv["value"]):
                     fail(f"{name}: level {d} reconstruction mismatch")
             elif "value_sha256" in lv:
-                if sha256_str(str(prod)) != lv["value_sha256"]:
+                if sha256_str(str(expected)) != lv["value_sha256"]:
                     fail(f"{name}: level {d} value hash mismatch")
             else:
                 fail(f"{name}: level {d} carries no value and no hash")
@@ -224,8 +295,28 @@ def check_fiber(path, manifest_hashes):
         prod = 1
         for q, e in fz["factors"].items():
             prod *= int(q) ** int(e)
-        if len(str(prod)) != fz.get("scope_product_digits"):
+        level_values = {}
+        for lv in c["levels"]:
+            d = int(lv["d"])
+            value = universal_level_value(d)
+            level_values[d] = value
+            if len(str(value)) != lv.get("piece_digits"):
+                fail(f"{name}: level {d} piece digit count mismatch")
+            if sha256_str(str(value)) != lv.get("piece_sha256"):
+                fail(f"{name}: level {d} piece hash mismatch")
+        scope = 1
+        for d in c["level_summary"]["factorized_levels"]:
+            if int(d) not in level_values:
+                fail(f"{name}: factorized level {d} has no level record")
+                continue
+            scope *= level_values[int(d)]
+        if prod != scope:
+            fail(f"{name}: global factor map differs from independently "
+                 "recomputed level product")
+        if len(str(scope)) != fz.get("scope_product_digits"):
             fail(f"{name}: scope product digit count mismatch")
+        if sha256_str(str(scope)) != fz.get("scope_product_sha256"):
+            fail(f"{name}: scope product hash mismatch")
         if "payload_sha256" in c:
             d = {k: v for k, v in c.items() if k != "payload_sha256"}
             enc = json.dumps(d, sort_keys=True, separators=(",", ":"),
@@ -300,8 +391,7 @@ def check_census(full):
     if listed != set(distinct):
         fail("census: distinct_factors keys differ from the rows")
     for p in distinct:
-        if not isprime(p):
-            fail(f"census: factor {p} is not prime")
+        check_prime(p, "census factor")
     mode = "smoke + row coherence"
     if full:
         by_n = {int(r["n"]): int(r["H"]) for r in rows}
@@ -348,6 +438,7 @@ def main():
                                            "certificato_fibra_*.json"))):
         check_fiber(f, manifest_hashes)
     check_census(args.full)
+    prove_large_primes_with_pari()
 
     print("ALL CHECKS PASSED" if ok else "CHECKS FAILED")
     sys.exit(0 if ok else 1)

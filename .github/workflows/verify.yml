@@ -26,6 +26,12 @@ jobs:
           build-args: "--wfail"
           use-mathlib-cache: true
 
+      - name: Install certificate dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes pari-gp
+          python3 -m pip install --requirement requirements.txt
+
       - name: Replay shipped certificates
         run: python3 tools/verify_certificates.py
 

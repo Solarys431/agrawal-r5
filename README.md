@@ -129,14 +129,20 @@ all prime factors proven) and the self-certifying census manifest
 (n ≤ 100000, all 9,725 factorizations embedded and proven, zero
 split factors). Re-check everything shipped here with
 
+Python 3 and PARI/GP (`gp` on `PATH`) are required; the Python dependency is
+pinned:
+
 ```
+python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # certificate replay
 python3 tools/verify_certificates.py --full   # + full census replay
 ```
 
 The default mode re-verifies file hashes against the fiber manifest,
-primality of every listed factor, detector-class emptiness, level
-reconstructions against the embedded value hashes, the embedded
+primality of every listed factor (deterministically below \(2^{64}\), with
+PARI `isprime` proofs above it), detector-class emptiness, independently
+recomputes every universal level norm \(N(\Phi_d(U))\), checks its exact
+factorization and embedded value hash, and verifies the embedded
 multiplicative-order certificates (recomputed in F_p[X]/Φ₅) and the
 row-by-row coherence of the census manifest. `--full` additionally
 recomputes every H_n from scratch and compares it with the manifest;
@@ -191,15 +197,21 @@ provati) e il manifest autocertificante del censimento (n ≤ 100000,
 tutte le 9.725 fattorizzazioni incorporate e provate, zero fattori
 split). Tutto ciò che è distribuito qui si ricontrolla con
 
+Servono Python 3 e PARI/GP (`gp` nel `PATH`); la dipendenza Python è
+pinnata:
+
 ```
+python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # replay dei certificati
 python3 tools/verify_certificates.py --full   # + replay integrale del censimento
 ```
 
 La modalità base riverifica gli hash dei file contro il manifest
-delle fibre, la primalità di ogni fattore elencato, la vuotezza
-nelle classi del rilevatore, le ricostruzioni dei livelli contro gli
-hash incorporati, i certificati di ordine moltiplicativo (ricalcolati
+delle fibre, la primalità di ogni fattore elencato (deterministicamente sotto
+\(2^{64}\), con prove PARI `isprime` oltre tale soglia), la vuotezza
+nelle classi del rilevatore, ricalcola indipendentemente ogni norma universale
+\(N(\Phi_d(U))\), ne verifica fattorizzazione esatta e hash, e ricontrolla
+i certificati di ordine moltiplicativo (ricalcolati
 in F_p[X]/Φ₅) e la coerenza riga per riga del manifest del
 censimento. `--full` ricalcola in aggiunta ogni H_n da zero e lo
 confronta col manifest; il censimento si può anche rigenerare per

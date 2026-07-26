@@ -1,0 +1,262 @@
+# Adversarial audit — 2026-07-26
+
+Private working document. This audit was instructed to reject unsupported
+claims, not to confirm the project. It is a model audit, not a substitute for
+review by a human specialist.
+
+## Verdict
+
+**Mechanical core: PASS after repairs.**
+
+**Mathematical novelty claim: HOLD pending human specialist review.**
+
+No counterexample was found to a Lean theorem, no paper theorem was found to
+be stronger than its cited declaration, and the independent finite checks
+reproduced the flagship identity. The audit did find three real
+reproducibility defects. All three were repaired before this verdict:
+
+1. the first private CI run omitted the Python dependency and failed before
+   certificate replay;
+2. primality above \(2^{64}\) was screened by BPSW rather than reproved;
+3. the fiber verifier trusted embedded level hashes instead of independently
+   recomputing the universal level norms.
+
+The release remains private because priority for the golden-moment bridge has
+not been certified by a human expert in cyclotomy and because no independent
+human mathematician has yet read the paper end to end.
+
+## 1. Remote and kernel audit
+
+- Private remote verified: `Solarys431/agrawal-r5`, visibility `PRIVATE`.
+- Pushed baseline audited: `eb8f6b8b9eb57b091c515e422a708d079d15437b`.
+- Remote and local `main` agreed exactly at the start of the audit.
+- `lake build --wfail`: **PASS**, 2,866 jobs.
+- Scan for `sorry`, `admit`, `axiom` and `opaque`: no project escape hatch.
+- The flagship declarations use only ordinary Mathlib/Lean foundations
+  (`propext`, `Quot.sound`, and, where the construction is noncomputable,
+  `Classical.choice`); no project axiom is introduced.
+
+The first GitHub Actions run built the entire Lean project successfully but
+failed at certificate replay with:
+
+```text
+please install sympy (pip install sympy)
+```
+
+This was a real CI defect. The workflow now installs pinned
+`sympy==1.14.0` and PARI/GP before replay.
+
+## 2. Flagship theorem: independent semantic check
+
+The Lean proof was not treated as the only line of evidence. An independent
+prime-field calculation was run for every prime
+\(p\equiv1\pmod5\), \(p<20000\): 563 primes.
+
+For each prime the audit independently:
+
+1. found a primitive generator of \(\mathbf F_p^\times\);
+2. constructed a primitive fifth root \(\zeta\);
+3. rebuilt the full discrete-log table;
+4. computed
+   \[
+   M_2=\sum_{a=1}^4(a^2\bmod5)\,
+       \operatorname{ind}_5(\zeta^a-1);
+   \]
+5. computed
+   \[
+   U_2=(\zeta-1)(\zeta^2-1)^4(\zeta^3-1)^4(\zeta^4-1);
+   \]
+6. checked
+   \[
+   U_2=s^5\varepsilon^3,\qquad
+   \operatorname{ind}_5(U_2)=M_2
+   =3\,\operatorname{ind}_5(\varepsilon).
+   \]
+
+Result:
+
+```text
+checked_primes=563; max_p=20000;
+factorization=M2=3ind(eps): PASS
+```
+
+This closes the most obvious semantic attack: the Lean object called
+`quadraticMomentUnit` has exactly the weights used by the quadratic moment,
+and its character is the stated moment.
+
+## 3. Paper-to-Lean statement audit
+
+The theorem environments in `paper/agrawal-r5.tex` were compared against the
+actual declaration types, not only their names.
+
+### Passes
+
+- `moment_covariance`, `moment_obstruction`, and
+  `pow_succ_eq_one_of_moment_ne_zero` match the abstract finite-field
+  statements in the paper.
+- `golden_moment_factorization` is division-free and holds in every
+  commutative ring under the displayed \(\Phi_5\) relation.
+- `golden_moment_index` and `zmod_golden_moment_index` prove the stated
+  quintic-character consequence; the prime-field construction is an actual
+  multiplicative discrete index modulo five.
+- `agrawal_fermat_shadow`, the two-adic jaw, bounded order, box identity, and
+  the Lenstra–Pomerance proposition have the hypotheses stated in the paper.
+- The Lenstra–Pomerance result is correctly attributed as classical
+  mathematics whose contribution here is formal verification.
+- The two open statements are typeset as conjectures and are not smuggled
+  into theorem statements.
+
+### Deliberate scope boundary
+
+`MomentObstruction.lean` formalizes the algebraic covariance engine. It does
+**not** yet formalize the complete local definition of \(S(p,r)\) and derive
+the full inclusion \(\operatorname{im}_r(S)\subseteq T\) end to end. The paper
+and novelty map disclose this boundary explicitly. It is therefore a
+limitation, not a mismatch.
+
+## 4. Certificate audit and repairs
+
+### Full replay
+
+The repaired verifier produced:
+
+```text
+7/7 certified-empty fibers: PASS
+20,000 indices: replayed
+9,725 nontrivial H_n: reproduced
+4,522 distinct prime factors: reproduced
+split factors: 0
+```
+
+### Repair A — proven primality
+
+There are 4,666 distinct listed factors and 22 exceed \(2^{64}\); the largest
+has 149 bits. The previous verifier used `sympy.isprime` alone. Its large-input
+BPSW path is excellent evidence but is not a primality proof.
+
+The verifier now:
+
+- uses deterministic `sympy.isprime` below \(2^{64}\);
+- batches every larger factor through PARI `isprime`;
+- fails if `gp` is absent or any large factor is not proved.
+
+Result:
+
+```text
+PARI proved 22 factors above 2^64: PASS
+```
+
+### Repair B — independent level reconstruction
+
+The old replay reconstructed factors against hashes stored in the same JSON
+certificate. That detects corruption but does not independently identify the
+integer being factored.
+
+The verifier now derives each level integer from the fixed algebraic datum
+\[
+\operatorname{Tr}(U)=-625,\qquad N(U)=3125,
+\]
+whose minimal polynomial is
+\[
+X^2+625X+3125.
+\]
+For every level \(d\) it computes
+\[
+N(\Phi_d(U))
+=\left|\operatorname{Res}
+  (X^2+625X+3125,\Phi_d(X))\right|
+\]
+and compares that integer with the exact listed factorization, digit count and
+hash. All 139 shipped level pieces passed. Schema-1 scope products are also
+rebuilt from the independently recomputed pieces.
+
+This changes the fiber files from self-consistent data packages into
+independently replayed arithmetic certificates for their stated universal
+level values.
+
+### Remaining certificate boundary
+
+The verifier checks the embedded detector classes, exact multiplicative
+orders, level coverage and absence of surviving factors. The general theorem
+that these detector classes exhaust a mathematical fiber belongs to the
+wider paper argument; it is not itself a Lean theorem in this release core.
+The certificates therefore prove the finite claims under the displayed
+detector reduction, not the two universal open conjectures.
+
+## 5. Prior-art attack
+
+Primary sources checked:
+
+- Lenstra–Pomerance, *Remarks on Agrawal's conjecture* (AIM, 2003);
+- Williams–Hardy, *A congruence for the index of a unit of a real abelian
+  number field*, Acta Arith. 46 (1985), especially Theorem 5;
+- Popovych, *On a subgroup generated by a polynomial in a finite field*
+  (2009);
+- the current `google-deepmind/formal-conjectures` Agrawal file.
+
+Findings:
+
+- Williams–Hardy already compute the quintic index of the golden unit. That
+  character is **not new** and the repository says so.
+- Lenstra–Pomerance already contain the relevant bounded-order mechanism and
+  proposition. The project claims formalization value, not ownership of that
+  mathematics.
+- Formal Conjectures contains the open Agrawal statement with `sorry`; the
+  targeted search found neither this verified Lenstra–Pomerance core nor the
+  golden-moment bridge in another Lean development.
+- The targeted literature search did not find the identification
+  \[
+  \text{Agrawal quadratic moment}
+  =3\,\operatorname{ind}_5(\varepsilon).
+  \]
+
+The last sentence is a search result, not a priority theorem. The only safe
+public wording remains “to our knowledge,” followed by explicit specialist
+review.
+
+## 6. Scientific value
+
+### Formalization value: high
+
+The repository is a nontrivial, pinned, warning-clean Lean development with
+24 substantive modules, 2,520 source lines and 139 named declarations. Its
+strongest formal contribution is not line count but the end-to-end
+organization of:
+
+- a genuine prime-field quintic index;
+- the division-free golden factorization;
+- the polynomial-quotient Agrawal bridge;
+- the Lenstra–Pomerance proposition under its original hypotheses;
+- independent finite certificates separated from kernel theorems.
+
+### Mathematical novelty: concentrated and provisional
+
+The strongest plausible new result is the short bridge from the Agrawal
+quadratic moment to the classical golden-unit character. The moment
+covariance lemma is elementary, and much of the remaining mathematical core
+is classical or a clean structural consequence. This concentration is a
+strength: one exact new bridge is more defensible than a long list of inflated
+novelty claims.
+
+## 7. Release decision
+
+### Ready now
+
+- continued work in the private repository;
+- private specialist circulation;
+- a private Lean/formalization review;
+- reproduction from a clean clone once the repaired CI is green.
+
+### Not authorized yet
+
+- a public Zulip announcement;
+- a public priority claim;
+- wording that suggests Agrawal's conjecture or H4 is proved;
+- wording that calls model audits “external human review.”
+
+### Gates still required
+
+1. human specialist priority review of the golden-moment bridge;
+2. independent human mathematical reading of the paper;
+3. final authorship and AI-disclosure decision;
+4. green clean-clone CI on the repaired private commit.
