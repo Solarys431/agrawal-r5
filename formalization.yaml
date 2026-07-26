@@ -1,0 +1,175 @@
+# formalization.yaml (v0.3) — see https://github.com/mathlib-initiative/formalization.yaml
+version: "v0.3"
+
+project:
+  name: "agrawal-r5"
+  authors:
+    - "Claude (Anthropic) — formalization"
+    - "Solarys431 — direction and operation of the pipeline"
+  license: "Apache-2.0"
+
+automation:
+  - method: "LLM-assisted formalization"
+    description: >-
+      Statements and proofs written by an orchestrated multi-model pipeline
+      (Claude Opus 5 as orchestrator, Claude Sonnet 5 subagents for the
+      mechanical modules, GPT-5.6-Sol for adversarial review), with every
+      declaration compiled by the Lean 4 kernel and every theorem checked with
+      #print axioms. No proof step is accepted on the strength of a model's
+      assertion.
+  - method: "numerical pre-verification"
+    description: >-
+      Each key identity was checked numerically on independent samples before
+      being formalized (e.g. lcm(p−1,p+1,80) = 10(p²−1) on 304 primes ≡ 3 mod
+      80 below 100000).
+
+review:
+  status: "adversarially reviewed, corrections pending"
+  details: >-
+    Two independent pre-publication reviews on 2026-07-26, both instructed to
+    find faults rather than confirm. Both returned NOT READY. The substantive
+    finding was that an earlier version of this file claimed as new an
+    observation already present in the AIM proof; that claim has been
+    withdrawn (see the first source entry). Remaining items are being fixed
+    before publication.
+
+fidelity:
+  divergences:
+    - statement: "lenstra_proposition"
+      source_hypothesis: "k ≡ 1 (mod 4) prime factors, all ≡ 3 (mod 80)"
+      formalized_hypothesis: "n ≡ 3 (mod 80), together with all prime factors ≡ 3 (mod 80)"
+      note: >-
+        The source derives n ≡ 3 (mod 80) from the count of prime factors,
+        since 3^4 ≡ 1 (mod 80). The formalized theorem assumes that consequence
+        directly. The bridge from n.primeFactors.card % 4 = 1 to n % 80 = 3 is
+        NOT yet proved in Lean: prod_class_mod_eighty proves the corresponding
+        statement for lists, but it is not connected to Nat.primeFactors. Until
+        that gap is closed, this is a formalization of a slightly weaker
+        statement than the original proposition, and it is described as such.
+    - statement: "lenstra_local and downstream"
+      source_hypothesis: "p ≡ 3 (mod 80)"
+      formalized_hypothesis: "p ≡ 3 (mod 80)"
+      note: >-
+        The chain covers only the class 3 mod 80. Separate lemmas in
+        ClassMod80 treat the class 67 mod 80, but they are not wired into the
+        main theorem.
+
+sources:
+  - title: "The Lenstra–Pomerance proposition on counterexamples to Agrawal's conjecture at r = 5"
+    authors:
+      - "Hendrik W. Lenstra, Jr."
+      - "Carl Pomerance"
+    id: "https://aimath.org/WWN/primesinp/articles/html/50a/"
+    type: "proposition stated in research notes (American Institute of Mathematics, 2003, pp. 30–32)"
+    license: "n/a (mathematical statement)"
+    author_contacted: "no"
+    prior_work: >-
+      Independent formalization (2026-07-26) of the statement: if n is squarefree
+      with n ≡ 3 (mod 80), every prime factor p ≡ 3 (mod 80), and both Korselt
+      conditions hold ((p−1) | (n−1) and (p+1) | (n+1)), then the Agrawal
+      congruence at r = 5 holds modulo n and n² ≢ 1 (mod 5). The proposition is
+      quoted throughout the literature on the AKS test — OEIS A329223, the
+      encyclopedic entry on the conjecture, Popovych (IACR ePrint 2009/008),
+      Hegde–Devaraj (Springer 2021) — and, to our knowledge, had not been
+      machine-checked in any proof assistant.
+      What already exists: google-deepmind/formal-conjectures contains
+      FormalConjectures/Wikipedia/Agrawal.lean with the STATEMENT of Agrawal's
+      conjecture itself, tagged `@[category research open]` and closed by a
+      `sorry`, as is proper for an open problem; the same file states Popovych's
+      variant. Neither the Lenstra–Pomerance proposition nor any proof of it
+      appears there. We claim no priority on the mathematics, which is Lenstra
+      and Pomerance's, and none on the statement of the conjecture, which is
+      already formalized in that repository.
+      Route: OURS IS THE SAME ROUTE AS THE ORIGINAL. The AIM notes already
+      contain, in the proof of the proposition, the identity
+      (ζ₅−1)^(p²) = −ζ₅^(−1)(ζ₅−1), the consequence that the order of ζ₅−1
+      divides 10(p²−1), and the reduction to n ≡ p (mod 10(p²−1)) verified on
+      four coprime factors. Our presentation repackages that argument through
+      the identity lcm(p−1, p+1, 80) = 10(p²−1); it is a different wrapping of
+      the same proof, not an observation absent from the literature. An earlier
+      draft of this file claimed otherwise; the claim was false and has been
+      withdrawn. WE CLAIM NOTHING ON THE MATHEMATICS: the proposition and its
+      proof are Lenstra and Pomerance's. We claim only the mechanical
+      verification.
+
+  - title: "Korselt's criterion and Carmichael numbers"
+    authors:
+      - "Alwin Korselt (1899)"
+      - "Robert Daniel Carmichael (1910)"
+    id: "https://mathworld.wolfram.com/KorseltsCriterion.html"
+    type: "classical theorem"
+    license: "public domain"
+    author_contacted: "n/a"
+    prior_work: >-
+      Introduced here (2026-07-26) because they were needed for the proposition
+      above: `IsCarmichael`, `IsLucasCarmichael`, and Korselt's criterion in the
+      form `IsCarmichael n → Nat.Coprime n b → Nat.FermatPsp n b`.
+      What already exists: Mathlib has `Nat.FermatPsp`
+      (Mathlib/NumberTheory/FermatPsp.lean) and the Carmichael FUNCTION λ
+      (Mathlib/NumberTheory/ArithmeticFunction/Carmichael.lean), which is a
+      different object; it has no Carmichael numbers and no Korselt criterion.
+      google-deepmind/formal-conjectures defines `IsCarmichael` in its own
+      support library (FormalConjecturesForMathlib/NumberTheory/Carmichael.lean).
+      Ours is an independent definition with the Korselt implication proved; we
+      claim no priority on the notion itself.
+
+  - title: "The Agrawal congruence forces base-5 Fermat pseudoprimality (the bridge)"
+    authors:
+      - "this pipeline"
+    id: "https://github.com/Solarys431/agrawal-r5"
+    type: "elementary consequence of the congruence, derived in the course of this study"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Proved unconditionally (2026-07-24): every squarefree n prime to 10
+      satisfying the Agrawal congruence at r = 5 divides 5^(n−1) − 1. The
+      argument evaluates the polynomial identity at the four fifth roots of
+      unity and multiplies, using the explicit cofactor identity
+      (z−1)(z²−1)(z³−1)(z⁴−1) = 5. The same four-factor evaluation appears in
+      the AIM proof of the Lenstra–Pomerance proposition, used there in the
+      opposite direction. The statement is elementary and is likely folklore
+      among people working on the conjecture; we make no claim of novelty for
+      the mathematics, only for its mechanical verification.
+
+  - title: "Bounded order of ζ−1 in F_p[X]/Φ₅"
+    authors:
+      - "this pipeline"
+    id: "https://github.com/Solarys431/agrawal-r5"
+    type: "lemma derived in the course of this study"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      NOT NEW. The bound for p ≡ 3 (mod 5) is stated explicitly in the AIM
+      notes of Lenstra and Pomerance, inside the proof of the proposition
+      above: "the order of (ζ₅−1) in F_p[ζ₅] divides 10(p²−1)". What is
+      formalized here (2026-07-26) is that statement, in the division-free form
+      (ζ−1)^(10p²) = (ζ−1)^10, together with the observation that the same
+      proof covers BOTH inert classes p ≡ 2 and p ≡ 3 (mod 5), since
+      2² ≡ 3² ≡ 4 (mod 5); the source treats only p ≡ 3. That extension to the
+      second class is the only part we have not found stated, and it is a
+      marginal remark, not a result. Popovych (IACR ePrint 2009/008) studies
+      the subgroup generated by X−1 in the same quotient; we could not consult
+      that paper (PDF behind bot protection).
+
+  - title: "Two-adic constraint on inert prime factors"
+    authors:
+      - "this pipeline"
+    id: "https://github.com/Solarys431/agrawal-r5"
+    type: "lemma derived in the course of this study"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Proved (2026-07-24): if the Agrawal congruence at r = 5 holds for a
+      squarefree n prime to 5, then v₂(q−1) ≤ v₂(n−1) for every prime factor
+      q ≡ ±2 (mod 5). Follows from the bridge together with Euler's criterion.
+      No novelty claim on the mathematics.
+
+notes: >-
+  Nothing in this repository asserts or refutes Agrawal's conjecture. The
+  proposition formalized here is a SUFFICIENT condition, not a necessary one:
+  it says how to build a counterexample, not where all counterexamples must be.
+  Note that primes satisfy its hypotheses trivially (n = 83 is a witness), and
+  they are of course not counterexamples: only a COMPOSITE n produces one. Such
+  an n would be simultaneously a Carmichael and a Lucas–Carmichael number; none
+  is known, and the question has been open since Pomerance raised it in 1984 in
+  connection with the Baillie–PSW primality test.

@@ -308,6 +308,79 @@ In particular the left-hand side is non-negative whenever
 \(r^2\le 2I(pq)\) with \(q<r\) into \(r<2Ip\), this bounds the third
 prime by an explicit multiple of the smallest one.
 
+\section{The Lenstra--Pomerance proposition}
+
+The statement below is the one on which the search for counterexamples at
+\(r=5\) rests. It appears in the AIM notes of Lenstra and Pomerance
+\cite[pp.~30--32]{LPremarks} and is quoted throughout the subsequent
+literature; to our knowledge it had not been machine-checked before. Note
+that Mathlib does not currently contain Carmichael numbers or Korselt's
+criterion, so those had to be introduced (\lean{IsCarmichael},
+\lean{IsLucasCarmichael}, \lean{IsCarmichael.fermatPsp}).
+
+\begin{theorem}[\lean{lenstra\_proposition}]\label{thm:lenstra}
+Let \(n\) be squarefree with \(n\equiv3\pmod{80}\), suppose every prime
+\(p\mid n\) satisfies \(p\equiv3\pmod{80}\), and suppose Korselt's two
+conditions hold: \((p-1)\mid(n-1)\) and \((p+1)\mid(n+1)\) for every
+\(p\mid n\). Then
+\[
+(X-1)^n\equiv X^n-1 \pmod{n,\ X^5-1}
+\qquad\text{and}\qquad
+n^2\not\equiv1\pmod5 .
+\]
+\end{theorem}
+
+The hypothesis \(n\equiv3\pmod{80}\) is a consequence, in the original, of
+having \(k\equiv1\pmod4\) prime factors all \(\equiv3\pmod{80}\), since
+\(3^4\equiv1\pmod{80}\); the list-level form of that step is
+\lean{prod\_class\_mod\_eighty}, but the bridge to \lean{Nat.primeFactors}
+is not yet formalized, so Theorem~\ref{thm:lenstra} assumes the consequence
+directly and is to that extent weaker than the original statement.
+
+The second conclusion is what makes such an \(n\), \emph{if composite}, a
+genuine counterexample: Agrawal's conjecture allows the escape
+\(n^2\equiv1\pmod r\), and here it is closed
+(\lean{sq\_not\_one\_mod\_five}). The proviso matters: primes satisfy the
+hypotheses trivially — \(n=83\) is one — and are of course not
+counterexamples. Only a composite witness would be one, and none is known.
+
+\begin{proof}[Certified proof sketch]
+The route is the one of the original proof, which already contains the
+identity \((\zeta_5-1)^{p^2}=-\zeta_5^{-1}(\zeta_5-1)\), the resulting bound
+on the order, and the reduction to \(n\equiv p\); we repackage it through a
+single observation: \emph{the three conditions imposed on
+\(n\) are satisfied by \(p\) itself}, since \(p\equiv1\pmod{p-1}\),
+\(p\equiv-1\pmod{p+1}\) and \(p\equiv3\pmod{80}\). Hence
+\[
+n\equiv p \pmod{\operatorname{lcm}(p-1,\,p+1,\,80)},
+\qquad
+\operatorname{lcm}(p-1,\,p+1,\,80)=10(p^2-1)
+\]
+(\lean{lcm\_three\_eq}, \lean{sub\_dvd\_of\_korselt}), and that modulus is
+exactly the one bounding the order of \(\zeta-1\) by
+Theorem~\ref{thm:order}. Therefore \((\zeta-1)^n=(\zeta-1)^p\), and the
+Frobenius gives \((\zeta-1)^p=\zeta^p-1=\zeta^3-1=\zeta^n-1\), which is the
+congruence in the cyclotomic component (\lean{lenstra\_local}). On the
+component \(X\mapsto1\) both sides vanish, and since
+\(X^5-1=(X-1)\Phi_5\) with the two factors coprime for \(p\neq5\), the two
+pieces glue to the congruence modulo \(p\) (\lean{agrawal\_mod\_p}, using
+\lean{dvd\_of\_dvd\_both}). Finally, for squarefree \(n\) a congruence
+holding modulo every prime factor holds modulo \(n\): dividing by the monic
+\(X^5-1\) over \(\mathbf Z\), every coefficient of the remainder is divisible
+by each \(p\mid n\), hence by \(n\) (\lean{congruence\_of\_local}).
+\end{proof}
+
+\begin{remark}
+Nothing here asserts that a composite such \(n\) exists. A composite number
+satisfying the hypotheses would be simultaneously a Carmichael and a
+Lucas--Carmichael number; no such integer is known, and the question is open
+since Pomerance raised it in 1984 in connection with the Baillie--PSW
+primality test. Note also that the proposition gives a \emph{sufficient}
+condition for producing a counterexample, not a necessary one: it does not say
+where all counterexamples must lie. It certifies the tool used to look for
+them; it does not decide Agrawal's conjecture in either direction.
+\end{remark}
+
 \section{Computational certificates}
 
 Independently of the kernel-checked statements above, the repository
@@ -358,7 +431,7 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Twelve modules, \(1148\) source lines, \(73\) named declarations; no
+Twenty-one modules, \(2212\) source lines, \(123\) named declarations; no
 \lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build}. The table mapping each

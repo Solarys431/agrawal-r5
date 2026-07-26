@@ -12,7 +12,7 @@ emptiness of the fibers) are stated precisely in the paper.
 
 ## Lean core
 
-Ten modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-one modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -38,6 +38,45 @@ lake build
 | 2-adic saturation of a divisor | `pow_two_dvd_of_not_dvd_half` | `TwoAdicJaw.lean` |
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
+| Bounded order: ord(ζ−1) divides 10(p²−1), both inert classes | `order_bounded` | `OrderBound.lean` |
+| Box identity and its arithmetic corollary | `prod_pairs_sub_prod_squares`, `lt_two_mul_of_sq_le` | `BoxLemma.lean` |
+| Carmichael and Lucas–Carmichael numbers (Korselt) | `IsCarmichael`, `IsLucasCarmichael` | `Korselt.lean` |
+| Korselt's criterion: Carmichael ⟹ Fermat pseudoprime in every coprime base | `IsCarmichael.fermatPsp` | `Korselt.lean` |
+| Class arithmetic: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ product ≡ 3 (mod 80) | `prod_class_mod_eighty` | `ClassMod80.lean` |
+| The escape stays closed: n ≡ 3 (mod 80) ⟹ n² ≢ 1 (mod 5) | `sq_not_one_mod_five` | `ClassMod80.lean` |
+| lcm(p−1, p+1, 80) = 10(p²−1) for p ≡ 3 (mod 80) | `lcm_three_eq` | `LcmIdentity.lean` |
+| Korselt's conditions give n ≡ p (mod 10(p²−1)) | `sub_dvd_of_korselt` | `LcmIdentity.lean` |
+| Cyclotomic component of Agrawal's congruence | `lenstra_local` | `LenstraLocal.lean` |
+| Recomposition: (X−1) ∣ f and Φ₅ ∣ f ⟹ (X⁵−1) ∣ f | `dvd_of_dvd_both` | `Recompose.lean` |
+| The congruence modulo p | `agrawal_mod_p` | `LocalGlue.lean` |
+| Local to global for squarefree n | `congruence_of_local` | `GlobalGlue.lean` |
+| **The Lenstra–Pomerance proposition (see the caveat below)** | `lenstra_proposition` | `Lenstra.lean` |
+
+### On the Lenstra–Pomerance proposition
+
+`lenstra_proposition` is the statement of Lenstra and Pomerance
+([AIM notes, 2003](https://aimath.org/WWN/primesinp/articles/html/50a/),
+pp. 30–32), which to our knowledge had not been machine-checked before. Three
+things must be said plainly.
+
+**The mathematics is theirs, not ours.** The AIM proof already contains the
+identity (ζ₅−1)^(p²) = −ζ₅^(−1)(ζ₅−1), the bound on the order of ζ₅−1, and the
+reduction to n ≡ p (mod 10(p²−1)). Our route is the same one, repackaged
+through the identity lcm(p−1, p+1, 80) = 10(p²−1). We claim only the mechanical
+verification.
+
+**Our statement is slightly weaker than theirs.** The original assumes
+k ≡ 1 (mod 4) prime factors and derives n ≡ 3 (mod 80); we assume that
+consequence directly. The bridge from `n.primeFactors.card % 4 = 1` to
+`n % 80 = 3` is not yet formalized. This is recorded under `fidelity` in
+`formalization.yaml`.
+
+**Primes satisfy the hypotheses.** n = 83 is a witness, and is obviously not a
+counterexample. Only a **composite** witness would be one, and none is known:
+it would be simultaneously a Carmichael and a Lucas–Carmichael number, a
+question open since Pomerance raised it in 1984. The proposition is a
+*sufficient* condition for building a counterexample, not a necessary condition
+on all of them.
 
 ## Paper
 

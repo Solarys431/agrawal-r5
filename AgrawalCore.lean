@@ -10,3 +10,12 @@ import AgrawalCore.AgrawalBridge
 import AgrawalCore.TwoAdicJaw
 import AgrawalCore.BoxLemma
 import AgrawalCore.OrderBound
+import AgrawalCore.LenstraLocal
+import AgrawalCore.Korselt
+import AgrawalCore.ClassMod80
+import AgrawalCore.Recompose
+import AgrawalCore.LocalGlue
+import AgrawalCore.LcmIdentity
+import AgrawalCore.LenstraProp
+import AgrawalCore.GlobalGlue
+import AgrawalCore.Lenstra
