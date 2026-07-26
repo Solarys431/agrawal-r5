@@ -24,7 +24,7 @@ publication checklist is in
 
 ## Lean core
 
-Twenty-four modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-six modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -75,6 +75,10 @@ lake build
 | Universal mod-3 congruence of two factors under the paired Korselt conditions | `three_congruence_forced` | `Partition.lean` |
 | Strong complementary row gives the cubic Lenstra signature | `cubic_signature_of_strong_row` | `Partition.lean` |
 | The cubic signature contains no extra information when p ≠ 0 | `strong_row_of_cubic_signature` | `Partition.lean` |
+| Definition of the mixed Fibonacci–Lucas sequence Hₙ | `goldenA`, `goldenH` | `H4Core.lean` |
+| **Exact scalar profile: p ∣ Hₙ ↔ ε^(2n) = −1 and 5^(n−1) = −1** | `dvd_goldenH_iff_scalar_profile` | `H4Core.lean` |
+| Exact 2-adic depth of ordₚ(5) for p ∣ Hₙ | `dvd_goldenH_order_factorization_two` | `H4Core.lean` |
+| **Kernel form of the H4 wall: golden inertia ↔ 2-adic saturation** | `dvd_goldenH_nonsquare_iff_two_adic_saturation` | `H4Core.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -177,7 +181,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Ventiquattro moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Ventisei moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```

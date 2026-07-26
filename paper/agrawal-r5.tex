@@ -643,11 +643,64 @@ repository alone. Separately, the repository freezes as
 of the working material of the study, including a prime-by-prime
 corpus up to \(10^9\); nothing in this note relies on it.
 
+\section{The kernel form of the golden-inertia wall}
+
+The arithmetic reduction underlying the first open problem is now also
+kernel-checked. Recall the definitions of \(A_n\) and \(H_n\) from
+Section~1.
+
+\begin{theorem}[kernel-checked scalar profile]
+\label{thm:hprofile}
+Let \(p\) be prime, \(p\ne5\), and \(n\ge1\). Then
+\[
+ p\mid H_n
+ \quad\Longleftrightarrow\quad
+ \eps^{2n}=-1\text{ in }R_p
+ \quad\text{and}\quad
+ 5^{\,n-1}=-1\text{ in }\mathbf F_p.
+\]
+\end{theorem}
+
+The declaration is
+\begin{center}
+\small
+\lean{dvd\_goldenH\_iff\_scalar\_profile}.
+\end{center}
+
+Both parity branches are proved in both directions. In particular, the
+Fibonacci--Lucas condition is not used merely as a necessary shadow of
+the scalar semiperiod.
+
+\begin{theorem}[kernel-checked 2-adic form]
+\label{thm:h4wall}
+Let \(p\ne2,5\) be prime, \(n\ge2\), and \(p\mid H_n\). Then
+\[
+ v_2\!\left(\operatorname{ord}_p(5)\right)=v_2(n-1)+1,
+\]
+and
+\[
+ \left(\frac5p\right)=-1
+ \quad\Longleftrightarrow\quad
+ v_2(p-1)=v_2(n-1)+1.
+\]
+\end{theorem}
+
+The corresponding declarations are
+\begin{center}
+\small
+\lean{dvd\_goldenH\_order\_factorization\_two}\\
+\lean{dvd\_goldenH\_nonsquare\_iff\_two\_adic\_saturation}.
+\end{center}
+
+Thus the remaining universal assertion is exactly the last equality,
+not the already-proved order identity. The theorem is a reduction of
+the obstruction; it neither proves nor assumes golden inertia.
+
 \section{Two open problems}
 
 We pose the two statements that our working material identifies as
-the central open problems of the \(r=5\) study. We claim no proof and
-no partial proof here.
+the central open problems of the \(r=5\) study. We claim no proof of
+either statement.
 
 \begin{conjecture}[golden inertia]\label{conj:inertia}
 For every \(n\equiv4\pmod5\), every odd prime factor of \(H_n\)
@@ -658,6 +711,7 @@ Theorem~\ref{thm:support} shows that every prime
 \(p\equiv2\pmod5\) does occur in some \(H_{n}\) with
 \(n\equiv4\pmod5\); the census in item (2) above verifies
 Conjecture~\ref{conj:inertia} for all \(n\le10^5\).
+Theorem~\ref{thm:h4wall} gives its exact kernel-checked saturation form.
 
 \begin{conjecture}[fibre emptiness]\label{conj:fibres}
 The pattern of item (1) above is general: for every admissible pair,
@@ -666,8 +720,8 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-At the release state audited for this version there are twenty-five modules
-and \(2682\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+At the release state audited for this version there are twenty-six modules
+and \(3027\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each

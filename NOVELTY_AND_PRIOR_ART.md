@@ -55,6 +55,7 @@ novelty should be claimed for their underlying arguments.
 | Golden–cyclotomic entanglement identity | Lean-checked | Structural identity supporting the main story; priority unassessed |
 | Forced odd-\(q\) partition for simultaneous Carmichael/Lucas–Carmichael conditions | Lean-checked | **Classical mathematics, new formalization.** McIntosh (2014) explicitly records the Williams-set compatibility \(\gcd(p_i-1,p_j+1)=2\); Leng (2017) records \(n\equiv p\bmod (p^2-1)/2\) and the mod-12 consequence. The present contribution is a reusable kernel proof, including the arbitrary-common-divisor form `common_divisor_forced` and the named mod-3 corollary. |
 | Cubic Lenstra signature versus the strong complementary row | Lean-checked | Elementary equivalence, included as a negative result of orientation: the cubic parameters repackage the row and must not be counted as an independent obstruction |
+| Arithmetic profile of \(H_n\) and the 2-adic saturation wall | Lean-checked | Exact formal reduction, not a proof of H4: `dvd_goldenH_iff_scalar_profile` identifies divisibility by \(H_n\) with the two negative scalar semiperiods, and `dvd_goldenH_nonsquare_iff_two_adic_saturation` proves that inertia is equivalent to saturation of \(v_2(p-1)\). Priority for the elementary reduction is unassessed; no novelty claim beyond this explicit formal package should be made. |
 
 ## Computational results
 

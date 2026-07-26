@@ -185,6 +185,51 @@ wider paper argument; it is not itself a Lean theorem in this release core.
 The certificates therefore prove the finite claims under the displayed
 detector reduction, not the two universal open conjectures.
 
+## 4-bis. H4 arithmetic bridge audit
+
+The new module `AgrawalCore/H4Core.lean` was audited against the actual
+types rather than the surrounding narrative.
+
+- `goldenA` uses Lucas numbers for even indices and Fibonacci numbers for
+  odd indices, exactly as in the paper.
+- `goldenH` is the literal natural-number gcd
+  `gcd(goldenA n, 5^(n-1)+1)`.
+- `dvd_goldenH_iff_scalar_profile` proves both directions of
+  \[
+  p\mid H_n\iff \varepsilon^{2n}=-1\ \land\ 5^{n-1}=-1.
+  \]
+  The reverse Fibonacci and Lucas implications are separate kernel proofs;
+  no numerical characterization is imported.
+- `dvd_goldenH_order_factorization_two` proves the exact identity
+  \(v_2(\operatorname{ord}_p5)=v_2(n-1)+1\).
+- `dvd_goldenH_nonsquare_iff_two_adic_saturation` proves, under
+  \(p\mid H_n\), that non-squareness of \(5\) modulo \(p\) is equivalent to
+  \(v_2(p-1)=v_2(n-1)+1\).
+
+Adversarial boundary: the module does **not** prove that the last equality
+always holds and therefore does not prove H4. It also does not yet connect
+the order-four local transport symmetry in the original definition of
+`S(p,5)` to `goldenH`; that end-to-end local interface is absent from the
+public kernel. The safe claim is an exact arithmetic reduction of the
+golden-inertia conjecture, not a formalization of the full local
+classification.
+
+An independent implementation represented
+\(\mathbf F_p[X]/(X^2-X-1)\) by coefficient pairs, recomputed Fibonacci and
+Lucas numbers from their recurrence, and calculated multiplicative orders
+by factoring \(p-1\). For every prime \(p<2000\), \(p\ne5\), and
+\(2\le n\le400\), it found 205 instances of \(p\mid H_n\). All 205 passed:
+
+```text
+eps^(2n) = -1;
+5^(n-1) = -1;
+v2(ord_p(5)) = v2(n-1)+1;
+non-square(5 mod p) iff v2(p-1)=v2(n-1)+1.
+```
+
+All 205 were inert and none split, consistently with—but not proving—the
+open conjecture.
+
 ## 5. Prior-art attack
 
 Primary sources checked:
