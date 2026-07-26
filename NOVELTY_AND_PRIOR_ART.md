@@ -56,6 +56,7 @@ novelty should be claimed for their underlying arguments.
 | Forced odd-\(q\) partition for simultaneous Carmichael/Lucas–Carmichael conditions | Lean-checked | **Classical mathematics, new formalization.** McIntosh (2014) explicitly records the Williams-set compatibility \(\gcd(p_i-1,p_j+1)=2\); Leng (2017) records \(n\equiv p\bmod (p^2-1)/2\) and the mod-12 consequence. The present contribution is a reusable kernel proof, including the arbitrary-common-divisor form `common_divisor_forced` and the named mod-3 corollary. |
 | Cubic Lenstra signature versus the strong complementary row | Lean-checked | Elementary equivalence, included as a negative result of orientation: the cubic parameters repackage the row and must not be counted as an independent obstruction |
 | Arithmetic profile of \(H_n\) and the 2-adic saturation wall | Lean-checked | Exact formal reduction, not a proof of H4: `dvd_goldenH_iff_scalar_profile` identifies divisibility by \(H_n\) with the two negative scalar semiperiods, and `dvd_goldenH_nonsquare_iff_two_adic_saturation` proves that inertia is equivalent to saturation of \(v_2(p-1)\). Priority for the elementary reduction is unassessed; no novelty claim beyond this explicit formal package should be made. |
+| Local order-four transport implies \(p\mid H_n\) | Lean-checked end to end | `LocalTransport.lean` starts from the literal row \((\zeta-1)^m=\zeta^m-1\) in \((\mathbf Z/p)[X]/\Phi_5\), derives all four labelled rows, and proves `orderFourTransport_dvd_goldenH`. This closes the necessary local-to-arithmetic direction. The converse sign-repair argument is still outside the kernel, so the module does not prove the claimed scalar completeness equivalence or H4. Priority is unassessed. |
 
 ## Computational results
 
@@ -76,6 +77,8 @@ The following are potentially more important than the current Lean core, but
 are not yet represented by end-to-end kernel statements in this repository:
 
 - exact local classification by the golden and binary locks;
+- the converse `p ∣ H_n ⟹` existence of a labelled local transport
+  (the necessary direction is now kernel-checked);
 - the full local interface that instantiates the now formalized abstract
   moment obstruction and derives `im_r(S) ⊆ T` directly from `S(p,r)`;
 - finite-fiber/resultant reductions in the three-factor case;

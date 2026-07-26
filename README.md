@@ -24,7 +24,7 @@ publication checklist is in
 
 ## Lean core
 
-Twenty-six modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-seven modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -79,6 +79,9 @@ lake build
 | **Exact scalar profile: p ∣ Hₙ ↔ ε^(2n) = −1 and 5^(n−1) = −1** | `dvd_goldenH_iff_scalar_profile` | `H4Core.lean` |
 | Exact 2-adic depth of ordₚ(5) for p ∣ Hₙ | `dvd_goldenH_order_factorization_two` | `H4Core.lean` |
 | **Kernel form of the H4 wall: golden inertia ↔ 2-adic saturation** | `dvd_goldenH_nonsquare_iff_two_adic_saturation` | `H4Core.lean` |
+| Exact local definition of the residue-2 transport in `S(p,5)` | `LocalS5`, `OrderFourTransportWitness` | `LocalTransport.lean` |
+| Four labelled T5 rows from the universal cyclotomic row | `localS5_row`, `orderFourTransport_rows` | `LocalTransport.lean` |
+| **End-to-end necessary bridge: local order-4 transport ⟹ p ∣ Hₙ** | `orderFourTransport_dvd_goldenH`, `hasOrderFourTransport_imp_goldenH_support` | `LocalTransport.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -181,7 +184,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Ventisei moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Ventisette moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```

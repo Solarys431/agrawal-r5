@@ -207,12 +207,9 @@ types rather than the surrounding narrative.
   \(v_2(p-1)=v_2(n-1)+1\).
 
 Adversarial boundary: the module does **not** prove that the last equality
-always holds and therefore does not prove H4. It also does not yet connect
-the order-four local transport symmetry in the original definition of
-`S(p,5)` to `goldenH`; that end-to-end local interface is absent from the
-public kernel. The safe claim is an exact arithmetic reduction of the
-golden-inertia conjecture, not a formalization of the full local
-classification.
+always holds and therefore does not prove H4. The safe claim is an exact
+arithmetic reduction of the golden-inertia conjecture, not a proof of the
+full local classification.
 
 An independent implementation represented
 \(\mathbf F_p[X]/(X^2-X-1)\) by coefficient pairs, recomputed Fibonacci and
@@ -229,6 +226,48 @@ non-square(5 mod p) iff v2(p-1)=v2(n-1)+1.
 
 All 205 were inert and none split, consistently with—but not proving—the
 open conjecture.
+
+## 4-ter. Local transport interface audit
+
+The new module `AgrawalCore/LocalTransport.lean` closes one of the scope
+boundaries recorded above.
+
+- `LocalS5 p m` is the literal equality
+  \[
+  (\zeta-1)^m=\zeta^m-1
+  \quad\text{in }(\mathbf Z/p\mathbf Z)[X]/\Phi_5,
+  \]
+  not a scalar proxy.
+- `localS5_row` first converts that equality back to divisibility by
+  \(\Phi_5\), then evaluates at a conjugate root. The four root proofs are
+  separate kernel declarations.
+- `orderFourTransport_rows` derives the complete labelled cycle for
+  \(m=2n-1\), \(n\equiv4\pmod5\).
+- `orderFourTransport_cyclo_scalar` derives
+  \(\varepsilon^{2n}=-1\) and \(5^{n-1}=-1\) inside the cyclotomic quotient.
+- `orderFourTransport_dvd_goldenH` proves the end-to-end necessary direction
+  \[
+  \text{local residue-2 transport}\Longrightarrow p\mid H_n.
+  \]
+  The descent to integer divisibility is reproved in the cyclotomic ring;
+  it does not assume that the quotient is a field.
+
+Adversarial boundary: the converse
+\[
+p\mid H_n\Longrightarrow\text{existence of a labelled local transport}
+\]
+is **not** a Lean theorem. In particular the common-defect/sign-repair
+argument in the wider manuscript has not been accepted into the release
+kernel. The new module narrows, but does not erase, the formal gap and does
+not prove H4.
+
+An independent implementation of
+\((\mathbf Z/p\mathbf Z)[X]/\Phi_5\), with its own degree-four reduction
+and binary exponentiation, tested every prime \(p<2000\), \(p\ne5\), and
+all \(n\le800\), \(n\equiv4\pmod5\). It found 140 positive local
+transport witnesses on 65 distinct primes. Every witness satisfied all
+four labelled rows and \(p\mid H_n\); there were zero violations. This is
+a falsification check, not part of the proof.
 
 ## 5. Prior-art attack
 
@@ -266,7 +305,7 @@ review.
 ### Formalization value: high
 
 The repository is a nontrivial, pinned, warning-clean Lean development with
-24 substantive modules, 2,520 source lines and 139 named declarations. Its
+27 substantive modules, 3,520 source lines and 193 named declarations. Its
 strongest formal contribution is not line count but the end-to-end
 organization of:
 

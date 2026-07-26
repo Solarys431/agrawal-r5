@@ -649,6 +649,38 @@ The arithmetic reduction underlying the first open problem is now also
 kernel-checked. Recall the definitions of \(A_n\) and \(H_n\) from
 Section~1.
 
+\begin{theorem}[kernel-checked local-to-arithmetic bridge]
+\label{thm:localH}
+Let \(p\ne5\) be prime, let
+\[
+ T_p=(\mathbf Z/p\mathbf Z)[X]/(\Phi_5),\qquad \zeta=X\bmod\Phi_5,
+\]
+and let \(n\ge1\), \(n\equiv4\pmod5\). If, for \(m=2n-1\),
+\[
+ (\zeta-1)^m=\zeta^m-1\qquad\text{in }T_p,
+\]
+then \(p\mid H_n\).
+\end{theorem}
+
+The corresponding declarations are
+\begin{center}
+\small
+\lean{LocalS5},\quad \lean{OrderFourTransportWitness},\\
+\lean{orderFourTransport\_rows},\\
+\lean{orderFourTransport\_dvd\_goldenH}.
+\end{center}
+They start from the literal local row, evaluate its polynomial remainder at
+\(\zeta,\zeta^2,\zeta^4,\zeta^3\), and recover the labelled cycle
+\[
+u_1\longmapsto u_2\longmapsto u_4\longmapsto u_3\longmapsto u_1.
+\]
+The cycle implies, without division,
+\(\eps^{2n}=-1\) and \(5^{n-1}=-1\) in the cyclotomic quotient; the
+Fibonacci--Lucas recurrences then descend these identities to
+\(p\mid H_n\).  The converse construction of a labelled transport from
+\(p\mid H_n\), including the common-sign repair, is not asserted by the
+Lean theorem and remains outside the release kernel.
+
 \begin{theorem}[kernel-checked scalar profile]
 \label{thm:hprofile}
 Let \(p\) be prime, \(p\ne5\), and \(n\ge1\). Then
@@ -720,8 +752,8 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-At the release state audited for this version there are twenty-six modules
-and \(3027\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+At the release state audited for this version there are twenty-seven modules
+and \(3520\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each

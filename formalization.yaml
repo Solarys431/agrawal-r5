@@ -105,13 +105,17 @@ sources:
       Formalized as `goldenA`, `goldenH`,
       `dvd_goldenH_iff_scalar_profile`,
       `dvd_goldenH_order_factorization_two`, and
-      `dvd_goldenH_nonsquare_iff_two_adic_saturation`. For a prime p
+      `dvd_goldenH_nonsquare_iff_two_adic_saturation`. The separate module
+      `LocalTransport.lean` defines the literal local row in
+      (Z/p)[X]/Phi_5, derives the four labelled T5 rows, and proves
+      `orderFourTransport_dvd_goldenH`. For a prime p
       distinct from 2 and 5, divisibility by
       H_n=gcd(A_n,5^(n-1)+1) is equivalent to the two negative scalar
       semiperiods. Under that divisibility, inertia of 5 is equivalent to
       v_2(p-1)=v_2(n-1)+1. This is an exact reduction, not a proof of the
-      universal golden-inertia conjecture and not yet an end-to-end
-      formalization of the order-four symmetry in S(p,5). We make no
+      universal golden-inertia conjecture. The end-to-end necessary direction
+      from a residue-2 order-four transport in S(p,5) to p|H_n is now
+      kernel-checked; the converse sign-repair direction is not. We make no
       mathematical priority claim for the elementary order calculation.
 
   - title: "The Lenstra–Pomerance proposition on counterexamples to Agrawal's conjecture at r = 5"
