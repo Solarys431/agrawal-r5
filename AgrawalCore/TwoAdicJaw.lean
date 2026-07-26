@@ -43,7 +43,7 @@ lemma pow_two_dvd_of_not_dvd_half {d k v : ℕ} (hd0 : d ≠ 0)
   by_contra hcon
   have hbk : d.factorization 2 ≤ k := by
     by_contra hle
-    push_neg at hle
+    push Not at hle
     exact hcon (dvd_trans (pow_dvd_pow 2 hle) (Nat.ordProj_dvd d 2))
   exact hnot (hsplit ▸ Nat.mul_dvd_mul (pow_dvd_pow 2 hbk) hdvdv)
 

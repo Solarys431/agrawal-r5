@@ -36,7 +36,7 @@ si scrive `p = 80t+3`, si isola `m = 800t²+60t+1` (con `p²−1 = 8m`), si
 usa `gcd(p−1,p+1) = 2` (due multipli di 2 consecutivi) per ottenere
 `lcm(p−1,p+1) = 4m`, e `m ≡ 1 (mod 20)` (sempre, perché 800 e 60 sono
 multipli di 20) per ottenere `lcm(4m, 80) = 80m = 10(p²−1)`. -/
-theorem lcm_three_eq {p : ℕ} (hp : p % 80 = 3) (hp3 : 3 ≤ p) :
+theorem lcm_three_eq {p : ℕ} (hp : p % 80 = 3) (_hp3 : 3 ≤ p) :
     Nat.lcm (Nat.lcm (p - 1) (p + 1)) 80 = 10 * (p * p - 1) := by
   obtain ⟨t, hpt⟩ : ∃ t, p = 80 * t + 3 := ⟨p / 80, by omega⟩
   obtain ⟨m, hm_def⟩ : ∃ m, m = 800 * (t * t) + 60 * t + 1 := ⟨_, rfl⟩

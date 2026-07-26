@@ -118,7 +118,7 @@ fattore primo `p` di `n` la congruenza di Agrawal a `r = 5` vale in
 `(Z/p)[X]`, allora vale in `(Z/n)[X]`. È il passaggio inverso rispetto
 alla riduzione `agrawal_fermat_shadow`/`agrawal_local`: qui si incollano
 i pezzi locali invece di scomporre il pezzo globale. -/
-theorem congruence_of_local {n : ℕ} (hn : Squarefree n) (hn1 : 0 < n)
+theorem congruence_of_local {n : ℕ} (hn : Squarefree n) (_hn1 : 0 < n)
     (h : ∀ p ∈ n.primeFactors, ∃ g : Polynomial (ZMod p),
       (X - 1) ^ n = X ^ n - 1 + (X ^ 5 - 1) * g) :
     ∃ g : Polynomial (ZMod n),

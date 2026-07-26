@@ -66,7 +66,7 @@ private lemma finset_prod_mod_eighty {s : Finset ℕ} (h : ∀ x ∈ s, x % 80 =
 fanno nella loro proposizione originale, a partire dal fatto che `3` ha
 ordine `4` modulo `80`: qui non si assume più la classe di `n`, la si
 ottiene dalla cardinalità dei fattori. -/
-theorem mod_eighty_of_card {n : ℕ} (hsq : Squarefree n) (hn0 : 0 < n)
+theorem mod_eighty_of_card {n : ℕ} (hsq : Squarefree n) (_hn0 : 0 < n)
     (hfact : ∀ p ∈ n.primeFactors, p % 80 = 3)
     (hcard : n.primeFactors.card % 4 = 1) :
     n % 80 = 3 := by

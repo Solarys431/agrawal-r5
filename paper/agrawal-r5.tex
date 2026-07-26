@@ -3,8 +3,8 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
-\hypersetup{pdfauthor={The UNICO/NOUS pipeline},
-  pdftitle={Certified constraints on counterexamples to Agrawal's conjecture at r=5}}
+\hypersetup{pdfauthor={Daniele Cappello and the UNICO/NOUS pipeline},
+  pdftitle={The golden moment and certified constraints on Agrawal's conjecture at r=5}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -18,33 +18,42 @@
 \newcommand{\F}{\mathbf{F}}
 \newcommand{\lean}[1]{\texttt{#1}}
 \emergencystretch=1.5em
+\raggedbottom
 
 \begin{document}
 
-\title[Certified constraints at \(r=5\)]{Certified constraints on
-counterexamples to Agrawal's conjecture at \(r=5\)}
+\title[The golden moment at \(r=5\)]{The golden moment and certified
+constraints on Agrawal's conjecture at \(r=5\)}
 
-\author{The UNICO/NOUS pipeline}
-\thanks{An autonomous multi-model pipeline (Claude Fable~5, Claude
-Opus~4.8, GPT-5.6-Sol, with an independent external review pass),
-orchestrated by Daniele Cappello, who carried the messages, audited
-the artifacts and made no mathematical contribution. Repository with
-the Lean sources and all computational certificates:
+\author{Daniele Cappello and the UNICO/NOUS pipeline}
+\thanks{This is a human-directed, LLM-assisted project. The mathematical
+exploration and formalization were produced by an orchestrated multi-model
+pipeline (Claude and GPT-family models), directed by Daniele Cappello and
+subjected to independent model audits. Every formal claim is checked by the
+Lean kernel; model agreement is not treated as evidence. Repository with the
+Lean sources and all computational certificates:
 \url{https://github.com/Solarys431/agrawal-r5}.}
 
 \begin{abstract}
-This note collects the part of our structural study of Agrawal's
-conjecture at \(r=5\) that is mechanically verified. Every statement
-called a theorem below is proved in Lean~4 over Mathlib, with no
+We prove, and formally verify in Lean, that the quadratic moment unit
+arising in Agrawal's congruence at \(r=5\) has quintic index
+\[
+M_2=3\,\operatorname{ind}_5\!\left(\frac{1+\sqrt5}{2}\right).
+\]
+Thus the quadratic moment is exactly the classical quintic character of
+the golden unit, up to the scalar \(3\). This note also collects the
+mechanically verified constraints obtained around that bridge. Every
+statement called a theorem below is proved in Lean~4 over Mathlib, with no
 \lean{sorry}, no \lean{admit} and no added axioms; the corresponding
-declaration name is given with each statement. Every computational
-claim carries a replayable certificate with its detection criterion
-embedded and SHA-256 manifests. We then pose, without any claim of
-proof, the two open problems that our working material identifies as
-central. Nothing in this note asserts the conjecture.
+declaration name is given with each statement. Every computational claim
+carries a replayable certificate with its detection criterion embedded and
+SHA-256 manifests. We pose, without any claim of proof, the two open
+problems that remain central. Nothing in this note asserts Agrawal's
+conjecture.
 \end{abstract}
 
 \maketitle
+\enlargethispage{4pt}
 
 \section{Setting}
 
@@ -58,7 +67,7 @@ statements are elementary, and their interest lies in the role they
 play in the wider study and in the fact that a proof assistant has
 checked every one of them.
 
-In Sections 2--4, \(p\) is an odd prime; in Section~5, \(q\) denotes
+In Sections 2--5, \(p\) is an odd prime; in Section~6, \(q\) denotes
 an arbitrary prime factor of \(n\), with \(q=2\) allowed. Let
 \[
 R_p \;=\; (\Z/p)[X]\,/\,(X^2-X-1),
@@ -136,6 +145,125 @@ Let \(p\equiv2\pmod5\), \(p\neq2\), and put \(n_0=(p+1)/2\). Then
 particular \(p\mid H_{n_0}\), with an index in the class
 \(4\bmod5\).
 \end{theorem}
+
+\section{The moment obstruction}\label{sec:moment-obstruction}
+
+Let \(F\) be a finite field, let \(e:F^\times\to F\), and define
+\[
+M_j(e)=\sum_{a\in F^\times}a^j e(a).
+\]
+The discrete logarithms occurring in the local Agrawal problem satisfy a
+covariance relation of the following form.
+
+\begin{theorem}[\lean{moment\_covariance}]\label{thm:moment-covariance}
+If \(t\in F^\times\) and
+\[
+e(ta)=t\,e(a)\qquad(a\in F^\times),
+\]
+then
+\[
+tM_j(e)=t^{-j}M_j(e).
+\]
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+Multiply the defining sum by \(t\), use the covariance relation, and
+substitute \(b=ta\). Multiplication by \(t\) permutes \(F^\times\), so
+\[
+tM_j=\sum_a a^j e(ta)
+    =\sum_b(t^{-1}b)^j e(b)=t^{-j}M_j.
+\]
+The change of variables is implemented by an explicit finite equivalence in
+the Lean proof.
+\end{proof}
+
+\begin{corollary}[\lean{pow\_succ\_eq\_one\_of\_moment\_ne\_zero}]
+\label{cor:moment-obstruction}
+Under the same covariance relation,
+\[
+M_j(e)\neq0\quad\Longrightarrow\quad t^{j+1}=1.
+\]
+Without the nonvanishing hypothesis one has the factor identity
+\[
+\bigl(t^{j+1}-1\bigr)M_j(e)=0
+\qquad(\lean{moment\_obstruction}).
+\]
+\end{corollary}
+
+This is the kernel-checked Fourier argument behind the moment obstruction
+\(\operatorname{im}_r(S)\subseteq T\) in the wider local theory. The present
+file formalizes its algebraic engine; connecting the abstract function \(e\)
+to the complete definition of \(S(p,r)\) remains outside this core.
+
+\section{The golden moment}\label{sec:golden-moment}
+
+Let \(\zeta\) satisfy \(\Phi_5(\zeta)=0\), and put
+\[
+ s=1+2(\zeta+\zeta^4),\qquad
+ \eps=1+\zeta+\zeta^4,\qquad
+ U_2=\prod_{a=1}^{4}(\zeta^a-1)^{a^2\bmod 5}.
+\]
+Thus \(s^2=5\), \(\eps=(1+s)/2\) whenever \(2\) is invertible, and
+\[
+U_2=(\zeta-1)(\zeta^2-1)^4(\zeta^3-1)^4(\zeta^4-1).
+\]
+The quintic index of \(U_2\) is the quadratic moment \(M_2\) in the
+moment decomposition of the local Agrawal congruence.
+
+\begin{theorem}[\lean{golden\_moment\_factorization}]
+\label{thm:golden-factorization}
+In every commutative ring in which
+\(\zeta^4+\zeta^3+\zeta^2+\zeta+1=0\), one has
+\[
+\boxed{\quad U_2=s^5\eps^3.\quad}
+\]
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+Set
+\[
+A=(\zeta-1)(\zeta^4-1),\qquad
+B=(\zeta^2-1)(\zeta^3-1).
+\]
+Direct reductions modulo \(\Phi_5\), formalized without division, give
+\[
+AB=5,\qquad B=s\eps,\qquad s^2=5.
+\]
+Since \(U_2=AB^4=(AB)B^3\), it follows that
+\(U_2=5(s\eps)^3=s^5\eps^3\).
+\end{proof}
+
+\begin{theorem}[Golden index theorem]
+\label{thm:golden-index}
+Let \(p\) be prime with \(5\mid p-1\), let \(\zeta\in\F_p\) satisfy
+\(\Phi_5(\zeta)=0\), and suppose that the displayed elements are units.
+For the discrete quintic index
+\(\operatorname{ind}_5:\F_p^\times\to\Z/5\Z\) constructed in
+\lean{quinticIndex},
+\[
+\boxed{\quad M_2=3\,\operatorname{ind}_5(\eps).\quad}
+\]
+The same identity holds for every multiplicative quintic character.
+\par\smallskip\noindent
+\textit{Lean declarations:}\quad
+\lean{golden\_moment\_index}, \lean{zmod\_golden\_moment\_index}.
+\end{theorem}
+
+\begin{proof}[Certified proof sketch]
+Every quintic index kills the fifth power \(s^5\), and sends
+\(\eps^3\) to \(3\,\operatorname{ind}_5(\eps)\). Apply
+Theorem~\ref{thm:golden-factorization}.
+\end{proof}
+
+\begin{remark}[Prior art and novelty boundary]\label{rem:golden-prior-art}
+Williams and Hardy computed the quintic index of the golden unit in
+Dickson coordinates \cite[Theorem~5]{WH}; that classical character is
+not claimed here as new. The contribution of
+Theorems~\ref{thm:golden-factorization}--\ref{thm:golden-index} is the
+identification of the \emph{Agrawal quadratic moment} with that character.
+We have not found this bridge in the targeted literature search, but
+priority remains provisional pending specialist review.
+\end{remark}
 
 \section{The golden--cyclotomic entanglement}
 
@@ -294,14 +422,22 @@ The following identity is used to confine the largest prime factor of
 a three-factor solution to an interval. It is stated over any
 commutative ring and proved by expansion.
 
-\begin{theorem}[\lean{prod\_pairs\_sub\_prod\_squares}]\label{thm:box}
+\begin{theorem}[Box identity]\label{thm:box}
 In any commutative ring, for all \(p,q,r\),
 \[
-2\bigl[(pq-1)(pr-1)(qr-1)-(p^2-1)(q^2-1)(r^2-1)\bigr]
-=(p^2-1)(q-r)^2+(q^2-1)(p-r)^2+(r^2-1)(p-q)^2 .
+\begin{split}
+&2\bigl[(pq-1)(pr-1)(qr-1)
+        -(p^2-1)(q^2-1)(r^2-1)\bigr]\\
+&\qquad=(p^2-1)(q-r)^2+(q^2-1)(p-r)^2
+        +(r^2-1)(p-q)^2 .
+\end{split}
 \]
 In particular the left-hand side is non-negative whenever
-\(p,q,r\ge1\) (\lean{prod\_pairs\_ge\_prod\_squares}).
+\(p,q,r\ge1\).
+\par\smallskip\noindent
+\textit{Lean declarations:}\par\noindent
+\lean{prod\_pairs\_sub\_prod\_squares},\par\noindent
+\lean{prod\_pairs\_ge\_prod\_squares}.
 \end{theorem}
 
 \noindent Combined with \lean{lt\_two\_mul\_of\_sq\_le}, which turns
@@ -317,12 +453,12 @@ literature; to our knowledge it had not been machine-checked before.
 
 Mathlib does not currently contain Carmichael numbers or Korselt's criterion,
 so those had to be introduced: \lean{IsCarmichael} and
-\lean{IsLucasCarmichael} package the two divisibility conditions used below,
-while \lean{IsCarmichael.fermatPsp} — Korselt's criterion proper, that a
-Carmichael number is a Fermat pseudoprime to every coprime base — is proved
-for completeness and is \emph{not} used in the proof of
-Theorem~\ref{thm:lenstra}, which needs only the divisibility conditions
-themselves.
+\lean{IsLucasCarmichael} package the two divisibility conditions used below.
+We also prove that a Carmichael number is a Fermat pseudoprime to every
+coprime base (declaration
+\texttt{IsCarmichael.}\allowbreak\texttt{fermatPsp}). This implication is
+\emph{not} used in Theorem~\ref{thm:lenstra}, which needs only the
+divisibility conditions themselves.
 
 \begin{theorem}[\lean{lenstra\_proposition\_card}]\label{thm:lenstra}
 Let \(n\) be squarefree, suppose the number \(k\) of its prime factors
@@ -347,7 +483,7 @@ The second conclusion is what makes such an \(n\), \emph{if composite}, a
 genuine counterexample: Agrawal's conjecture allows the escape
 \(n^2\equiv1\pmod r\), and here it is closed
 (\lean{sq\_not\_one\_mod\_five}). The proviso matters: primes satisfy the
-hypotheses trivially — \(n=83\) is one — and are of course not
+hypotheses trivially---\(n=83\) is one---and are of course not
 counterexamples. Only a composite witness would be one, and none is known.
 
 \begin{proof}[Certified proof sketch]
@@ -437,12 +573,31 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-Twenty-two modules, \(2312\) source lines, \(126\) named declarations; no
+Twenty-four modules, \(2520\) source lines, \(139\) named declarations; no
 \lean{sorry}, no \lean{admit}, no axioms beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build}. The table mapping each
 statement of this note to its declaration and file is in the
 repository \lean{README}.
+
+\clearpage
+\section{Reproducibility map}
+
+The repository is organized so that the three kinds of evidence never
+collapse into one another:
+\begin{enumerate}
+\item the kernel layer is rebuilt with
+  \lean{lake build --wfail}; its flagship files are
+  \lean{MomentObstruction.lean} and \lean{GoldenMoment.lean};
+\item the finite-computation layer is replayed by running
+  \path{tools/verify_certificates.py}; the optional \lean{--full} flag
+  recomputes the complete \(H_n\) census;
+\item the literature layer is recorded claim by claim in
+  \path{NOVELTY_AND_PRIOR_ART.md}, including negative novelty findings.
+\end{enumerate}
+A read-only GitHub Actions workflow runs the first two checks with Lean
+warnings promoted to errors. The release gate remains private until a human
+specialist has reviewed the golden-moment priority claim.
 
 \begin{thebibliography}{9}
 
@@ -465,6 +620,11 @@ J. Eur. Math. Soc. 21 (2019), 1229--1269.
 T.~V\'a\v na,
 \emph{Agrawal's conjecture and Carmichael numbers},
 Student Scientific Conference, Comenius University Bratislava, 2009.
+
+\bibitem{WH}
+K.~S. Williams and K.~Hardy,
+\emph{A congruence for the index of a unit of a real abelian number field},
+Acta Arith. 46 (1985), 57--72.
 
 \end{thebibliography}
 

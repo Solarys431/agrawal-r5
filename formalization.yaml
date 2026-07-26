@@ -4,19 +4,18 @@ version: "v0.3"
 project:
   name: "agrawal-r5"
   authors:
-    - "Claude (Anthropic) — formalization"
-    - "Daniele Cappello — direction and operation of the pipeline"
+    - "Daniele Cappello — mathematical direction and project operation"
+    - "UNICO/NOUS multi-model pipeline — exploration and formalization"
   license: "Apache-2.0"
 
 automation:
   - method: "LLM-assisted formalization"
     description: >-
       Statements and proofs written by an orchestrated multi-model pipeline
-      (Claude Opus 5 as orchestrator, Claude Sonnet 5 subagents for the
-      mechanical modules, GPT-5.6-Sol for adversarial review), with every
-      declaration compiled by the Lean 4 kernel and every theorem checked with
-      #print axioms. No proof step is accepted on the strength of a model's
-      assertion.
+      using Claude-family and GPT-family models under human direction, with
+      every declaration compiled by the Lean 4 kernel and every theorem checked
+      with #print axioms. No proof step is accepted on the strength of a
+      model's assertion or agreement between models.
   - method: "numerical pre-verification"
     description: >-
       Each key identity was checked numerically on independent samples before
@@ -24,14 +23,16 @@ automation:
       80 below 100000).
 
 review:
-  status: "adversarially reviewed, corrections applied"
+  status: "private adversarial model review; human specialist review pending"
   details: >-
-    Two independent pre-publication reviews on 2026-07-26, both instructed to
-    find faults rather than confirm. Both returned NOT READY. The substantive
+    Two independent model-based pre-publication reviews on 2026-07-26, both
+    instructed to find faults rather than confirm. Both returned NOT READY.
+    The substantive
     finding was that an earlier version of this file claimed as new an
     observation already present in the AIM proof; that claim has been
-    withdrawn (see the first source entry). Remaining items are being fixed
-    before publication.
+    withdrawn (see the first source entry). The repository remains private
+    while the repaired version is re-audited. No human specialist review is
+    claimed.
 
 fidelity:
   divergences:
@@ -54,6 +55,45 @@ fidelity:
         main theorem.
 
 sources:
+  - title: "The moment obstruction"
+    authors:
+      - "this pipeline"
+    id: "private repository; public identifier pending"
+    type: "finite Fourier lemma used by the local theory"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Formalized as `moment_covariance`, `moment_obstruction`, and
+      `pow_succ_eq_one_of_moment_ne_zero`. For a function e on the units of a
+      finite field satisfying e(ta)=t e(a), the weighted moment
+      M_j=Σ a^j e(a) satisfies t M_j=t^(−j) M_j, hence
+      (t^(j+1)−1)M_j=0. This is a short finite-Fourier/change-of-variables
+      argument. We claim no priority for the abstract algebraic lemma. The
+      potentially substantive object in the wider study is its application to
+      the local set S(p,r); that end-to-end interface is not yet formalized in
+      this repository.
+
+  - title: "The golden moment of Agrawal's congruence at r = 5"
+    authors:
+      - "this pipeline"
+    id: "private repository; public identifier pending"
+    type: "new bridge derived in the course of this study"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Formalized on 2026-07-26 as `golden_moment_factorization`,
+      `golden_moment_index`, and `zmod_golden_moment_index`. If ζ satisfies
+      Φ₅(ζ)=0, the weighted quadratic moment unit
+      U₂=∏_{a=1}^4(ζ^a−1)^(a² mod 5) factors as (√5)^5 ε^3, where
+      √5=1+2(ζ+ζ^4) and ε=1+ζ+ζ^4. Consequently every quintic index satisfies
+      ind₅(U₂)=3 ind₅(ε).
+      PRIOR ART BOUNDARY: Williams and Hardy, Acta Arith. 46 (1985), Theorem 5,
+      compute the quintic index of ε in Dickson coordinates. That classical
+      character is not ours. The potentially new contribution is identifying
+      the Agrawal quadratic moment with it. We have not found that bridge in
+      the targeted literature search; priority is explicitly provisional
+      pending specialist review.
+
   - title: "The Lenstra–Pomerance proposition on counterexamples to Agrawal's conjecture at r = 5"
     authors:
       - "Hendrik W. Lenstra, Jr."

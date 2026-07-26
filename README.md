@@ -1,18 +1,30 @@
-# Agrawal's conjecture at r = 5: certified core
+# The golden moment at r = 5: a Lean-certified core
 
 <details open>
 <summary><strong>English</strong></summary>
 
-A structural study of Agrawal's conjecture at r = 5, produced by
-an autonomous multi-model pipeline with external review. This
-repository is the verification surface: the Lean core, the paper, and
-the computational certificates. We do **not** prove the conjecture;
-the two open problems (the local hypothesis H4 and the global
+A human-directed, LLM-assisted structural study of Agrawal's conjecture
+at r = 5. The flagship theorem identifies the quadratic moment unit
+from the congruence with the golden unit:
+
+```
+ind₅(U₂) = 3 · ind₅((1 + √5) / 2).
+```
+
+The identity and its index consequence are checked by Lean. This
+repository is the private verification surface: the formal core, the
+paper, and the computational certificates. We do **not** prove the
+conjecture; the two open problems (golden inertia/H4 and global
 emptiness of the fibers) are stated precisely in the paper.
+
+Release is intentionally on hold. The conservative claim-by-claim assessment
+is in [`NOVELTY_AND_PRIOR_ART.md`](NOVELTY_AND_PRIOR_ART.md), and the private
+publication checklist is in
+[`PRIVATE_RELEASE_GATE.md`](PRIVATE_RELEASE_GATE.md).
 
 ## Lean core
 
-Twenty-two modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-four modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -22,6 +34,10 @@ lake build
 
 | Result | Declaration | File |
 |---|---|---|
+| **Moment covariance: t·Mⱼ = t⁻ʲ·Mⱼ** | `moment_covariance` | `MomentObstruction.lean` |
+| **Moment obstruction: Mⱼ ≠ 0 ⟹ tʲ⁺¹ = 1** | `pow_succ_eq_one_of_moment_ne_zero` | `MomentObstruction.lean` |
+| **Golden factorization: U₂ = (√5)⁵ε³** | `golden_moment_factorization` | `GoldenMoment.lean` |
+| **Golden theorem: ind₅(U₂) = 3·ind₅(ε)** | `zmod_golden_moment_index` | `GoldenMoment.lean` |
 | Index lemma | `mul_dvd_gcd_mul` | `IndexLemma.lean` |
 | Golden Frobenius: ε^p = 1 − ε (inert case) | `golden_frobenius` | `InertiaCore.lean` |
 | Golden half-period: ε^(p+1) = −1 | `golden_pow_p_succ` | `InertiaCore.lean` |
@@ -66,6 +82,23 @@ identity (ζ₅−1)^(p²) = −ζ₅^(−1)(ζ₅−1), the bound on the order 
 reduction to n ≡ p (mod 10(p²−1)). Our route is the same one, repackaged
 through the identity lcm(p−1, p+1, 80) = 10(p²−1). We claim only the mechanical
 verification.
+
+### On the golden moment
+
+Williams and Hardy (Acta Arith. 46 (1985), Theorem 5) already computed
+the quintic index of the golden unit in Dickson coordinates. We claim
+no priority for that classical character. The contribution formalized
+here is the bridge
+
+```
+quadratic moment of Agrawal = 3 × quintic index of the golden unit.
+```
+
+The kernel proof first establishes the division-free ring identity
+`U₂ = (√5)⁵ ε³`, then applies an actual discrete quintic index on
+`(ZMod p)ˣ`. We have not found this identification in the targeted
+literature search; that novelty assessment remains provisional until
+specialist review.
 
 **The statement covers the original hypotheses.** `lenstra_proposition_card`
 assumes exactly what the source assumes: k ≡ 1 (mod 4) prime factors, all
@@ -122,7 +155,8 @@ SHA-256 index of the working artifacts of the wider study) and
 <summary><strong>Italiano</strong></summary>
 
 Uno studio strutturale della congettura di Agrawal per r = 5,
-prodotto da una pipeline autonoma multi-modello con revisione esterna.
+prodotto da una pipeline multi-modello sotto direzione umana, con audit
+avversariali indipendenti tra modelli.
 Questo repository è la superficie di verifica: il nucleo Lean, il
 paper e i certificati computazionali. La congettura **non** è
 dimostrata; i due problemi aperti (l'ipotesi locale H4 e la vacuità
@@ -130,7 +164,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Dieci moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Ventiquattro moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```

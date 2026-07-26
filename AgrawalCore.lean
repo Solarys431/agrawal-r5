@@ -1,6 +1,8 @@
 import AgrawalCore.IndexLemma
 import AgrawalCore.InertiaCore
 import AgrawalCore.Entanglement
+import AgrawalCore.GoldenMoment
+import AgrawalCore.MomentObstruction
 import AgrawalCore.FibBridge
 import AgrawalCore.Reciprocity
 import AgrawalCore.SupportBridge
