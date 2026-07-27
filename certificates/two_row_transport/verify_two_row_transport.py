@@ -31,6 +31,9 @@ EXPECTED_1E6 = {
     "products_tested": 76_530,
     "semiprime_candidates": 415,
     "both_rows_transport_pass": 24,
+    "triangle_crt_pass_after_two_transports": 17,
+    "size_pass_after_two_transports": 1,
+    "triangle_and_size_pass": 0,
     "first_row_exact_pass": 0,
     "both_rows_exact_pass": 0,
 }
@@ -119,6 +122,9 @@ def replay_census(limit: int) -> dict[str, Any]:
     transport_survivors: list[dict[str, Any]] = []
     first_exact = 0
     both_exact = 0
+    triangle_passes = 0
+    size_passes = 0
+    triangle_and_size = 0
 
     for q in inert:
         tq = exact.t_order(q)
@@ -156,6 +162,28 @@ def replay_census(limit: int) -> dict[str, Any]:
                                 all(row["original_row"] for row in rows)
                             )
                             if all(row["transport_pass"] for row in rows):
+                                triangle_modulus = math.gcd(
+                                    rows[0]["T_p"], rows[1]["T_p"]
+                                )
+                                triangle = (
+                                    pow(
+                                        p,
+                                        rows[0]["exponent"] + 1,
+                                        triangle_modulus,
+                                    )
+                                    == pow(
+                                        r,
+                                        rows[1]["exponent"] + 1,
+                                        triangle_modulus,
+                                    )
+                                )
+                                size = (
+                                    rows[0]["T_p"] <= max(p * p, r * q)
+                                    and rows[1]["T_p"] <= max(r * r, p * q)
+                                )
+                                triangle_passes += int(triangle)
+                                size_passes += int(size)
+                                triangle_and_size += int(triangle and size)
                                 h_bound = (q * q - 2) // tq
                                 first = rows[0]
                                 if not (
@@ -176,6 +204,9 @@ def replay_census(limit: int) -> dict[str, Any]:
                                             "required_h_residue"
                                         ],
                                         "first_row_modulus": first["reduced_modulus"],
+                                        "triangle_modulus": triangle_modulus,
+                                        "triangle_pass": triangle,
+                                        "size_pass": size,
                                     }
                                 )
                 product += tq
@@ -187,6 +218,9 @@ def replay_census(limit: int) -> dict[str, Any]:
         "products_tested": products,
         "semiprime_candidates": semiprimes,
         "both_rows_transport_pass": len(transport_survivors),
+        "triangle_crt_pass_after_two_transports": triangle_passes,
+        "size_pass_after_two_transports": size_passes,
+        "triangle_and_size_pass": triangle_and_size,
         "first_row_exact_pass": first_exact,
         "both_rows_exact_pass": both_exact,
         "transport_survivors": transport_survivors,

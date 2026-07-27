@@ -1,0 +1,75 @@
+{
+  "branch_counts": {
+    "0": 345,
+    "2": 438
+  },
+  "counts": {
+    "excluded_by_Tq_ge_q2": 71715,
+    "inert_q": 78225,
+    "products": 187844,
+    "semiprimes": 783,
+    "size": 3,
+    "triangle": 31,
+    "triangle_and_size": 2,
+    "two_transports": 38
+  },
+  "crosscheck_limit_exclusive": 0,
+  "elapsed_seconds": 251.87129,
+  "exact_hits": [],
+  "limit_q_exclusive": 10000000,
+  "lower_q_inclusive": 7500000,
+  "orders_crosschecked": 0,
+  "provenance": {
+    "independent_replay_sha256": "a34e712b393fe8de6815e60bbddbcd770b483f74793bcdfdf7b953906271d050",
+    "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "script_sha256": "8eee2234135b348c020b54b0de9769e082abdf3fc4b91d47d0d8b3e12ea89e54"
+  },
+  "scope": "all-inert triples p<r<q with 7500000<=q<10000000",
+  "status": "PASS",
+  "structural_survivors": [
+    {
+      "branch": 2,
+      "defect_q": 10773,
+      "h": 996,
+      "orders": [
+        2451438167760,
+        31252523890480,
+        85454069360
+      ],
+      "primes": [
+        857573,
+        8101253,
+        9594773
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    },
+    {
+      "branch": 0,
+      "defect_q": 34507,
+      "h": 159,
+      "orders": [
+        12996119517360,
+        2643585048720,
+        27831960240
+      ],
+      "primes": [
+        1974547,
+        2241163,
+        9799987
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    }
+  ]
+}

@@ -49,6 +49,24 @@ theorem twistedSmallRow_transport {P q a Tp Tq : ℕ}
   convert h using 1
   ring
 
+/-- **The third side of the CRT triangle.**
+
+Two earlier rows involving the same product `P * q` must agree after
+reduction to the common divisor of their order moduli:
+
+`a ≡ b (mod gcd Tp Tr)`.
+
+Together with the two transports from the final row, this is the complete
+pairwise compatibility condition for the three residue classes. -/
+theorem smallRows_triangle {P q a b Tp Tr : ℕ}
+    (hp : P * q ≡ a [MOD Tp]) (hr : P * q ≡ b [MOD Tr]) :
+    a ≡ b [MOD Nat.gcd Tp Tr] := by
+  have hp' : P * q ≡ a [MOD Nat.gcd Tp Tr] :=
+    hp.of_dvd (Nat.gcd_dvd_left Tp Tr)
+  have hr' : P * q ≡ b [MOD Nat.gcd Tp Tr] :=
+    hr.of_dvd (Nat.gcd_dvd_right Tp Tr)
+  exact hp'.symm.trans hr'
+
 /-- Exact multiplier normal form in the pure branch `P = 1 + hTq`. -/
 theorem pureSmallRow_lift_iff {h q Tq a Tp : ℕ} :
     (1 + h * Tq) * q ≡ a [MOD Tp] ↔

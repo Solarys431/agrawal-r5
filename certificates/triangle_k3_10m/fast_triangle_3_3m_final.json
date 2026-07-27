@@ -1,0 +1,141 @@
+{
+  "branch_counts": {
+    "0": 847,
+    "2": 853
+  },
+  "counts": {
+    "excluded_by_Tq_ge_q2": 99399,
+    "inert_q": 108479,
+    "products": 320062,
+    "semiprimes": 1700,
+    "size": 7,
+    "triangle": 79,
+    "triangle_and_size": 5,
+    "two_transports": 98
+  },
+  "crosscheck_limit_exclusive": 100000,
+  "elapsed_seconds": 290.158335,
+  "exact_hits": [],
+  "limit_q_exclusive": 3000000,
+  "lower_q_inclusive": 3,
+  "orders_crosschecked": 4813,
+  "provenance": {
+    "independent_replay_sha256": "a34e712b393fe8de6815e60bbddbcd770b483f74793bcdfdf7b953906271d050",
+    "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "script_sha256": "8eee2234135b348c020b54b0de9769e082abdf3fc4b91d47d0d8b3e12ea89e54"
+  },
+  "scope": "all-inert triples p<r<q with 3<=q<3000000",
+  "status": "PASS",
+  "structural_survivors": [
+    {
+      "branch": 2,
+      "defect_q": 12411,
+      "h": 924,
+      "orders": [
+        21364244720,
+        459663092880,
+        894353680
+      ],
+      "primes": [
+        288653,
+        982493,
+        1053557
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    },
+    {
+      "branch": 2,
+      "defect_q": 10497,
+      "h": 942,
+      "orders": [
+        14782495760,
+        425229850320,
+        6113644240
+      ],
+      "primes": [
+        732533,
+        898853,
+        2533277
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    },
+    {
+      "branch": 0,
+      "defect_q": 506481,
+      "h": 3310,
+      "orders": [
+        1354850948880,
+        80758058640,
+        157057680
+      ],
+      "primes": [
+        368083,
+        1412347,
+        2820403
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    },
+    {
+      "branch": 2,
+      "defect_q": 506481,
+      "h": 49246,
+      "orders": [
+        58387660080,
+        893042885360,
+        157057680
+      ],
+      "primes": [
+        425443,
+        517603,
+        2820403
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    },
+    {
+      "branch": 2,
+      "defect_q": 506481,
+      "h": 50205,
+      "orders": [
+        369358429680,
+        145690532720,
+        157057680
+      ],
+      "primes": [
+        192187,
+        362107,
+        2820403
+      ],
+      "rows": [
+        false,
+        false,
+        true
+      ],
+      "size": true,
+      "triangle": true
+    }
+  ]
+}

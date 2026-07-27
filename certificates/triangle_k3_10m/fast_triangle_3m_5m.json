@@ -1,0 +1,29 @@
+{
+  "branch_counts": {
+    "0": 358,
+    "2": 409
+  },
+  "counts": {
+    "excluded_by_Tq_ge_q2": 60605,
+    "inert_q": 65915,
+    "products": 197710,
+    "semiprimes": 767,
+    "size": 1,
+    "triangle": 26,
+    "two_transports": 48
+  },
+  "crosscheck_limit_exclusive": 0,
+  "elapsed_seconds": 201.417753,
+  "exact_hits": [],
+  "limit_q_exclusive": 5000000,
+  "lower_q_inclusive": 3000000,
+  "orders_crosschecked": 0,
+  "provenance": {
+    "independent_replay_sha256": "a34e712b393fe8de6815e60bbddbcd770b483f74793bcdfdf7b953906271d050",
+    "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "script_sha256": "8eee2234135b348c020b54b0de9769e082abdf3fc4b91d47d0d8b3e12ea89e54"
+  },
+  "scope": "all-inert triples p<r<q with 3000000<=q<5000000",
+  "status": "PASS",
+  "structural_survivors": []
+}

@@ -68,6 +68,18 @@ jobs:
           python3 certificates/two_row_transport/verify_two_row_transport.py \
             --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
 
+      - name: Verify and merge the sharded q below 10M census
+        run: |
+          (cd certificates/triangle_k3_10m && sha256sum --check SHA256SUMS.txt)
+          python3 certificates/triangle_k3_10m/replay_root/motore/unisci_censimenti_triangolo.py \
+            certificates/triangle_k3_10m/fast_triangle_3_3m_final.json \
+            certificates/triangle_k3_10m/fast_triangle_3m_5m.json \
+            certificates/triangle_k3_10m/fast_triangle_5m_7p5m.json \
+            certificates/triangle_k3_10m/fast_triangle_7p5m_10m.json \
+            --output /tmp/TRIANGLE_K3_10M_MANIFEST.json
+          cmp certificates/triangle_k3_10m/TRIANGLE_K3_10M_MANIFEST.json \
+            /tmp/TRIANGLE_K3_10M_MANIFEST.json
+
       - name: Replay the portable H4-v3 audit package
         run: |
           python3 certificates/h4_assalto_finale/verify_h4_final_assault_v3.py \

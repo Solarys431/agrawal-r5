@@ -6,7 +6,7 @@ argument.  It intentionally does not formalize an asymptotic claim or a finite
 computer census.
 -/
 import Mathlib.Data.Nat.ModEq
-import Mathlib.Tactic.Order
+import Mathlib.Tactic
 
 namespace AgrawalCore
 
@@ -74,6 +74,38 @@ theorem localRow_order_le_max {P p T : ℕ}
   rcases hrow with hrow | hrow
   · exact not_modEq_one_of_one_lt_of_lt hP hPT hrow
   · exact hne (hrow.eq_of_lt_of_lt hPT hpT)
+
+/-- **Normal-defect gap at a middle factor.**
+
+Assume the exact order/defect identity
+
+`T * I = 10 * (r² - 1)`
+
+with `r ≥ 7` and a normal odd defect `I ≤ 9`.  Then `T` is strictly larger
+than `r²`.  Consequently, if a local row supplies the universal size bound
+`T ≤ max r² P`, its complementary product must satisfy `r² < P`.
+
+For a three-prime candidate `p < r < q`, taking `P = p*q` says that a
+normal middle prime forces the large-gap alternative `r² < p*q`; otherwise
+the middle prime itself must have exceptional defect at least `11`. -/
+theorem normalDefect_forces_sq_lt_complement {r T I P : ℕ}
+    (hr : 7 ≤ r) (hexact : T * I = 10 * (r ^ 2 - 1))
+    (hI : I ≤ 9) (hsize : T ≤ max (r ^ 2) P) :
+    r ^ 2 < P := by
+  have hr2 : 10 < r ^ 2 := by nlinarith
+  have hT : r ^ 2 < T := by
+    by_contra h
+    have hTle : T ≤ r ^ 2 := Nat.le_of_not_gt h
+    have hmul : T * I ≤ r ^ 2 * 9 :=
+      Nat.mul_le_mul hTle hI
+    rw [hexact] at hmul
+    have hsub : r ^ 2 - 1 + 1 = r ^ 2 := by omega
+    omega
+  by_contra h
+  have hPle : P ≤ r ^ 2 := Nat.le_of_not_gt h
+  have hmax : max (r ^ 2) P = r ^ 2 := max_eq_left hPle
+  rw [hmax] at hsize
+  omega
 
 /-- The pure final row is exactly the divisibility `T ∣ P - 1`. -/
 theorem pureRow_dvd_product_sub_one {P T : ℕ}

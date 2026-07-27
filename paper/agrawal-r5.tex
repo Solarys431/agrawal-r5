@@ -1181,6 +1181,45 @@ parameterizations of $P$.  These are exact equivalences, not
 probabilistic sieves.
 \end{proof}
 
+\begin{corollary}[three-row CRT triangle]\label{cor:three-row-triangle}
+If the second small row is
+\[
+ Pq\equiv r^{j_r+1}\pmod{T_r},
+\]
+then necessarily
+\[
+\boxed{
+p^{j_p+1}\equiv r^{j_r+1}
+\pmod{\gcd(T_p,T_r)}.}
+\]
+\end{corollary}
+
+\begin{proof}
+Reduce the two congruences for the same integer \(Pq\) modulo
+\(\gcd(T_p,T_r)\).  Together with the two instances of
+Theorem~\ref{thm:two-row-transport}, this is the complete triangle of
+pairwise CRT compatibility.
+\end{proof}
+
+\begin{corollary}[middle-prime defect cascade]\label{cor:defect-cascade}
+Let \(p<r<q\), and write
+\[
+T_r I_r=10(r^2-1)
+\]
+for the exact defect identity at \(r\).  Every three-factor candidate
+satisfies
+\[
+\boxed{I_r\ge11\quad\text{or}\quad r^2<pq.}
+\]
+\end{corollary}
+
+\begin{proof}
+If \(I_r\le9\), then \(T_r>r^2\).  The universal local-row size bound
+\(T_r\le\max(r^2,pq)\) therefore forces \(r^2<pq\).  Thus the middle
+prime must itself be in the exceptional Kummer range, or the final prime
+must realize the large gap \(q>r^2/p\).
+\end{proof}
+
 The chain of reductions supports a correctness theorem for machine
 certificates, which a referee can audit once instead of trusting each
 output separately.
@@ -1353,15 +1392,30 @@ There is no squarefree three-factor counterexample at $r=5$ whose largest
 prime factor is $q<10^6$.  The replay enumerates the entire all-inert branch:
 among $39{,}286$ inert primes it finds $76{,}530$ residual final-row
 products and $415$ admissible semiprimes.  The multiplier-free transport of
-Theorem~\ref{thm:two-row-transport} eliminates $391$; for each of the
-remaining $24$, the canonical residue required by the reduced linear lift
-lies strictly above the exact multiplier interval.  None passes even the
-first complete small-prime row.
+Theorem~\ref{thm:two-row-transport} eliminates $391$.  Of the remaining
+$24$, exactly $17$ pass the complete CRT triangle of
+Corollary~\ref{cor:three-row-triangle}, while exactly one passes both
+local-row size bounds; these two sets are disjoint.  Thus the box is
+already empty before solving the lift.  As a redundant check, for every
+one of the $24$ the canonical residue required by the first reduced linear
+lift lies strictly above the exact multiplier interval.
 \end{verification}
 
 The H4 qualifier is essential: the replay exhausts the all-inert fiber
 branch, whereas a split local order-$4$ witness belongs to the other arm of
 the unconditional dichotomy.
+
+The finite disjointness just used is not asserted universally.  A targeted
+sharded falsifier extends the all-inert census to \(q<10^7\).  It enumerates
+\(332{,}441\) inert final primes, \(993{,}466\) residual products, and
+\(4{,}429\) admissible semiprimes.  Of these, \(254\) pass both transports,
+\(194\) pass the CRT triangle, \(14\) pass both local-row size bounds, and
+\(10\) pass both structural tests.  All ten fail the exact small-prime
+rows.  Thus there is no all-inert three-factor counterexample in this
+finite region (and, under H4, no three-factor counterexample there at all).
+This adversarial extension isolates the remaining universal problem at the
+simultaneous linear lifts and prevents the initial finite pattern from being
+mistaken for a theorem.
 
 Method: the base-$5$ sieve of Theorem~\ref{thm:k3} places $p_3$ in a single
 CRT progression for each admissible pair $(p_1,p_2)$; $1{,}330{,}896$ pairs

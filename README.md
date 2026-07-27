@@ -113,10 +113,12 @@ this audit after every kernel build.
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
 | Universal local-row size bound | `localRow_order_le_max` | `FinalRowSize.lean` |
+| Normal middle defect forces the large-gap alternative \(r^2<P\) | `normalDefect_forces_sq_lt_complement` | `FinalRowSize.lean` |
 | Exact pure/twisted final-row divisibilities | `pureRow_dvd_product_sub_one`, `twistedRow_dvd_sq_sub_product` | `FinalRowSize.lean` |
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |
+| Third side of the exact three-row CRT triangle | `smallRows_triangle` | `TwoRowTransport.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
 
@@ -205,6 +207,13 @@ python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # final-row size replay
 python3 certificates/two_row_transport/verify_two_row_transport.py \
   --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
+(cd certificates/triangle_k3_10m && shasum -a 256 -c SHA256SUMS.txt)
+python3 certificates/triangle_k3_10m/replay_root/motore/unisci_censimenti_triangolo.py \
+  certificates/triangle_k3_10m/fast_triangle_3_3m_final.json \
+  certificates/triangle_k3_10m/fast_triangle_3m_5m.json \
+  certificates/triangle_k3_10m/fast_triangle_5m_7p5m.json \
+  certificates/triangle_k3_10m/fast_triangle_7p5m_10m.json \
+  --output /tmp/TRIANGLE_K3_10M_MANIFEST.json
 python3 tools/verify_certificates.py --full   # + full census replay
 ```
 
@@ -267,6 +276,13 @@ three-factor replay to \(q<10^6\). Of 415 admissible semiprime products,
 391 fail the multiplier-free transport and the remaining 24 fail the exact
 bounded linear lift. Under H4 this excludes the full three-factor box; without
 H4 it excludes only the all-inert arm of the unconditional dichotomy.
+
+`certificates/triangle_k3_10m/` freezes the adversarial sharded extension to
+\(q<10^7\): 4,429 admissible semiprimes, 254 double transports, 194 complete
+CRT triangles, 14 local-size survivors, 10 passing both structural tests,
+and zero passing both exact small-prime rows.  The package includes portable
+sources, shard hashes and a byte-reproducible merged manifest.  This is a
+finite all-inert certificate, not a universal incompatibility theorem.
 
 </details>
 
@@ -337,6 +353,13 @@ python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # replay del vincolo di taglia
 python3 certificates/two_row_transport/verify_two_row_transport.py \
   --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
+(cd certificates/triangle_k3_10m && shasum -a 256 -c SHA256SUMS.txt)
+python3 certificates/triangle_k3_10m/replay_root/motore/unisci_censimenti_triangolo.py \
+  certificates/triangle_k3_10m/fast_triangle_3_3m_final.json \
+  certificates/triangle_k3_10m/fast_triangle_3m_5m.json \
+  certificates/triangle_k3_10m/fast_triangle_5m_7p5m.json \
+  certificates/triangle_k3_10m/fast_triangle_7p5m_10m.json \
+  --output /tmp/TRIANGLE_K3_10M_MANIFEST.json
 python3 tools/verify_certificates.py --full   # + replay integrale del censimento
 ```
 
@@ -362,6 +385,14 @@ tutto-inerte a \(q<10^6\): 391 dei 415 semiprimi ammissibili cadono sul
 trasporto senza moltiplicatore, i 24 residui sul sollevamento lineare
 limitato. Sotto H4 ciò esclude l'intero box a tre fattori; senza H4 esclude
 soltanto il ramo tutto-inerte della dicotomia.
+
+`certificates/triangle_k3_10m/` congela l'estensione avversariale a shard
+fino a \(q<10^7\): 4.429 semiprimi ammissibili, 254 doppi trasporti,
+194 triangoli CRT completi, 14 superstiti ai bound di taglia, 10 a entrambi
+i controlli strutturali e zero alle due righe piccole esatte. Il pacchetto
+contiene sorgenti portabili, hash degli shard e un manifest unificato
+riproducibile byte per byte. È un certificato finito del ramo tutto-inerte,
+non un teorema di incompatibilità universale.
 
 Due file sono di sola provenienza e NON sono rieseguibili da questo
 clone: `certificates/INDICE_PROVENIENZA_ESTERNA_AGRAWAL.json` (un

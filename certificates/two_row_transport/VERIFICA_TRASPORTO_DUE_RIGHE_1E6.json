@@ -1,7 +1,7 @@
 {
   "both_rows_exact_pass": 0,
   "both_rows_transport_pass": 24,
-  "elapsed_seconds": 138.48314,
+  "elapsed_seconds": 138.389672,
   "excluded_by_Tq_ge_q2": 36009,
   "first_row_exact_pass": 0,
   "inert_q": 39286,
@@ -10,9 +10,10 @@
   "provenance": {
     "fibre_size_replay_sha256": "a34e712b393fe8de6815e60bbddbcd770b483f74793bcdfdf7b953906271d050",
     "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
-    "script_sha256": "079206abfcf171573067977ed8df65e4e600c5b9b597a92d5340bceb367da0a1"
+    "script_sha256": "0528e339743ba106187ccced9a96983d9aa9c5c94d462eb91b79d9d5b7011cd5"
   },
   "semiprime_candidates": 415,
+  "size_pass_after_two_transports": 1,
   "status": "PASS",
   "transport_survivors": [
     {
@@ -25,7 +26,10 @@
         2347,
         5443,
         7603
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": true
     },
     {
       "H_q": 13,
@@ -37,7 +41,10 @@
         7253,
         13757,
         18077
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 59,
@@ -49,7 +56,10 @@
         307,
         36307,
         81163
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": true
     },
     {
       "H_q": 7,
@@ -61,7 +71,10 @@
         2027,
         55787,
         89603
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 107,
@@ -73,7 +86,10 @@
         77587,
         193723,
         231643
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 107,
@@ -85,7 +101,10 @@
         163643,
         202067,
         231643
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": true
     },
     {
       "H_q": 41,
@@ -97,7 +116,10 @@
         201757,
         202613,
         244957
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 404,
@@ -109,7 +131,10 @@
         86027,
         231547,
         261707
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 8560,
+      "triangle_pass": true
     },
     {
       "H_q": 5,
@@ -121,7 +146,10 @@
         297467,
         345227,
         352907
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 1040,
+      "triangle_pass": false
     },
     {
       "H_q": 15,
@@ -133,7 +161,10 @@
         93497,
         263273,
         354313
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 480,
+      "triangle_pass": true
     },
     {
       "H_q": 197,
@@ -145,7 +176,10 @@
         100237,
         369917,
         424397
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": false
     },
     {
       "H_q": 21,
@@ -157,7 +191,10 @@
         194917,
         375533,
         447637
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 282,
@@ -169,7 +206,10 @@
         203023,
         394063,
         547663
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 960,
+      "triangle_pass": true
     },
     {
       "H_q": 3585,
@@ -181,7 +221,10 @@
         365507,
         512843,
         553963
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 2640,
+      "triangle_pass": false
     },
     {
       "H_q": 3585,
@@ -193,7 +236,10 @@
         8387,
         13267,
         553963
-      ]
+      ],
+      "size_pass": true,
+      "triangle_modulus": 240,
+      "triangle_pass": false
     },
     {
       "H_q": 901,
@@ -205,7 +251,10 @@
         51043,
         461707,
         595123
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 560,
+      "triangle_pass": false
     },
     {
       "H_q": 91,
@@ -217,7 +266,10 @@
         31387,
         157867,
         711307
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 104,
@@ -229,7 +281,10 @@
         26437,
         255637,
         736357
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": true
     },
     {
       "H_q": 19,
@@ -241,7 +296,10 @@
         388573,
         694597,
         772517
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 2,
@@ -253,7 +311,10 @@
         48187,
         649307,
         810587
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 560,
+      "triangle_pass": false
     },
     {
       "H_q": 36,
@@ -265,7 +326,10 @@
         237877,
         707053,
         830413
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 80,
+      "triangle_pass": true
     },
     {
       "H_q": 27,
@@ -277,7 +341,10 @@
         63853,
         860357,
         865957
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": false
     },
     {
       "H_q": 48,
@@ -289,7 +356,10 @@
         228197,
         758357,
         932117
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 240,
+      "triangle_pass": true
     },
     {
       "H_q": 3,
@@ -301,7 +371,12 @@
         470663,
         505367,
         963143
-      ]
+      ],
+      "size_pass": false,
+      "triangle_modulus": 1440,
+      "triangle_pass": true
     }
-  ]
+  ],
+  "triangle_and_size_pass": 0,
+  "triangle_crt_pass_after_two_transports": 17
 }
