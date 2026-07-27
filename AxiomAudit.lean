@@ -15,6 +15,9 @@ introduced.
 #print axioms AgrawalCore.zmod_golden_moment_index
 #print axioms AgrawalCore.agrawal_fermat_shadow
 #print axioms AgrawalCore.agrawal_two_adic_jaw
+#print axioms AgrawalCore.orderOf_norm_power
+#print axioms AgrawalCore.orderOf_norm_decomposition
+#print axioms AgrawalCore.orderOf_norm_kernel
 #print axioms AgrawalCore.lenstra_proposition_card
 #print axioms AgrawalCore.partition_forced
 #print axioms AgrawalCore.hasOrderFourTransport_iff_goldenH_support

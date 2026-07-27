@@ -26,7 +26,7 @@ measurements and their deliberately limited interpretation.
 
 ## Lean core
 
-The implementation core consists of forty modules (5,574 source lines)
+The implementation core consists of forty-one modules (5,639 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -66,6 +66,8 @@ this audit after every kernel build.
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 | Kernel form of the order bound: (ζ−1)^(10p²) = (ζ−1)^10, both inert classes | `order_bounded` | `OrderBound.lean` |
+| Exact decomposition of an order through a norm power | `orderOf_norm_decomposition` | `NormOrder.lean` |
+| Exact order of the norm-kernel component | `orderOf_norm_kernel` | `NormOrder.lean` |
 | Box identity and its arithmetic corollary | `prod_pairs_sub_prod_squares`, `lt_two_mul_of_sq_le` | `BoxLemma.lean` |
 | Carmichael and Lucas–Carmichael numbers (Korselt) | `IsCarmichael`, `IsLucasCarmichael` | `Korselt.lean` |
 | Korselt's criterion: Carmichael ⟹ Fermat pseudoprime in every coprime base | `IsCarmichael.fermatPsp` | `Korselt.lean` |
@@ -265,7 +267,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene quaranta moduli (5.574 righe
+Il nucleo di implementazione contiene quarantuno moduli (5.639 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova

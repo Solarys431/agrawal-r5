@@ -12,6 +12,7 @@ import AgrawalCore.AgrawalBridge
 import AgrawalCore.TwoAdicJaw
 import AgrawalCore.BoxLemma
 import AgrawalCore.OrderBound
+import AgrawalCore.NormOrder
 import AgrawalCore.LenstraLocal
 import AgrawalCore.Korselt
 import AgrawalCore.ClassMod80
