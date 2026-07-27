@@ -26,7 +26,7 @@ measurements and their deliberately limited interpretation.
 
 ## Lean core
 
-The implementation core consists of forty-one modules (5,693 source lines)
+The implementation core consists of forty-one modules (5,747 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -68,6 +68,7 @@ this audit after every kernel build.
 | Kernel form of the order bound: (ζ−1)^(10p²) = (ζ−1)^10, both inert classes | `order_bounded` | `OrderBound.lean` |
 | Exact decomposition of an order through a norm power | `orderOf_norm_decomposition` | `NormOrder.lean` |
 | Exact order of the norm-kernel component | `orderOf_norm_kernel` | `NormOrder.lean` |
+| Exact \(q^2\)-threshold from the odd defect product | `odd_defectProduct_threshold`, `odd_defectProduct_normal_iff` | `NormOrder.lean` |
 | Box identity and its arithmetic corollary | `prod_pairs_sub_prod_squares`, `lt_two_mul_of_sq_le` | `BoxLemma.lean` |
 | Carmichael and Lucas–Carmichael numbers (Korselt) | `IsCarmichael`, `IsLucasCarmichael` | `Korselt.lean` |
 | Korselt's criterion: Carmichael ⟹ Fermat pseudoprime in every coprime base | `IsCarmichael.fermatPsp` | `Korselt.lean` |
@@ -270,7 +271,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene quarantuno moduli (5.693 righe
+Il nucleo di implementazione contiene quarantuno moduli (5.747 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova

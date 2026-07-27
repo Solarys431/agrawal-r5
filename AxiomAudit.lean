@@ -18,6 +18,9 @@ introduced.
 #print axioms AgrawalCore.orderOf_norm_power
 #print axioms AgrawalCore.orderOf_norm_decomposition
 #print axioms AgrawalCore.orderOf_norm_kernel
+#print axioms AgrawalCore.defectProduct_threshold
+#print axioms AgrawalCore.odd_defectProduct_threshold
+#print axioms AgrawalCore.odd_defectProduct_normal_iff
 #print axioms AgrawalCore.lenstra_proposition_card
 #print axioms AgrawalCore.partition_forced
 #print axioms AgrawalCore.hasOrderFourTransport_iff_goldenH_support

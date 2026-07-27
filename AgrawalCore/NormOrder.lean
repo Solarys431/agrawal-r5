@@ -22,6 +22,7 @@ norma `u ^ m = 5` è un ingresso algebrico separato e non viene assunta come
 assioma del progetto.
 -/
 import Mathlib.GroupTheory.OrderOfElement
+import Mathlib.Tactic
 
 namespace AgrawalCore
 
@@ -61,5 +62,58 @@ theorem orderOf_norm_power_dvd
     orderOf b ∣ orderOf u := by
   rw [orderOf_norm_power u b m hNorm]
   exact Nat.div_dvd_of_dvd (Nat.gcd_dvd_left (orderOf u) m)
+
+/-- **Exact threshold in terms of the defect product.**
+
+If `T * I = 10 * (q² - 1)` and `q ≥ 7`, then `T < q²` is equivalent
+to `I ≥ 10`.  In the cyclotomic application `I` is the product of the
+two odd defect indices. -/
+theorem defectProduct_threshold {q T I : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1)) :
+    T < q ^ 2 ↔ 10 ≤ I := by
+  have hq2 : 10 < q ^ 2 := by nlinarith
+  constructor
+  · intro hT
+    by_contra hI
+    have hIle : I ≤ 9 := by omega
+    have hsub : q ^ 2 - 1 + 1 = q ^ 2 := by omega
+    nlinarith
+  · intro hI
+    have hsub : q ^ 2 - 1 + 1 = q ^ 2 := by omega
+    have hIpos : 0 < I := by omega
+    nlinarith
+
+/-- Since the two defect indices are odd, the first exceptional value is
+`11`, not `10`. -/
+theorem odd_defectProduct_threshold {q T I : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1))
+    (hodd : Odd I) :
+    T < q ^ 2 ↔ 11 ≤ I := by
+  rw [defectProduct_threshold hq hexact]
+  rcases hodd with ⟨k, rfl⟩
+  omega
+
+/-- Complementary normal-range formulation: for an odd defect product,
+`T ≥ q²` holds exactly for the finite range `I ≤ 9`. -/
+theorem odd_defectProduct_normal_iff {q T I : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1))
+    (hodd : Odd I) :
+    q ^ 2 ≤ T ↔ I ≤ 9 := by
+  have hthreshold := odd_defectProduct_threshold hq hexact hodd
+  constructor
+  · intro hT
+    by_cases hI : I ≤ 9
+    · exact hI
+    · have h11 : 11 ≤ I := by
+        rcases hodd with ⟨k, hk⟩
+        omega
+      have hlt : T < q ^ 2 := hthreshold.mpr h11
+      omega
+  · intro hI
+    by_cases hT : q ^ 2 ≤ T
+    · exact hT
+    · have hlt : T < q ^ 2 := by omega
+      have h11 : 11 ≤ I := hthreshold.mp hlt
+      omega
 
 end AgrawalCore
