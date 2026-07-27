@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Comparator.FinalRowSize.Challenge",
+  "solution_module": "Comparator.FinalRowSize.Solution",
+  "theorem_names": [
+    "FinalRowSizeChallenge.three_factor_exclusion",
+    "FinalRowSizeChallenge.second_product_unique"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

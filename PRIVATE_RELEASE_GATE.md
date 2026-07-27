@@ -18,6 +18,9 @@ single controlled transition rather than a scramble.
       explicit premise rather than an added axiom.
 - [x] Intrinsic four-coefficient support, exact order/scalar profile and
       the universal \(p-1=8q^e\) exclusion checked in Lean.
+- [x] Final-row size exclusion for three factors and meet-in-the-middle
+      uniqueness for five factors checked in Lean; no asymptotic order claim
+      is included in the theorem surface.
 - [x] H4 itself absent from the theorem and Challenge surfaces; the original
       \(G_{r,s}\leftrightarrow D_{r,s}\) bridge via \(B_s\) is labelled
       paper-level rather than silently postulated.
@@ -35,13 +38,15 @@ single controlled transition rather than a scramble.
 - [x] Full census replay available.
 - [x] Private CI workflow builds with warnings as errors and replays
       certificates.
-- [x] Three Mathlib-only Challenge files are independent from their
+- [x] Four Mathlib-only Challenge files are independent from their
       Solution files.
 - [x] Pinned `leanprover/comparator` checks exact statement identity,
-      permitted axioms and kernel replay for all three surfaces.
+      permitted axioms and kernel replay for all four surfaces.
 - [x] A separate `ComparatorAxiomAudit.lean` prints the axioms of every
       exported comparator theorem.
 - [x] Portable H4-v3 replay passes from the private clean checkout.
+- [x] Final-row size replay distinguishes 208 decided and 13 undecided
+      \(k=5\) primes instead of reporting a false complete interval.
 - [x] Clean-clone CI run observed on the private remote: commit `9f2b0d0`,
       workflow run `30220768099`, green on 2026-07-26.
 - [x] Kernel-and-replay content commit `51f3991`, workflow run

@@ -46,6 +46,7 @@ readonly configs=(
   "Comparator/GoldenMoment/config.json"
   "Comparator/FermatShadow/config.json"
   "Comparator/PrimitiveSupport/config.json"
+  "Comparator/FinalRowSize/config.json"
 )
 
 for config in "${configs[@]}"; do

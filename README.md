@@ -26,7 +26,7 @@ measurements and their deliberately limited interpretation.
 
 ## Lean core
 
-The implementation core consists of thirty-nine modules (5,493 source lines)
+The implementation core consists of forty modules (5,574 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -107,9 +107,12 @@ this audit after every kernel build.
 | Four coefficients imply the exact scalar profile of \(5,\varepsilon^2\) | `dvd_D_exact_scalar_profile` | `PrimitiveScalarBridge.lean` |
 | No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
+| Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
+| Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 
-Three independent review surfaces in [`Comparator/`](Comparator/) state the
-golden factorization, Fermat shadow and the closed primitive-support results.
+Four independent review surfaces in [`Comparator/`](Comparator/) state the
+golden factorization, Fermat shadow, the closed primitive-support results, and
+the deterministic final-row size lemmas.
 Every `Challenge.lean` imports **only Mathlib**; every submitted proof lives in
 a separate `Solution.lean`. CI runs pinned
 [`leanprover/comparator`](https://github.com/leanprover/comparator), which
@@ -186,6 +189,10 @@ pinned:
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # certificate replay
 python3 tools/verify_scalar.py                # independent quotient-ring regression
+python3 certificates/fibre_size/verifica_fibre_taglia.py \
+  --k3-limit 100000 --k5-limit 3000 \
+  --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
+  --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # final-row size replay
 python3 tools/verify_certificates.py --full   # + full census replay
 ```
 
@@ -237,6 +244,12 @@ noncanonical inert witness, including the exact order
 replay certificate, not a Lean declaration. Zero hits in these finite
 domains is not a proof of H4.
 
+`certificates/fibre_size/` independently replays the final-row size sieve.
+For three factors it is exhaustive for largest inert prime \(q<100000\).
+For five factors it covers exactly the 208 inert primes \(q<3000\) with
+\(T_q\ge q^2\); the other 13 are explicitly recorded as undecided. The
+finite zero count is not a proof of global fibre emptiness.
+
 </details>
 
 <details>
@@ -252,7 +265,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene trentanove moduli (5.493 righe
+Il nucleo di implementazione contiene quaranta moduli (5.574 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova
@@ -267,7 +280,7 @@ lake build
 La tabella dei risultati è nella sezione inglese: ogni riga mappa un
 teorema del paper sulla sua dichiarazione Lean.
 
-Le tre superfici indipendenti in [`Comparator/`](Comparator/) importano solo
+Le quattro superfici indipendenti in [`Comparator/`](Comparator/) importano solo
 Mathlib negli enunciati e tengono le soluzioni in file distinti. La CI usa il
 comparator ufficiale, pinnato, per verificare identità degli enunciati,
 assiomi consentiti e replay nel kernel; istruzioni e confine di fiducia sono
@@ -300,6 +313,10 @@ pinnata:
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # replay dei certificati
 python3 tools/verify_scalar.py                # regressione indipendente nel quoziente
+python3 certificates/fibre_size/verifica_fibre_taglia.py \
+  --k3-limit 100000 --k5-limit 3000 \
+  --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
+  --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # replay del vincolo di taglia
 python3 tools/verify_certificates.py --full   # + replay integrale del censimento
 ```
 
@@ -314,6 +331,11 @@ censimento. `--full` ricalcola in aggiunta ogni H_n da zero e lo
 confronta col manifest; il censimento si può anche rigenerare per
 intero con `certificates/censimento_Hn_certificato_v2.py` (richiede
 PARI/GP).
+
+`certificates/fibre_size/` ricostruisce indipendentemente il setaccio della
+riga finale. Per tre fattori copre ogni \(q<100000\); per cinque fattori
+copre soltanto i 208 primi con \(T_q\ge q^2\), lasciando dichiaratamente
+13 primi non decisi.
 
 Due file sono di sola provenienza e NON sono rieseguibili da questo
 clone: `certificates/INDICE_PROVENIENZA_ESTERNA_AGRAWAL.json` (un

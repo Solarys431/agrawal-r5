@@ -1,6 +1,6 @@
 # Independent theorem surfaces
 
-This repository ships three trusted statement surfaces for
+This repository ships four trusted statement surfaces for
 [`leanprover/comparator`](https://github.com/leanprover/comparator).
 Each `Challenge.lean` imports only Mathlib and contains the exact statement
 with a proof hole.  Its paired `Solution.lean` imports the project proof.
@@ -15,6 +15,7 @@ Comparator checks that:
 | `Comparator/GoldenMoment` | `GoldenMomentChallenge.golden_moment_factorization` |
 | `Comparator/FermatShadow` | `FermatShadowChallenge.agrawal_fermat_shadow` |
 | `Comparator/PrimitiveSupport` | `four_coefficient_bridge`, `scalar_profile`, `single_support_exclusion` |
+| `Comparator/FinalRowSize` | `three_factor_exclusion`, `second_product_unique` |
 
 The universal H4 inertia statement is not among them: it remains open.
 
@@ -32,7 +33,7 @@ The project uses:
 - Go `1.24.0` for the CI build;
 - the Lean and Mathlib revisions pinned by this repository.
 
-GitHub Actions builds those exact tools and runs all three configurations
+GitHub Actions builds those exact tools and runs all four configurations
 with real Landrun.  For a local Linux replay, build Comparator and Landrun,
 then run:
 

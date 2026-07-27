@@ -10,7 +10,7 @@ The exact dependency graph was extracted from the pinned build environment
 with `lean-code-reuse` at commit
 `aeeb9bb8fc873e46d54d2debedbe77d307037917`. The analyzer was extended
 locally only to register this private checkout and the `AgrawalCore`
-namespace. Its exact-tier name-resolution join rate was 99.06%.
+namespace. Its exact-tier name-resolution join rate was 99.07%.
 
 Because statistical code-quality metrics are sensitive to project size and
 can be gamed, no composite score or rank is reported. We use the measurements
@@ -22,16 +22,16 @@ surface, the official comparator, and certificate replay.
 
 | Property | Measurement | Interpretation |
 |---|---:|---|
-| Core modules / declarations | 39 / 318 | Scope of the analyzed namespace |
-| Exact dependency edges | 29,535 | Fully elaborated environment graph |
+| Core modules / declarations | 40 / 323 | Scope of the analyzed namespace |
+| Exact dependency edges | 29,678 | Fully elaborated environment graph |
 | Dependency depth / cycles | 15 / 0% | Layered, acyclic declaration graph |
-| Internal edges crossing files | 50.53% | Modules are used across boundaries |
-| Declarations reused at least twice | 36.48% | Nontrivial internal reuse |
-| Mean reuse degree | 2.981 | Definitions are not predominantly isolated |
+| Internal edges crossing files | 50.37% | Modules are used across boundaries |
+| Declarations reused at least twice | 35.91% | Nontrivial internal reuse |
+| Mean reuse degree | 2.944 | Definitions are not predominantly isolated |
 | Statement duplicate rate | 0% | No duplicated theorem statements detected |
-| Proof-body duplicate rate | 0.87% | Low syntactic proof duplication |
-| Public declaration documentation | 75.65% | Good but not complete; an improvement target |
-| Distinct Mathlib declarations used | 761 | Broad use of the pinned library |
+| Proof-body duplicate rate | 0.85% | Low syntactic proof duplication |
+| Public declaration documentation | 76.04% | Good but not complete; an improvement target |
+| Distinct Mathlib declarations used | 762 | Broad use of the pinned library |
 | Project axioms / `native_decide` users | 0 / 0 | No project trust shortcut detected |
 | `sorry` rate in `AgrawalCore` | 0% | All implementation declarations are filled |
 
@@ -52,6 +52,9 @@ theorems reuse a small algebraic core rather than rebuilding it.
 3. Comparator declarations received their own tracked `#print axioms` audit.
 4. Release checks distinguish deliberate `sorry` placeholders in trusted
    `Challenge.lean` statements from the sorry-free submitted implementation.
+5. The final-row size module was added only after its deterministic core was
+   separated from asymptotic and finite-computation claims; the exact-tier
+   audit above was then regenerated on external scratch storage.
 
 ## Resource options
 
