@@ -27,3 +27,4 @@ import AgrawalCore.H4Core
 import AgrawalCore.LocalTransport
 import AgrawalCore.ScalarCompleteness
 import AgrawalCore.UnconditionalDichotomy
+import AgrawalCore.PrimitiveSupport

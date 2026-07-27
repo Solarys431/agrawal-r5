@@ -179,6 +179,30 @@ sources:
       remounting and the literal local witness, while the arithmetic
       general-s fiber encoding remains outside this release.
 
+  - title: "Four-coefficient primitive support: kernel arithmetic interface"
+    authors:
+      - "this pipeline"
+    id: "private repository; public identifier pending"
+    type: "formal arithmetic interface for an open golden-inertia reduction"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Formalized as `fourCoefficientGcd`,
+      `dvd_fourCoefficientGcd_iff`,
+      `primitiveSupport_iff_fourCoefficientGcd`,
+      `one_semiorder_dvd_four_of_single_odd_prime`, and
+      `one_order_dvd_eight_of_single_odd_prime`. The first three declarations
+      compress simultaneous divisibility of four integral coefficients into
+      one gcd once the external cyclotomic coefficient theorem is supplied.
+      The last two prove the arithmetic core of the exclusion of a split
+      H-profile with p-1 = 8*q^e: for coprime semiorders dividing a group
+      order supported on one odd prime, one complete order divides 8.
+      The evaluation of Phi_m((5+sqrt(5))/2), the integral-basis argument in
+      the split quadratic algebra, and the Smith-normal-form statement are
+      not yet formalized and are not represented by axioms. The mathematical
+      priority of the four-coefficient cyclotomic formulation is provisional
+      pending specialist review.
+
   - title: "Korselt's criterion and Carmichael numbers"
     authors:
       - "Alwin Korselt (1899)"

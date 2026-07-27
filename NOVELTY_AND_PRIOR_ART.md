@@ -57,6 +57,7 @@ novelty should be claimed for their underlying arguments.
 | Cubic Lenstra signature versus the strong complementary row | Lean-checked | Elementary equivalence, included as a negative result of orientation: the cubic parameters repackage the row and must not be counted as an independent obstruction |
 | Arithmetic profile of \(H_n\) and the 2-adic saturation wall | Lean-checked | Exact formal reduction, not a proof of H4: `dvd_goldenH_iff_scalar_profile` identifies divisibility by \(H_n\) with the two negative scalar semiperiods, and `dvd_goldenH_nonsquare_iff_two_adic_saturation` proves that inertia is equivalent to saturation of \(v_2(p-1)\). Priority for the elementary reduction is unassessed; no novelty claim beyond this explicit formal package should be made. |
 | Local order-four transport is equivalent to support of \(H_n\) | Lean-checked end to end | `LocalTransport.lean` proves the necessary direction from the literal row. `ScalarCompleteness.lean` proves the converse existentially: a common defect is globally `+1` or `−1`; the negative sign is repaired by an explicit index shift. The precise declaration is `hasOrderFourTransport_iff_goldenH_support`. This proves the scalar-completeness reduction, **not H4**: excluding split prime factors from every \(H_n\) remains open. Priority is unassessed. |
+| Four-coefficient primitive support and the \(p-1=8q^e\) exclusion | Arithmetic core Lean-checked; cyclotomic integral-basis bridge paper-audited | The external theorem replaces a norm surrogate by the exact support \(\gcd(c_{r,s},d_{r,s},U_k+1,U_{k-1}+1)\), including both components above a split prime. `PrimitiveSupport.lean` checks the gcd interface and the single-odd-prime semiorder obstruction. No exact match was found in the targeted sources, but priority is provisional: the integral cyclotomic theorem still needs specialist review and a complete database search. It is a reduction of H4, not a proof of H4. |
 
 ## Computational results
 
@@ -116,5 +117,11 @@ They should enter the public theorem table only after each has:
 - R. J. McIntosh and S. Mitra Dipra,
   [Carmichael numbers with \(p+1\mid n+1\)](https://www.sciencedirect.com/science/article/pii/S0022314X14002108),
   *Journal of Number Theory* 147 (2015), 81–91.
+- F. Breuer,
+  [Multiplicative orders of Gauss periods and the arithmetic of real
+  quadratic fields](https://arxiv.org/abs/2006.10344), 2020.
+- P. M. Voutier,
+  [Primitive divisors of Lucas and Lehmer sequences, II](https://doi.org/10.5802/jtnb.168),
+  *Journal de Théorie des Nombres de Bordeaux* 8 (1996), 251–274.
 - The current Formal Conjectures entry contains the statement of Agrawal’s
   conjecture with `sorry`; it does not contain this verified core.
