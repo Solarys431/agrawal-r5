@@ -203,6 +203,8 @@ python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --k3-limit 100000 --k5-limit 3000 \
   --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
   --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # final-row size replay
+python3 certificates/two_row_transport/verify_two_row_transport.py \
+  --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
 python3 tools/verify_certificates.py --full   # + full census replay
 ```
 
@@ -259,6 +261,12 @@ For three factors it is exhaustive for largest inert prime \(q<100000\).
 For five factors it covers exactly the 208 inert primes \(q<3000\) with
 \(T_q\ge q^2\); the other 13 are explicitly recorded as undecided. The
 finite zero count is not a proof of global fibre emptiness.
+
+`certificates/two_row_transport/` extends the exhaustive all-inert
+three-factor replay to \(q<10^6\). Of 415 admissible semiprime products,
+391 fail the multiplier-free transport and the remaining 24 fail the exact
+bounded linear lift. Under H4 this excludes the full three-factor box; without
+H4 it excludes only the all-inert arm of the unconditional dichotomy.
 
 </details>
 
@@ -327,6 +335,8 @@ python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --k3-limit 100000 --k5-limit 3000 \
   --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
   --output /tmp/VERIFICA_FIBRE_TAGLIA.json    # replay del vincolo di taglia
+python3 certificates/two_row_transport/verify_two_row_transport.py \
+  --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
 python3 tools/verify_certificates.py --full   # + replay integrale del censimento
 ```
 
@@ -346,6 +356,12 @@ PARI/GP).
 riga finale. Per tre fattori copre ogni \(q<100000\); per cinque fattori
 copre soltanto i 208 primi con \(T_q\ge q^2\), lasciando dichiaratamente
 13 primi non decisi.
+
+`certificates/two_row_transport/` estende il replay esaustivo del ramo
+tutto-inerte a \(q<10^6\): 391 dei 415 semiprimi ammissibili cadono sul
+trasporto senza moltiplicatore, i 24 residui sul sollevamento lineare
+limitato. Sotto H4 ciò esclude l'intero box a tre fattori; senza H4 esclude
+soltanto il ramo tutto-inerte della dicotomia.
 
 Due file sono di sola provenienza e NON sono rieseguibili da questo
 clone: `certificates/INDICE_PROVENIENZA_ESTERNA_AGRAWAL.json` (un
