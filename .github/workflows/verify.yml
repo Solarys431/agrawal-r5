@@ -29,6 +29,12 @@ jobs:
       - name: Print axioms of headline declarations
         run: lake env lean AxiomAudit.lean
 
+      - name: Compile minimal challenge surfaces
+        run: |
+          lake env lean Challenges/GoldenMoment.lean
+          lake env lean Challenges/FermatShadow.lean
+          lake env lean Challenges/PrimitiveSupport.lean
+
       - name: Install certificate dependencies
         run: |
           sudo apt-get update
@@ -43,6 +49,12 @@ jobs:
 
       - name: Independent scalar-completeness regression
         run: python3 tools/verify_scalar.py
+
+      - name: Replay the portable H4-v3 audit package
+        run: |
+          python3 certificates/h4_assalto_finale/verify_h4_final_assault_v3.py \
+            --root certificates/h4_assalto_finale \
+            --output /tmp/VERIFICA_H4_ASSALTO_FINALE_v3.json
 
       - name: Recompute the complete census
         if: github.event_name == 'workflow_dispatch'

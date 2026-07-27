@@ -21,3 +21,16 @@ introduced.
 #print axioms AgrawalCore.no_squarefree_counterexample_of_no_witnesses
 #print axioms AgrawalCore.primitiveSupport_iff_fourCoefficientGcd
 #print axioms AgrawalCore.one_order_dvd_eight_of_single_odd_prime
+#print axioms AgrawalCore.gamma_pow_formula
+#print axioms AgrawalCore.noncanonicalP_prime
+#print axioms AgrawalCore.noncanonical_inert
+#print axioms AgrawalCore.noncanonical_five_order_certificate
+#print axioms AgrawalCore.noncanonical_five_order
+#print axioms AgrawalCore.split_pair_zero_iff_four_coefficient_gcd
+#print axioms AgrawalCore.eval₂_cyclotomic_gamma_coeffs
+#print axioms AgrawalCore.primitiveFourVanish_iff_dvd_D
+#print axioms AgrawalCore.canonicalSignature_unique
+#print axioms AgrawalCore.primitiveFourVanish_exact_order_profile
+#print axioms AgrawalCore.dvd_primitiveFourCoefficientD_exact_order_profile
+#print axioms AgrawalCore.dvd_D_exact_scalar_profile
+#print axioms AgrawalCore.no_split_single_odd_support

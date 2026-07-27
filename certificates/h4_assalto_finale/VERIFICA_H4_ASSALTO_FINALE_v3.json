@@ -1,0 +1,67 @@
+{
+  "binary_hash_policy": "Compiled executables are deliberately excluded: their bytes depend on compiler, flags and platform. Reproducibility is source+command+output based.",
+  "failures": [],
+  "noncanonical_inert_prime": {
+    "factor_p_minus_1": {
+      "2": 1,
+      "71": 1,
+      "79": 1,
+      "1627": 1
+    },
+    "factor_p_plus_1": {
+      "2": 3,
+      "3": 1,
+      "7": 1,
+      "13": 1,
+      "61": 1,
+      "137": 1
+    },
+    "k": 2493399,
+    "legendre_5": -1,
+    "m": 15758288,
+    "ord_p_5": 158,
+    "ord_p_epsilon_squared_matrix": 99736,
+    "p": 18251687,
+    "prime": true,
+    "r": 79,
+    "relation": "p = k + m",
+    "s": 49868,
+    "scan_done_line": "DONE N=50000000 inert=1500789 admissible=1500789 p_gt_m=1 minratio=0.863388 minp=18251687 R=158 E=99736"
+  },
+  "portable_artifacts": {
+    "scan_hits": {
+      "path": "INERT_PK_5E7_REPLAY.txt",
+      "sha256": "6acf687aac6f7ae08a10fcd499cc0baaadefe92d6986e8926dfb319936229e38"
+    },
+    "scan_log": {
+      "path": "INERT_PK_5E7_REPLAY.log",
+      "sha256": "37d1002e69cab15e6aeb5ea09528494ebb72ef166ea075ab24347c933546cb1a"
+    },
+    "scan_source": {
+      "path": "scan_inert_pk.cpp",
+      "sha256": "87c1c32d908cad78719202705b3492890629c60f09ce1a6bf7b36275f206cbdb"
+    },
+    "two_log": {
+      "path": "H_TWO_SUPPORT_POWERS_Q5K_1E18_REPLAY.log",
+      "sha256": "20b860b99b09448428cdee85282004f6988edcd747605117ab9cff06e4b28582"
+    },
+    "two_source": {
+      "path": "search_H_two_support_powers.cpp",
+      "sha256": "7c8de77b20f282551812b131954aa820ff4d10a85c50df269cd12ebd4520b0f3"
+    }
+  },
+  "schema": 3,
+  "scope_warning": "Finite replay only. Zero hits in the declared domains neither proves H4 nor the universal inert-support conjecture.",
+  "status": "PASS",
+  "two_odd_support_family": {
+    "PMAX": 1000000000000000000,
+    "Q": 5000,
+    "dyad": 268541,
+    "hits": 0,
+    "primes": 8406178,
+    "primes_base": 667,
+    "scan_done_line": "DONE Q=5000 primes_base=667 PMAX=1000000000000000000 variants=159265017 primes=8406178 dyad=268541 hits=0 sec=22.6519",
+    "scope": "p-1=2^b*q^a*t^c for p\u22614 mod 5, or p-1=2^b*5^f*q^a*t^c for p\u22611 mod 5; q<t\u22645000, positive exponents, p<10^18",
+    "variants": 159265017
+  }
+}

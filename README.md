@@ -24,8 +24,8 @@ publication checklist is in
 
 ## Lean core
 
-Thirty modules over plain Mathlib (pinned), no `sorry`, no extra
-axioms. Build:
+Thirty-nine modules (5,485 source lines) over plain Mathlib (pinned), no
+`sorry`, `admit`, `native_decide`, or extra axioms. Build:
 
 ```
 lake exe cache get
@@ -94,6 +94,19 @@ this audit after every kernel build.
 | **Unconditional witness dichotomy from the explicit reduction interface** | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
 | Four-coefficient support compression | `primitiveSupport_iff_fourCoefficientGcd` | `PrimitiveSupport.lean` |
 | Single-odd-prime semiorder obstruction | `one_order_dvd_eight_of_single_odd_prime` | `PrimitiveSupport.lean` |
+| Quadratic recurrence for γ | `gamma_pow_formula` | `QuadraticGamma.lean` |
+| Both split components vanish iff the canonical coefficients vanish | `split_pair_eq_zero_iff_coefficients` | `PrimitiveEvaluation.lean` |
+| Intrinsic primitive intersection iff the four-coefficient gcd vanishes | `primitiveFourVanish_iff_dvd_D` | `PrimitiveBridge.lean` |
+| Canonical signature uniqueness | `canonicalSignature_unique` | `CanonicalSignature.lean` |
+| Four coefficients imply exact orders \(4rs,2r,2s\) | `dvd_primitiveFourCoefficientD_exact_order_profile` | `PrimitiveOrderBridge.lean` |
+| Four coefficients imply the exact scalar profile of \(5,\varepsilon^2\) | `dvd_D_exact_scalar_profile` | `PrimitiveScalarBridge.lean` |
+| No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
+| Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
+
+Three minimal review surfaces in `Challenges/` restate the golden moment,
+Fermat shadow and primitive-support claims with narrow imports. They are
+compiled separately in CI. H4 is intentionally absent from the challenge
+files because it remains open.
 
 ### On the Lenstra–Pomerance proposition
 
@@ -142,9 +155,11 @@ on all of them.
 
 ## Paper
 
-`paper/agrawal-r5.pdf`: the kernel-certified part of the study. Everything called a theorem in it is checked by Lean, every
-computational claim carries a certificate, and the two central open
-problems are posed without any claim of proof.
+`paper/agrawal-r5.pdf`: the full mathematical draft. Its elementary core is
+kernel-certified and identified declaration by declaration above; deeper
+algebraic, analytic and reduction theorems remain paper proofs and are not
+mislabelled as Lean-checked. Every computational claim carries a certificate,
+and the two central open problems are posed without any claim of proof.
 
 ## Certificates
 
@@ -205,6 +220,14 @@ prime and every factorization reconstructed. This is a finite
 certificate, **not a proof of H4**; the universal inertia statement
 remains open.
 
+`certificates/h4_assalto_finale/` is the portable v3 audit package for the
+later falsification campaign. Its standard-library verifier checks the
+noncanonical inert witness, including the exact order
+\(\operatorname{ord}_p(5)=158\), and the frozen two-support census
+\(q<t\le5000,\ p<10^{18}\). The companion matrix order \(99\,736\) is a
+replay certificate, not a Lean declaration. Zero hits in these finite
+domains is not a proof of H4.
+
 </details>
 
 <details>
@@ -220,8 +243,9 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Trenta moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
-assiomi aggiuntivi. Compilazione:
+Trentanove moduli (5.485 righe sorgente) su Mathlib puro (versione
+pinnata), senza `sorry`, `admit`, `native_decide` o assiomi aggiuntivi.
+Compilazione:
 
 ```
 lake exe cache get
@@ -233,9 +257,12 @@ teorema del paper sulla sua dichiarazione Lean.
 
 ## Paper
 
-`paper/agrawal-r5.pdf`: la parte dello studio certificata dal kernel. Tutto ciò che vi è chiamato teorema è verificato da
-Lean, ogni claim computazionale ha il suo certificato, e i due
-problemi aperti centrali sono posti senza alcuna pretesa di prova.
+`paper/agrawal-r5.pdf`: la bozza matematica completa. Il nucleo elementare
+certificato dal kernel è mappato dichiarazione per dichiarazione nella
+sezione inglese; i teoremi algebrici, analitici e di riduzione più profondi
+restano prove cartacee e non vengono presentati come formalizzati. Ogni claim
+computazionale ha il suo certificato, e i due problemi aperti centrali sono
+posti senza alcuna pretesa di prova.
 
 ## Certificati
 

@@ -1,900 +1,1681 @@
 \documentclass[11pt]{amsart}
-\usepackage[T1]{fontenc}
+\usepackage[margin=1.2in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{booktabs}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{pdfauthor={Daniele Cappello and the UNICO/NOUS pipeline},
-  pdftitle={The golden moment and certified constraints on Agrawal's conjecture at r=5}}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{verification}[theorem]{Computational verification}
 
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\Z}{\mathbf{Z}}
-\newcommand{\F}{\mathbf{F}}
-\newcommand{\lean}[1]{\texttt{#1}}
-\emergencystretch=1.5em
-\raggedbottom
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Norm}{\operatorname{N}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
+
+\author{Anonymous draft for review}
+\thanks{Private draft v20 of July 27, 2026. Results obtained within the UNICO/NOUS pipeline
+(an AI-assisted discovery-and-certification workflow with independent adversarial
+review). A kernel-pure Lean~4/Mathlib layer, with no \texttt{sorry}, covers
+the elementary core identified in the text. All computational claims come
+with reproducible scripts, hashes and stated domains.}
 
 \begin{document}
 
-\title[The golden moment at \(r=5\)]{The golden moment and certified
-constraints on Agrawal's conjecture at \(r=5\)}
-
-\author{Daniele Cappello and the UNICO/NOUS pipeline}
-\thanks{This is a human-directed, LLM-assisted project. The mathematical
-exploration and formalization were produced by an orchestrated multi-model
-pipeline (Claude and GPT-family models), directed by Daniele Cappello and
-subjected to independent model audits. Every formal claim is checked by the
-Lean kernel; model agreement is not treated as evidence. Repository with the
-Lean sources and all computational certificates:
-\url{https://github.com/Solarys431/agrawal-r5}.}
-
 \begin{abstract}
-We prove, and formally verify in Lean, that the quadratic moment unit
-arising in Agrawal's congruence at \(r=5\) has quintic index
+Agrawal's conjecture asserts that if $r$ is prime, $r \nmid n$, and
+$(X-1)^n \equiv X^n - 1 \pmod{n,\, X^r-1}$, then $n$ is prime or
+$n^2 \equiv 1 \pmod r$. We develop a local theory of this congruence
+at $r=5$. Writing $S(p,r)$ for the set of exponents that satisfy the
+congruence in $\F_p[X]/(\Phi_r)$, we attach to each pair $(p,r)$ a family of
+\emph{cyclotomic moments} in $\F_r$ whose non-vanishing rigidifies the image
+of $S(p,r)$ modulo $r$. For $r = 5$ the second moment is, up to an invertible
+constant, the quintic character of the golden ratio: $M_2 = 3\cdot
+\ind_5\!\big(\tfrac{1+\sqrt5}{2}\big)$. As a consequence, a nontrivial local
+image requires $5$ and the golden unit to be simultaneous $5^s$-th power
+residues for every available level $s$, together with an explicit $2$-adic
+alignment; every local exception satisfies $p \equiv 1 \pmod{20}$, and the
+conditional splitting density is $1/25$ per floor of an explicit
+non-abelian Kummer tower. For squarefree $n$ we prove a mod-$5$ structure
+theorem for counterexamples, derive an explicit Korselt-type system for the
+minimal three-factor case, determine the exact order decomposition
+$T_p = 2^{b+1}\cdot 5\cdot d_+\cdot d_5$ of $\zeta_5-1$ in $\F_{p^4}$, and
+identify its tail defect as a Kummer defect: $q_p = \prod_\ell \ell^{e_\ell}$,
+where $\ell^{e_\ell}$ measures $\zeta_5-1$ being an $\ell^{e_\ell}$-th power;
+the $(-1)$-side carries no defect of its own
+($d_5 = \ord_p(5)_{\mathrm{odd}}$ exactly), so $T_p$ is completely
+determined by the Kummer defects of the canonical pair $(5,\ \zeta_5-1)$.
+This exhibits the $(+1)$-side conditions of the Lenstra--Pomerance heuristic
+as consequences, rather than assumptions, of the local algebra; more
+precisely, the two coprime odd components $d_5, d_+$ of the order
+decomposition realize the two sides $p \mp 1$ of the Lenstra--Pomerance
+mechanism, which the local structure thus generates internally. Under the
+explicit local Hypothesis~H4, the squarefree problem reduces exactly to
+the emptiness of finite resultant fibers over compatible tuples. We also
+replace the norm surrogate in H4 by an exact four-coefficient primitive
+support in the integral basis of $\Q(\sqrt5)$, and exclude universally the
+infinite candidate family $p-1=8q^e$. We certify
+a stated three-factor region and seven individual empty fibers. For every
+fixed number $s$ of prime factors, the terminal row gives the unconditional
+quartic-skeleton bound
 \[
-M_2=3\,\operatorname{ind}_5\!\left(\frac{1+\sqrt5}{2}\right).
+M_s^{(4)}(X)\ll_s
+\frac{X}{\log X}(\log\log X)^{s-2},
 \]
-Thus the quadratic moment is exactly the classical quintic character of
-the golden unit, up to the scalar \(3\). This note also collects the
-mechanically verified constraints obtained around that bridge. Every
-statement called a theorem below is proved in Lean~4 over Mathlib, with no
-\lean{sorry}, no \lean{admit} and no added axioms; the corresponding
-declaration name is given with each statement. Every computational claim
-carries a replayable certificate with its detection criterion embedded and
-SHA-256 manifests. We pose, without any claim of proof, the two open
-problems that remain central. Nothing in this note asserts Agrawal's
-conjecture.
+saving one factor of $\log\log X$ over the unrestricted almost-prime count.
+The two remaining walls are H4 and the global emptiness of the union of the
+finite fibers.
 \end{abstract}
 
 \maketitle
-\enlargethispage{4pt}
 
-\section{Setting}
+\section{Introduction}
 
-Agrawal's conjecture (arising from the AKS primality test
-\cite{AKS}; see also \cite{LPremarks,LPgauss,Vana}) is stated for coprime
-positive integers \(n,r\). We use its prime-\(r\) specialization: if \(r\)
-is prime, \(r\nmid n\), and
-\((X-1)^n\equiv X^n-1 \pmod{n,\,X^r-1}\),
-then \(n\) is prime or \(n^2\equiv1\pmod r\). Our study concerns
-\(r=5\). This note isolates its mechanically certified core; the
-statements are elementary, and their interest lies in the role they
-play in the wider study and in the fact that a proof assistant has
-checked every one of them.
+Let $r$ be a prime and $n \ge 2$ an integer with $r \nmid n$. Agrawal's
+conjecture; formulated by Bhattacharjee and Pandey \cite{BP2001} and
+discussed by Agrawal in connection with the AKS primality test
+\cite{AKS2004}; asserts:
+\begin{conjecture}[Agrawal]\label{conj:agrawal}
+If $(X-1)^n \equiv X^n - 1 \pmod{n,\, X^r-1}$, then $n$ is prime or
+$n^2 \equiv 1 \pmod r$.
+\end{conjecture}
+A proof would lower the complexity of AKS-type primality proving to
+$\widetilde{O}(\log^3 n)$. Lenstra and Pomerance \cite{LP} gave a heuristic
+construction suggesting that counterexamples exist and are abundant, though
+astronomically large: products $n = p_1\cdots p_k$ with $k$ odd,
+$p_i \equiv 3 \pmod{80}$, $p_i - 1 \mid n-1$ and $p_i+1 \mid n+1$ satisfy the
+congruence at $r=5$ with $n^2 \not\equiv 1 \pmod 5$. V\'a\v na \cite{Vana2009}
+gave an alternative proof of the Lenstra--Pomerance proposition through the
+multiplicative order of $X-1$ in $\Z_n[X]/(X^5-1)$ and reduced the congruence
+to a CRT-combinable system of Korselt-type congruences; Popovych
+\cite{Popovych2009} generalized Lenstra's proposition; Hegde and Devaraj
+\cite{HD2021} constructed further heuristic families. No counterexample is
+known; distributed searches found none in the ranges attempted.
 
-Local notation and all parity hypotheses are introduced at the point of
-use. In the first sections, let
+This paper is a study of the \emph{local} obstruction: what happens at a
+single prime $p$, in the ring $A = \F_p[X]/(\Phi_r)$. Our findings can be
+summarized in one sentence:
+\begin{quote}
+\emph{the local degeneracies of Agrawal's congruence classified so far are
+governed by Kummer defects of canonical cyclotomic elements}; for
+$r = 5$, by the quintic characters of $5$ and of the golden ratio, and, in
+the tail of the three-factor system, by the power-residue defect of
+$\zeta_5 - 1$ itself. (The scope qualifier is deliberate: the possible
+order-$4$ local branch, Hypothesis~H4 below, is not yet classified.)
+\end{quote}
+
+\subsection*{Main results}
+Write $S(p,r) = \{m \ge 1 : (X-1)^m \equiv X^m - 1 \text{ in }
+\F_p[X]/(\Phi_r)\}$ and let $\im_r S \subseteq (\Z/r)^\times$ be its image
+modulo $r$.
+
+\begin{enumerate}
+\item \emph{Moments} (\S\ref{sec:moments}). We attach to $(p,r)$ moments
+$M_j \in \F_r$ built from discrete logarithms of $\zeta^a - 1$ and prove
+$\im_r S \subseteq T$, where $T$ is the subgroup cut out by the nonzero
+$M_j$. The $M_j$ obey exact structure theorems (Frobenius, parity, head,
+tail): in particular $M_0 = \log_\gamma(r) \bmod r$, so $M_0 = 0$ iff $r$ is
+an $r$-th power residue.
+\item \emph{The golden unit} (\S\ref{sec:golden}). For $r=5$,
+$p \equiv 1 \pmod 5$: $M_2 = 3\ind_5(\eps)$ with $\eps = (1+\sqrt5)/2$.
+Hence nontrivial local behaviour requires $5$ \emph{and} $\eps$ to be quintic
+residues. The identity lifts $5$-adically: $M_0^{(s)} = \ind_{5^s}(5)$,
+$M_2^{(s)} = -2\ind_{5^s}(\eps)$, forcing both keys to open \emph{every}
+floor of the tower. The governing tower
+$L_s = \Q(\zeta_{5^s}, 5^{1/5^s}, \eps^{1/5^s})$ satisfies $[L_s : B_s] = 25$
+at every floor, whence a conditional Chebotarev density of $1/25$ per floor.
+\item \emph{Two locks and the local classification} (\S\ref{sec:locks}).
+For $p \equiv 1 \pmod 5$: $\im_5 S \ne \{1\}$ iff the golden lock
+($5, \eps \in (\F_p^\times)^{5^s}$, $s = v_5(p-1)$) and the binary lock
+($\nu_1 = \nu_2 \le v_2(p-1) - 2$ for explicit $2$-adic valuations of
+discrete logarithms) are both open. Every local exception satisfies
+$p \equiv 1 \pmod{20}$. All $406$ known local exceptions are predicted by
+this classification.
+\item \emph{Structure of squarefree counterexamples} (\S\ref{sec:structure}).
+A composite squarefree $n$ satisfying the congruence with
+$n^2 \not\equiv 1 \pmod 5$ must have an odd number $k \ge 3$ of prime
+factors if no order-$4$ residue occurs in the $\pm1$ branches (Hypothesis
+H4, supported by a mechanistic ``many locks'' theorem and by exhaustive
+censuses); unconditionally, an even $k$ forces an order-$4$ residue. Under
+H4 all factors are $\equiv \pm2 \pmod 5$. In the quartic branch we prove the
+rigidity $S(p,5) = \langle p \rangle$ unconditionally, which makes the
+three-factor system fully explicit: Korselt-type congruences
+$n/p_i \equiv p_i^{j_i} \pmod{M_i}$ with determined exponents
+$j_i \in \{0,2\}$.
+\item \emph{The order of $\zeta-1$ and the Kummer defect}
+(\S\ref{sec:order}--\ref{sec:kummer}). In the quartic branch,
+$\Norm(\zeta-1) = 5$ gives $T_p \mid 10(p^2-1)\cdot{}$(vertical part), with
+the exact decomposition $T_p = 2^{b_p+1}\cdot 5\cdot d_{p,+}\cdot d_{p,5}$,
+$b_p = v_2(p^2-1)$, and the exact binary law $v_2(T_p) = 1 + v_2(p^2-1)$.
+The tail quotient $q_p = (p+1)_{\mathrm{odd}}/d_{p,+}$ satisfies
+$q_p = \prod_{\ell} \ell^{e_\ell}$ where $e_\ell$ is the Kummer defect of
+$\zeta - 1$ at $\ell$: the deviation from the full Lenstra--Pomerance
+$(+1)$-side condition is \emph{exactly} a power-residue phenomenon.
+\item \emph{Derived Lenstra--Pomerance mechanism} (\S\ref{sec:lp}).
+After the binary filter, the three-factor system collapses to the cyclic
+tail system $d_{i,+} \mid p_jp_k - 1$; a weakened form of
+$p_i + 1 \mid n+1$. The $(+1)$-side of the Lenstra--Pomerance construction
+is thereby \emph{derived} from the local algebra as a necessary condition on
+the minimal skeleton, rather than imposed as a sufficient device.
+\item \emph{Exact reduction and certified computations}
+(\S\ref{sec:fibers}--\ref{sec:computations}). Under H4 the squarefree
+problem is equivalent to the emptiness of explicit finite fibers over
+compatible tuples. An exact finite computation excludes the region
+$7\le p_1<p_2<30{,}000$, $p_3<10^9$; the separate boundary
+$p_1\in\{2,3\}$ is certified for $p_3<2\cdot10^8$. The pair
+$(13,37,30517)$ shows that two complete rows can hold simultaneously,
+so this regional statement is not a pairwise-incompatibility theorem.
+Seven individual fibers are empty without any upper bound on the last
+prime.
+\item \emph{Counting} (\S\ref{sec:counting}). The last row yields, for
+every fixed $s\ge3$, the unconditional quartic-skeleton estimate
 \[
-R_p \;=\; (\Z/p)[X]\,/\,(X^2-X-1),
-\qquad
-\eps \;=\; \text{the class of } X,
+M_s^{(4)}(X)\ll_s
+\frac{X}{\log X}(\log\log X)^{s-2}.
 \]
-so that \(\eps^2=\eps+1\), and set \(\sqrt5:=2\eps-1\), which
-satisfies \((\sqrt5)^2=5\) in \(R_p\)
-(\lean{GoldenRing}, \lean{eps\_sq}, \lean{sqrt5\_sq}).
-Let \(F_n\), \(L_n\) denote the Fibonacci and Lucas numbers, with
-\(L_n=F_{n+1}+F_{n-1}\) (\lean{lucas}). Define
+Under H4 this bounds every squarefree counterexample with $s$ factors.
+Separately, under Dedekind--GRH for the explicit joint Kummer composita,
+the local H4 profiles satisfy $N_H(X)\ll X/(\log X)^2$.
+\end{enumerate}
+
+\subsection*{Relation to earlier work}
+Several ingredients of this paper are classical, and we state plainly what
+is not ours. The focus on $r = 5$, the two-sided conditions
+$p_i \pm 1 \mid n \pm 1$, the conjugation
+$(\zeta_5-1)^{p^2} = -\zeta_5^{-1}(\zeta_5-1)$ and the bound
+$T_p \mid 10(p^2-1)$ are all in the Lenstra--Pomerance notes \cite{LP}.
+The paradigm of studying subgroups of $(\F_p[X]/(\Phi_r))^\times$ generated
+by cyclotomic elements such as $X - 1$, with lower bounds on their orders,
+is Popovych's \cite{Popovych2009}; our set $S(p,r)$ is a specific
+formulation within that paradigm, not a new idea. The reduction of the
+congruence to a CRT system of Korselt-type conditions appears in
+V\'a\v na's 2009 student paper \cite{Vana2009}, which deserves to be better
+known; our Sections~\ref{sec:structure}--\ref{sec:order} sharpen it to the
+field component $\Phi_5$, prove the \emph{necessity} of the explicit system
+on the minimal skeleton (via the rigidity theorem), and determine the exact
+order decomposition. The quintic character of the golden ratio is classical
+(Williams--Hardy \cite{WH1985}, building on E.~Lehmer \cite{Lehmer1966} and
+Williams \cite{Williams1975}); the translation between power residuosity
+and splitting in Kummer extensions is completely classical (see e.g.\
+Helou \cite{Helou} for norm-residue symbols and cyclotomic units), as is
+the Fibonacci torus of Cubre--Rouse \cite{CR2014}.
+
+What we have not found in the literature examined is: the moment theory
+applied to this congruence (Section~\ref{sec:moments}); the identification
+$M_2 = 3\ind_5(\eps)$ of the Agrawal moment with the quintic character of
+the golden unit; the necessary-and-sufficient two-lock classification of
+the local exceptions at $r = 5$; the mod-$5$ structure theorem for
+counterexamples; and the derivation of the $(+1)$-side Lenstra--Pomerance
+conditions, with their exact weakening measured by a Kummer defect, from
+the local algebra. These bridges, not the individual ingredients, are the
+contribution claimed here; we would welcome pointers to earlier
+occurrences.
+
+\subsection*{Disclosure and verification}
+The results were found and assembled in an AI-assisted pipeline with
+independent adversarial review; every theorem below was proved by hand in
+the usual sense. The accompanying Lean~4 files verify a stated elementary
+kernel layer over Mathlib with kernel-pure proofs (no \texttt{sorry}, no
+extra axioms); they do not silently stand for the analytic or finite-field
+arguments left on paper. Computational statements always carry their exact domain; they are
+falsification controls, not proofs, except where stated as certified
+exclusions in explicitly bounded regions.
+
+For the four-coefficient reduction, the kernel now defines the
+coefficients by polynomial remainder, checks simultaneous vanishing in
+both split components, proves the canonical-signature uniqueness, and
+derives the exact scalar orders from \(p\mid D_{r,s}\).  The final
+identification with the integral integer \(B_s\) remains paper-level,
+and the class-specific implication \((4.8)\) remains precisely H4; neither
+is represented by a hidden axiom.
+
+\section{The local set and its discrete-logarithm form}\label{sec:local}
+
+Fix distinct primes $p, r$ with $r$ odd. Let $k = \ord_r(p)$, $q = p^k$,
+$N = q - 1$, $K = \F_q$, and let $\zeta \in K^\times$ have order $r$. Set
+$G = (\Z/r)^\times$, $h = r-1$, and for $a \in G$ put $u_a = \zeta^a - 1 \in
+K^\times$, $e_a = \log_\gamma(u_a) \in \Z/N$ for a fixed generator $\gamma$
+of $K^\times$. Let
 \[
-A_n=\begin{cases}L_n,& n \text{ even},\\ F_n,& n\text{ odd},\end{cases}
-\qquad
-H_n=\gcd\bigl(A_n,\,5^{\,n-1}+1\bigr),
+S = S(p,r) = \{\, m \in \Z^+ : (X-1)^m \equiv X^m - 1 \ \text{in}\
+A = \F_p[X]/(\Phi_r) \,\}.
 \]
-and, dually, \(B_n=F_n\) (\(n\) even), \(L_n\) (\(n\) odd), with
-\(J_n=\gcd\bigl(B_n,\,5^{\,n-1}-1\bigr)\).
 
-\section{The golden Frobenius and the inertia of \texorpdfstring{\(J_n\)}{Jn}}
-
-\begin{theorem}[\lean{golden\_frobenius}]\label{thm:frob}
-Assume \(5\) is not a square in \(\Z/p\) and \(p\neq2\). Then
-\(\eps^p=1-\eps\) in \(R_p\).
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-By Euler's criterion (\lean{euler\_nonsquare}) we have
-\(5^{(p-1)/2}=-1\) in \(\Z/p\), hence
-\[
-(\sqrt5)^p=(5)^{(p-1)/2}\sqrt5=-\sqrt5
-\qquad(\lean{sqrt5\_pow\_p}).
-\]
-Expanding \((2\eps-1)^p\) by the Frobenius endomorphism and
-cancelling the unit \(2\) gives the claim.
-\end{proof}
-
-\begin{corollary}[\lean{golden\_pow\_p\_succ}]\label{cor:halfperiod}
-Under the same hypotheses, \(\eps^{\,p+1}=-1\) in \(R_p\).
-\end{corollary}
-
-\begin{theorem}[\lean{inertia\_J}]\label{thm:inertia}
-Assume \(5\) is not a square in \(\Z/p\) and \(p\neq2\). Then for no
-\(n\ge1\) do \(\eps^{2n}=1\) in \(R_p\) and \(5^{\,n-1}=1\) in
-\(\Z/p\) hold simultaneously.
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-If \(n\) is odd, raising \(\eps^{2n}=1\) to the power \((p+1)/2\) and
-comparing with \((\eps^{p+1})^n=(-1)^n=-1\) gives \(1=-1\), absurd for
-\(p\neq2\). If \(n\) is even, \(5=5^{\,n}=(5^{\,n/2})^2\) exhibits
-\(5\) as a square, against the hypothesis.
-\end{proof}
-
-Via the identity \(\eps^{\,n+1}=F_{n+1}\eps+F_n\) in \(R_p\)
-(\lean{golden\_pow\_fib} and its predecessor form
-\lean{golden\_pow\_pred}) one obtains the divisibility forms, in
-which the hypothesis is purely arithmetic by quadratic reciprocity
-(\lean{not\_isSquare\_five}):
-
-\begin{theorem}[\lean{inertia\_J\_fib\_mod5},
-\lean{inertia\_J\_lucas\_mod5}]\label{thm:inertiadvd}
-Let \(p\equiv\pm2\pmod5\), \(p\neq2\). For even \(n\ge2\), \(p\) does
-not divide \(\gcd(F_n,\,5^{\,n-1}-1)\); for odd \(n\ge1\), \(p\) does
-not divide \(\gcd(L_n,\,5^{\,n-1}-1)\). Equivalently, no \emph{odd}
-prime inert in \(\mathbf{Q}(\sqrt5)\) divides any \(J_n\).
-\end{theorem}
-
-\section{The canonical support witness}
-
-\begin{theorem}[\lean{support\_witness}]\label{thm:support}
-Let \(p\equiv2\pmod5\), \(p\neq2\), and put \(n_0=(p+1)/2\). Then
-\(n_0\equiv4\pmod5\), \(p\mid 5^{\,n_0-1}+1\), and \(p\) divides
-\(L_{n_0}\) if \(n_0\) is even, \(F_{n_0}\) if \(n_0\) is odd. In
-particular \(p\mid H_{n_0}\), with an index in the class
-\(4\bmod5\).
-\end{theorem}
-
-\section{The moment obstruction}\label{sec:moment-obstruction}
-
-Let \(F\) be a finite field, let \(e:F^\times\to F\), and define
-\[
-M_j(e)=\sum_{a\in F^\times}a^j e(a).
-\]
-The discrete logarithms occurring in the local Agrawal problem satisfy a
-covariance relation of the following form.
-
-\begin{theorem}[\lean{moment\_covariance}]\label{thm:moment-covariance}
-If \(t\in F^\times\) and
-\[
-e(ta)=t\,e(a)\qquad(a\in F^\times),
-\]
-then
-\[
-tM_j(e)=t^{-j}M_j(e).
-\]
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-Multiply the defining sum by \(t\), use the covariance relation, and
-substitute \(b=ta\). Multiplication by \(t\) permutes \(F^\times\), so
-\[
-tM_j=\sum_a a^j e(ta)
-    =\sum_b(t^{-1}b)^j e(b)=t^{-j}M_j.
-\]
-The change of variables is implemented by an explicit finite equivalence in
-the Lean proof.
-\end{proof}
-
-\begin{corollary}[\lean{pow\_succ\_eq\_one\_of\_moment\_ne\_zero}]
-\label{cor:moment-obstruction}
-Under the same covariance relation,
-\[
-M_j(e)\neq0\quad\Longrightarrow\quad t^{j+1}=1.
-\]
-Without the nonvanishing hypothesis one has the factor identity
-\[
-\bigl(t^{j+1}-1\bigr)M_j(e)=0
-\qquad(\lean{moment\_obstruction}).
-\]
-\end{corollary}
-
-This is the kernel-checked Fourier argument behind the moment obstruction
-\(\operatorname{im}_r(S)\subseteq T\) in the wider local theory. The present
-file formalizes its algebraic engine; connecting the abstract function \(e\)
-to the complete definition of \(S(p,r)\) remains outside this core.
-
-\section{The golden moment}\label{sec:golden-moment}
-
-Let \(\zeta\) satisfy \(\Phi_5(\zeta)=0\), and put
-\[
- s=1+2(\zeta+\zeta^4),\qquad
- \eps=1+\zeta+\zeta^4,\qquad
- U_2=\prod_{a=1}^{4}(\zeta^a-1)^{a^2\bmod 5}.
-\]
-Thus \(s^2=5\), \(\eps=(1+s)/2\) whenever \(2\) is invertible, and
-\[
-U_2=(\zeta-1)(\zeta^2-1)^4(\zeta^3-1)^4(\zeta^4-1).
-\]
-The quintic index of \(U_2\) is the quadratic moment \(M_2\) in the
-moment decomposition of the local Agrawal congruence.
-
-\begin{theorem}[\lean{golden\_moment\_factorization}]
-\label{thm:golden-factorization}
-In every commutative ring in which
-\(\zeta^4+\zeta^3+\zeta^2+\zeta+1=0\), one has
-\[
-\boxed{\quad U_2=s^5\eps^3.\quad}
-\]
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-Set
-\[
-A=(\zeta-1)(\zeta^4-1),\qquad
-B=(\zeta^2-1)(\zeta^3-1).
-\]
-Direct reductions modulo \(\Phi_5\), formalized without division, give
-\[
-AB=5,\qquad B=s\eps,\qquad s^2=5.
-\]
-Since \(U_2=AB^4=(AB)B^3\), it follows that
-\(U_2=5(s\eps)^3=s^5\eps^3\).
-\end{proof}
-
-\begin{theorem}[Golden index theorem]
-\label{thm:golden-index}
-Let \(p\) be prime with \(5\mid p-1\), let \(\zeta\in\F_p\) satisfy
-\(\Phi_5(\zeta)=0\), and suppose that the displayed elements are units.
-For the discrete quintic index
-\(\operatorname{ind}_5:\F_p^\times\to\Z/5\Z\) constructed in
-\lean{quinticIndex},
-\[
-\boxed{\quad M_2=3\,\operatorname{ind}_5(\eps).\quad}
-\]
-The same identity holds for every multiplicative quintic character.
-\par\smallskip\noindent
-\textit{Lean declarations:}\quad
-\lean{golden\_moment\_index}, \lean{zmod\_golden\_moment\_index}.
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-Every quintic index kills the fifth power \(s^5\), and sends
-\(\eps^3\) to \(3\,\operatorname{ind}_5(\eps)\). Apply
-Theorem~\ref{thm:golden-factorization}.
-\end{proof}
-
-\begin{remark}[Prior art and novelty boundary]\label{rem:golden-prior-art}
-Williams and Hardy computed the quintic index of the golden unit in
-Dickson coordinates \cite[Theorem~5]{WH}; that classical character is
-not claimed here as new. The contribution of
-Theorems~\ref{thm:golden-factorization}--\ref{thm:golden-index} is the
-identification of the \emph{Agrawal quadratic moment} with that character.
-We have not found this bridge in the targeted literature search, but
-priority remains provisional pending specialist review.
-\end{remark}
-
-\section{The golden--cyclotomic entanglement}
-
-\begin{theorem}[\lean{entanglement}]\label{thm:ent}
-In any commutative ring, if
-\(\zeta^4+\zeta^3+\zeta^2+\zeta+1=0\), then
-\[
-\zeta^3\,(1+\zeta+\zeta^4)^2\,(\zeta-1)^4 \;=\; 5 .
-\]
-In particular this holds in \(\Z[\zeta_5]\) with
-\(\eps=1+\zeta+\zeta^4\) the image of the golden unit.
-\end{theorem}
-
-The proof is a single \lean{linear\_combination} with an explicit
-cofactor; \(\zeta^5=1\) follows from the same hypothesis
-(\lean{zeta\_pow\_five}).
-
-\section{The Fermat-shadow glue}
-
-\begin{lemma}[\lean{mul\_dvd\_gcd\_mul}]\label{lem:index}
-If \(x\mid M\) and \(y\mid M\), then \(xy\mid\gcd(x,y)\,M\).
+\begin{lemma}[coprimality]\label{lem:coprime}
+$m \in S \implies \gcd(m,r) = 1$.
 \end{lemma}
 
-\begin{theorem}[\lean{fermat\_shadow}]\label{thm:shadow}
-Let \(n\) be squarefree with \(5\nmid n\), and suppose that for every
-prime \(q\mid n\)
-\[
-5^{\,n/q-1}\equiv1\pmod q .
-\tag{\(\ast\)}
-\]
-Then \(n\mid 5^{\,n-1}-1\). Thus \(n\) satisfies the base-\(5\)
-Fermat congruence; if \(n\) is composite, it is a Fermat pseudoprime
-to base \(5\).
+\begin{theorem}[discrete-logarithm form]\label{thm:T5}
+$m \in S$ iff $\gcd(m,r)=1$ and $m\, e_a \equiv e_{am \bmod r} \pmod N$
+for every $a \in G$.
 \end{theorem}
 
-\begin{remark}
-Hypothesis \((\ast)\) is the local norm constraint of the wider study;
-in Theorem~\ref{thm:shadow} it is an explicit hypothesis. The next
-theorem removes it: in our squarefree \(r=5\) setting, the Agrawal
-congruence itself forces the base-\(5\) Fermat congruence.
-\end{remark}
-
-\begin{theorem}[\lean{agrawal\_fermat\_shadow}]\label{thm:bridge}
-Let \(n\) be squarefree with \(5\nmid n\), and suppose the Agrawal
-congruence at \(r=5\) holds:
-\((X-1)^n\equiv X^n-1\pmod{n,\,X^5-1}\).
-Then \(n\mid 5^{\,n-1}-1\). In particular, every squarefree composite
-counterexample to Agrawal's conjecture at \(r=5\) prime to \(10\) is
-a Fermat pseudoprime to base \(5\).
-\end{theorem}
-
-\begin{proof}[Certified proof sketch]
-Reduce the congruence mod a prime \(q\mid n\); it becomes a
-polynomial identity in \((\Z/q)[X]\), which can be evaluated at the
-four elements \(z^j\) (\(j=1,\dots,4\)) of the quotient ring
-\((\Z/q)[X]/\Phi_5\) (not a field in general), where \(z^5=1\) kills
-the modulus. Multiplying the four evaluated identities and using the
-explicit-cofactor identity \((z-1)(z^2-1)(z^3-1)(z^4-1)=5\)
-(\lean{prod\_pow\_sub\_one}) gives \(5^{\,n}=5\) in the quotient
-ring; injectivity of the constant embedding descends this equality
-to \(\Z/q\), hence \(5^{\,n-1}=1\) there (\lean{agrawal\_local}),
-and the squarefree gluing finishes. No Frobenius descent and no norm
-maps are needed.
+\begin{proof}[Sketch]
+$A \cong \prod K$ over Frobenius orbits of primitive $r$-th roots;
+the congruence in each component reads $(\zeta^a - 1)^m = \zeta^{am}-1$,
+which in $\log_\gamma$-coordinates is the displayed congruence; Frobenius
+transports the identity across an orbit. Full details (and the Lean
+formalization of this section) are in the project repository.
 \end{proof}
 
-\begin{remark}[Prior art]
-Lenstra observed the more general implication
-\(r^n\equiv r\pmod n\) directly from Agrawal's congruence
-\cite[Remark~5]{LPproblems}. Theorem~\ref{thm:bridge} is therefore not
-claimed as new mathematics: its contribution here is an end-to-end Lean
-formalization of the squarefree \(r=5\) specialization.
-\end{remark}
+\begin{lemma}[squarefree reduction]\label{lem:ingress}
+Let $n \ge 2$ be squarefree with $r \nmid n$. Then
+$(X-1)^n \equiv X^n - 1 \pmod{n, X^r-1}$ iff $n/p \in S(p,r)$ for every
+prime $p \mid n$.
+\end{lemma}
 
-\section{The two-adic jaw}
+\begin{proof}[Sketch]
+CRT over $p \mid n$; injectivity of the absolute Frobenius on
+$\F_p[X]/(X^r-1)$ replaces $(X-1)^n$ by $(X-1)^{n/p}$; the component at
+$X \mapsto 1$ is trivial.
+\end{proof}
 
-The bridge constrains a squarefree solution of the Agrawal congruence
-only through the multiplicative order of \(5\). On the primes that are
-inert in \(\mathbf{Q}(\sqrt5)\) that constraint is rigid at the
-prime \(2\).
+We also record that $S \bmod M$ is a subgroup of $(\Z/M)^\times$ for
+$M = \lcm(T, r)$, $T$ the multiplicative order of $X - 1$ in $A^\times$;
+membership in $S$ depends exactly on $m \bmod M$ (periodicity), and
+$p \in S$ always (Frobenius).
 
-\begin{theorem}[\lean{agrawal\_two\_adic\_jaw}]\label{thm:jaw}
-Let \(n\) be squarefree with \(5\nmid n\) and suppose the Agrawal
-congruence at \(r=5\) holds. Let \(q\mid n\) be an odd prime with
-\(q\equiv\pm2\pmod5\). Then
+\section{Cyclotomic moments}\label{sec:moments}
+
+Since $r \mid N$, the reductions $\bar e_a = e_a \bmod r \in \F_r$ are well
+defined. For $0 \le j \le h-1$ define
 \[
-v_2(q-1)\;\le\;v_2(n-1).
+M_j = \sum_{a \in G} a^j\, \bar e_a \in \F_r,
+\qquad
+J = \{ j : M_j \ne 0 \},
+\qquad
+T = \{ t \in \F_r^\times : t^{j+1} = 1 \ \forall j \in J \}.
+\]
+
+\begin{theorem}[moment obstruction]\label{thm:moments}
+\(\im_r S \subseteq T\). Moreover
+\[
+T = \mu_e,\qquad e = \gcd\bigl(h, \gcd_{j \in J}(j+1)\bigr).
 \]
 \end{theorem}
 
-\begin{proof}[Certified proof sketch]
-By Theorem~\ref{thm:bridge}, \(\operatorname{ord}_q(5)\) divides
-\(n-1\). Since \(q\equiv\pm2\pmod5\), quadratic reciprocity gives
-\((5/q)=-1\) (\lean{not\_isSquare\_five}), so \(5^{(q-1)/2}=-1\)
-(\lean{euler\_nonsquare}) and the order does \emph{not} divide
-\((q-1)/2\). A divisor of \(2^{a}u\) with \(u\) odd that fails to
-divide \(2^{a-1}u\) is 2-adically saturated
-(\lean{pow\_two\_dvd\_of\_not\_dvd\_half}), whence
-\(v_2(\operatorname{ord}_q5)=v_2(q-1)\), and the claim follows; the
-local form is \lean{two\_adic\_jaw\_local}.
+\begin{proof}
+For $m \in S$ with $t = m \bmod r$: reducing Theorem~\ref{thm:T5} mod $r$
+gives $t\,\bar e_a = \bar e_{ta}$. Multiply by $a^j$, sum over $a$, and
+substitute $b = ta$: $t M_j = t^{-j}M_j$, so $(t - t^{-j})M_j = 0$; if
+$M_j \ne 0$ then $t^{j+1} = 1$.
 \end{proof}
 
-\begin{corollary}[\lean{agrawal\_inert\_mod\_four}]\label{cor:modfour}
-Under the same hypotheses, if \(n\equiv3\pmod4\) then every prime
-factor of \(n\) that is inert in \(\mathbf{Q}(\sqrt5)\) satisfies
-\(q\equiv3\pmod4\).
+\begin{theorem}[structure of the moments]\label{thm:M2345}
+\emph{(i)} $M_j \ne 0 \implies p^{j+1} \equiv 1 \pmod r$.
+\emph{(ii)} $M_j = 0$ for odd $j \ne h-1$.
+\emph{(iii)} $M_{h-1} = -d\bar w/2$ with $d = (N/r) \bmod r$; in particular
+$M_{h-1} = 0$ iff $r^2 \mid N$, and its associated constraint is vacuous.
+\emph{(iv)} $M_0 = \log_\gamma(r) \bmod r$; thus $M_0 = 0$ iff
+$r \in (K^\times)^r$.
+\end{theorem}
+
+The choices of $\gamma$ and $\zeta$ only scale the moments by units, so $J$,
+$T$ and all vanishing conditions are invariant. Part (iv) uses
+$\prod_{a}(\zeta^a - 1) = \Phi_r(1) = r$. For $r = 3$, composing (iv) with
+the classical cubic-residuacity criterion ($4p = L^2 + 27M^2$; $3$ is a
+cubic residue iff $3 \mid M$, Jacobi; see \cite{Lehmer1958}) characterizes
+the degenerate primes exactly.
+
+\begin{verification}
+Zero violations of Theorems~\ref{thm:moments}--\ref{thm:M2345} over all
+$(p, r)$ with $r \in \{3,5,7,11,13\}$, $q = p^k \le 5\cdot10^5$, and in the
+$k=1$ ranges $p < 10^6$ ($r \le 7$), $p < 2\cdot10^5$ ($r \le 19$). All
+$406$ historically known local exceptions ($397$ at $r{=}3$, $8$ at $r{=}5$,
+$1$ at $r{=}7$) have all even moments vanishing, as the theory predicts.
+\end{verification}
+
+\section{$r = 5$: the golden unit}\label{sec:golden}
+
+From now on $r = 5$, $p \equiv 1 \pmod 5$ in this section. Fix $z$ of order
+$5$ in $\F_p^\times$, coordinate $\sqrt5 = 1 + 2(z + z^{-1})$, and set
+$\eps = (1+\sqrt5)/2$, the golden unit. Let $\ind_5(x) \in \{0,\dots,4\}$
+denote the quintic index with respect to $z$.
+
+\begin{theorem}[golden theorem]\label{thm:golden}
+$M_2 = 3 \cdot \ind_5(\eps)$. In particular $M_2 = 0 \iff \eps \in
+(\F_p^\times)^5$.
+\end{theorem}
+
+\begin{proof}
+$M_2 = \ind_5(U_2)$ with $U_2 = \prod_{a=1}^{4}(z^a-1)^{[a^2 \bmod 5]}
+= A B^4$, where $A = (z-1)(z^4-1) = (5-\sqrt5)/2$ and
+$B = (z^2-1)(z^3-1) = (5+\sqrt5)/2$. Then $AB = 5$, so
+$U_2 = 5 B^3 = (\sqrt5)^5 \eps^3$ since $B = \sqrt5\,\eps$; the factor
+$(\sqrt5)^5$ is a fifth power.
+\end{proof}
+
+The other choice of $\sqrt5$ maps $\eps \mapsto -\eps^{-1}$ and does not
+affect the vanishing ($-1$ is a fifth power). Combined with
+Theorem~\ref{thm:M2345}(iv), a nontrivial local image at $r = 5$ requires
+$5$ \emph{and} $\eps$ to be simultaneous quintic residues. Via the Dickson
+system of quintic cyclotomy, $\ind_5(\eps) \equiv 3v - u$ and $\ind_5(5)
+\equiv -2u - v \pmod 5$; the criterion for $\eps$ is classical
+(Williams--Hardy \cite{WH1985}, Thm~5 and Remark~2), while its
+identification with $M_2$ is new. The pair $(M_0, M_2)$ is a linear
+coordinate system on the Dickson plane $(u,v)$ mod $5$ (determinant $4$), so
+the degenerate locus $M_0 = M_2 = 0$ is exactly $u \equiv v \equiv 0$.
+
+\begin{theorem}[lifted moments and the tower]\label{thm:tower-local}
+Let $s \ge 1$ with $5^s \mid p - 1$ and define $M_j^{(s)}$ with Teichm\"uller
+weights. If $m \in S$ has $t = m \bmod 5 \ne 1$, then
+$M_0^{(s)} \equiv M_2^{(s)} \equiv 0 \pmod{5^s}$. Moreover
+$M_0^{(s)} = \ind_{5^s}(5)$ and $M_2^{(s)} = -2\,\ind_{5^s}(\eps)$.
+Hence $t \ne 1$ forces $5, \eps \in (\F_p^\times)^{5^s}$ for every
+$s \le v_5(p-1)$.
+\end{theorem}
+
+\begin{theorem}[golden Kummer tower]\label{thm:tower-global}
+Let $K_s = \Q(\zeta_{5^s})$, $L_s = K_s(5^{1/5^s}, \eps^{1/5^s})$,
+$B_s = K_s(5^{1/5^{s-1}}, \eps^{1/5^{s-1}})$. For every $s \ge 1$:
+$[L_s : K_s] = 5^{2s}$ and $[L_s : B_s] = 25$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+$5 \notin K_s^{\times 5}$: otherwise $K_s$ would contain the splitting field
+of $X^5 - 5$, which is non-abelian over $\Q$, contradicting
+$K_s/\Q$ abelian. The same argument applies to $\eps$ through
+$X^{10} - X^5 - 1 = (X^5-\eps)(X^5-\eps')$ with $\eps' = -\eps^{-1}$, whose
+splitting field is again non-abelian. Exact order $5^s$ of the classes and
+Kummer independence of $5$ and $\eps$ (using the conjugation
+$\sigma(\eps) = -\eps^{-1}$) complete the proof.
+\end{proof}
+
+By Kummer--Dedekind splitting and Chebotarev, among the primes that have
+passed floor $s-1$, those passing floor $s$ have conditional density
+$1/25$: each floor of the tower removes $24/25$ of the survivors. This
+explains quantitatively the observed rarity of local exceptions (e.g.\ the
+factor ${\sim}20$ drop of the degeneracy rate in the branch
+$p \equiv 1 \pmod{25}$).
+
+\section{The two locks and the local classification}\label{sec:locks}
+
+Still $r=5$, $p \equiv 1 \pmod 5$, $N = p-1$, $s = v_5(N)$, $v = v_2(N)$.
+The system for $t = -1$ has an obstruction only at $\ell = 2$ and
+$\ell = 5$; all other $\ell$-adic components are automatically solvable.
+
+\begin{lemma}[binary lock]\label{lem:binary}
+Set $\nu_a = \min(v, v_2(e_a))$. The four rows at $t = -1$ are compatible
+iff $\nu_1 = \nu_2 = \nu_3 = \nu_4 < v$; by the conjugate-pair relations
+$e_4 \equiv e_1 + 2^{v-1}(\mathrm{odd})$, $e_3 \equiv e_2 +
+2^{v-1}(\mathrm{odd}) \pmod{2^v}$, this reduces to
+$\nu_1 = \nu_2 \le v - 2$.
+\end{lemma}
+
+\begin{corollary}\label{cor:mod20}
+$v_2(p-1) \ge 2$ is necessary for a local exception; with
+$p \equiv 1 \pmod 5$ this gives $p \equiv 1 \pmod{20}$.
 \end{corollary}
 
-\begin{remark}
-The split primes behave in the opposite way: for \(q\equiv\pm1\pmod5\)
-one has \((5/q)=+1\), hence \(\operatorname{ord}_q(5)\mid(q-1)/2\) and
-\(v_2(\operatorname{ord}_q5)<v_2(q-1)\), so no constraint is
-transmitted. Both statements above are unconditional.
-\end{remark}
-
-\section{The bounded order}
-
-The bridge and the jaw both read the congruence through the
-multiplicative order of an element. The element that carries the
-congruence itself is \(\zeta-1\), where \(\zeta\) is the class of
-\(X\) in \(T=\mathbf{F}_p[X]/\Phi_5\). A priori its order is only
-known to divide \(|T^\times|=p^4-1\). It divides much less.
-
-\begin{theorem}[\lean{order\_bounded}]\label{thm:order}
-Let \(p\) be a prime with \(p\equiv\pm2\pmod5\), so that \(\Phi_5\)
-stays irreducible modulo \(p\), and let \(\zeta\) be the class of
-\(X\) in \(T=\mathbf{F}_p[X]/\Phi_5\). Then
+\begin{theorem}[local classification at $r=5$]\label{thm:local-final}
+$\im_5 S$ is a subgroup of $\F_5^\times$; any nontrivial subgroup contains
+$-1$, so $\im_5 S \neq \{1\}$ iff $-1 \in \im_5 S$, and
 \[
-(\zeta-1)^{10p^2}=(\zeta-1)^{10}.
+\im_5 S \ne \{1\}
+\iff
+\Big[\,5,\ \eps \in (\F_p^\times)^{5^{s}}\Big]
+\ \wedge\
+\Big[\,\nu_1 = \nu_2 \le v_2(p-1) - 2\Big].
 \]
 \end{theorem}
 
-The displayed identity is the statement checked by the cited Lean
-declaration. Mathematically, irreducibility makes \(T\) a field and
-\(\zeta-1\neq0\); cancellation therefore gives the finite-field
-corollary that the multiplicative order of \(\zeta-1\) divides
-\(10(p^2-1)\). This order formulation is not bundled into
-\lean{order\_bounded}.
+For residues of order $4$ the situation is drastically stiffer: for
+$t \in \{2,3\}$ \emph{every} odd prime divisor $\ell \mid p - 1$ imposes a
+lock (equal truncated valuations and a square condition on the unit parts),
+so heuristically the probability decays like
+$\prod_{\ell \mid p-1} O(1/\ell)$. In a census of all $71$ local exceptions
+with $p < 10^6$, none has an order-$4$ element: $\im_5 S \in
+\{\{1\}, \{1,-1\}\}$ throughout the censused domain. Two further exact
+results constrain order~$4$: in the quadratic branch
+($p \equiv -1 \bmod 5$) existence of $t = 2$ is \emph{decidable} by the
+criterion $g_1 = g_2 \wedge c^2 \equiv p \pmod T$ (censused: $0/104$); in
+the split branch the ``golden compression'' forces
+$5^{m-1} = 1,\ \eps^{m+1} = -1$, whose CRT solvability profile
+($4 \mid E$, $5 \nmid RE$, $\gcd(R,E) \mid E/2 - 2$, with $R = \ord_p 5$,
+$E = \ord_p \eps$) is realized by \emph{no} prime $p < 10^7$ ($0$ of
+$166{,}104$). These motivate:
 
-\begin{proof}[Certified proof sketch]
-Write \(u=\zeta-1\). In characteristic \(p\) the Frobenius is
-additive, so \(u^p=\zeta^p-1\), and since \(\zeta^5=1\) the exponent
-only matters modulo \(5\) (\lean{zeta5\_pow\_mod}), giving
-\(u^p=\zeta^{p\bmod 5}-1\) (\lean{zeta\_sub\_one\_pow\_p}). Applying
-the Frobenius once more multiplies that exponent by \(p\) again, and
-here the two inert classes merge: \(2^2\equiv3^2\equiv4\pmod5\), so in
-both cases \(u^{p^2}=\zeta^4-1\)
-(\lean{zeta\_sub\_one\_pow\_sq}). Finally \(\zeta^4=\zeta^{-1}\)
-turns that into
+\begin{hypothesis}[H4]\label{hyp:h4}
+For every prime $p \equiv \pm1 \pmod 5$, $\im_5 S(p,5)$ contains no element
+of order $4$.
+\end{hypothesis}
+
+\subsection{A prime-support formulation of H4}\label{subsec:Hsupport}
+
+For $n\equiv4\pmod5$, define
 \[
-u^{p^2}=\zeta^{-1}-1=-(\zeta-1)\zeta^{-1}=-\zeta^4\,u
-\]
-(\lean{order\_bound\_relation}): the square of the Frobenius merely
-scales \(u\) by \(-\zeta^4\). Raising to the tenth power kills the
-scalar, since \((-1)^{10}=1\) and \(\zeta^{40}=(\zeta^5)^8=1\).
-\end{proof}
-
-\begin{remark}
-The statement is phrased as \(u^{10p^2}=u^{10}\) rather than as a
-divisibility of the order, so that no invertibility of \(u\) is
-needed. It is the form actually used downstream: the factor \(10\) is
-what forces the modulus \(80\) to appear in the congruence conditions
-on the prime factors of a putative counterexample, and it is what
-makes an exact-order computation factor a ten-digit integer instead of
-a twenty-digit one.
-\end{remark}
-
-\section{An elementary box}
-
-The following identity is used to confine the largest prime factor of
-a three-factor solution to an interval. It is stated over any
-commutative ring and proved by expansion.
-
-\begin{theorem}[Box identity]\label{thm:box}
-In any commutative ring, for all \(p,q,r\),
-\[
-\begin{split}
-&2\bigl[(pq-1)(pr-1)(qr-1)
-        -(p^2-1)(q^2-1)(r^2-1)\bigr]\\
-&\qquad=(p^2-1)(q-r)^2+(q^2-1)(p-r)^2
-        +(r^2-1)(p-q)^2 .
-\end{split}
-\]
-In particular the left-hand side is non-negative whenever
-\(p,q,r\ge1\).
-\par\smallskip\noindent
-\textit{Lean declarations:}\par\noindent
-\lean{prod\_pairs\_sub\_prod\_squares},\par\noindent
-\lean{prod\_pairs\_ge\_prod\_squares}.
-\end{theorem}
-
-\noindent Combined with \lean{lt\_two\_mul\_of\_sq\_le}, which turns
-\(r^2\le 2I(pq)\) with \(q<r\) into \(r<2Ip\), this bounds the third
-prime by an explicit multiple of the smallest one.
-
-\section{The Lenstra--Pomerance proposition}
-
-The statement below is the one on which the search for counterexamples at
-\(r=5\) rests. It appears in the AIM notes of Lenstra and Pomerance
-\cite[pp.~30--32]{LPremarks} and is quoted throughout the subsequent
-literature; to our knowledge it had not been machine-checked before.
-
-Mathlib does not currently contain Carmichael numbers or Korselt's criterion,
-so those had to be introduced: \lean{IsCarmichael} and
-\lean{IsLucasCarmichael} package the two divisibility conditions used below.
-We also prove that a Carmichael number is a Fermat pseudoprime to every
-coprime base (declaration
-\texttt{IsCarmichael.}\allowbreak\texttt{fermatPsp}). This implication is
-\emph{not} used in Theorem~\ref{thm:lenstra}, which needs only the
-divisibility conditions themselves.
-
-\begin{theorem}[\lean{lenstra\_proposition\_card}]\label{thm:lenstra}
-Let \(n\) be squarefree, suppose the number \(k\) of its prime factors
-satisfies \(k\equiv1\pmod4\), suppose every prime \(p\mid n\) satisfies
-\(p\equiv3\pmod{80}\), and suppose Korselt's two conditions hold:
-\((p-1)\mid(n-1)\) and \((p+1)\mid(n+1)\) for every \(p\mid n\). Then
-\[
-(X-1)^n\equiv X^n-1 \pmod{n,\ X^5-1}
-\qquad\text{and}\qquad
-n^2\not\equiv1\pmod5 .
-\]
-\end{theorem}
-
-These are the hypotheses of the original statement. That \(n\equiv3\pmod{80}\)
-follows from them is itself proved (\lean{mod\_eighty\_of\_card}): for
-squarefree \(n\) the product of the prime factors is \(n\), each factor is
-\(3\) modulo 80, and \(3^4=81\equiv1\pmod{80}\) reduces the exponent to the
-class of \(k\) modulo 4. A variant assuming \(n\equiv3\pmod{80}\) directly
-is available as \lean{lenstra\_proposition}.
-
-The second conclusion is what makes such an \(n\), \emph{if composite}, a
-genuine counterexample: Agrawal's conjecture allows the escape
-\(n^2\equiv1\pmod r\), and here it is closed
-(\lean{sq\_not\_one\_mod\_five}). The proviso matters: primes satisfy the
-hypotheses trivially---\(n=83\) is one---and are of course not
-counterexamples. Only a composite witness would be one, and none is known.
-
-\par\smallskip
-\begin{proof}[Certified proof sketch]
-The route is the one of the original proof, which already contains the
-identity \((\zeta_5-1)^{p^2}=-\zeta_5^{-1}(\zeta_5-1)\), the resulting bound
-on the order, and the reduction to \(n\equiv p\); we repackage it through a
-single observation: \emph{the three conditions imposed on
-\(n\) are satisfied by \(p\) itself}, since \(p\equiv1\pmod{p-1}\),
-\(p\equiv-1\pmod{p+1}\) and \(p\equiv3\pmod{80}\). Hence
-\[
-n\equiv p \pmod{\operatorname{lcm}(p-1,\,p+1,\,80)},
+A_n=\begin{cases}
+L_n,&n\ {\rm even},\\
+F_n,&n\ {\rm odd},
+\end{cases}
 \qquad
-\operatorname{lcm}(p-1,\,p+1,\,80)=10(p^2-1)
+H_n=\gcd(A_n,5^{n-1}+1),
+\tag{4.1}
 \]
-(\lean{lcm\_three\_eq}, \lean{sub\_dvd\_of\_korselt}), and that modulus is
-exactly the one bounding the order of \(\zeta-1\) by
-Theorem~\ref{thm:order}. Therefore \((\zeta-1)^n=(\zeta-1)^p\), and the
-Frobenius gives \((\zeta-1)^p=\zeta^p-1=\zeta^3-1=\zeta^n-1\), which is the
-congruence in the cyclotomic component (\lean{lenstra\_local}). On the
-component \(X\mapsto1\) both sides vanish, and since
-\(X^5-1=(X-1)\Phi_5\) with the two factors coprime for \(p\neq5\), the two
-pieces glue to the congruence modulo \(p\) (\lean{agrawal\_mod\_p}, using
-\lean{dvd\_of\_dvd\_both}). Finally, for squarefree \(n\) a congruence
-holding modulo every prime factor holds modulo \(n\): dividing by the monic
-\(X^5-1\) over \(\mathbf Z\), every coefficient of the remainder is divisible
-by each \(p\mid n\), hence by \(n\) (\lean{congruence\_of\_local}).
+where $F_n,L_n$ are the Fibonacci and Lucas sequences.
+
+\begin{theorem}[scalar completeness and the sequence $H_n$]
+\label{thm:Hsupport}
+Let $p\ne2,5$ be split in $\Q(\sqrt5)$. The local image
+$\im_5S(p,5)$ contains an element of order $4$ if and only if there is an
+$n\equiv4\pmod5$ such that
+\[
+5^{n-1}\equiv-1\pmod p,\qquad
+\eps^{2n}\equiv-1\pmod p.
+\tag{4.2}
+\]
+Equivalently, $p\mid H_n$ for some $n\equiv4\pmod5$. Consequently H4 is
+equivalent to the assertion that every prime in
+\[
+\bigcup_{n\equiv4\ (5)}\operatorname{Supp}_{(10)}(H_n)
+\tag{4.3}
+\]
+is inert in $\Q(\sqrt5)$.
+\end{theorem}
+
+The point of ``scalar completeness'' is that no independent cyclotomic
+direction remains hidden in (4.2). In the linear branch the four defects
+$u_a^{2n-1}/u_{2a}$ coincide; their common sign can be repaired by shifting
+the exponent by half the order of the cyclotomic subgroup. In the quadratic
+branch the same two scalar equations force the intrinsic conditions
+$\langle u_1\rangle=\langle u_2\rangle$ and
+$\theta^2=\operatorname{Frob}_p$. Thus (4.2) is equivalent to the complete
+local row, not only necessary for it.
+
+\begin{theorem}[support of $H_n$]\label{thm:Hcanonical}
+Every prime $p\ne2,5$ inert in $\Q(\sqrt5)$ divides $H_n$ for infinitely
+many $n\equiv4\pmod5$. If $p\equiv2\pmod5$, then the canonical index is
+\[
+p\mid H_{(p+1)/2}.
+\tag{4.4}
+\]
+Hence H4 is equivalent to equality in (4.3) between the support of the
+$H_n$ and the set of inert primes outside $\{2,5\}$.
+\end{theorem}
+
+\begin{proof}[Proof of the support assertion]
+For an inert $p$, Frobenius sends $\eps$ to $-\eps^{-1}$, so
+$\eps^{p+1}=-1$, while Euler's criterion gives
+$5^{(p-1)/2}=-1$. Thus $n_0=(p+1)/2$ satisfies both scalar equations.
+All simultaneous solutions form one progression modulo
+\[
+\lcm\!\left(\ord(\eps)/2,\ord_p(5)\right).
+\]
+This modulus is coprime to $5$, so the progression meets
+$n\equiv4\pmod5$ infinitely often. When $p\equiv2\pmod5$, $n_0$ already
+has the required residue.
 \end{proof}
 
-\begin{remark}
-Nothing here asserts that a composite such \(n\) exists. A composite number
-satisfying the hypotheses would be simultaneously a Carmichael and a
-Lucas--Carmichael number; no such integer is known. Williams posed this
-existence problem in 1977 \cite{Williams1977,McIntoshDipra2015}; Pomerance's 1984
-Baillie--PSW heuristic later imposed the same paired Korselt conditions
-\cite{Pomerance1984}. Note also that the proposition gives a \emph{sufficient}
-condition for producing a counterexample, not a necessary one: it does not say
-where all counterexamples must lie. It certifies the tool used to look for
-them; it does not decide Agrawal's conjecture in either direction.
-\end{remark}
+A certified census of all $20{,}000$ indices $n\le100{,}000$ with
+$n\equiv4\pmod5$ found $9{,}725$ nontrivial $H_n$ and $4{,}522$ distinct
+prime factors, all inert. Of these, $4{,}503$ are the canonical factors
+$p\equiv2\pmod5$ forced by (4.4), and $19$ are translated inert factors.
+Thus the informative negative observation is zero split factors, not the
+raw number of factors. A separate prime-first census found no H-profile
+below $10^9$.
 
-\section{The forced partition}
+For comparison, the positive-sign companion $J_n$ can have split odd
+factors. Three exact J-profiles occur below $10^9$, each saturating
+$\ord_p(5)\ord_p(\eps)=(p-1)/2$. The earlier proposed closed formula for
+$J_n$ is false; the valid theorem is only that no inert odd prime divides
+$J_n$. A kernel-checked proof is elementary. If the index is even, the
+positive scalar equation writes \(5\) as an explicit square; if it is
+odd, the inert semiperiod \(\eps^{p+1}=-1\) and the positive equation
+force \(1=-1\). This correction does not affect
+Theorems~\ref{thm:Hsupport} and~\ref{thm:Hcanonical}.
 
-The simultaneous Carmichael and Lucas--Carmichael conditions impose a
-prime-by-prime separation on the factors of any hypothetical witness.
+\subsection{A four-coefficient primitive support}\label{subsec:Hfour}
 
-\begin{theorem}[\lean{common\_divisor\_forced}]\label{thm:partition}
-Let \(n=pm=p'm'\), and suppose that both Korselt divisibilities hold
-at \(p\) and at \(p'\):
+The norm of an algebraic integer detects only one of the two prime ideals
+above a split rational prime. The following refinement removes that
+ambiguity. For an admissible pair
 \[
-p-1\mid n-1,\quad p+1\mid n+1,\qquad
-p'-1\mid n-1,\quad p'+1\mid n+1.
+\gcd(r,s)=1,\qquad r+s\equiv1\pmod2,\qquad5\nmid rs,
 \]
-If \(d\mid p-1\) and \(d\mid p'+1\), then \(d\mid2\). Consequently, for an
-odd prime \(q\), the two sets
+put \(m=4rs\), and let \(k=k_{r,s}\pmod m\) be the unique involution with
 \[
-\{p\mid n:q\mid p-1\},\qquad
-\{p\mid n:q\mid p+1\}
+\gcd(m,k-1)=2r,\qquad \gcd(m,k+1)=2s.
+\tag{4.5}
 \]
-cannot both be nonempty (\lean{partition\_forced}).
+Set
+\[
+\gamma=\frac{5+\sqrt5}{2},\qquad \gamma'=5-\gamma,
+\]
+and define \(U_0=0,U_1=1,U_{j+2}=5U_{j+1}-5U_j\), so that
+\[
+\gamma^j=U_j\gamma-5U_{j-1}.
+\]
+Writing
+\[
+\Phi_m(\gamma)=c_{r,s}+d_{r,s}\gamma,\qquad
+A_{r,s}=U_k+1,\qquad W_{r,s}=U_{k-1}+1,
+\]
+and, with \(x=\eps^2\), set
+\[
+C_r=\Phi_{2r}(5),\qquad
+B_s=x^{-\varphi(2s)/2}\Phi_{2s}(x)\in\Z,\qquad
+G_{r,s}=\gcd(C_r,B_s),
+\]
+where \(B_1=1\). Finally define
+\[
+D_{r,s}=\gcd(c_{r,s},d_{r,s},A_{r,s},W_{r,s}).
+\tag{4.6}
+\]
+
+\begin{theorem}[four-coefficient primitive support]
+\label{thm:Hfour}
+For every prime \(p\nmid10rs\),
+\[
+p\mid G_{r,s}\quad\Longleftrightarrow\quad p\mid D_{r,s},
+\tag{4.7}
+\]
+where \(G_{r,s}\) is the primitive cyclotomic gcd associated with the
+orders \(2r\) of \(5\) and \(2s\) of \(\eps^2\). Consequently H4 is
+equivalent to
+\[
+p\mid D_{r,s},\quad p\nmid10rs
+\quad\Longrightarrow\quad
+\left(\frac5p\right)=-1.
+\tag{4.8}
+\]
 \end{theorem}
 
-\begin{proof}[Certified proof sketch]
-Writing \(n=pm\), the two divisibilities at \(p\) give
-\(p-1\mid m-1\) and \(p+1\mid m-1\)
-(\lean{dvd\_sub\_of\_korselt\_pair}). Since \(d\mid p-1\), it follows
-that \(d\mid m-1\), and therefore \(n\equiv p\pmod d\). The same
-argument at \(p'\), using \(d\mid p'+1\), gives
-\(n\equiv p'\pmod d\), so \(p\equiv p'\pmod d\). But the two side
-conditions give \(p\equiv1\pmod d\) and \(p'\equiv-1\pmod d\).
-Thus \(d\mid2\).
+\begin{proof}
+The exact-order theorem gives
+\(\ord(5)=2r,\ord(\eps^2)=2s\). In the cyclic subgroup generated by
+\(\sqrt5\) and \(\eps\), both
+\(\gamma=\sqrt5\,\eps\) and \(\gamma'=\sqrt5\,\eps^{-1}\) have exact
+order \(m\), and (4.5) gives
+\[
+\gamma'=\gamma^k,\qquad k^2\equiv1\pmod m.
+\]
+Thus \(\Phi_m(\gamma)\) and \(\gamma^k-\gamma'\) vanish. In the inert
+case, linear independence of \(1,\gamma\) gives divisibility of all four
+coefficients. In the split case the second component is essential:
+conjugation and \(k^2\equiv1\pmod m\) give
+\((\gamma')^k=\gamma\), so both algebraic integers vanish in both
+components of
+\(\mathcal O_{\Q(\sqrt5)}/p\simeq\F_p\times\F_p\). Since \(p\ne5\),
+the integral basis is nondegenerate and again \(p\mid c,d,A,W\).
+
+Conversely, divisibility of the four coefficients gives
+\(\Phi_m(\gamma)=0\) and \(\gamma^k=\gamma'\) in every component.
+Since \(p\nmid m\), \(\gamma\) has exact order \(m\), and hence
+\[
+\ord(5)=\frac m{\gcd(m,k+1)}=2r,\qquad
+\ord(\eps^2)=\frac m{\gcd(m,k-1)}=2s.
+\]
+This recovers \(p\mid G_{r,s}\).
 \end{proof}
 
-\begin{remark}[Scope and prior art]
-The compatibility condition
-\(\gcd(p_i-1,p_j+1)=2\) for Williams sets is stated explicitly by
-McIntosh \cite[\S4]{McIntosh2014}; it is not a new mathematical claim of
-this paper. The contribution here is a kernel-checked arbitrary-divisor
-form and its reusable corollaries. The intermediate congruence
-\(n\equiv p\pmod{(p^2-1)/2}\), and the stronger consequence that all
-prime factors of a simultaneous Carmichael and Lucas--Carmichael number
-are congruent modulo \(12\), already appear in Leng's 2017 study
-\cite{Leng2017}; the named mod-\(3\) corollary is
-\lean{three\_congruence\_forced}. Theorem~\ref{thm:partition} is
-a useful structural sieve, not a proof that simultaneous numbers do not
-exist. In particular, the exclusions contributed by different \(q\)
-need not be statistically independent.
-
-There is also no contradiction from size alone. If
-\(L=\operatorname{lcm}_{p\mid n}(p-1)\) and
-\(M=\operatorname{lcm}_{p\mid n}(p+1)\), then \(LM\mid n^2-1\), but
+The intersection ideal
 \[
- LM\le\prod_{p\mid n}(p^2-1)<n^2
+\mathfrak I_{r,s}
+=\bigl(\Phi_m(\gamma),\gamma^k-\gamma'\bigr)
+\subset\mathcal O_{\Q(\sqrt5)}
 \]
-is automatic. The non-tautological information is instead at each prime-power
-level: if \(I^-_{\ell,e}=\{i:\ell^e\mid p_i-1\}\), then
-\(\prod_{i\notin I^-_{\ell,e}}p_i\equiv1\pmod{\ell^e}\); if
-\(I^+_{\ell,e}=\{i:\ell^e\mid p_i+1\}\), then
-\(\prod_{i\notin I^+_{\ell,e}}p_i
-\equiv(-1)^{|I^+_{\ell,e}|+1}\pmod{\ell^e}\).
-These incidence congruences, rather than the global inequality, are the
-next structural sieve.
-
-The cubic parametrization used in the five-factor search does not provide
-an independent constraint: the strong complementary row
-\(10(p^2-1)\mid m-1\) is equivalent, for \(p\neq0\), to
+is generated, in the basis \(1,\gamma\), by the four columns
 \[
- pm=p+10u(p^3-p)
+(c,d),\quad(-5d,c+5d),\quad(-5W,A),\quad(-5A,5(A-W)).
 \]
-for some \(u\). Both directions are kernel-checked:
-\begin{center}
-\small
-\lean{cubic\_signature\_of\_strong\_row}\\
-\lean{strong\_row\_of\_cubic\_signature}.
-\end{center}
+Its index is therefore the gcd of the six \(2\times2\) minors. Away
+from \(10rs\), its radical is the radical of
+\(D_{r,s}\mathcal O_{\Q(\sqrt5)}\). No universal equality of
+multiplicities is claimed.
+
+\begin{theorem}[single odd-prime support is impossible]
+\label{thm:Hsingleprime}
+No split H-profile prime satisfies
+\[
+p-1=8q^e
+\]
+with \(q\) an odd prime and \(e\ge1\).
+\end{theorem}
+
+\begin{proof}
+Write \(\ord_p(5)=2r\), \(\ord_p(\eps^2)=2s\), with
+\(\gcd(r,s)=1\). The prime \(q\) cannot divide both \(r,s\).
+If \(q\nmid r\), then \(2r\mid8\), so
+\[
+p\mid5^8-1=2^5\cdot3\cdot13\cdot313,
+\]
+whose good prime factors are all inert. If \(q\nmid s\), then
+\(2s\mid8\), so
+\[
+p\mid\left|N_{\Q(\sqrt5)/\Q}\bigl((\eps^2)^8-1\bigr)\right|
+=2205=3^2\cdot5\cdot7^2,
+\]
+again with no good split factor.
+\end{proof}
+
+An independent exact replay on the 244 admissible pairs
+\(r,s\le30\) found no discrepancy in (4.7) or in the localized ideal
+radical. A separate smooth-\(p-1\) falsifier enumerated all
+\[
+p-1=2^b5^f m\le10^{15}
+\]
+with \(m\) supported on
+\(\{3,7,11,13,17,19,23,29,31,37,41,43\}\):
+among \(4{,}253{,}287\) prime values and \(161{,}918\) survivors of the
+dyadic lock, it found no complete H-profile. This is a finite test of a
+structured family, not a proof of H4.
+
+The candidates are, at least, provably rare:
+
+\begin{theorem}[density zero of H4 candidates]\label{thm:densityzero}
+In each branch, the set of primes satisfying the mobile Kummer covering
+condition of the unified H4 profile (for every odd prime
+$\ell \mid p-1$, $\ell \ne 5$: $5$ or $\eps$ is an $\ell$-th power
+mod $p$) has relative natural density zero, hence absolute density zero.
+Proof idea: for the level-one events
+$B_\ell = \{\ell \mid p-1,\ 5 \notin (\F_p^\times)^\ell,\ \eps \notin
+(\F_p^\times)^\ell\}$ one computes $\delta(B_\ell) = (\ell-1)/\ell^2$ by
+Chebotarev on the rank-two Kummer fields of $(5, \eps)$ over
+$\Q(\sqrt5)$; the fiber-product disjointness for this family (proved by
+the same commutator argument as Theorem~\ref{thm:fpd}) makes finite
+families independent; and
+$\prod_{\ell \le Y}(1 - (\ell-1)/\ell^2) \to 0$ since
+$\sum (\ell-1)/\ell^2 = \infty$. Density zero does not assert
+finiteness, nor emptiness, nor H4 itself.
+\end{theorem}
+
+\begin{theorem}[quantitative compression under GRH]
+\label{thm:Hcompression}
+Assume Dedekind--GRH for the explicit joint Kummer composita
+\[
+\mathcal K_{i,d}
+=C_i\!\prod_{\ell\mid d}^{\rm comp}
+\Q(\sqrt5,\mu_\ell,5^{1/\ell},\eps^{1/\ell}),
+\]
+with $d$ squarefree and $(d,10)=1$. In either split branch, the number of
+primes up to $X$ satisfying the complete mobile H-profile obeys
+\[
+N_{H,i}(X)\ll\frac{X}{(\log X)^2}.
+\tag{4.9}
+\]
+\end{theorem}
+
+The proof is a Selberg upper-bound sieve. Fiber-product disjointness gives
+the exact density factor
+\(g(d)=\prod_{\ell\mid d}(\ell-1)/\ell^2\). A class-sensitive
+Greni\'e--Molteni estimate retains this factor, and the exact identity
+\(\delta_i g(d)[\mathcal K_{i,d}:\Q]=\varphi(d)^2\) gives a summable
+remainder for the explicit choice \(D=X^{1/7}\). This is a theorem under
+the stated GRH family, not an unconditional estimate.
+
+H4 remains open. Its candidates have unconditional density zero and the
+GRH compression (4.5), but neither statement implies emptiness. The
+finite-level Frobenius classes of the scalar and cyclotomic systems remain
+nonempty at every tested and proved level. The pure metaplectic and
+spinorial routes do not see more than the already recorded residue data,
+and the full \(2\)-power reciprocity tower permits the H-profile. These
+negative orientation theorems delimit the missing ingredient without
+supplying it.
+
+\section{Structure of squarefree counterexamples}\label{sec:structure}
+
+Let $n$ be squarefree composite, $5 \nmid n$, satisfying the congruence at
+$r = 5$, and write $\nu = n \bmod 5$, $\pi_i = p_i \bmod 5$,
+$t_i = (n/p_i) \bmod 5$ for its prime factors $p_i$
+(Lemma~\ref{lem:ingress}: $n/p_i \in S(p_i,5)$).
+
+\begin{theorem}[mod-$5$ structure]\label{thm:structure}
+\emph{(a)} $t_i = \nu \pi_i^{-1}$: the local residues are determined.
+\emph{(b)} If $\nu \in \{1,4\}$ then $n^2 \equiv 1 \pmod 5$; a
+counterexample has $\nu \in \{2,3\}$.
+\emph{(c)} If $\pi_i \equiv \pm1$ then $t_i$ has order $4$.
+\emph{(d)} (unconditional) If $n$ has an even number of prime factors, all
+$\equiv \pm2 \pmod 5$, then $n^2 \equiv 1 \pmod 5$; hence a counterexample
+with even $k$ has a factor $\equiv \pm1$ whose local residue has order $4$.
+\emph{(e)} Under H4: every counterexample has an odd number $k \ge 3$ of
+factors, all $\equiv \pm2 \pmod 5$, and $k_- = \#\{p_i \equiv -\nu\}$
+satisfies $k_- \equiv (k-1)/2 \pmod 2$.
+\end{theorem}
+
+In particular, under H4 the two-factor case of
+Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
+with at most two prime factors passing the test is prime or
+$n^2 \equiv 1 \pmod 5$.
+
+\begin{theorem}[rigidity in the Frobenius branch]\label{thm:rigidity}
+For any branch and any $m \in S(p,5)$ with $m \bmod 5 \in
+\langle p \bmod 5\rangle$: $m \in \langle p \rangle \bmod M$. In
+particular, in the quartic branch ($p \equiv \pm2 \bmod 5$),
+$S(p,5) = \langle p \rangle \bmod M$ unconditionally.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Multiply by a power of $p$ to reduce to $m' \equiv 1 \pmod 5$; then the $T5$
+rows give $(m'-1)e_a \equiv 0 \pmod N$ for \emph{all} $a$, so
+$T_a \mid m' - 1$ for the row orders $T_a$, hence
+$\lcm_a T_a = T \mid m'-1$, and $M = \lcm(T,5) \mid m'-1$. (Care is needed:
+distinct Frobenius orbits can have distinct row orders; the lcm over all
+rows repairs this.)
+\end{proof}
+
+\begin{theorem}[explicit $k=3$ system]\label{thm:k3}
+Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all
+$p_i \equiv \pm2 \bmod 5$) satisfies exactly
+\[
+n/p_i \equiv p_i^{\,j_i} \pmod{M_i},
+\qquad
+j_i = \begin{cases} 0 & p_i \equiv \nu,\\ 2 & p_i \equiv -\nu,\end{cases}
+\qquad M_i = \lcm(T_i, 5),
+\]
+with $T_i = \ord(\zeta_5 - 1)$ in $\F_{p_i^4}^\times$. Moreover
+$\ord_{p_i}(5) \mid n/p_i - 1$ for every $i$ (base-$5$ Korselt condition
+shifted to $n/p$), and $M_i \le \max(n/p_i - 1, |n/p_i - p_i^2|)$.
+\end{theorem}
+
+The determination of the exponents uses Theorem~\ref{thm:structure}(a) and
+the four-element lemma $p^4 \equiv 1 \pmod{M}$; necessity uses
+Theorem~\ref{thm:rigidity}. The base-$5$ condition follows from the norm
+lemma below. A CRT-combinable Korselt system for this congruence, in the
+ring $\Z_n[X]/(X^5-1)$, was first set up by V\'a\v na \cite{Vana2009}; the
+present version localizes it to the field component, proves its necessity
+on the minimal skeleton, and determines the exponents.
+
+\section{The exact order decomposition}\label{sec:order}
+
+Let $p \equiv \pm2 \pmod 5$ (quartic branch), $\zeta = \zeta_5 \in
+\F_{p^4}$, $T_p = \ord(\zeta - 1)$.
+
+\begin{lemma}[norm lemma]\label{lem:norm}
+$(\zeta-1)^{1+p+p^2+p^3} = 5$ in $\F_p^\times$; hence
+$\ord_p(5) \mid T_p$.
+\end{lemma}
+
+\begin{theorem}[exact decomposition]\label{thm:decomposition}
+For odd $p$: $u_1^{p^2-1} = -\zeta^{-1}$ has order $10$, whence
+$T_p \mid 10(p^2-1)$, $v_2(T_p) = 1 + v_2(p^2-1)$, $v_5(T_p) = 1$, and
+\[
+T_p = 2^{\,b_p + 1} \cdot 5 \cdot d_{p,+} \cdot d_{p,5},
+\qquad b_p = v_2(p^2 - 1),
+\]
+with coprime odd parts $d_{p,+} \mid (p+1)_{\mathrm{odd}}$ and
+$d_{p,5} \mid \ord_p(5)_{\mathrm{odd}}$.
+\end{theorem}
+
+Both the conjugation identity $u_1^{p^2-1} = -\zeta^{-1}$ and the resulting
+bound $T_p \mid 10(p^2-1)$ already appear in the Lenstra--Pomerance notes
+\cite{LP}, and a ring version ($\rho \mid 10(\lambda^2-1)$ modulo $X^5-1$)
+in \cite{Vana2009}, Lemma~3.4: we claim no novelty for them. The exact
+$2$-adic law, the coprime tail decomposition, and the Kummer
+interpretation of the tail below are, to our knowledge, new. The binary
+consequence for the Korselt rows is a single bit:
+
+\begin{corollary}[binary rows]\label{cor:bit}
+Row $i$ of the system implies
+$n/p_i \equiv 1 + \eta_i 2^{b_i} \pmod{2^{b_i+1}}$, with
+$\eta_i \in \{0,1\}$ according to the pure/twisted case. On census data
+this bit accounts for ${\sim}90\%$ of all row failures. However, the
+associated ``at most one bit can hold'' candidate theorem is \emph{false}:
+an exhaustive enumeration modulo $2^7$ over the skeleton finds $96 + 18{,}720$
+configurations (out of $2^{21}$) where two, respectively three, bits hold
+simultaneously. Any universal incompatibility must therefore involve the
+odd tails.
+\end{corollary}
+
+\section{Kummer identification of the tail}\label{sec:kummer}
+
+\begin{theorem}[tail identification]\label{thm:tail}
+Let $\ell$ be an odd prime with $\ell \mid p + 1$, and let
+$e_\ell = \max\{0 \le e \le v_\ell(p+1) : \zeta - 1 \in
+(\F_{p^4}^\times)^{\ell^e}\}$ (Kummer depths are always truncated at the
+$\ell$-adic valuation of the ambient group order: without the bound the
+maximum need not exist, e.g.\ every element of order coprime to $\ell$ is
+an $\ell^e$-th power for all $e$). Then
+\[
+v_\ell(d_{p,+}) = v_\ell(p+1) - e_\ell,
+\qquad\text{and consequently}\qquad
+q_p := \frac{(p+1)_{\mathrm{odd}}}{d_{p,+}} = \prod_{\ell \mid p+1,\ \ell\
+\mathrm{odd}} \ell^{\,e_\ell}.
+\]
+The tail quotient is exactly the Kummer defect of $\zeta - 1$ in
+$\F_{p^4}$.
+\end{theorem}
+
+Thus all local degeneracies classified in this paper are power-residue
+phenomena of canonical cyclotomic elements: at $k=1$, the elements $5$ and
+$\eps$ as $5^s$-th powers (golden tower); at the $k=3$ tail, $\zeta - 1$ as
+an $\ell^{e}$-th power. One mechanism, three incarnations. (Whether the
+still-open order-$4$ branch obeys the same mechanism is precisely
+Hypothesis~H4 territory, and we do not claim it.) On census data,
+$q_p = 1$ for ${\sim}90\%$ of the relevant rows (so the local condition is
+generically the full odd $(+1)$-side condition), and $q_p > 1$ is governed
+by small $\ell$ with the expected frequency
+${\sim}\sum_\ell 1/(\ell(\ell-1))$.
+
+\section{The derived Lenstra--Pomerance mechanism}\label{sec:lp}
+
+Since $d_{i,+} \mid p_i + 1$, we have $p_i^2 \equiv 1 \pmod{d_{i,+}}$: the
+pure and twisted congruences coincide on the tail, and the three-factor
+system collapses, after the binary filter and absorption of the factor $5$,
+to the cyclic tail system
+\[
+d_{1,+} \mid p_2p_3 - 1,\qquad
+d_{2,+} \mid p_1p_3 - 1,\qquad
+d_{3,+} \mid p_1p_2 - 1.
+\]
+These are precisely the conditions $p_i + 1 \mid n + 1$ of the
+Lenstra--Pomerance construction \cite{LP}, weakened to the structural
+divisor $d_{i,+}$ of $(p_i+1)_{\mathrm{odd}}$, and \emph{derived} as
+necessary conditions on the minimal skeleton rather than imposed as
+sufficient ones. Theorem~\ref{thm:tail} states exactly when the weakening is
+strict: when $\zeta - 1$ has a nontrivial Kummer defect. This explains, we
+believe for the first time from first principles at the level of necessity,
+why the $(+1)$-side of the Lenstra--Pomerance mechanism is the operative
+wall of Agrawal's congruence in the minimal composite case.
+
+In fact the decomposition of Theorem~\ref{thm:decomposition} organizes the
+complete local row into \emph{four checks with distinct roles}: the
+$2$-adic bit; the factor $5$ (absorbed by the skeleton); the
+\emph{$(+1)$-jaw} $d_{p,+} \mid (p+1)_{\mathrm{odd}}$; and the
+\emph{$(-1)$-jaw} $d_{p,5} \mid \ord_p(5)_{\mathrm{odd}}$, which lives on
+the $p-1$ side since $\ord_p(5) \mid p - 1$. The local structure of
+Agrawal's congruence thus \emph{internally generates both sides}
+$p \mp 1$ of the Lenstra--Pomerance mechanism, as the two coprime odd
+components of the order of $\zeta - 1$. Mirroring the tail defect, define
+the $(-1)$-side defect $q_{p,-} = \ord_p(5)_{\mathrm{odd}}/d_{p,5}$. The
+question closes in the strongest possible form: the $(-1)$-jaw carries no
+defect of its own; the odd $(p-1)$-component of $T_p$ descends
+losslessly through the cyclotomic norm.
+
+\begin{theorem}[norm transfer for the odd $(p-1)$-component]\label{thm:minusjaw}
+Let $p \equiv \pm2 \pmod 5$ be an odd prime and $\ell \ne 5$ an odd prime
+with $\ell \mid p - 1$. Then
+\[
+v_\ell(\ord_p(5)) = v_\ell(T_p) = v_\ell(p-1) - f_\ell,
+\]
+where $f_\ell$ is the Kummer depth of $5$ in $\F_p^\times$ at $\ell$
+(the largest $f \le v_\ell(p-1)$ with $5 \in (\F_p^\times)^{\ell^f}$;
+truncation is essential: e.g.\ for $p = 13$, $\ell = 3$, the element $5$
+is a $3^e$-th power for every $e$, and the intended value is $f_3 = 1$);
+moreover the Kummer
+depth of $\zeta - 1$ in $\F_{p^4}^\times$ at $\ell$ equals $f_\ell$.
+Consequently $d_{p,5} = \ord_p(5)_{\mathrm{odd}}$ exactly, i.e.\
+\emph{$q_{p,-} = 1$ identically}.
+\end{theorem}
+
+\begin{proof}
+By the norm lemma (Lemma~\ref{lem:norm}), $5 = u^{S}$ with $u = \zeta - 1$
+and $S = 1 + p + p^2 + p^3 = (p^4-1)/(p-1)$, so in the cyclic group
+$\F_{p^4}^\times$ we have $\ord_p(5) = T_p/\gcd(T_p, S)$. For
+$\ell \mid p-1$: $S \equiv 4 \pmod \ell$, and $\ell$ is odd, so
+$\ell \nmid S$ and $v_\ell(\ord_p 5) = v_\ell(T_p)$. Since
+$\ell \nmid p+1$, $v_\ell(d_{p,+}) = 0$, so
+$v_\ell(d_{p,5}) = v_\ell(T_p) = v_\ell(\ord_p 5)$; at odd primes dividing
+$p + 1$ both $d_{p,5}$ and $\ord_p(5)$ have trivial part, and
+$T_p \mid 10(p^2-1)$ excludes all remaining primes: hence
+$d_{p,5} = \ord_p(5)_{\mathrm{odd}}$. The depth formula in $\F_p^\times$
+gives $v_\ell(\ord_p 5) = v_\ell(p-1) - f_\ell$; the depth formula in
+$\F_{p^4}^\times$ gives $v_\ell(T_p) = v_\ell(p^4-1) - e_\ell =
+v_\ell(p-1) - e_\ell$, using $v_\ell(p^4-1) = v_\ell(p-1)$ for odd
+$\ell \mid p-1$; comparing, $e_\ell = f_\ell$. (One inequality is
+conceptual: the norm maps $\ell$-power classes to $\ell$-power classes, so
+$f_\ell \ge e_\ell$; the order computation forces equality.)
+\end{proof}
+
+Verified with zero violations on all $1{,}138$ primes
+$p \equiv \pm2 \pmod 5$, $p < 20{,}000$ (depth identity $e_\ell = f_\ell$
+checked directly for $p < 3{,}000$).
+
+\begin{remark}[domain of the norm-transfer argument]
+The argument is specific to odd $\ell \mid p-1$ in the quartic branch: at
+$\ell = 2$ the exponent $S$ is even and the $2$-adic component obeys the
+separate exact law $v_2(T_p) = 1 + v_2(p^2-1)$; $\ell = 5$ never divides
+$p - 1$ here; and outside the branch $p \equiv \pm2 \pmod 5$ the Frobenius
+orbit, hence the norm identity itself, changes.
 \end{remark}
 
-\section{Computational certificates}
-
-Independently of the kernel-checked statements above, the repository
-carries replayable certificates, each embedding its own detection
-criterion and reconstruction data, with SHA-256 manifests:
-
-\begin{enumerate}
-\item seven \emph{certified-empty fibres} of a three-factor sieve
-associated with the study (pairs
-\((13,37)\), \((17,113)\), \((13,277)\), \((23,167)\), \((7,823)\),
-\((83,347)\), \((463,1327)\)): for each pair, the finitely many
-levels required by the certificate are integrally factored, all prime
-factors are proven prime, and no prime in the certificate's detector
-classes survives;
-\item a self-certifying census of \(H_n\) for all
-\(n\equiv4\pmod5\), \(n\le10^5\): \(9{,}725\) nontrivial values,
-all factorizations proven, and \emph{no} prime factor
-\(\equiv\pm1\pmod5\) occurs.
-\end{enumerate}
-
-These are certificates of finite computations; they prove exactly
-what they state and nothing beyond, and both replay from the
-repository alone. Separately, the repository freezes as
-\emph{hash-only provenance} (hashes, not artifacts) a SHA-256 index
-of the working material of the study, including a prime-by-prime
-corpus up to \(10^9\); nothing in this note relies on it.
-
-\section{The kernel form of the golden-inertia wall}
-
-The arithmetic reduction underlying the first open problem is now also
-kernel-checked. Recall the definitions of \(A_n\) and \(H_n\) from
-Section~1.
-
-\begin{theorem}[kernel-checked local-to-arithmetic bridge]
-\label{thm:localH}
-Let \(p\ne5\) be prime, let
+\begin{corollary}[complete determination of $T_p$]\label{cor:Tdetermined}
 \[
- T_p=(\mathbf Z/p\mathbf Z)[X]/(\Phi_5),\qquad \zeta=X\bmod\Phi_5,
+T_p
+= 2^{\,1 + v_2(p^2-1)} \cdot 5 \cdot d_{p,+} \cdot
+\ord_p(5)_{\mathrm{odd}},
 \]
-and let \(n\ge1\), \(n\equiv4\pmod5\). If, for \(m=2n-1\),
+and, expanding both odd components through their Kummer defects,
 \[
- (\zeta-1)^m=\zeta^m-1\qquad\text{in }T_p,
+T_p
+= 2^{\,1 + v_2(p^2-1)} \cdot 5 \cdot
+\frac{(p+1)_{\mathrm{odd}}}{q_{p,+}} \cdot
+\prod_{\ell \mid p-1,\ \ell\ \mathrm{odd}} \ell^{\,v_\ell(p-1) - f_\ell},
 \]
-then \(p\mid H_n\).
+with $q_{p,+} = \prod \ell^{e_\ell}$ the Kummer defect of
+Theorem~\ref{thm:tail}. The order of $\zeta - 1$ is completely determined
+by the Kummer defect vectors of the canonical pair: $5$ downstairs on the
+$(-1)$-side, $\zeta - 1$ upstairs on the $(+1)$-side.
+\end{corollary}
+
+The picture is thus not symmetric but \emph{completely asymmetric}, with
+the norm behaving in opposite ways on the two sides. Factor the norm
+exponent:
+\[
+S = 1 + p + p^2 + p^3 = (p+1)(p^2+1).
+\]
+For odd $\ell \mid p-1$ we have $\ell \nmid S$: the norm is invertible on
+the $\ell$-Sylow and all information descends losslessly to
+$5 = \Norm(\zeta-1) \in \F_p^\times$; the side is \emph{norm-visible}.
+For odd $\ell \mid p+1$ we have $v_\ell(S) = v_\ell(p+1)$: the norm
+annihilates precisely the information living on that side; the side is
+\emph{norm-invisible} and must be read directly on the residuosity of
+$\zeta - 1$ upstairs; accordingly its $\ell$-Sylow lies in
+$\F_{p^2}^\times$ and the defect $q_{p,+}$ is genuinely quadratic. In
+summary: \emph{the exact order decomposition internally derives the two
+Lenstra--Pomerance sides; the $p-1$ side transferred losslessly by the
+norm $5$, the $p+1$ side governed by a genuine Kummer defect of the
+quartic cyclotomic element.}
+
+In particular, the odd content of the $(-1)$-jaw condition in the
+three-factor system is exactly the odd part of the base-$5$ Korselt
+condition $\ord_{p_i}(5) \mid n/p_i - 1$ of Theorem~\ref{thm:k3}. This
+proves the \emph{structural complementarity} of the two experimental
+populations of Section~\ref{sec:computations}: a candidate built on the
+base-$5$ condition has the $(-1)$-jaw closed by construction, so only the
+$(+1)$-jaw and the bit can eliminate it; dually, a seed built on the
+tails can only be eliminated by the $(-1)$-jaw and the bit. The observed
+mortality frequencies are computational evidence whose meaning the
+theorem explains; they are not themselves universal statements.
+
+\section{Finite fibers for the third prime}\label{sec:fibers}
+
+The two-row analysis of Section~\ref{sec:lp} leaves a single question per
+compatible pair: which third primes $q$ satisfy their own complete row.
+This fiber is finite, effectively bounded, and enumerable.
+
+\begin{theorem}[finite fibers: Frobenius elimination and resultant
+trapping]\label{thm:fibers}
+Let $(p_i, p_j)$ be a compatible pair, $A = p_ip_j - 1$, and let
+$q \equiv \pm2 \pmod 5$ be a prime, inert in $K = \Q(\zeta_5)$, whose
+complete row holds in the triple $(p_i, p_j, q)$. Write $u = \zeta_5 - 1$.
+\emph{Pure case} ($j_q = 0$; the skeleton forces $10 \mid A$): then
+$u^A \equiv 1 \pmod q$, so $q$ divides $\alpha_A^- = u^A - 1 \ne 0$ and
+\[
+q^4 \mid N_{K/\Q}(\alpha_A^-) = \Res\big(\Phi_5(X),\, (X-1)^A - 1\big).
+\]
+\emph{Twisted case} ($j_q = 2$; the skeleton forces $A \equiv 8 \bmod
+10$): since $q^2 \equiv -1 \pmod 5$, Frobenius gives $u^{q^2} =
+\zeta_5^{-1} - 1 = -\zeta_5^{-1} u$, so the row $u^{A+1} = u^{q^2}$ is
+equivalent to $\zeta_5 u^A + 1 \equiv 0 \pmod q$, and
+\[
+q^4 \mid N_{K/\Q}(\zeta_5 u^A + 1) = \Res\big(\Phi_5(X),\, X(X-1)^A +
+1\big).
+\]
+Both algebraic integers are nonzero; their vanishing would force
+$5^A = N(u)^A = 1$; and $|N| \le 16 \cdot 5^A$; since $q$ is inert,
+$(q)$ is a prime ideal of norm $q^4$, whence the $q^4$-divisibility and
+the effective bound
+\[
+q \le 2 \cdot 5^{A/4}.
+\]
+The fiber of admissible third primes over a compatible pair is therefore
+finite and enumerable among the inert prime divisors of two explicit
+integers.
 \end{theorem}
 
-The corresponding declarations are
-\begin{center}
-\small
-\lean{LocalS5},\quad \lean{OrderFourTransportWitness},\\
-\lean{orderFourTransport\_rows},\\
-\lean{orderFourTransport\_dvd\_goldenH}.
-\end{center}
-They start from the literal local row, evaluate its polynomial remainder at
-\(\zeta,\zeta^2,\zeta^4,\zeta^3\), and recover the labelled cycle
+\begin{lemma}[quadratic descent]\label{lem:descent}
+Both norms are squares. With $t = \zeta_5 + \zeta_5^{-1} = (\sqrt5-1)/2$:
 \[
-u_1\longmapsto u_2\longmapsto u_4\longmapsto u_3\longmapsto u_1.
+U := u^{10} = -175 + 275\,t, \qquad V := \zeta_5 u^8 = 50 - 75\,t
 \]
-The cycle implies, without division,
-\(\eps^{2n}=-1\) and \(5^{n-1}=-1\) in the cyclotomic quotient; the
-Fibonacci--Lucas recurrences then descend these identities to
-\(p\mid H_n\).
+lie in $\Q(\sqrt5)$, with $\operatorname{Tr}(U) = -625$, $N(U) = 3125$,
+$\operatorname{Tr}(V) = 175$, $N(V) = 625$. Writing $A = 10h$ (pure) or
+$A = 10h + 8$ (twisted), we get $\alpha^-_A = U^h - 1$, $\alpha^{tw}_A =
+V U^h + 1$, so $N_{K/\Q}(\alpha) = N_{\Q(\sqrt5)/\Q}(\alpha)^2$ with
+\[
+D_h = 3125^h - S_h + 1,
+\qquad
+E_h = 625 \cdot 3125^h + R_h + 1,
+\]
+where $S_h = \operatorname{Tr}(U^h)$, $R_h = \operatorname{Tr}(VU^h)$
+satisfy the order-two recurrence $x_{h+2} = -625\,x_{h+1} - 3125\,x_h$
+with $S_0 = 2$, $S_1 = -625$, $R_0 = 175$, $R_1 = -106250$. For an inert
+prime $q$, the \emph{complete} third row (binary bit included) is
+equivalent to $q^2 \mid D_h$ (pure), respectively $q^2 \mid E_h$
+(twisted): indeed $q$ is inert in $\Q(\sqrt5)$ as well, so there is a
+unique prime above $q$, of norm $q^2$, and
+$q^2 \mid N_{\Q(\sqrt5)/\Q}(\alpha) \iff \alpha \equiv 0 \pmod q$. For
+$A = 480$ the integer to factor has $168$ digits instead of $336$.
+\end{lemma}
 
-\begin{theorem}[kernel-checked scalar completeness]
-\label{thm:scalarcomplete}
-Let \(p\ne2,5\) be prime. Then the following are equivalent:
-\begin{enumerate}
-\item there exists \(n\ge1\), \(n\equiv4\pmod5\), such that, with
-      \(m=2n-1\),
-      \[
-      (\zeta-1)^m=\zeta^m-1\qquad\text{in }T_p;
-      \]
-\item there exists \(n\ge1\), \(n\equiv4\pmod5\), such that \(p\mid H_n\).
-\end{enumerate}
+All identities, recurrences and both equivalences were verified exactly
+(symbolic computation in $\Z[\zeta_5]$; equivalence against the field row
+on $120 + 120$ random cases; the twisted witness of
+Section~\ref{sec:computations} as regression test). Cyclic-resultant
+recurrences of this kind are classical objects \cite{Hillar}; the
+reduction from Agrawal's row to this specific resultant trap, including
+the twisted branch after Frobenius elimination, appears to be new.
+
+Two further exact statements make the fibers effectively computable.
+
+\begin{lemma}[even valuation at inert primes]\label{lem:even}
+Let $\beta \in \mathcal{O}_{\Q(\sqrt5)} \setminus \{0\}$ and $q \ne 5$ a
+prime inert in $\Q(\sqrt5)$. Then $v_q(N_{\Q(\sqrt5)/\Q}(\beta)) =
+2\,v_{(q)}(\beta)$: an inert prime enters the norm with even exponent
+(cost at least $q^2$), while a split prime can enter with exponent one
+(cost $q$). This is the deterministic seed of the observed factor
+pattern: the observed factorizations are split-dominated, consistently
+with the double valuation cost. (The lemma proves the $q^2$ cost, not
+yet a universal distribution statement.)
+\end{lemma}
+
+\begin{lemma}[unified cyclotomic engine]\label{lem:engine}
+$V^5 = (\zeta_5 u^8)^5 = u^{40} = U^4$; since $5 \nmid q^2 - 1$ for $q$
+inert, fifth power is an automorphism of $\F_{q^2}^\times$, so in the
+twisted branch (with $k = 5h + 4 = A/2$)
+\[
+V U^h = -1 \iff U^{k} = -1,
+\]
+and the twisted fiber integer also splits cyclotomically:
+$N(U^k + 1) = \prod_{d \mid 2k,\ d \nmid k} N(\Phi_d(U))$. Both branches
+are thus driven by one engine, $U^h = 1$ (pieces $d \mid h$) and
+$U^k = -1$ (pieces $d \mid 2k$, $d \nmid k$), whose pieces are norms of
+cyclotomic values, small enough to factor.
+\end{lemma}
+
+The chain of reductions supports a correctness theorem for machine
+certificates, which a referee can audit once instead of trusting each
+output separately.
+
+\begin{theorem}[certificate correctness]\label{thm:certificate}
+Suppose an implementation, for a compatible pair in a fixed branch,
+(i) computes the cyclotomic pieces $N(\Phi_d(U))$ of the fiber integer
+and verifies that their product reconstructs it exactly (sign and
+multiplicities included); (ii) factors every piece completely;
+(iii) certifies every factor prime by a proven primality test;
+(iv) checks even valuation at every inert factor; and (v) applies the
+inertia and CRT-class filters to the complete factor list, finding no
+survivor. Then the pair admits no third prime in that branch: no
+counterexample $p_i p_j q$ exists for any prime $q$.
 \end{theorem}
 
-The converse is existential: it does not claim that the same index works.
-Starting from \(p\mid H_n\), define the common cyclotomic defect
-\[
- w=\frac{(\zeta-1)^{2n-1}}{\zeta^2-1}.
-\]
-The formal proof avoids division by representing the denominator as a
-unit. It proves that \(w\) is fixed by \(\zeta\mapsto\zeta^2\) and
-\(w^2=1\). A trace argument, valid also when \(\Phi_5\) splits modulo
-\(p\), gives \(w=1\) or \(w=-1\).  The positive sign yields the original
-index.  For the negative sign, putting \(m=2n-1\) and
-\[
- d=\left\lfloor\frac{m^2}{2}\right\rfloor
-   =\frac{m^2-1}{2},
- \qquad n'=n+5d,
-\]
-one obtains
-\[
- (\zeta-1)^{\,2n'-1}=\zeta^{\,2n'-1}-1,
- \qquad n'\equiv4\pmod5.
-\]
-Thus the sign ambiguity is repaired constructively.
+\begin{proof}[Proof sketch]
+Necessity of the third row (Theorems~\ref{thm:rigidity}
+and~\ref{thm:k3}) plus the resultant trap
+(Theorem~\ref{thm:fibers}) place every candidate $q$ among the inert
+prime divisors of the fiber integer; the quadratic-descent equivalence
+(Lemma~\ref{lem:descent}) makes membership exact; steps (i)--(iii)
+guarantee the divisor list is complete and correct, and step (v) is
+exhaustive over it. (Proven primality matters: composite-factoring
+routines may return strong pseudoprimes unless primality is certified
+separately.)
+\end{proof}
 
-The declarations are
+As a first application we record the first \emph{complete empty-fiber
+certificate}: for the pair $(13, 37)$ ($A = 480$, both residue classes
+pure), the cyclotomic splitting of $D_{48}$ into ten pieces (largest:
+$56$ digits) was fully factored, all $32$ prime factors certified prime,
+the product reconstructed exactly, and \emph{no} inert prime beyond
+$\{2, 3, 7\}$ divides $D_{48}$ at all; in particular none lies in the
+two admissible CRT classes. Hence \emph{no prime $q$ whatsoever makes
+$13 \cdot 37 \cdot q$ a counterexample at $r = 5$}: the earlier
+``zero survivors up to $10^9$'' becomes an absolute statement for this
+pair.
+
+Two further reductions sharpen the fiber analysis. First, the
+\emph{level theorem with CRT sieve}: if $q$ is inert, $q \nmid d$ and
+$q \mid N(\Phi_d(U))$, then $\ord_{\F_{q^2}^\times}(U) = d$, hence
+$d \mid q^2 - 1$; if moreover $q \equiv r \pmod M$ (the two-row class),
+then necessarily $r^2 \equiv 1 \pmod{\gcd(d, M)}$; a purely
+arithmetic condition that can eliminate entire cyclotomic pieces before
+any factoring (for the pair $(13,37)$ it eliminates exactly the levels
+$16$ and $48$, i.e.\ the two largest pieces). In the non-primitive case
+$q \mid d$ the level drops to $d/q^{v_q(d)}$ and the cost in the norm is
+\emph{exactly} $q^2$ (local valuation one, by the lifting-the-exponent
+lemma); at the primitive level the $q^2$ cost is a minimum
+(Wieferich-type excess is not excluded). Second, on the counting side,
+$B(A) \le 1$: the compatible pair is determined by $A$, since
+$A + 1 = p_ip_j$ factors uniquely; so the sum over pairs is a sum
+over semiprime values of $A+1$, with an unconditional aggregate bound
+$O(X \log\log X/\log X)$. The equidistribution hypothesis needed for
+global finiteness can then be stated quantitatively (UED): over dyadic
+blocks, $N_j \le C\,M_j + E_j$ with $\sum_j M_j$, $\sum_j E_j < \infty$,
+uniformly in the division fields and CRT moduli involved; which
+deterministically implies that the number of three-factor
+counterexamples is finite. UED with summable errors is precisely what
+remains on this route.
+
+We note finally that $D_h = N_{\Q(\sqrt5)/\Q}(U^h - 1)$ is a
+Lehmer--Pierce sequence for the quadratic integer $U$; the literature on
+primitive divisors of such sequences (see e.g.\ \cite{Flatters}) may
+provide structural information on the divisors that our inertia filter
+then screens, though it does not replace the filter itself.
+
+A fundamental caution: finiteness of each fiber does \emph{not} bound the
+total number of three-factor counterexamples, since the compatible pairs
+may be infinite in number. The global $k = 3$ problem thus decomposes as
+\[
+\textit{uniform control of compatible pairs}
+\;+\;
+\textit{factorization of the finite fibers } D_h, E_h,
+\]
+so the pointwise algebraic wall is removed while the global union remains
+open.
+
+The machine extends verbatim to every odd number of factors.
+
+\begin{theorem}[general-$k$ reduction]\label{thm:generalk}
+Let $n = p_1 \cdots p_{k-1} q$ be squarefree in the quartic skeleton
+($k \ge 3$ odd, all factors $\equiv \pm2 \bmod 5$, $\nu = n \bmod 5 \in
+\{2,3\}$), and put $P = p_1\cdots p_{k-1}$, $A = P - 1$.
+\emph{(i)} The first $k-1$ rows are simultaneously solvable in $q$ iff
+$\gcd(P/p_i, T_i) = 1$ for all $i$ and the residues
+$a_i \equiv p_i^{j_i}(P/p_i)^{-1} \pmod{T_i}$ are pairwise compatible
+(together with the mod-$5$ class); the solutions then form a single
+reduced class $q \equiv r \pmod{M}$, $M = \lcm(5, T_1, \dots, T_{k-1})$.
+For $k = 3$ these conditions are exactly the pair-compatibility
+conditions above; for $k > 3$ they are genuinely $(k-1)$-ary.
+\emph{(ii)} For every compatible $(k-1)$-tuple, the admissible last
+primes $q$ lie in the same two resultant traps, with $A = P-1$:
+$q^4$ divides $\Res(\Phi_5, (X-1)^A - 1)$ (pure) or
+$\Res(\Phi_5, X(X-1)^A + 1)$ (twisted), and $q \le 2\cdot5^{A/4}$: each
+fiber is finite and enumerable.
+\emph{(iii)} Under H4, Agrawal's conjecture for $r = 5$ restricted to
+squarefree integers is \emph{equivalent} to: no compatible
+$(k-1)$-tuple, for any odd $k \ge 3$, has a fiber prime passing its own
+complete row.
+\end{theorem}
+
+\begin{theorem}[compatible prefixes at arbitrary length]
+\label{thm:prefixes}
+For every length \(r\), residue \(\nu\in\{2,3\}\) and bound \(B\), there
+are distinct primes \(p_1,\ldots,p_r>B\), all congruent to \(\nu\pmod5\),
+whose first \(r\) rows form a compatible CRT prefix.
+\end{theorem}
+
+\begin{proof}[Proof idea]
+If \(T_i=\ord_{\F_{p_i^4}^\times}(\zeta_5-1)\), compatibility is equivalent
+to \(p_j\nmid T_i\) for \(i\ne j\) and to the consistency of the single
+system \(p_i^{j_i+1}\pmod{T_i}\). Given a compatible tuple, choose a new
+prime in the common reduced class modulo \(\lcm(T_i)\), while avoiding the
+at most four fourth roots of unity modulo each old prime. The ordinary CRT
+and Dirichlet's theorem provide arbitrarily large such primes. Since
+\(T_{\rm new}\mid p_{\rm new}^4-1\), the avoided classes give the reverse
+coprimalities as well.
+\end{proof}
+
+Thus there is no collapse obtained merely by comparing the number of
+pairwise congruences with the number of variables. Any global exclusion
+must use the final fiber row. The exact reduction is
+\[
+\text{tuple}\longrightarrow\text{CRT}\longrightarrow
+\text{resultant}\longrightarrow\text{exact filter}.
+\]
+
 \begin{center}
-\small
-\lean{commonDefect\_eq\_one\_or\_neg\_one},\\
-\lean{localS5\_sign\_repair},\\
-\lean{dvd\_goldenH\_imp\_hasOrderFourTransport},\\
-\lean{hasOrderFourTransport\_iff\_goldenH\_support}.
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{0.18\textwidth}
+  >{\raggedright\arraybackslash}p{0.48\textwidth}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+@{}}
+\hline
+Global case & Available result & Status\\
+\hline
+\(s=2\) & excluded by the structure theorem & conditional on H4\\
+even \(s\ge4\) & excluded by the parity/order-\(4\) structure &
+conditional on H4\\
+\(s=3\), stated box & no survivor in the exact finite searches &
+certified computation under H4\\
+\(s=3\), seven pairs & fibers empty without a bound on \(q\) &
+exact certificates\\
+\(s=3\), remaining pairs & exact CRT and finite terminal fiber &
+reduction theorem; open union\\
+odd \(s\ge5\) & compatible prefix plus finite terminal fiber &
+reduction theorem; open union\\
+\hline
+\end{tabular}
 \end{center}
-This theorem closes the local scalar-completeness reduction. It does
-\emph{not} prove golden inertia: the universal exclusion of split prime
-factors from the support of \(H_n\) remains Conjecture~\ref{conj:inertia}.
 
-\begin{theorem}[kernel-checked scalar profile]
-\label{thm:hprofile}
-Let \(p\) be prime, \(p\ne5\), and \(n\ge1\). Then
+\section{Certified computations}\label{sec:computations}
+
+All computations are exact (finite-field arithmetic, no floating point) and
+scripted; every eliminated candidate carries an inspectable certificate
+(the failing row and the failing modulus). Sanity identities whose truth is
+a theorem (Frobenius row transport, solvability of $t = p^j$) are asserted
+in every run.
+
+\begin{verification}[certified finite region, under H4]\label{thm:threshold}
+Assume H4. There is no squarefree counterexample $n = p_1p_2p_3$ at $r = 5$
+with $7 \le p_1 < p_2 < 30{,}000$ and $p_3 < 10^9$; the boundary
+$p_1 \in \{2,3\}$ is excluded for $p_3 < 2\cdot10^8$.
+\end{verification}
+
+Method: the base-$5$ sieve of Theorem~\ref{thm:k3} places $p_3$ in a single
+CRT progression for each admissible pair $(p_1,p_2)$; $1{,}330{,}896$ pairs
+produce $2{,}227$ candidates (plus $1{,}053$ and $369$ in two earlier
+sweeps, and $2$ on the boundary), each judged by the exact test
+$(\zeta-1)^{\,n/p_i - p_i^{j_i}} = 1$ in $\F_{p_i^4}$; zero survive. Across
+the earlier base-$5$ population, the first row causes nearly every
+elimination. This is a distribution inside a finite census, not a universal
+obstruction. Indeed
 \[
- p\mid H_n
- \quad\Longleftrightarrow\quad
- \eps^{2n}=-1\text{ in }R_p
- \quad\text{and}\quad
- 5^{\,n-1}=-1\text{ in }\mathbf F_p.
+(p_1,p_2,q)=(13,37,30517)
+\]
+passes the complete rows at \(13\) and \(37\) and fails only the row at
+\(30517\); the residue of the failing row is \(480=p_1p_2-1\).
+For $p_1 = 3$ one has $T_3 = 80$ and exactly $16 + 16$ admissible classes
+mod $80$, so no ``small-factor barrier'' exists: the walls are the large
+factors' rows, as the census confirms.
+
+\begin{verification}[unbounded empty fibers]\label{ver:emptyfibers}
+The exact level certificates prove that the fibers over
+\[
+(13,37),\ (17,113),\ (13,277),\ (23,167),\ (7,823),\
+(83,347),\ (463,1327)
+\]
+are empty for every possible last prime. The universal-level cache contains
+76 completely reconstructed and prime-certified values
+\(\lvert N(\Phi_d(U))\rvert\). On the frozen queue of 356 compatible pairs,
+7 are certified empty, 349 remain open because at least one required level
+is unfactored, and no verified survivor occurs.
+\end{verification}
+
+The two relevant manifests are
+\begin{quote}\small
+\path{fibre_s42/MANIFEST.json}\\
+\path{MANIFEST_RIPRODUCIBILITA_AGRAWAL.json}.
+\end{quote}
+They record the detector, required levels, primality proofs, exact
+reconstructions, original-field checks and SHA-256 hashes. The replay
+verifier recomputes all 76 level values and all 356 pair plans. Timeouts are
+open fibers, never negative results.
+
+A complementary experiment conditions on the $(+1)$-side instead: a search
+for skeleton triples satisfying all three tail conditions
+$(p_i+1)_{\mathrm{odd}} \mid p_jp_k - 1$ simultaneously (``seeds'') finds
+them in abundance, so the universal incompatibility of the three tails is
+\emph{false}. On a frozen corpus of $39$ seeds (archived with the verdicts
+for exact reproducibility) the complete-row judgment gives: zero survivors;
+of the $116$ failing rows, the binary bit blocks $102$ and the $(-1)$-jaw
+$d_{5}$ blocks $111$ ($d_5$ alone: $14$; bit alone: $5$; the tail and the
+factor $5$: never, as forced by the seed construction and the skeleton).
+The two populations are thus eliminated by \emph{complementary} jaws,
+exactly as the bilateral picture of Section~\ref{sec:lp} predicts. One
+seed, $(7,\,367,\,28049407)$, passes the complete row at $p = 7$: the
+first witness of solvability of a complete row in the three-factor system
+(it shows the four checks of a row can be satisfied simultaneously; it does
+not suggest proximity to satisfying all three rows). A caveat on
+composition: the snapshot was taken while the seed enumeration was still at
+$p_1 = 7$, and Mersenne-type primes are privileged seed components since
+$(p+1)_{\mathrm{odd}} = 1$ empties the tail; quantitative frequencies
+therefore require the completed census or stratified sampling.
+
+\section{Counting, and open problems}\label{sec:counting}
+
+Let \(M_s^{(4)}(X)\) count squarefree counterexamples in the quartic
+skeleton with exactly \(s\) prime factors. The terminal row gives a first
+quantitative theorem for the global union of fibers.
+
+\begin{theorem}[compression of the terminal-fiber wall]
+\label{thm:secondwall}
+For every fixed \(s\ge3\) and \(X\ge256\),
+\[
+M_s^{(4)}(X)\le
+C_s\frac{X}{\log X}
+\bigl(\log\log(2X)+2\bigr)^{s-2},
+\tag{10.1}
+\]
+where
+\[
+C_s=(s-1)\left(\frac{\log16}{2}+2\log5\right)
++
+\frac{16s(s-1)}{(s-2)!\log2}.
+\tag{10.2}
+\]
+Under H4 the same bound holds for all squarefree counterexamples with
+\(s\) factors; for even \(s\) the count is zero.
+\end{theorem}
+
+\begin{proof}[Proof architecture]
+Write the largest prime as \(q\), the product of the other
+\(k=s-1\) primes as \(P\), and split at \(P=\sqrt X\). If
+\(P\le\sqrt X\), the two resultant traps satisfy
+\[
+q^4\mid\mathcal R_{P,\pm},\qquad
+\log|\mathcal R_{P,\pm}|\le\log16+(P-1)\log5.
+\]
+Since the largest prime of the prefix is at least \(P^{1/k}\), each
+fiber has at most
+\[
+\frac{k[\log16+(P-1)\log5]}{2\log P}
+\]
+primes across both branches. Summing over all integers \(P\le\sqrt X\)
+gives the first term in (10.2). If \(P>\sqrt X\), ignore the final row
+and count \(k\)-prime prefixes in dyadic blocks. Choosing the largest
+prefix prime uniquely and using
+\(\sum_{p\le y}p^{-1}\le\log\log y+2\) gives
+\[
+\#\{P\in[Z,2Z)\}
+\le\frac{4kZ}{(k-1)!\log Z}
+(\log\log(2Z)+2)^{k-1}.
+\]
+The prime bound for \(q\le X/P\), the inequality
+\(P<X^{k/(k+1)}\), and summation over the dyadic blocks yield the second
+term in (10.2). The proof is unconditional inside the quartic skeleton;
+only the final application to all branches uses H4.
+\end{proof}
+
+The unrestricted squarefree \(s\)-almost-prime count has one additional
+factor of \(\log\log X\). Thus Theorem~\ref{thm:secondwall} gives a genuine
+compression, not vacuity. Heath-Brown's stronger bound for Carmichael
+numbers with three prime factors \cite{HB2007} uses the full Korselt
+divisibilities and does not transfer to the weaker order conditions here.
+Likewise the Alford--Granville--Pomerance construction \cite{AGP1994} is
+an existence method, not an upper bound for this set. The explicit
+elementary estimates used above are in the range of
+Rosser--Schoenfeld \cite{RS1962}.
+
+We next state the Galois-theoretic density program for the tail anomalies.
+
+\begin{theorem}[Theorem A: density of tail anomalies at level
+$\ell$]\label{thm:A}
+Let $\ell \ne 5$ be an odd prime, $K = \Q(\zeta_5)$,
+$K_0 = \Q(\zeta_5, \mu_\ell)$, and
+$\widetilde K_\ell = K_0\big((\zeta_5^a - 1)^{1/\ell} : a \in
+(\Z/5)^\times\big)$, which is Galois over $\Q$.
+\emph{(i)} The classes of the four conjugates $u_a = \zeta_5^a - 1$ in
+$K^\times/(K^\times)^\ell$ span exactly the two-dimensional space
+$\langle [u_1], [\eps] \rangle$: indeed
+$u_2 = (-\zeta_5^3\eps)\,u_1$, $u_3 = (\zeta_5\eps)\,u_1$,
+$u_4 = (-\zeta_5^4)\,u_1$, and roots of unity in $\mu_{10}$ are
+$\ell$-th powers; independence follows from $v_\lambda(u_1) = 1$,
+$v_\lambda(\eps) = 0$ at the unique prime $\lambda$ above $5$, together
+with $\mathcal O_K^\times = \mu_{10} \times \langle \eps \rangle$. The
+rank persists over $K_0$ because $[K_0 : K] \mid \ell - 1$ is coprime to
+$\ell$. Hence
+\[
+[\widetilde K_\ell : \Q] = 4(\ell-1)\,\ell^2.
+\]
+\emph{(ii)} On the Kummer space with basis $([u_1], [\eps])$ the
+generator $\sigma : \zeta_5 \mapsto \zeta_5^2$ acts by
+$S = \bigl(\begin{smallmatrix}1 & 0\\ 1 & -1\end{smallmatrix}\bigr)$,
+$S^2 = I$. For a lift $g = (w, h)$ with $h$ of order $4$ on $K$ and
+inversion on $\mu_\ell$, the induced action on
+$W = \Gal(\widetilde K_\ell/K_0) \cong \F_\ell^2$ is $R = -S^{T}$, and
+\[
+g^4 = \big(2(I + R)\,w,\ 1\big), \qquad 2(I+R)(a,b) = (-2b,\, 4b),
+\]
+so \emph{$g^4$ fixes an $\ell$-th root of $u_1$ iff $b = 0$ iff
+$g^4 = 1$}. The class $C_\ell$ cut out by these conditions is stable
+under conjugation, with $|C_\ell| = 2\ell$.
+\emph{(iii)} By Chebotarev, the density of primes
+$p \equiv \pm2 \pmod 5$, $p \equiv -1 \pmod \ell$ such that
+$\zeta_5 - 1$ is an $\ell$-th power in $\F_{p^4}$ equals
+\[
+\delta_\ell = \frac{2\ell}{4(\ell-1)\ell^2} =
+\frac{1}{2\ell(\ell-1)};
+\qquad
+\text{conditioned on the two base congruences: exactly } \frac1\ell.
 \]
 \end{theorem}
 
-The declaration is
-\begin{center}
-\small
-\lean{dvd\_goldenH\_iff\_scalar\_profile}.
-\end{center}
+Numerical control: for $\ell = 3$, $1496/4495 = 0.3328$ against $1/3$
+(and $0.083185$ against $1/12$ unconditionally) over $p < 2\cdot10^5$;
+for $\ell = 7$, $0.1369$ against $1/7$. The proof is the
+Galois--Chebotarev computation, not the finite frequencies.
 
-Both parity branches are proved in both directions. In particular, the
-Fibonacci--Lucas condition is not used merely as a necessary shadow of
-the scalar semiperiod.
+The theorem refines to every depth, and the disjointness across primes
+$\ell$ is itself a theorem. At depth $e \ge 1$, with
+$\widetilde K_{\ell,e} = K(\mu_{\ell^e})\big(u_a^{1/\ell^e}\big)$,
+the Kummer rank remains $2$ (same two directions; the $\ell$-adic descent
+requires eliminating a root-of-unity factor, which is done explicitly),
+$[\widetilde K_{\ell,e} : \Q] = 4(\ell-1)\ell^{3e-1}$, and the density of
+depth-$\ge e$ anomalies is
+\[
+\delta_{\ell,e} = \frac{1}{2(\ell-1)\,\ell^{2e-1}},
+\qquad
+\text{(conditioned: } \ell^{-e}\text{)};
+\]
+the exact-depth law is $(\ell+1)/(2\ell^{2e+1})$.
 
-\begin{theorem}[kernel-checked 2-adic form]
-\label{thm:h4wall}
-Let \(p\ne2,5\) be prime, \(n\ge2\), and \(p\mid H_n\). Then
-\[
- v_2\!\left(\operatorname{ord}_p(5)\right)=v_2(n-1)+1,
-\]
-and
-\[
- \left(\frac5p\right)=-1
- \quad\Longleftrightarrow\quad
- v_2(p-1)=v_2(n-1)+1.
-\]
+\begin{theorem}[fiber-product disjointness]\label{thm:fpd}
+Let $G_\ell = \Gal(\widetilde K_\ell/K)$. Then
+$[G_\ell, G_\ell] = W_\ell$: the abelianization is the cyclotomic part.
+Consequently, for distinct admissible primes, any common quotient of
+$G_\ell$ and $G_m$ has trivial commutator (an $\ell$-group and an
+$m$-group at once), hence is abelian, hence cyclotomic, and
+$K(\mu_\ell) \cap K(\mu_m) = K$ by conductors: so
+$\widetilde K_\ell \cap \widetilde K_m = K$, and by induction the
+compositum over any finite set $\mathcal L$ has Galois group
+$\prod_{\ell \in \mathcal L} G_\ell$ over $K$ (the full fiber product
+over $\Gal(K/\Q)$).
 \end{theorem}
 
-The corresponding declarations are
-\begin{center}
-\small
-\lean{dvd\_goldenH\_order\_factorization\_two}\\
-\lean{dvd\_goldenH\_nonsquare\_iff\_two\_adic\_saturation}.
-\end{center}
+Therefore, \emph{unconditionally}, for every finite $\mathcal L$ the
+density of ``anomalous for some $\ell \in \mathcal L$'' in the quartic
+branch equals $1 - \prod_{\ell \in \mathcal L}(1 - \tfrac1{\ell(\ell-1)})$.
+The passage to the full Euler product requires a uniform tail bound
+(UKS, the uniform Kummer sieve: the upper density of
+$\bigcup_{\ell > Y} E_\ell$ tends to $0$ with $Y$, preserving the Kummer
+factor $1/\ell$); an Artin--Hooley type problem; simple
+Brun--Titchmarsh on the progressions $p \equiv -1 \pmod \ell$ provably
+does not suffice on ranges with distinct exponents. This is where the
+minimal-field structure of the next theorem enters.
 
-Thus the remaining universal assertion is exactly the last equality,
-not the already-proved order identity. The theorem is a reduction of
-the obstruction; it neither proves nor assumes golden inertia.
+The uniform tail is now a theorem under a standard, explicitly named
+hypothesis. The key is a third Frobenius elimination, which identifies
+the tail events with order anomalies of the golden unit:
+\[
+\begin{aligned}
+(\zeta_5 - 1)^{(p-1)(p^2+1)}
+  &= \eps^2 &&\text{in }\F_{p^4},\\
+p \in E_\ell
+  &\iff \eps^{2(p+1)/\ell}=1
+   \iff \eps\in(\F_{p^2}^{\times})^\ell
+  &&(\ell\mid p+1).
+\end{aligned}
+\]
 
-\section{Two open problems}
+\begin{theorem}[tail density under GRH]\label{thm:uks}
+Assume GRH for the Dedekind zeta functions of the explicit family
+$M_\ell = \Q(\sqrt5, \mu_\ell, \eps^{1/\ell})$, $\ell \ne 2,5$ prime.
+Then the set of primes in the quartic branch having at least one tail
+anomaly has relative natural density exactly
+\[
+\Delta
+= 1 - \prod_{\ell \ne 2,5}\Big(1 - \frac{1}{\ell(\ell-1)}\Big)
+= 1 - \frac{40\,\mathcal A}{19}
+= 0.212724602906942\ldots,
+\]
+where $\mathcal A$ is Artin's constant; the absolute density among all
+primes is $\Delta/2$.
+\end{theorem}
 
-We pose the two statements that our working material identifies as
-the central open problems of the \(r=5\) study. We claim no proof of
-either statement.
+\begin{proof}[Proof architecture]
+\emph{(i) Minimal field.} By the equivalence above,
+$p \in E_\ell \iff \operatorname{Frob}_p(M_\ell/\Q) = h$, where $M_\ell$
+is the \emph{minimal Galois field detecting the event}: it has degree
+$2\ell(\ell-1)$, Galois group $\F_\ell \rtimes (C_2 \times
+\F_\ell^\times)$ with action $(c^e, a)\cdot w = (-1)^e a w$, and
+$h = (c, -1)$ is a \emph{central singleton} conjugacy class (the two
+signs cancel on the Kummer kernel; $g_w^2 = \tau_{2w}$ fixes the radical
+iff $w = 0$). Minimality is strict: since the event is the singleton
+$\{h\}$, no proper Galois quotient can detect it exactly; the
+preimage of the image of $h$ would contain the whole coset $hN$. The
+family satisfies fiber-product disjointness by the commutator argument.
+\emph{(ii) GRH range.} The discriminants obey
+$\log|D_{M_\ell}| < \tfrac{11}{2}\ell^2\log\ell$ (tower argument;
+$v_5(D) = \ell(\ell-1)$ exact; $D_{M_3} = 3^{14}5^6$). The
+class-sensitive effective Chebotarev of Greni\'e--Molteni \cite{GM},
+applied to the singleton class ($\delta_\ell n_\ell = |C_\ell| = 1$),
+gives $|\pi_{E_\ell}(X) - \delta_\ell\operatorname{Li}(X)| \le
+7\sqrt X\log X$ with \emph{no} factor of $\ell$, whence the aggregate
+bound $\sum_{\ell \le \sqrt X/(\log X)^{1+\eta}} |\pi_{E_\ell}(X) -
+\delta_\ell \operatorname{Li}(X)| \ll_\eta X/(\log X)^{1+\eta} =
+o(\pi(X))$ for every $\eta > 0$.
+\emph{(iii) Logarithmic band.} For
+$\sqrt X/(\log X)^{1+\eta} < \ell \le \sqrt X(\log X)^\beta$,
+Brun--Titchmarsh on $p \equiv -1 \pmod\ell$ alone suffices: both
+endpoints have the same exponent $\tfrac12$, so the Mertens mass of the
+band is $O(\log\log X/\log X)$ and the count is
+$O(X\log\log X/(\log X)^2) = o(\pi(X))$; this does not contradict
+the failure of the same tool on ranges with distinct exponents.
+\emph{(iv) Unconditional tail.} For $\ell > \sqrt X(\log X)^\beta$, the
+quadratic trap $p^2 \mid N_{\Q(\sqrt5)/\Q}(\eps^{2m}-1)$,
+$m = (p+1)/\ell$, $|N| < 4\eps^{2m}$, gives
+$O_\beta(X/(\log X)^{1+2\beta})$.
+Combining (ii)--(iv), the uniform tail vanishes; with
+Theorem~\ref{thm:fpd} and the unconditional finite products, the union
+passes to the infinite limit.
+\end{proof}
 
-\begin{conjecture}[golden inertia]\label{conj:inertia}
-For every \(n\equiv4\pmod5\), every odd prime factor of \(H_n\)
-distinct from \(5\) is \(\equiv\pm2\pmod5\).
-\end{conjecture}
+The value $0.21272455$ quoted earlier in the campaign was the truncation
+of the product at $\ell \le 10^6$, within its declared error; the
+stabilized value follows from Artin's constant via
+$\prod_{\ell\ne2,5} = \mathcal A / \big((1-\tfrac12)(1-\tfrac1{20})\big)$.
+Against the census, $45/221 = 0.2036$ sits at $-0.33$ standard
+deviations (descriptive scale). Note the
+conceptual closure: \emph{the same golden unit $\eps$ that carries the
+moment $M_2$ is the second Kummer direction of the division fields
+governing the tail anomalies}. Effective forms of Chebotarev
+\cite{KW2021} make the densities explicit. The depth refinements, finite
+unions and disjointness across primes are unconditional; the passage to
+the infinite union is proved here under GRH.
 
-Theorem~\ref{thm:support} shows that every prime
-\(p\equiv2\pmod5\) does occur in some \(H_{n}\) with
-\(n\equiv4\pmod5\); the census in item (2) above verifies
-Conjecture~\ref{conj:inertia} for all \(n\le10^5\).
-Theorem~\ref{thm:h4wall} gives its exact kernel-checked saturation form.
+Two logically independent walls remain.
 
-\begin{conjecture}[fibre emptiness]\label{conj:fibres}
-The pattern of item (1) above is general: for every admissible pair,
-the corresponding fibre is empty.
-\end{conjecture}
+\emph{Wall I, H4.} The equivalent forms are exclusion of local order \(4\),
+absence of split prime factors from all \(H_n\), and saturation of the
+\(2\)-part of \(\ord_p(5)\) in the simultaneous negative-semiperiod
+profile. Candidates have unconditional density zero and satisfy
+Theorem~\ref{thm:Hcompression} under GRH, but emptiness is open.
 
-\section{Formalization data}
+\emph{Wall II, the global union of fibers.} Each fiber is finite and
+enumerable, seven are certified empty, and
+Theorem~\ref{thm:secondwall} saves one factor of \(\log\log X\) for every
+fixed number of factors. Compatible prefixes nevertheless exist at every
+length by Theorem~\ref{thm:prefixes}. The test case
+\((13,37,30517)\) already passes two rows, so pairwise incompatibility is
+false. What remains is the emptiness, or construction of a point, in the
+union over all compatible tuples.
 
-At the release state audited for this version there are thirty modules
-and \(4433\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
-beyond Mathlib's. Mathlib is
-pinned to a fixed upstream commit; a clean clone builds with
-\lean{lake exe cache get \&\& lake build --wfail}. The table mapping each
-statement of this note to its declaration and file is in the
-repository \lean{README}. The tracked \path{AxiomAudit.lean} runs
-\lean{\#print axioms} on the twelve headline declarations in CI; it
-reports only \lean{propext}, \lean{Classical.choice}, and
-\lean{Quot.sound}.
+A separate strengthening is to remove GRH from
+Theorems~\ref{thm:Hcompression} and~\ref{thm:uks}, in the spirit of
+unconditional partial results for Artin-type problems.
+Beyond $r = 5$: the moment theory of Section~\ref{sec:moments} applies
+verbatim to every $r$; only the golden identification is special
+to $r = 5$.
 
-\section{Reproducibility map}
+\begin{thebibliography}{99}
 
-The repository is organized so that the three kinds of evidence never
-collapse into one another:
-\begin{enumerate}
-\item the kernel layer is rebuilt with
-  \lean{lake build --wfail}; its flagship modules cover the moment
-  obstruction, the golden moment, and the forced partition;
-\item the finite-computation layer is replayed by running
-  \path{tools/verify_certificates.py}; the separate script
-  \path{tools/verify_scalar.py} independently tests the
-  common-sign repair in a four-tuple quotient implementation; the optional
-  \lean{--full} flag recomputes the complete \(H_n\) census;
-\item the literature layer is recorded claim by claim in
-  \path{NOVELTY_AND_PRIOR_ART.md}, including negative novelty findings.
-\end{enumerate}
-A read-only GitHub Actions workflow runs the first two checks with Lean
-warnings promoted to errors. The release gate remains private until a human
-specialist has reviewed the golden-moment priority claim.
-
-\begin{thebibliography}{9}
-
-\bibitem{AKS}
-M.~Agrawal, N.~Kayal, and N.~Saxena,
+\bibitem{AKS2004}
+M.~Agrawal, N.~Kayal, N.~Saxena,
 \emph{PRIMES is in P},
-Ann. of Math. 160 (2004), 781--793,
-\url{https://doi.org/10.4007/annals.2004.160.781}.
+Ann. of Math. (2) 160 (2004), 781--793.
 
-\bibitem{LPremarks}
-H.~W. Lenstra, Jr. and C.~Pomerance,
+\bibitem{BP2001}
+R.~Bhattacharjee, P.~Pandey,
+\emph{Primality testing},
+IIT Kanpur, 2001.
+
+\bibitem{AGP1994}
+W.~R. Alford, A.~Granville, C.~Pomerance,
+\emph{There are infinitely many Carmichael numbers},
+Ann. of Math. (2) 140 (1994), 703--722.
+
+\bibitem{HB2007}
+D.~R. Heath-Brown,
+\emph{Carmichael numbers with three prime factors},
+Hardy-Ramanujan J. 30 (2007), 6--12.
+
+\bibitem{RS1962}
+J.~B. Rosser, L.~Schoenfeld,
+\emph{Approximate formulas for some functions of prime numbers},
+Illinois J. Math. 6 (1962), 64--94.
+
+\bibitem{LP}
+H.~W. Lenstra, Jr., C.~Pomerance,
 \emph{Remarks on Agrawal's conjecture},
-AIM note, 2003,
+American Institute of Mathematics workshop notes (2003),
 \url{https://aimath.org/WWN/primesinp/articles/html/50a/}.
 
-\bibitem{LPproblems}
-H.~W. Lenstra, Jr. and C.~Pomerance,
-\emph{Problems concerning Agrawal's conjecture},
-AIM note, 2003,
-\url{https://aimath.org/WWN/primesinp/articles/html/38a/}.
-
-\bibitem{LPgauss}
-H.~W. Lenstra, Jr. and C.~Pomerance,
-\emph{Primality testing with Gaussian periods},
-J. Eur. Math. Soc. 21 (2019), 1229--1269,
-\url{https://doi.org/10.4171/JEMS/861}.
-
-\bibitem{Vana}
+\bibitem{Vana2009}
 T.~V\'a\v na,
 \emph{Agrawal's conjecture and Carmichael numbers},
-Student Scientific Conference, Comenius University Bratislava, 2009,
-\url{https://jcmf.cz/sites/default/files/cms/archiv_svoc/2009/prace/7/Vana.pdf}.
+student scientific conference paper, Comenius University, Bratislava (2009),
+\url{https://web.ics.upjs.sk/svoc2009/prace/7/Vana.pdf}.
 
-\bibitem{WH}
-K.~S. Williams and K.~Hardy,
+\bibitem{Popovych2009}
+R.~Popovych,
+\emph{A note on Agrawal conjecture},
+Cryptology ePrint Archive, Report 2009/008;
+see also \emph{Lower bounds on the orders of subgroups connected with
+Agrawal conjecture}, by the same author.
+
+\bibitem{HD2021}
+A.~Hegde, P.~Devaraj,
+\emph{Heuristics for the construction of counterexamples to the Agrawal
+conjecture},
+in: Mathematical Analysis and Computing (ICMAC 2019), Springer PROMS 344
+(2021).
+
+\bibitem{Lehmer1958}
+E.~Lehmer,
+\emph{Criteria for cubic and quartic residuacity},
+Mathematika 5 (1958), 20--29.
+
+\bibitem{Lehmer1966}
+E.~Lehmer,
+\emph{Artiads characterized},
+J. Math. Anal. Appl. 15 (1966), 118--131.
+
+\bibitem{Williams1975}
+K.~S. Williams,
+\emph{On Euler's criterion for quintic nonresidues},
+Pacific J. Math. 61 (1975), 543--550.
+
+\bibitem{WH1985}
+K.~Hardy, K.~S. Williams,
 \emph{A congruence for the index of a unit of a real abelian number field},
-Acta Arith. 46 (1985), 57--72,
-\url{https://eudml.org/doc/205987}.
+Acta Arith. 46 (1985).
 
-\bibitem{Pomerance1984}
-C.~Pomerance,
-\emph{Are there counter-examples to the Baillie--PSW primality test?},
-1984,
-\url{https://math.dartmouth.edu/~carlp/dopo.pdf}.
+\bibitem{Helou}
+C.~Helou,
+\emph{Norm residue symbol and cyclotomic units},
+available via EuDML, doc.~206815.
 
-\bibitem{Williams1977}
-H.~C. Williams,
-\emph{On numbers analogous to the Carmichael numbers},
-Canad. Math. Bull. 20 (1977), 133--143,
-\url{https://doi.org/10.4153/CMB-1977-019-8}.
+\bibitem{CR2014}
+P.~Cubre, J.~Rouse,
+\emph{Divisibility properties of the Fibonacci entry point},
+Proc. Amer. Math. Soc. 142 (2014), 3771--3785.
 
-\bibitem{McIntosh2014}
-R.~J. McIntosh,
-\emph{Carmichael numbers with \(p+1\mid n-1\)},
-Integers 14 (2014), Paper A59,
-\url{https://ftp.icm.edu.pl/packages/EMIS/journals/INTEGERS/papers/o59/o59.pdf}.
+\bibitem{KW2021}
+H.~Kadiri, P.-J. Wong,
+\emph{Primes in the Chebotarev density theorem for all number fields},
+arXiv:2105.14181.
 
-\bibitem{McIntoshDipra2015}
-R.~J. McIntosh and S.~Mitra Dipra,
-\emph{Carmichael numbers with \(p+1\mid n+1\)},
-J. Number Theory 147 (2015), 81--91,
-\url{https://doi.org/10.1016/j.jnt.2014.06.005}.
+\bibitem{Hillar}
+C.~J. Hillar,
+\emph{Cyclic resultants},
+J. Symbolic Comput. 39 (2005), 653--669; arXiv:math/0411414.
 
-\bibitem{Leng2017}
-A.~Leng,
-\emph{Independence of the Miller--Rabin and Lucas probable prime tests},
-2017,
-\url{https://math.mit.edu/research/highschool/primes/materials/2016/Leng.pdf}.
+\bibitem{Flatters}
+A.~Flatters,
+\emph{Primitive divisors of some Lehmer--Pierce sequences},
+J. Number Theory 129 (2009), 209--219.
+
+\bibitem{GM}
+L.~Greni\'e, G.~Molteni,
+\emph{An effective Chebotarev density theorem under GRH},
+J. Number Theory 200 (2019), 441--485.
 
 \end{thebibliography}
 

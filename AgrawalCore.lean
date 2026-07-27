@@ -28,3 +28,12 @@ import AgrawalCore.LocalTransport
 import AgrawalCore.ScalarCompleteness
 import AgrawalCore.UnconditionalDichotomy
 import AgrawalCore.PrimitiveSupport
+import AgrawalCore.QuadraticGamma
+import AgrawalCore.NoncanonicalWitness
+import AgrawalCore.PrimitiveEvaluation
+import AgrawalCore.SingleSupportExclusion
+import AgrawalCore.PrimitiveCoefficients
+import AgrawalCore.PrimitiveBridge
+import AgrawalCore.CanonicalSignature
+import AgrawalCore.PrimitiveOrderBridge
+import AgrawalCore.PrimitiveScalarBridge

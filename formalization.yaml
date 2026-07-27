@@ -14,7 +14,7 @@ automation:
       Statements and proofs written by an orchestrated multi-model pipeline
       using Claude-family and GPT-family models under human direction, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean file runs #print axioms on the twelve headline
+      AxiomAudit.lean file runs #print axioms on twenty-five headline
       declarations in CI and reports only propext, Classical.choice, and
       Quot.sound. No proof step is accepted on the strength of a model's
       assertion or agreement between models.
@@ -189,21 +189,22 @@ sources:
     license: "Apache-2.0"
     author_contacted: "n/a"
     prior_work: >-
-      Formalized as `fourCoefficientGcd`,
-      `dvd_fourCoefficientGcd_iff`,
-      `primitiveSupport_iff_fourCoefficientGcd`,
-      `one_semiorder_dvd_four_of_single_odd_prime`, and
-      `one_order_dvd_eight_of_single_odd_prime`. The first three declarations
-      compress simultaneous divisibility of four integral coefficients into
-      one gcd once the external cyclotomic coefficient theorem is supplied.
-      The last two prove the arithmetic core of the exclusion of a split
-      H-profile with p-1 = 8*q^e: for coprime semiorders dividing a group
-      order supported on one odd prime, one complete order divides 8.
-      The evaluation of Phi_m((5+sqrt(5))/2), the integral-basis argument in
-      the split quadratic algebra, and the Smith-normal-form statement are
-      not yet formalized and are not represented by axioms. The mathematical
-      priority of the four-coefficient cyclotomic formulation is provisional
-      pending specialist review.
+      The kernel now defines the two remainder coefficients of
+      Phi_m((5+sqrt(5))/2), checks both components of the split quadratic
+      algebra, and proves `primitiveFourVanish_iff_dvd_D`.  From a good
+      divisor of that intrinsic four-coefficient integer it derives the exact
+      orders (4rs,2r,2s) in
+      `dvd_primitiveFourCoefficientD_exact_order_profile`, then identifies
+      the two scalar directions (5, epsilon^2) in
+      `dvd_D_exact_scalar_profile`.  The combinatorial support lemma is
+      completed by the universal theorem `no_split_single_odd_support`,
+      excluding a split H-profile with p-1 = 8*q^e.  What remains outside
+      Lean is sharply delimited: the paper's integral B_s construction and
+      its exact-level bridge from the original gcd G_(r,s) to the intrinsic
+      intersection, plus the Smith-normal-form multiplicity statement.
+      Neither is represented by an axiom. The mathematical priority of the
+      four-coefficient cyclotomic formulation is provisional pending
+      specialist review.
 
   - title: "Korselt's criterion and Carmichael numbers"
     authors:
