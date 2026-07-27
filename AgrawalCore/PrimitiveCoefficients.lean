@@ -7,6 +7,7 @@ affidati a uno script esterno. In particolare questo vale per
 `Φₘ(γ)`. La seconda forma `γᵏ-γ'` è espressa dalla ricorrenza `gammaU`.
 -/
 import AgrawalCore.QuadraticGamma
+import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 
 open Polynomial
