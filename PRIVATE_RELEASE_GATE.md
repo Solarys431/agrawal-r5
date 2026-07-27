@@ -39,8 +39,9 @@ single controlled transition rather than a scramble.
 - [x] Portable H4-v3 replay passes from the private clean checkout.
 - [x] Clean-clone CI run observed on the private remote: commit `9f2b0d0`,
       workflow run `30220768099`, green on 2026-07-26.
-- [x] Current release commit `51f3991`, workflow run
-      `30279362820`, green on 2026-07-27.
+- [x] Kernel-and-replay content commit `51f3991`, workflow run
+      `30279362820`, green on 2026-07-27; later paper/metadata commits retain
+      the identical verified Lean tree and are required to pass the same CI.
 
 ## Gate C — scientific presentation
 
