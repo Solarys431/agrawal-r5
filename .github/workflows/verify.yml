@@ -63,6 +63,11 @@ jobs:
             --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
             --output /tmp/VERIFICA_FIBRE_TAGLIA.json
 
+      - name: Replay the two-row transport census
+        run: |
+          python3 certificates/two_row_transport/verify_two_row_transport.py \
+            --output /tmp/VERIFICA_TRASPORTO_DUE_RIGHE_1E6.json
+
       - name: Replay the portable H4-v3 audit package
         run: |
           python3 certificates/h4_assalto_finale/verify_h4_final_assault_v3.py \
