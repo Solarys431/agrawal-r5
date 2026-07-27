@@ -13,6 +13,9 @@ single controlled transition rather than a scramble.
 - [x] Lenstra–Pomerance attribution corrected to the primary source.
 - [x] Both directions of the local transport / \(H_n\)-support bridge
       checked in Lean, including the negative-sign repair.
+- [x] Local H4 witness and the unconditional two-obstruction logic
+      checked in Lean; the general-\(s\) arithmetic reduction remains an
+      explicit premise rather than an added axiom.
 - [x] Every open statement labelled as conjecture.
 - [ ] Golden-moment priority checked by a human specialist in cyclotomy.
 - [ ] Paper read end-to-end by a human mathematician independent of the

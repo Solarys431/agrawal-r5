@@ -159,6 +159,26 @@ sources:
       proof are Lenstra and Pomerance's. We claim only the mechanical
       verification.
 
+  - title: "The unconditional local-or-global witness dichotomy"
+    authors:
+      - "this pipeline"
+    id: "private repository; public identifier pending"
+    type: "formal interface theorem for the squarefree reduction"
+    license: "Apache-2.0"
+    author_contacted: "n/a"
+    prior_work: >-
+      Formalized as `LocalH4For`, `SplitOrderFourWitness`,
+      `not_localH4For_iff_splitOrderFourWitness`,
+      `squarefree_counterexample_witness_dichotomy`, and
+      `no_squarefree_counterexample_of_no_witnesses`. The theorem states
+      that an explicit reduction from a squarefree counterexample with no
+      local split order-four witness to a global fiber witness yields an
+      unconditional disjunction between those two certificate types. The
+      global reduction is passed as the named premise `ReductionToFiber`;
+      it is not postulated as an axiom. Thus the kernel checks the logical
+      remounting and the literal local witness, while the arithmetic
+      general-s fiber encoding remains outside this release.
+
   - title: "Korselt's criterion and Carmichael numbers"
     authors:
       - "Alwin Korselt (1899)"

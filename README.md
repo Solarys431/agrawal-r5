@@ -24,7 +24,7 @@ publication checklist is in
 
 ## Lean core
 
-Twenty-eight modules over plain Mathlib (pinned), no `sorry`, no extra
+Twenty-nine modules over plain Mathlib (pinned), no `sorry`, no extra
 axioms. Build:
 
 ```
@@ -85,6 +85,7 @@ lake build
 | Common cyclotomic defect is globally `+1` or `−1` | `commonDefect_eq_one_or_neg_one` | `ScalarCompleteness.lean` |
 | Constructive repair of the negative defect | `localS5_sign_repair` | `ScalarCompleteness.lean` |
 | **Complete existential bridge: local order-4 transport ↔ support of Hₙ** | `hasOrderFourTransport_iff_goldenH_support` | `ScalarCompleteness.lean` |
+| **Unconditional witness dichotomy from the explicit reduction interface** | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
 
 ### On the Lenstra–Pomerance proposition
 
@@ -211,7 +212,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Ventisette moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
+Ventinove moduli su Mathlib puro (versione pinnata), senza `sorry`, senza
 assiomi aggiuntivi. Compilazione:
 
 ```
