@@ -26,6 +26,9 @@ jobs:
           build-args: "--wfail"
           use-mathlib-cache: true
 
+      - name: Print axioms of headline declarations
+        run: lake env lean AxiomAudit.lean
+
       - name: Install certificate dependencies
         run: |
           sudo apt-get update

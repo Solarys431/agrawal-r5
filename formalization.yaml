@@ -13,9 +13,11 @@ automation:
     description: >-
       Statements and proofs written by an orchestrated multi-model pipeline
       using Claude-family and GPT-family models under human direction, with
-      every declaration compiled by the Lean 4 kernel and every theorem checked
-      with #print axioms. No proof step is accepted on the strength of a
-      model's assertion or agreement between models.
+      every declaration compiled by the Lean 4 kernel. The tracked
+      AxiomAudit.lean file runs #print axioms on the twelve headline
+      declarations in CI and reports only propext, Classical.choice, and
+      Quot.sound. No proof step is accepted on the strength of a model's
+      assertion or agreement between models.
   - method: "numerical pre-verification"
     description: >-
       Each key identity was checked numerically on independent samples before

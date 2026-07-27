@@ -797,13 +797,16 @@ the corresponding fibre is empty.
 
 \section{Formalization data}
 
-At the release state audited for this version there are twenty-eight modules
-and \(4239\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
+At the release state audited for this version there are thirty modules
+and \(4433\) source lines; no \lean{sorry}, no \lean{admit}, and no axioms
 beyond Mathlib's. Mathlib is
 pinned to a fixed upstream commit; a clean clone builds with
 \lean{lake exe cache get \&\& lake build --wfail}. The table mapping each
 statement of this note to its declaration and file is in the
-repository \lean{README}.
+repository \lean{README}. The tracked \path{AxiomAudit.lean} runs
+\lean{\#print axioms} on the twelve headline declarations in CI; it
+reports only \lean{propext}, \lean{Classical.choice}, and
+\lean{Quot.sound}.
 
 \section{Reproducibility map}
 

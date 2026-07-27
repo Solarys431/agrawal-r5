@@ -32,6 +32,12 @@ lake exe cache get
 lake build
 ```
 
+The tracked [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms`
+on the headline declarations. Its output contains only `propext`,
+`Classical.choice`, and `Quot.sound`, the standard logical axioms used
+by Mathlib; no project-defined axiom is present. GitHub Actions runs
+this audit after every kernel build.
+
 | Result | Declaration | File |
 |---|---|---|
 | **Moment covariance: t·Mⱼ = t⁻ʲ·Mⱼ** | `moment_covariance` | `MomentObstruction.lean` |
