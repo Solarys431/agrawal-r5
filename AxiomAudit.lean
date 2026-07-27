@@ -39,4 +39,7 @@ introduced.
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max
+#print axioms AgrawalCore.pureRow_dvd_product_sub_one
+#print axioms AgrawalCore.twistedRow_dvd_sq_sub_product
+#print axioms AgrawalCore.twistedRow_product_le_sq_sub_order
 #print axioms AgrawalCore.mitm_secondProduct_unique

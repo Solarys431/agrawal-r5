@@ -75,6 +75,32 @@ theorem localRow_order_le_max {P p T : ℕ}
   · exact not_modEq_one_of_one_lt_of_lt hP hPT hrow
   · exact hne (hrow.eq_of_lt_of_lt hPT hpT)
 
+/-- The pure final row is exactly the divisibility `T ∣ P - 1`. -/
+theorem pureRow_dvd_product_sub_one {P T : ℕ}
+    (hP : 1 ≤ P) (hrow : P ≡ 1 [MOD T]) :
+    T ∣ P - 1 := by
+  exact (Nat.modEq_iff_dvd' hP).mp hrow.symm
+
+/-- The twisted final row is exactly the divisibility `T ∣ q² - P`
+when the candidate product lies below `q²`. -/
+theorem twistedRow_dvd_sq_sub_product {P q T : ℕ}
+    (hPq : P < q ^ 2) (hrow : P ≡ q ^ 2 [MOD T]) :
+    T ∣ q ^ 2 - P := by
+  exact (Nat.modEq_iff_dvd' (Nat.le_of_lt hPq)).mp hrow
+
+/-- **Twisted final-row clamp.** A proper candidate in the twisted row
+satisfies `P ≤ q² - T`.  This is an exact rewriting of the congruence,
+not an additional sieve on candidates already enumerated in that residue
+class. -/
+theorem twistedRow_product_le_sq_sub_order {P q T : ℕ}
+    (hPq : P < q ^ 2) (hrow : P ≡ q ^ 2 [MOD T]) :
+    P ≤ q ^ 2 - T := by
+  have hdvd : T ∣ q ^ 2 - P :=
+    twistedRow_dvd_sq_sub_product hPq hrow
+  have hpos : 0 < q ^ 2 - P := Nat.sub_pos_of_lt hPq
+  have hTle : T ≤ q ^ 2 - P := Nat.le_of_dvd hpos hdvd
+  omega
+
 /-- Cancellation of a common multiplier in a natural congruence when that
 multiplier is coprime to the modulus. -/
 theorem modEq_cancel_left_of_coprime {A B₁ B₂ T : ℕ}
