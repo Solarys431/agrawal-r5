@@ -37,7 +37,7 @@ single controlled transition rather than a scramble.
       certificates.
 - [x] Three Mathlib-only Challenge files are independent from their
       Solution files.
-- [ ] Pinned `leanprover/comparator` checks exact statement identity,
+- [x] Pinned `leanprover/comparator` checks exact statement identity,
       permitted axioms and kernel replay for all three surfaces.
 - [x] A separate `ComparatorAxiomAudit.lean` prints the axioms of every
       exported comparator theorem.
@@ -47,6 +47,9 @@ single controlled transition rather than a scramble.
 - [x] Kernel-and-replay content commit `51f3991`, workflow run
       `30279362820`, green on 2026-07-27; later paper/metadata commits retain
       the identical verified Lean tree and are required to pass the same CI.
+- [x] Independent Challenge/Solution release surface commit `3512ccf`,
+      workflow run `30287303449`, green on 2026-07-27 with real Landrun on
+      Linux.
 
 ## Gate C — scientific presentation
 
