@@ -32,6 +32,9 @@ jobs:
           sudo apt-get install --yes pari-gp
           python3 -m pip install --requirement requirements.txt
 
+      - name: Verify tracked release checksums
+        run: sha256sum --check SHA256SUMS.txt
+
       - name: Replay shipped certificates
         run: python3 tools/verify_certificates.py
 
