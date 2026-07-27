@@ -21,6 +21,10 @@ introduced.
 #print axioms AgrawalCore.defectProduct_threshold
 #print axioms AgrawalCore.odd_defectProduct_threshold
 #print axioms AgrawalCore.odd_defectProduct_normal_iff
+#print axioms AgrawalCore.defectMultiplier_iff
+#print axioms AgrawalCore.defectMultiplier_le_div_iff
+#print axioms AgrawalCore.pureCandidate_below_sq_iff
+#print axioms AgrawalCore.twistedCandidate_positive_iff
 #print axioms AgrawalCore.lenstra_proposition_card
 #print axioms AgrawalCore.partition_forced
 #print axioms AgrawalCore.hasOrderFourTransport_iff_goldenH_support

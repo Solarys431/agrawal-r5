@@ -116,4 +116,64 @@ theorem odd_defectProduct_normal_iff {q T I : ℕ}
       have h11 : 11 ≤ I := hthreshold.mp hlt
       omega
 
+/-- **Exact multiplier range.** Under the defect-product identity, a positive
+multiple `h * T` lies below `q² - 1` exactly when `10h < I`. This is the
+arithmetic core of the exact fiber-candidate count. -/
+theorem defectMultiplier_iff {q T I h : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1)) :
+    h * T < q ^ 2 - 1 ↔ 10 * h < I := by
+  have hq2 : 1 < q ^ 2 := by nlinarith
+  have hQ : 0 < q ^ 2 - 1 := by omega
+  have hI : 0 < I := by
+    by_contra h
+    have hIz : I = 0 := by omega
+    rw [hIz] at hexact
+    nlinarith
+  constructor
+  · intro hlt
+    have hm : (10 * h) * (q ^ 2 - 1) < I * (q ^ 2 - 1) := by
+      calc
+        (10 * h) * (q ^ 2 - 1) = h * (T * I) := by rw [hexact]; ring
+        _ = (h * T) * I := by ring
+        _ < (q ^ 2 - 1) * I := (Nat.mul_lt_mul_right hI).mpr hlt
+        _ = I * (q ^ 2 - 1) := by ring
+    exact (Nat.mul_lt_mul_right hQ).mp hm
+  · intro hlt
+    have hm : (h * T) * I < (q ^ 2 - 1) * I := by
+      calc
+        (h * T) * I = h * (T * I) := by ring
+        _ = h * (10 * (q ^ 2 - 1)) := by rw [hexact]
+        _ = (10 * h) * (q ^ 2 - 1) := by ring
+        _ < I * (q ^ 2 - 1) := (Nat.mul_lt_mul_right hQ).mpr hlt
+        _ = (q ^ 2 - 1) * I := by ring
+    exact (Nat.mul_lt_mul_right hI).mp hm
+
+/-- Quotient form of the exact multiplier range. Hence each final-row branch
+has exactly `(I - 1) / 10` admissible positive multipliers. -/
+theorem defectMultiplier_le_div_iff {q T I h : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1)) :
+    h * T < q ^ 2 - 1 ↔ h ≤ (I - 1) / 10 := by
+  have hI : 0 < I := by
+    by_contra h
+    have hIz : I = 0 := by omega
+    rw [hIz] at hexact
+    have hq2 : 1 < q ^ 2 := by nlinarith
+    omega
+  rw [defectMultiplier_iff hq hexact]
+  omega
+
+/-- Exact candidate range in the pure branch `P = 1 + hT`. -/
+theorem pureCandidate_below_sq_iff {q T I h : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1)) :
+    1 + h * T < q ^ 2 ↔ h ≤ (I - 1) / 10 := by
+  rw [← defectMultiplier_le_div_iff hq hexact]
+  omega
+
+/-- Exact candidate range in the twisted branch `P = q² - hT`. -/
+theorem twistedCandidate_positive_iff {q T I h : ℕ}
+    (hq : 7 ≤ q) (hexact : T * I = 10 * (q ^ 2 - 1)) :
+    1 < q ^ 2 - h * T ↔ h ≤ (I - 1) / 10 := by
+  rw [← defectMultiplier_le_div_iff hq hexact]
+  omega
+
 end AgrawalCore
