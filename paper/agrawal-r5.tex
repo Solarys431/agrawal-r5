@@ -1143,6 +1143,44 @@ $U^k = -1$ (pieces $d \mid 2k$, $d \nmid k$), whose pieces are norms of
 cyclotomic values, small enough to factor.
 \end{lemma}
 
+\begin{theorem}[two-row transport]\label{thm:two-row-transport}
+Let $P=p r$ and suppose the final row and the row at $p$, after
+multiplication by $p$, have the forms
+\[
+ P\equiv c\pmod{T_q},
+ \qquad
+ Pq\equiv p^{j_p+1}\pmod{T_p}.
+\]
+Then
+\[
+ \boxed{cq\equiv p^{j_p+1}\pmod{\gcd(T_p,T_q)}}.
+\]
+Thus the pure and twisted branches force, respectively,
+\[
+ q\equiv p^{j_p+1},\qquad
+ q^3\equiv p^{j_p+1}
+ \pmod{\gcd(T_p,T_q)}.
+\]
+Moreover, writing the final row as $P=1+hT_q$ in the pure branch or
+$P=q^2-hT_q$ in the twisted branch, the complete lift at $p$ is the
+linear congruence
+\[
+\begin{aligned}
+ (qT_q)h&\equiv p^{j_p+1}-q\pmod{T_p}
+ &&\text{(pure)},\\
+ (qT_q)h&\equiv q^3-p^{j_p+1}\pmod{T_p}
+ &&\text{(twisted)}.
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+Reduce both input rows modulo $\gcd(T_p,T_q)$ and eliminate $Pq$.
+The two linear forms follow by substituting the displayed
+parameterizations of $P$.  These are exact equivalences, not
+probabilistic sieves.
+\end{proof}
+
 The chain of reductions supports a correctness theorem for machine
 certificates, which a referee can audit once instead of trusting each
 output separately.
@@ -1309,6 +1347,21 @@ Assume H4. There is no squarefree counterexample $n = p_1p_2p_3$ at $r = 5$
 with $7 \le p_1 < p_2 < 30{,}000$ and $p_3 < 10^9$; the boundary
 $p_1 \in \{2,3\}$ is excluded for $p_3 < 2\cdot10^8$.
 \end{verification}
+
+\begin{verification}[largest-prime census, under H4]\label{ver:transport-million}
+There is no squarefree three-factor counterexample at $r=5$ whose largest
+prime factor is $q<10^6$.  The replay enumerates the entire all-inert branch:
+among $39{,}286$ inert primes it finds $76{,}530$ residual final-row
+products and $415$ admissible semiprimes.  The multiplier-free transport of
+Theorem~\ref{thm:two-row-transport} eliminates $391$; for each of the
+remaining $24$, the canonical residue required by the reduced linear lift
+lies strictly above the exact multiplier interval.  None passes even the
+first complete small-prime row.
+\end{verification}
+
+The H4 qualifier is essential: the replay exhausts the all-inert fiber
+branch, whereas a split local order-$4$ witness belongs to the other arm of
+the unconditional dichotomy.
 
 Method: the base-$5$ sieve of Theorem~\ref{thm:k3} places $p_3$ in a single
 CRT progression for each admissible pair $(p_1,p_2)$; $1{,}330{,}896$ pairs
