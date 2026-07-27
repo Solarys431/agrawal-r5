@@ -81,7 +81,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Zouuup/landrun
-          ref: 811cfff51ceaf3d9843708aa6d22e9b84ccac8b4
+          ref: c91b41ac6cb180e2fdcb989408dcde34449bd8b0
           path: .verification-tools/landrun
 
       - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6

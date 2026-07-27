@@ -27,8 +27,9 @@ The project uses:
 - `lean4export` commit
   `3de59f10bc4b4a0f2de698597aeb1246caa0df0a`, pinned by Comparator;
 - Landrun commit
-  `811cfff51ceaf3d9843708aa6d22e9b84ccac8b4`;
-- Go `1.24.0`, matching Landrun's `go.mod`;
+  `c91b41ac6cb180e2fdcb989408dcde34449bd8b0` (the last compatible
+  `urfave/cli` v2 revision, including the January 2026 Landlock fix);
+- Go `1.24.0` for the CI build;
 - the Lean and Mathlib revisions pinned by this repository.
 
 GitHub Actions builds those exact tools and runs all three configurations
