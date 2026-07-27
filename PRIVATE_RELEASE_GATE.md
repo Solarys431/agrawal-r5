@@ -55,6 +55,10 @@ single controlled transition rather than a scramble.
 - [x] Independent Challenge/Solution release surface commit `3512ccf`,
       workflow run `30287303449`, green on 2026-07-27 with real Landrun on
       Linux.
+- [x] Final-row size formalization and certificate commit `5dad3f7`,
+      workflow run `30291070714`, green on 2026-07-27; both the
+      kernel/certificate job and all four Comparator surfaces passed, the
+      latter under real Landrun on Linux.
 
 ## Gate C — scientific presentation
 
