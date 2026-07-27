@@ -8,3 +8,6 @@ rev = "4a7edd35ec64de7117995da659e9d4d80e6cca19"
 
 [[lean_lib]]
 name = "AgrawalCore"
+
+[[lean_lib]]
+name = "Comparator"

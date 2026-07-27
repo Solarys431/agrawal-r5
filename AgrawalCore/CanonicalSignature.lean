@@ -5,7 +5,9 @@ Questo modulo formalizza le conseguenze universali delle due uguaglianze
 di gcd. L'esistenza costruttiva della classe viene tenuta separata: nessuna
 scelta computazionale entra nei teoremi di supporto.
 -/
-import Mathlib
+import Mathlib.Data.Nat.GCD.Basic
+import Mathlib.Data.Nat.ModEq
+import Mathlib.Tactic
 
 namespace AgrawalCore
 

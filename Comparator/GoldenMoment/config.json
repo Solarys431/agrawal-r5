@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Comparator.GoldenMoment.Challenge",
+  "solution_module": "Comparator.GoldenMoment.Solution",
+  "theorem_names": [
+    "GoldenMomentChallenge.golden_moment_factorization"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

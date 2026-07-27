@@ -14,10 +14,13 @@ automation:
       Statements and proofs written by an orchestrated multi-model pipeline
       using Claude-family and GPT-family models under human direction, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean file runs #print axioms on twenty-five headline
-      declarations in CI and reports only propext, Classical.choice, and
-      Quot.sound. No proof step is accepted on the strength of a model's
-      assertion or agreement between models.
+      AxiomAudit.lean runs #print axioms on twenty-five headline declarations
+      in CI; ComparatorAxiomAudit.lean does the same for the five declarations
+      exported by the independent theorem surfaces. Both report only propext,
+      Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
+      that each Mathlib-only Challenge statement is identical to its separate
+      Solution statement before kernel replay. No proof step is accepted on
+      the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
     description: >-
       Each key identity was checked numerically on independent samples before

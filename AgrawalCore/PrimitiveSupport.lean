@@ -15,7 +15,9 @@ Questo modulo formalizza:
 Non formalizza ancora la valutazione di `Φₘ(γ)` nell'anello quadratico:
 quello è il nuovo confine algebrico esplicito.
 -/
-import Mathlib
+import Mathlib.Data.Nat.GCD.Basic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Tactic
 
 namespace AgrawalCore
 

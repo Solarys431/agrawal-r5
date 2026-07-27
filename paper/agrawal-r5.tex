@@ -33,9 +33,11 @@
 
 \author{Anonymous draft for review}
 \thanks{Private draft v20 of July 27, 2026. Results obtained within the UNICO/NOUS pipeline
-(an AI-assisted discovery-and-certification workflow with independent adversarial
-review). A kernel-pure Lean~4/Mathlib layer, with no \texttt{sorry}, covers
-the elementary core identified in the text. All computational claims come
+(an AI-assisted discovery-and-certification workflow with independent cross-model
+adversarial review). A kernel-pure Lean~4/Mathlib implementation layer, with no
+\texttt{sorry}, covers the elementary core identified in the text; separate
+trusted challenge statements contain explicit holes for statement comparison.
+All computational claims come
 with reproducible scripts, hashes and stated domains.}
 
 \begin{document}
@@ -230,12 +232,18 @@ contribution claimed here; we would welcome pointers to earlier
 occurrences.
 
 \subsection*{Disclosure and verification}
-The results were found and assembled in an AI-assisted pipeline with
-independent adversarial review; every theorem below was proved by hand in
-the usual sense. The accompanying Lean~4 files verify a stated elementary
-kernel layer over Mathlib with kernel-pure proofs (no \texttt{sorry}, no
-extra axioms); they do not silently stand for the analytic or finite-field
-arguments left on paper. Computational statements always carry their exact domain; they are
+The results were found and assembled in a human-directed, AI-assisted
+pipeline with independent cross-model adversarial review. Every result
+labelled as a theorem is accompanied by a mathematical proof; the
+accompanying Lean~4 implementation additionally verifies a stated elementary
+kernel layer over Mathlib with kernel-pure proofs (no
+\texttt{sorry} in the submitted implementation and no extra axioms).
+Separate Mathlib-only challenge statements contain explicit proof holes and
+are checked against their solution files by a pinned version of
+\texttt{leanprover/comparator}; those trusted statements are not counted as
+implementation proofs. The Lean layer does not silently stand for the
+analytic or finite-field arguments left on paper. Computational statements
+always carry their exact domain; they are
 falsification controls, not proofs, except where stated as certified
 exclusions in explicitly bounded regions.
 

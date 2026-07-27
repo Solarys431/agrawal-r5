@@ -21,6 +21,12 @@ reproducibility defects. All three were repaired before this verdict:
 3. the fiber verifier trusted embedded level hashes instead of independently
    recomputing the universal level norms.
 
+Current release note (2026-07-27): the later `Comparator/*/Challenge.lean`
+files deliberately contain trusted proof holes, as required by
+`leanprover/comparator`. Every scan below that says “no `sorry`” concerns the
+submitted implementation (`AgrawalCore` and the separate `Solution.lean`
+files), not those statement-only challenges.
+
 The release remains private because priority for the golden-moment bridge has
 not been certified by a human expert in cyclotomy and because no independent
 human mathematician has yet read the paper end to end.

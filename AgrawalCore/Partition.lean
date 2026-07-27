@@ -32,7 +32,8 @@ non una rivendicazione di priorità matematica.
 
 Campagna UNICO, 26 luglio 2026.
 -/
-import Mathlib
+import Mathlib.RingTheory.Int.Basic
+import Mathlib.Tactic
 
 namespace AgrawalCore
 

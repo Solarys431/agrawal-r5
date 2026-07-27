@@ -10,6 +10,8 @@ import AgrawalCore.PrimitiveOrderBridge
 
 namespace AgrawalCore
 
+-- The symbolic quotient-field normalization below is stable with this
+-- explicit elaboration budget across the pinned CI and clean-clone builds.
 set_option maxHeartbeats 200000
 
 variable {p r s k : ℕ} [Fact p.Prime]

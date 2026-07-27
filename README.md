@@ -20,12 +20,17 @@ emptiness of the fibers) are stated precisely in the paper.
 Release is intentionally on hold. The conservative claim-by-claim assessment
 is in [`NOVELTY_AND_PRIOR_ART.md`](NOVELTY_AND_PRIOR_ART.md), and the private
 publication checklist is in
-[`PRIVATE_RELEASE_GATE.md`](PRIVATE_RELEASE_GATE.md).
+[`PRIVATE_RELEASE_GATE.md`](PRIVATE_RELEASE_GATE.md). A separate
+[`QUALITY_AUDIT.md`](QUALITY_AUDIT.md) records exact-environment architecture
+measurements and their deliberately limited interpretation.
 
 ## Lean core
 
-Thirty-nine modules (5,485 source lines) over plain Mathlib (pinned), no
-`sorry`, `admit`, `native_decide`, or extra axioms. Build:
+The implementation core consists of thirty-nine modules (5,493 source lines)
+over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
+`native_decide`, project-defined axiom, or opaque escape hatch. The separate
+trusted `Challenge.lean` files necessarily contain proof holes; they are
+statements, not part of the submitted implementation. Build:
 
 ```
 lake exe cache get
@@ -103,10 +108,14 @@ this audit after every kernel build.
 | No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 
-Three minimal review surfaces in `Challenges/` restate the golden moment,
-Fermat shadow and primitive-support claims with narrow imports. They are
-compiled separately in CI. H4 is intentionally absent from the challenge
-files because it remains open.
+Three independent review surfaces in [`Comparator/`](Comparator/) state the
+golden factorization, Fermat shadow and the closed primitive-support results.
+Every `Challenge.lean` imports **only Mathlib**; every submitted proof lives in
+a separate `Solution.lean`. CI runs pinned
+[`leanprover/comparator`](https://github.com/leanprover/comparator), which
+checks declaration identity, permitted axioms and kernel replay. Exact
+versions and local replay commands are in [`COMPARATOR.md`](COMPARATOR.md).
+H4 is intentionally absent because it remains open.
 
 ### On the Lenstra–Pomerance proposition
 
@@ -243,8 +252,11 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Trentanove moduli (5.485 righe sorgente) su Mathlib puro (versione
-pinnata), senza `sorry`, `admit`, `native_decide` o assiomi aggiuntivi.
+Il nucleo di implementazione contiene trentanove moduli (5.493 righe
+sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
+`native_decide`, assiomi di progetto o scorciatoie opache. I file
+`Challenge.lean`, separati e fidati, contengono invece i buchi di prova
+necessari al comparator e non fanno parte dell'implementazione proposta.
 Compilazione:
 
 ```
@@ -254,6 +266,13 @@ lake build
 
 La tabella dei risultati è nella sezione inglese: ogni riga mappa un
 teorema del paper sulla sua dichiarazione Lean.
+
+Le tre superfici indipendenti in [`Comparator/`](Comparator/) importano solo
+Mathlib negli enunciati e tengono le soluzioni in file distinti. La CI usa il
+comparator ufficiale, pinnato, per verificare identità degli enunciati,
+assiomi consentiti e replay nel kernel; istruzioni e confine di fiducia sono
+in [`COMPARATOR.md`](COMPARATOR.md). H4 non compare tra le challenge perché
+resta aperta.
 
 ## Paper
 

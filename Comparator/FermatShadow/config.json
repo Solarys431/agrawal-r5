@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Comparator.FermatShadow.Challenge",
+  "solution_module": "Comparator.FermatShadow.Solution",
+  "theorem_names": [
+    "FermatShadowChallenge.agrawal_fermat_shadow"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

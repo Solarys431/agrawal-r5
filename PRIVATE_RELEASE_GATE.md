@@ -35,7 +35,12 @@ single controlled transition rather than a scramble.
 - [x] Full census replay available.
 - [x] Private CI workflow builds with warnings as errors and replays
       certificates.
-- [x] Three minimal Challenge files compile independently in CI.
+- [x] Three Mathlib-only Challenge files are independent from their
+      Solution files.
+- [ ] Pinned `leanprover/comparator` checks exact statement identity,
+      permitted axioms and kernel replay for all three surfaces.
+- [x] A separate `ComparatorAxiomAudit.lean` prints the axioms of every
+      exported comparator theorem.
 - [x] Portable H4-v3 replay passes from the private clean checkout.
 - [x] Clean-clone CI run observed on the private remote: commit `9f2b0d0`,
       workflow run `30220768099`, green on 2026-07-26.

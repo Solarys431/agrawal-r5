@@ -10,7 +10,8 @@ allora `γⁿ⁺¹ = Uₙ₊₁ γ - 5Uₙ`.
 
 Non contiene alcuna affermazione sull'inerzia dei divisori: H4 resta aperta.
 -/
-import Mathlib
+import Mathlib.Algebra.Ring.Defs
+import Mathlib.Tactic
 
 namespace AgrawalCore
 

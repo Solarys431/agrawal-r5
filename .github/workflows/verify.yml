@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Build the pinned Lean project
-        uses: leanprover/lean-action@v1
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
         with:
           build: true
           build-args: "--wfail"
@@ -29,11 +29,15 @@ jobs:
       - name: Print axioms of headline declarations
         run: lake env lean AxiomAudit.lean
 
-      - name: Compile minimal challenge surfaces
+      - name: Audit the public theorem surface
+        run: tools/check_release_surface.sh
+
+      - name: Compile independent challenges and submitted solutions
         run: |
-          lake env lean Challenges/GoldenMoment.lean
-          lake env lean Challenges/FermatShadow.lean
-          lake env lean Challenges/PrimitiveSupport.lean
+          lake build Comparator.GoldenMoment.Challenge Comparator.GoldenMoment.Solution
+          lake build Comparator.FermatShadow.Challenge Comparator.FermatShadow.Solution
+          lake build Comparator.PrimitiveSupport.Challenge Comparator.PrimitiveSupport.Solution
+          lake env lean ComparatorAxiomAudit.lean
 
       - name: Install certificate dependencies
         run: |
@@ -59,3 +63,48 @@ jobs:
       - name: Recompute the complete census
         if: github.event_name == 'workflow_dispatch'
         run: python3 tools/verify_certificates.py --full
+
+  comparator:
+    name: Independent statement comparison
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check out pinned Comparator
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: leanprover/comparator
+          ref: 1b82ba006811f7e25d53858252372e4d85fd3921
+          path: .verification-tools/comparator
+
+      - name: Check out pinned Landrun
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Zouuup/landrun
+          ref: 811cfff51ceaf3d9843708aa6d22e9b84ccac8b4
+          path: .verification-tools/landrun
+
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version: "1.24.0"
+
+      - name: Build pinned Landrun
+        working-directory: .verification-tools/landrun
+        run: go build -o landrun cmd/landrun/main.go
+
+      - name: Prepare the pinned Lean environment
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
+        with:
+          build: true
+          build-args: "--wfail"
+          use-mathlib-cache: true
+
+      - name: Build pinned Comparator and lean4export
+        working-directory: .verification-tools/comparator
+        run: lake build lean4export comparator
+
+      - name: Compare all trusted statements with their solutions
+        env:
+          COMPARATOR_ROOT: ${{ github.workspace }}/.verification-tools/comparator
+          COMPARATOR_LANDRUN: ${{ github.workspace }}/.verification-tools/landrun/landrun
+        run: tools/run_comparator.sh
