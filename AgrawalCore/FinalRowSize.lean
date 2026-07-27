@@ -47,6 +47,34 @@ theorem threeFactor_finalRow_size_exclusion {P q T : ℕ}
   · exact not_modEq_one_of_one_lt_of_lt hP (lt_of_lt_of_le hPq hqT) hrow
   · exact not_modEq_sq_of_pos_of_lt_of_le (by omega) hPq hqT hrow
 
+/-- **Universal size bound for a local row.**
+
+Suppose a nontrivial natural number `P`, distinct from `p²`, satisfies one
+of the two local-row congruences
+
+`P ≡ 1 (mod T)` or `P ≡ p² (mod T)`.
+
+Then the modulus cannot exceed both representatives:
+
+`T ≤ max p² P`.
+
+In the Agrawal application `P = n / p`.  Squarefreeness with another
+prime factor supplies `1 < P` and `P ≠ p²`; the local theory supplies the
+two alternatives.  The theorem itself deliberately isolates the purely
+arithmetic kernel and does not build those application hypotheses into
+its statement. -/
+theorem localRow_order_le_max {P p T : ℕ}
+    (hP : 1 < P) (hne : P ≠ p ^ 2)
+    (hrow : P ≡ 1 [MOD T] ∨ P ≡ p ^ 2 [MOD T]) :
+    T ≤ max (p ^ 2) P := by
+  by_contra h
+  have hmax : max (p ^ 2) P < T := Nat.lt_of_not_ge h
+  have hpT : p ^ 2 < T := lt_of_le_of_lt (Nat.le_max_left _ _) hmax
+  have hPT : P < T := lt_of_le_of_lt (Nat.le_max_right _ _) hmax
+  rcases hrow with hrow | hrow
+  · exact not_modEq_one_of_one_lt_of_lt hP hPT hrow
+  · exact hne (hrow.eq_of_lt_of_lt hPT hpT)
+
 /-- Cancellation of a common multiplier in a natural congruence when that
 multiplier is coprime to the modulus. -/
 theorem modEq_cancel_left_of_coprime {A B₁ B₂ T : ℕ}

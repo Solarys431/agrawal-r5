@@ -38,4 +38,5 @@ introduced.
 #print axioms AgrawalCore.dvd_D_exact_scalar_profile
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
+#print axioms AgrawalCore.localRow_order_le_max
 #print axioms AgrawalCore.mitm_secondProduct_unique
