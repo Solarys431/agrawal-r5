@@ -26,7 +26,7 @@ measurements and their deliberately limited interpretation.
 
 ## Lean core
 
-The implementation core consists of forty-one modules (5,807 source lines)
+The implementation core consists of forty-two modules (5,903 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -116,6 +116,9 @@ this audit after every kernel build.
 | Exact pure/twisted final-row divisibilities | `pureRow_dvd_product_sub_one`, `twistedRow_dvd_sq_sub_product` | `FinalRowSize.lean` |
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
+| Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |
+| Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
+| Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and

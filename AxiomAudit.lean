@@ -50,3 +50,9 @@ introduced.
 #print axioms AgrawalCore.twistedRow_dvd_sq_sub_product
 #print axioms AgrawalCore.twistedRow_product_le_sq_sub_order
 #print axioms AgrawalCore.mitm_secondProduct_unique
+#print axioms AgrawalCore.finalSmallRow_transport
+#print axioms AgrawalCore.pureSmallRow_transport
+#print axioms AgrawalCore.twistedSmallRow_transport
+#print axioms AgrawalCore.pureSmallRow_lift_iff
+#print axioms AgrawalCore.twistedSmallRow_lift_iff
+#print axioms AgrawalCore.boundedLift_exclusion
