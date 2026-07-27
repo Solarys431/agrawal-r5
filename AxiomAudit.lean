@@ -50,9 +50,14 @@ introduced.
 #print axioms AgrawalCore.pureRow_dvd_product_sub_one
 #print axioms AgrawalCore.twistedRow_dvd_sq_sub_product
 #print axioms AgrawalCore.twistedRow_product_le_sq_sub_order
+#print axioms AgrawalCore.pureRow_order_le_product_sub_one
+#print axioms AgrawalCore.twistedRow_order_le_absGap
 #print axioms AgrawalCore.mitm_secondProduct_unique
 #print axioms AgrawalCore.finalSmallRow_transport
 #print axioms AgrawalCore.smallRows_triangle
+#print axioms AgrawalCore.localRow_oddShadow
+#print axioms AgrawalCore.coprime_right_of_dvd_mul_sub_one
+#print axioms AgrawalCore.sharedOddSupport_dvd_gap
 #print axioms AgrawalCore.pureSmallRow_transport
 #print axioms AgrawalCore.twistedSmallRow_transport
 #print axioms AgrawalCore.pureSmallRow_lift_iff

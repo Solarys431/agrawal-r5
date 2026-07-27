@@ -1,0 +1,406 @@
+{
+  "excluded_by_odd_shadow": 10,
+  "excluded_by_quantized_gap": 2,
+  "input_manifest": "certificates/triangle_k3_10m/TRIANGLE_K3_10M_MANIFEST.json",
+  "input_manifest_sha256": "2240f63c6b3a53e4b3d373c13346dea3c1ebcf49f7cb00e200d90dd7ff77de1b",
+  "provenance": {
+    "script_sha256": "b5f610792f9ef415b3f38075cff6d68ded7b0d6f9d370d805f631569fcfe2361"
+  },
+  "remaining_after_gap_and_odd_shadow": 0,
+  "remaining_after_quantized_gap": 8,
+  "rows": [
+    {
+      "branch": 2,
+      "gap_pass": false,
+      "h": 924,
+      "odd_shadow_pass": false,
+      "primes": [
+        288653,
+        982493,
+        1053557
+      ],
+      "rows": [
+        {
+          "complement": 1035112377601,
+          "distance": 1035112377600,
+          "distance_mod_order": 9628631040,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 267053059,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 14720916,
+          "order": 21364244720,
+          "prime": 288653,
+          "target": 1
+        },
+        {
+          "complement": 304112388721,
+          "distance": 304112388720,
+          "distance_mod_order": 304112388720,
+          "exponent": 0,
+          "inside_forbidden_annulus": true,
+          "odd_core": 5745788661,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 5331378348,
+          "order": 459663092880,
+          "prime": 982493,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "branch": 2,
+      "gap_pass": true,
+      "h": 942,
+      "odd_shadow_pass": false,
+      "primes": [
+        732533,
+        898853,
+        2533277
+      ],
+      "rows": [
+        {
+          "complement": 2277043631281,
+          "distance": 2277043631280,
+          "distance_mod_order": 539284240,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 184781197,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 169721846,
+          "order": 14782495760,
+          "prime": 732533,
+          "target": 1
+        },
+        {
+          "complement": 1855709000641,
+          "distance": 1855709000640,
+          "distance_mod_order": 154789599360,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 5315373129,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 643778619,
+          "order": 425229850320,
+          "prime": 898853,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "branch": 0,
+      "gap_pass": true,
+      "h": 3310,
+      "odd_shadow_pass": false,
+      "primes": [
+        368083,
+        1412347,
+        2820403
+      ],
+      "rows": [
+        {
+          "complement": 3983387715841,
+          "distance": 3983387715840,
+          "distance_mod_order": 1273685818080,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 16935636861,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 3513053505,
+          "order": 1354850948880,
+          "prime": 368083,
+          "target": 1
+        },
+        {
+          "complement": 1038142397449,
+          "distance": 956581650960,
+          "distance_mod_order": 68243005920,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 1009475733,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 401343924,
+          "order": 80758058640,
+          "prime": 1412347,
+          "target": 1994724048409
+        }
+      ]
+    },
+    {
+      "branch": 2,
+      "gap_pass": true,
+      "h": 49246,
+      "odd_shadow_pass": false,
+      "primes": [
+        425443,
+        517603,
+        2820403
+      ],
+      "rows": [
+        {
+          "complement": 1459849054009,
+          "distance": 1278847307760,
+          "distance_mod_order": 52706446080,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 729845751,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 157552008,
+          "order": 58387660080,
+          "prime": 425443,
+          "target": 181001746249
+        },
+        {
+          "complement": 1199920713529,
+          "distance": 932007847920,
+          "distance_mod_order": 38964962560,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 11163036067,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 5475854359,
+          "order": 893042885360,
+          "prime": 517603,
+          "target": 267912865609
+        }
+      ]
+    },
+    {
+      "branch": 2,
+      "gap_pass": true,
+      "h": 50205,
+      "odd_shadow_pass": false,
+      "primes": [
+        192187,
+        362107,
+        2820403
+      ],
+      "rows": [
+        {
+          "complement": 1021287669121,
+          "distance": 1021287669120,
+          "distance_mod_order": 282570809760,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 4616980371,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 935007129,
+          "order": 369358429680,
+          "prime": 192187,
+          "target": 1
+        },
+        {
+          "complement": 542044791361,
+          "distance": 542044791360,
+          "distance_mod_order": 104973193200,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 1821131659,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 1168688637,
+          "order": 145690532720,
+          "prime": 362107,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "branch": 0,
+      "gap_pass": false,
+      "h": 2,
+      "odd_shadow_pass": false,
+      "primes": [
+        765043,
+        3224027,
+        5337443
+      ],
+      "rows": [
+        {
+          "complement": 17208060342961,
+          "distance": 17208060342960,
+          "distance_mod_order": 1600305893680,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 24387116327,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 15143332425,
+          "order": 1950969306160,
+          "prime": 765043,
+          "target": 1
+        },
+        {
+          "complement": 4083373405049,
+          "distance": 6310976691680,
+          "distance_mod_order": 6310976691680,
+          "exponent": 2,
+          "inside_forbidden_annulus": true,
+          "odd_core": 99945674007,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 85546444768,
+          "order": 7995653920560,
+          "prime": 3224027,
+          "target": 10394350096729
+        }
+      ]
+    },
+    {
+      "branch": 2,
+      "gap_pass": true,
+      "h": 5,
+      "odd_shadow_pass": false,
+      "primes": [
+        501317,
+        3970277,
+        5929853
+      ],
+      "rows": [
+        {
+          "complement": 23543158979281,
+          "distance": 23543158979280,
+          "distance_mod_order": 924472875360,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 31414841811,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 13442462841,
+          "order": 2513187344880,
+          "prime": 501317,
+          "target": 1
+        },
+        {
+          "complement": 2972736116401,
+          "distance": 2972736116400,
+          "distance_mod_order": 528844727760,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 15274321179,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 9517807674,
+          "order": 1221945694320,
+          "prime": 3970277,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "branch": 0,
+      "gap_pass": true,
+      "h": 739,
+      "odd_shadow_pass": false,
+      "primes": [
+        1288853,
+        6209837,
+        7216613
+      ],
+      "rows": [
+        {
+          "complement": 44813990422081,
+          "distance": 44813990422080,
+          "distance_mod_order": 11591149309920,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 207642756951,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 170797677615,
+          "order": 16611420556080,
+          "prime": 1288853,
+          "target": 1
+        },
+        {
+          "complement": 9301153314889,
+          "distance": 29260922251680,
+          "distance_mod_order": 696421832000,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 178528127623,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 17690678492,
+          "order": 14282250209840,
+          "prime": 6209837,
+          "target": 38562075566569
+        }
+      ]
+    },
+    {
+      "branch": 2,
+      "gap_pass": true,
+      "h": 996,
+      "odd_shadow_pass": false,
+      "primes": [
+        857573,
+        8101253,
+        9594773
+      ],
+      "rows": [
+        {
+          "complement": 77729683550569,
+          "distance": 76994252100240,
+          "distance_mod_order": 999668899680,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 30642977097,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 19093632576,
+          "order": 2451438167760,
+          "prime": 857573,
+          "target": 735431450329
+        },
+        {
+          "complement": 8228218265929,
+          "distance": 57402081904080,
+          "distance_mod_order": 26149558013600,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 390656548631,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 24430744677,
+          "order": 31252523890480,
+          "prime": 8101253,
+          "target": 65630300170009
+        }
+      ]
+    },
+    {
+      "branch": 0,
+      "gap_pass": true,
+      "h": 159,
+      "odd_shadow_pass": false,
+      "primes": [
+        1974547,
+        2241163,
+        9799987
+      ],
+      "rows": [
+        {
+          "complement": 21963368264881,
+          "distance": 21963368264880,
+          "distance_mod_order": 8967248747520,
+          "exponent": 0,
+          "inside_forbidden_annulus": false,
+          "odd_core": 162451493967,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 32416579335,
+          "order": 12996119517360,
+          "prime": 1974547,
+          "target": 1
+        },
+        {
+          "complement": 19350534930889,
+          "distance": 14327723338320,
+          "distance_mod_order": 1109798094720,
+          "exponent": 2,
+          "inside_forbidden_annulus": false,
+          "odd_core": 33044813109,
+          "odd_shadow_pass": false,
+          "odd_shadow_remainder": 19319262123,
+          "order": 2643585048720,
+          "prime": 2241163,
+          "target": 5022811592569
+        }
+      ]
+    }
+  ],
+  "scope": "all-inert triples p<r<q with 3<=q<10000000",
+  "status": "PASS",
+  "structural_survivors": 10
+}

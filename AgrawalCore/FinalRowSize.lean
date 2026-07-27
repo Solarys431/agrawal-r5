@@ -133,6 +133,47 @@ theorem twistedRow_product_le_sq_sub_order {P q T : ℕ}
   have hTle : T ≤ q ^ 2 - P := Nat.le_of_dvd hpos hdvd
   omega
 
+/-- **Pure-row quantized gap.**
+
+A nontrivial representative of the pure local row is not merely at least
+`1`: its distance from `1` is a positive multiple of the order `T`.  Hence
+the complementary product satisfies `T ≤ P - 1`.
+
+Unlike `localRow_order_le_max`, this retains the exact distance from the
+prescribed residue and can therefore exclude candidates that pass the
+coarser maximum bound. -/
+theorem pureRow_order_le_product_sub_one {P T : ℕ}
+    (hP : 1 < P) (hrow : P ≡ 1 [MOD T]) :
+    T ≤ P - 1 := by
+  have hdvd : T ∣ P - 1 :=
+    pureRow_dvd_product_sub_one (Nat.le_of_lt hP) hrow
+  exact Nat.le_of_dvd (Nat.sub_pos_of_lt hP) hdvd
+
+/-- **Twisted-row forbidden annulus.**
+
+If `P` is distinct from `p²` and satisfies the twisted local row, then its
+positive distance from `p²` is at least one full order:
+
+`T ≤ (P - p²) + (p² - P)`.
+
+The sum on the right is the natural-number absolute difference.  Thus no
+candidate can lie strictly inside the open interval of radius `T` around
+`p²`. -/
+theorem twistedRow_order_le_absGap {P p T : ℕ}
+    (hne : P ≠ p ^ 2) (hrow : P ≡ p ^ 2 [MOD T]) :
+    T ≤ (P - p ^ 2) + (p ^ 2 - P) := by
+  rcases lt_or_gt_of_ne hne with hP | hp
+  · have hdvd : T ∣ p ^ 2 - P :=
+      (Nat.modEq_iff_dvd' (Nat.le_of_lt hP)).mp hrow
+    have hle : T ≤ p ^ 2 - P :=
+      Nat.le_of_dvd (Nat.sub_pos_of_lt hP) hdvd
+    omega
+  · have hdvd : T ∣ P - p ^ 2 :=
+      (Nat.modEq_iff_dvd' (Nat.le_of_lt hp)).mp hrow.symm
+    have hle : T ≤ P - p ^ 2 :=
+      Nat.le_of_dvd (Nat.sub_pos_of_lt hp) hdvd
+    omega
+
 /-- Cancellation of a common multiplier in a natural congruence when that
 multiplier is coprime to the modulus. -/
 theorem modEq_cancel_left_of_coprime {A B₁ B₂ T : ℕ}

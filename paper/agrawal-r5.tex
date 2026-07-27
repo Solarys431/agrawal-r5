@@ -1220,6 +1220,54 @@ prime must itself be in the exceptional Kummer range, or the final prime
 must realize the large gap \(q>r^2/p\).
 \end{proof}
 
+\begin{corollary}[quantized local gap]\label{cor:quantized-gap}
+Let \(P_x=n/x\).  A local row at \(x\) forces
+\[
+ j_x=0:\quad T_x\le P_x-1,
+ \qquad
+ j_x=2:\quad T_x\le |P_x-x^2|
+\]
+whenever \(P_x\ne x^2\).  In particular, in the twisted branch no
+candidate lies strictly inside the open interval of radius \(T_x\)
+around \(x^2\).
+\end{corollary}
+
+\begin{proof}
+The two differences are nonzero multiples of \(T_x\), hence have size at
+least \(T_x\).
+\end{proof}
+
+\begin{corollary}[branch-independent odd shadow]\label{cor:odd-shadow}
+Remove the \(2\)- and \(5\)-parts from the local order:
+\[
+D_x=\frac{T_x}{2^{v_2(T_x)}5^{v_5(T_x)}}.
+\]
+In the inert branch, \(D_x\mid x^2-1\), and both local residues collapse
+to
+\[
+P_x\equiv1\pmod{D_x}.
+\]
+Thus a three-factor candidate satisfies
+\[
+\boxed{
+D_p\mid rq-1,\qquad D_r\mid pq-1,\qquad D_q\mid pr-1.}
+\tag{7.1}\label{eq:odd-shadow-three}
+\]
+Moreover,
+\[
+\gcd(D_p,D_r)\mid r-p
+\]
+and cyclically for the other two pairs.
+\end{corollary}
+
+\begin{proof}
+The structural order bound gives \(D_x\mid x^2-1\), so the residues \(1\)
+and \(x^2\) agree modulo \(D_x\).  For the last assertion, reduce two
+relations in~\eqref{eq:odd-shadow-three} modulo
+\(\gcd(D_p,D_r)\).  The common factor \(q\) is
+a unit because \(rq\equiv1\); cancellation gives \(p\equiv r\).
+\end{proof}
+
 The chain of reductions supports a correctness theorem for machine
 certificates, which a referee can audit once instead of trusting each
 output separately.
@@ -1413,9 +1461,15 @@ sharded falsifier extends the all-inert census to \(q<10^7\).  It enumerates
 \(10\) pass both structural tests.  All ten fail the exact small-prime
 rows.  Thus there is no all-inert three-factor counterexample in this
 finite region (and, under H4, no three-factor counterexample there at all).
-This adversarial extension isolates the remaining universal problem at the
-simultaneous linear lifts and prevents the initial finite pattern from being
-mistaken for a theorem.
+A second replay applies Corollaries~\ref{cor:quantized-gap}
+and~\ref{cor:odd-shadow} to the ten frozen records: the quantized gap
+eliminates two, while the branch-independent odd shadows eliminate all ten.
+Thus this finite box does not require discrete-log reconstruction of the
+complete lifts.  This adversarial extension isolates the remaining
+universal problem at the three simultaneous moving odd moduli
+in~\eqref{eq:odd-shadow-three},
+together with the \(2\)- and \(5\)-adic locks, and prevents the initial
+finite pattern from being mistaken for a theorem.
 
 Method: the base-$5$ sieve of Theorem~\ref{thm:k3} places $p_3$ in a single
 CRT progression for each admissible pair $(p_1,p_2)$; $1{,}330{,}896$ pairs

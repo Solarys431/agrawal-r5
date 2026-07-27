@@ -15,6 +15,8 @@ passing both final-small transports   254
 passing the complete CRT triangle     194
 passing both local size bounds          14
 passing triangle and size                10
+excluded by the quantized gap             2
+excluded by the odd shadow               10
 passing both exact small rows             0
 status                                PASS
 ```
@@ -34,6 +36,22 @@ python3 replay_root/motore/unisci_censimenti_triangolo.py \
   fast_triangle_7p5m_10m.json \
   --output /tmp/TRIANGLE_K3_10M_MANIFEST.json
 ```
+
+The ten structural survivors can then be replayed through the two new
+theorem-backed projections:
+
+```bash
+cd ../../
+python3 certificates/triangle_k3_10m/replay_root/motore/verifica_gap_quantizzato_k3.py \
+  certificates/triangle_k3_10m/TRIANGLE_K3_10M_MANIFEST.json \
+  --output /tmp/QUANTIZED_GAP_K3_10M.json
+cmp certificates/triangle_k3_10m/QUANTIZED_GAP_K3_10M.json \
+  /tmp/QUANTIZED_GAP_K3_10M.json
+```
+
+The quantized gap alone removes two survivors.  The branch-independent odd
+shadow removes all ten.  This is a finite statement on the frozen box, not a
+universal proof of the all-inert branch.
 
 A full rerun of a shard uses, for example:
 

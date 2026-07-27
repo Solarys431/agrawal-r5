@@ -80,6 +80,14 @@ jobs:
           cmp certificates/triangle_k3_10m/TRIANGLE_K3_10M_MANIFEST.json \
             /tmp/TRIANGLE_K3_10M_MANIFEST.json
 
+      - name: Replay the quantized gap and odd shadow
+        run: |
+          python3 certificates/triangle_k3_10m/replay_root/motore/verifica_gap_quantizzato_k3.py \
+            certificates/triangle_k3_10m/TRIANGLE_K3_10M_MANIFEST.json \
+            --output /tmp/QUANTIZED_GAP_K3_10M.json
+          cmp certificates/triangle_k3_10m/QUANTIZED_GAP_K3_10M.json \
+            /tmp/QUANTIZED_GAP_K3_10M.json
+
       - name: Replay the portable H4-v3 audit package
         run: |
           python3 certificates/h4_assalto_finale/verify_h4_final_assault_v3.py \
