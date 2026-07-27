@@ -1,4 +1,4 @@
-d449831a54e80afff47d0c9a3246f2e73289de17b7865661bf8cfcddea6fffd8  ./.github/workflows/verify.yml
+4400212c01ffcc9385794fdff5e9da5240743e58484ff6f93935d4c5023e9de7  ./.github/workflows/verify.yml
 ff0096d8709adde4a2132ce4f882941f2abdc4de6111975d6c1d9f0b9d98c118  ./.gitignore
 7430f8d64bfa85e125c85bed830768f85d707f215d8e86f5a780472f31878bcb  ./ADVERSARIAL_AUDIT_2026-07-26.md
 8ec139982f0e71c28ca3b37e08e6f2293ffc4d9968e603d4ce313f0a1c4d7ffe  ./AgrawalCore.lean
