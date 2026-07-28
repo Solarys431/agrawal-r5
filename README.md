@@ -23,10 +23,12 @@ publication checklist is in
 [`PRIVATE_RELEASE_GATE.md`](PRIVATE_RELEASE_GATE.md). A separate
 [`QUALITY_AUDIT.md`](QUALITY_AUDIT.md) records exact-environment architecture
 measurements and their deliberately limited interpretation.
+The verification tier of every public claim is summarized in
+[`CLAIM_STATUS.md`](CLAIM_STATUS.md).
 
 ## Lean core
 
-The implementation core consists of forty-two modules (5,903 source lines)
+The implementation core consists of forty-two modules (6,056 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are

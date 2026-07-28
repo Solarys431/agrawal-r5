@@ -32,7 +32,7 @@
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
 \author{Anonymous draft for review}
-\thanks{Private draft v20 of July 27, 2026. Results obtained within the UNICO/NOUS pipeline
+\thanks{Private draft v21 of July 28, 2026. Results obtained within the UNICO/NOUS pipeline
 (an AI-assisted discovery-and-certification workflow with independent cross-model
 adversarial review). A kernel-pure Lean~4/Mathlib implementation layer, with no
 \texttt{sorry}, covers the elementary core identified in the text; separate
@@ -233,10 +233,13 @@ occurrences.
 
 \subsection*{Disclosure and verification}
 The results were found and assembled in a human-directed, AI-assisted
-pipeline with independent cross-model adversarial review. Every result
-labelled as a theorem is accompanied by a mathematical proof; the
-accompanying Lean~4 implementation additionally verifies a stated elementary
-kernel layer over Mathlib with kernel-pure proofs (no
+pipeline with independent cross-model adversarial review. Results labelled
+as theorems are mathematical claims of the paper; only the subset named in
+the repository's claim-status table is additionally checked end to end by
+Lean. Several deeper results are presented with proof architectures whose
+ordinary mathematical review remains independent of the kernel layer. The
+accompanying Lean~4 implementation verifies a stated elementary kernel
+layer over Mathlib with kernel-pure proofs (no
 \texttt{sorry} in the submitted implementation and no extra axioms).
 Separate Mathlib-only challenge statements contain explicit proof holes and
 are checked against their solution files by a pinned version of
@@ -932,10 +935,12 @@ Lenstra--Pomerance construction \cite{LP}, weakened to the structural
 divisor $d_{i,+}$ of $(p_i+1)_{\mathrm{odd}}$, and \emph{derived} as
 necessary conditions on the minimal skeleton rather than imposed as
 sufficient ones. Theorem~\ref{thm:tail} states exactly when the weakening is
-strict: when $\zeta - 1$ has a nontrivial Kummer defect. This explains, we
-believe for the first time from first principles at the level of necessity,
-why the $(+1)$-side of the Lenstra--Pomerance mechanism is the operative
-wall of Agrawal's congruence in the minimal composite case.
+strict: when $\zeta - 1$ has a nontrivial Kummer defect. This gives a
+first-principles explanation, at the level of necessity, for why the
+$(+1)$-side of the Lenstra--Pomerance mechanism is the operative wall of
+Agrawal's congruence in the minimal composite case. We have not found this
+derivation in the targeted literature search, but make no absolute priority
+claim.
 
 In fact the decomposition of Theorem~\ref{thm:decomposition} organizes the
 complete local row into \emph{four checks with distinct roles}: the
@@ -1802,17 +1807,20 @@ IIT Kanpur, 2001.
 \bibitem{AGP1994}
 W.~R. Alford, A.~Granville, C.~Pomerance,
 \emph{There are infinitely many Carmichael numbers},
-Ann. of Math. (2) 140 (1994), 703--722.
+Ann. of Math. (2) 139 (1994), 703--722,
+\url{https://doi.org/10.2307/2118576}.
 
 \bibitem{HB2007}
 D.~R. Heath-Brown,
 \emph{Carmichael numbers with three prime factors},
-Hardy-Ramanujan J. 30 (2007), 6--12.
+Hardy-Ramanujan J. 30 (2007), 6--12,
+\url{https://doi.org/10.46298/hrj.2007.156}.
 
 \bibitem{RS1962}
 J.~B. Rosser, L.~Schoenfeld,
 \emph{Approximate formulas for some functions of prime numbers},
-Illinois J. Math. 6 (1962), 64--94.
+Illinois J. Math. 6 (1962), 64--94,
+\url{https://doi.org/10.1215/ijm/1255631807}.
 
 \bibitem{LP}
 H.~W. Lenstra, Jr., C.~Pomerance,
@@ -1829,7 +1837,8 @@ student scientific conference paper, Comenius University, Bratislava (2009),
 \bibitem{Popovych2009}
 R.~Popovych,
 \emph{A note on Agrawal conjecture},
-Cryptology ePrint Archive, Report 2009/008;
+Cryptology ePrint Archive, Report 2009/008,
+\url{https://eprint.iacr.org/2009/008};
 see also \emph{Lower bounds on the orders of subgroups connected with
 Agrawal conjecture}, by the same author.
 
@@ -1838,7 +1847,8 @@ A.~Hegde, P.~Devaraj,
 \emph{Heuristics for the construction of counterexamples to the Agrawal
 conjecture},
 in: Mathematical Analysis and Computing (ICMAC 2019), Springer PROMS 344
-(2021).
+(2021), 537--543,
+\url{https://doi.org/10.1007/978-981-33-4646-8_42}.
 
 \bibitem{Lehmer1958}
 E.~Lehmer,
@@ -1848,47 +1858,56 @@ Mathematika 5 (1958), 20--29.
 \bibitem{Lehmer1966}
 E.~Lehmer,
 \emph{Artiads characterized},
-J. Math. Anal. Appl. 15 (1966), 118--131.
+J. Math. Anal. Appl. 15 (1966), 118--131,
+\url{https://doi.org/10.1016/0022-247X(66)90145-4}.
 
 \bibitem{Williams1975}
 K.~S. Williams,
 \emph{On Euler's criterion for quintic nonresidues},
-Pacific J. Math. 61 (1975), 543--550.
+Pacific J. Math. 61 (1975), 543--550,
+\url{https://doi.org/10.2140/pjm.1975.61.543}.
 
 \bibitem{WH1985}
-K.~Hardy, K.~S. Williams,
+K.~S. Williams, K.~Hardy,
 \emph{A congruence for the index of a unit of a real abelian number field},
-Acta Arith. 46 (1985).
+Acta Arith. 46 (1985), 57--72,
+\url{https://doi.org/10.4064/aa-46-1-57-72}.
 
 \bibitem{Helou}
 C.~Helou,
 \emph{Norm residue symbol and cyclotomic units},
-available via EuDML, doc.~206815.
+Acta Arith. 73 (1995), 147--188,
+\url{https://doi.org/10.4064/aa-73-2-147-188}.
 
 \bibitem{CR2014}
 P.~Cubre, J.~Rouse,
 \emph{Divisibility properties of the Fibonacci entry point},
-Proc. Amer. Math. Soc. 142 (2014), 3771--3785.
+Proc. Amer. Math. Soc. 142 (2014), 3771--3785,
+\url{https://doi.org/10.1090/S0002-9939-2014-12269-6}.
 
 \bibitem{KW2021}
 H.~Kadiri, P.-J. Wong,
 \emph{Primes in the Chebotarev density theorem for all number fields},
-arXiv:2105.14181.
+J. Number Theory 241 (2022), 700--737,
+\url{https://doi.org/10.1016/j.jnt.2022.03.012}.
 
 \bibitem{Hillar}
 C.~J. Hillar,
 \emph{Cyclic resultants},
-J. Symbolic Comput. 39 (2005), 653--669; arXiv:math/0411414.
+J. Symbolic Comput. 39 (2005), 653--669,
+\url{https://doi.org/10.1016/j.jsc.2005.01.001}.
 
 \bibitem{Flatters}
 A.~Flatters,
 \emph{Primitive divisors of some Lehmer--Pierce sequences},
-J. Number Theory 129 (2009), 209--219.
+J. Number Theory 129 (2009), 209--219,
+\url{https://doi.org/10.1016/j.jnt.2008.05.008}.
 
 \bibitem{GM}
 L.~Greni\'e, G.~Molteni,
-\emph{An effective Chebotarev density theorem under GRH},
-J. Number Theory 200 (2019), 441--485.
+\emph{An explicit Chebotarev density theorem under GRH},
+J. Number Theory 200 (2019), 441--485,
+\url{https://doi.org/10.1016/j.jnt.2018.12.005}.
 
 \end{thebibliography}
 

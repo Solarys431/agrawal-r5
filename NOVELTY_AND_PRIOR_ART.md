@@ -5,6 +5,40 @@ conservative than a release announcement. “Potentially new” means that a
 targeted search did not find the statement; it does not replace review by a
 specialist in cyclotomy or primality testing.
 
+## Verified source-level audit (updated 2026-07-28)
+
+The following boundaries were checked against primary texts, not inferred
+from titles or secondary summaries.
+
+| Source | What the source actually contains | Consequence for this project |
+|---|---|---|
+| Lenstra–Pomerance, AIM notes (2003) | The conjugation identity for \(\zeta _5-1\), the divisibility of its order by \(10(p^2-1)\), and the sufficient paired conditions \(p_i-1\mid n-1\), \(p_i+1\mid n+1\) | None of these ingredients is claimed as new |
+| Váňa (2009), Lemmas 3.3–3.4 | Multiplicative relations among the residue exponents, the ring-level bound \(\rho\mid10(\lambda^2-1)\), and a CRT-combinable Korselt system | The field-component localization, exact decomposition and necessity results are presented as refinements, not as the first CRT reduction |
+| Popovych (2009) | The subgroup-growth paradigm in the cyclotomic quotient and a generalization of Lenstra’s construction | The use of cyclotomic subgroups is prior art |
+| Williams–Hardy (1985), Theorem 5 and Remark 2 | The exact quintic index of the golden unit in Dickson coordinates and its fifth-power criterion | Only the bridge from Agrawal’s quadratic moment to that classical character is a candidate new contribution |
+| Corrales-Rodrigáñez–Schoof (1997) | A support theorem whose hypothesis quantifies over every exponent and almost all primes | It does not directly settle the moving-exponent, finite-support problem here |
+| Bilu–Hanrot–Voutier (2001) | Primitive divisors for Lucas and Lehmer sequences beyond the uniform exceptional range | The fourth-order norm sequences used in the fiber analysis are outside that direct Lucas/Lehmer hypothesis; the BHV threshold is not imported |
+
+The exact golden-index formula is attributed to Williams–Hardy rather than
+to Dickson alone. Dickson’s cyclotomy supplies classical coordinates, but a
+change of conventions is not treated as an attribution of the later unit
+index theorem.
+
+The formalization search found the current
+[`FormalConjectures/Wikipedia/Agrawal.lean`](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Wikipedia/Agrawal.lean),
+which states Agrawal’s conjecture and Popovych’s variant with proof holes.
+It is a benchmark of statements, not prior proof formalization. Targeted
+GitHub and literature searches found no exact match for the golden-moment
+bridge, but this is negative search evidence only. The release therefore
+makes no absolute claim such as “first formalization” or “first theorem”.
+
+Publication-safe wording:
+
+> Williams and Hardy computed the classical quintic character of the golden
+> unit. We formalize an exact factorization showing that Agrawal’s quadratic
+> moment realizes that character. We did not find this bridge in the
+> targeted literature search and welcome prior-art corrections.
+
 ## The result to lead with
 
 | Result | Kernel status | Prior art | Current novelty assessment |
@@ -99,8 +133,14 @@ They should enter the public theorem table only after each has:
   [Problems concerning Agrawal’s conjecture](https://aimath.org/WWN/primesinp/articles/html/38a/),
   AIM notes, 2003; Remark 5 records \(r^n\equiv r\pmod n\).
 - K. S. Williams and K. Hardy,
-  [A congruence for the index of a unit of a real abelian number field](https://people.math.carleton.ca/~williams/papers/pdf/139.pdf),
-  *Acta Arith.* 46 (1985), 57–72.
+  [A congruence for the index of a unit of a real abelian number field](https://doi.org/10.4064/aa-46-1-57-72),
+  *Acta Arith.* 46 (1985), 57–72; Theorem 5 and Remark 2 are the exact
+  golden-unit reference.
+- T. Váňa,
+  [Agrawal’s conjecture and Carmichael numbers](https://web.ics.upjs.sk/svoc2009/prace/7/Vana.pdf),
+  student scientific conference paper, Comenius University, 2009;
+  Lemmas 3.3–3.4 and the subsequent CRT reduction are the closest direct
+  precursors to the order and Korselt layers.
 - R. Popovych,
   [A note on Agrawal conjecture](https://eprint.iacr.org/2009/008.pdf),
   IACR ePrint 2009/008.
@@ -123,5 +163,11 @@ They should enter the public theorem table only after each has:
 - P. M. Voutier,
   [Primitive divisors of Lucas and Lehmer sequences, II](https://doi.org/10.5802/jtnb.168),
   *Journal de Théorie des Nombres de Bordeaux* 8 (1996), 251–274.
+- C. Corrales-Rodrigáñez and R. Schoof,
+  [The support problem and its elliptic analogue](https://doi.org/10.1006/jnth.1997.2114),
+  *Journal of Number Theory* 64 (1997), 276–290.
+- Y. Bilu, G. Hanrot and P. M. Voutier,
+  [Existence of primitive divisors of Lucas and Lehmer numbers](https://doi.org/10.1515/crll.2001.080),
+  *Journal für die reine und angewandte Mathematik* 539 (2001), 75–122.
 - The current Formal Conjectures entry contains the statement of Agrawal’s
   conjecture with `sorry`; it does not contain this verified core.

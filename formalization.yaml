@@ -14,7 +14,7 @@ automation:
       Statements and proofs written by an orchestrated multi-model pipeline
       using Claude-family and GPT-family models under human direction, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on twenty-seven headline declarations
+      AxiomAudit.lean runs #print axioms on fifty-four headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks

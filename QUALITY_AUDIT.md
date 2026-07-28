@@ -7,10 +7,16 @@ checking.
 ## Scope and method
 
 The exact dependency graph was extracted from the pinned build environment
+at source commit `5dad3f7754cc39beef5ca3a6dccb985327783bbe`,
 with `lean-code-reuse` at commit
 `aeeb9bb8fc873e46d54d2debedbe77d307037917`. The analyzer was extended
 locally only to register this private checkout and the `AgrawalCore`
 namespace. Its exact-tier name-resolution join rate was 99.07%.
+
+These statistics describe that pinned 40-module snapshot. The current
+release has 42 modules and 6,056 kernel-source lines; the two later modules
+are covered by the kernel, axiom, Comparator and CI checks, but are not
+silently folded into the older dependency-graph measurements below.
 
 Because statistical code-quality metrics are sensitive to project size and
 can be gamed, no composite score or rank is reported. We use the measurements
@@ -22,7 +28,7 @@ surface, the official comparator, and certificate replay.
 
 | Property | Measurement | Interpretation |
 |---|---:|---|
-| Core modules / declarations | 40 / 323 | Scope of the analyzed namespace |
+| Snapshot modules / declarations | 40 / 323 | Scope of the pinned analyzed namespace |
 | Exact dependency edges | 29,678 | Fully elaborated environment graph |
 | Dependency depth / cycles | 15 / 0% | Layered, acyclic declaration graph |
 | Internal edges crossing files | 50.37% | Modules are used across boundaries |

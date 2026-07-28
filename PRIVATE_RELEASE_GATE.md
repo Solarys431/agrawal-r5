@@ -64,6 +64,11 @@ single controlled transition rather than a scramble.
 
 - [x] The paper leads with the new bridge, not with classical prior art.
 - [x] Novelty and prior art separated result by result.
+- [x] Primary-source audit records Lenstra--Pomerance, Váňa,
+      Williams--Hardy, Popovych, Corrales--Schoof and the BHV
+      non-applicability boundary.
+- [x] `CLAIM_STATUS.md` separates Lean, Comparator, paper, finite,
+      conditional and open claims.
 - [x] Human direction and LLM assistance disclosed.
 - [x] Exact Lean declaration names included.
 - [ ] Final human authorship decision.
