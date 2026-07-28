@@ -29,6 +29,12 @@ jobs:
       - name: Print axioms of headline declarations
         run: lake env lean AxiomAudit.lean
 
+      - name: Audit public instance assumptions
+        run: lake env lean AssumptionAudit.lean
+
+      - name: Verify the complete upstream-candidate inventory
+        run: python3 tools/check_upstream_inventory.py
+
       - name: Audit the public theorem surface
         run: tools/check_release_surface.sh
 

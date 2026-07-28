@@ -19,7 +19,7 @@ Status date: 2026-07-28.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 42 `AgrawalCore` modules and 6,056
+The implementation currently contains 42 `AgrawalCore` modules and 6,057
 kernel-source lines. `AxiomAudit.lean` prints the axioms of 54 headline
 declarations. Four independent Comparator surfaces export seven statements.
 

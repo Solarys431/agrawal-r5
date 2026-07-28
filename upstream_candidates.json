@@ -1,0 +1,441 @@
+{
+  "schema": 1,
+  "audit_date": "2026-07-28",
+  "scope": {
+    "lean_namespace": "AgrawalCore",
+    "pinned_mathlib_commit": "4a7edd35ec64de7117995da659e9d4d80e6cca19",
+    "module_policy": "Every tracked AgrawalCore module is classified. A candidate entry means only that human Mathlib review may be worthwhile; it is not a claim of novelty or merge readiness.",
+    "searches": [
+      {
+        "kind": "pinned Mathlib source search",
+        "status": "passed",
+        "detail": "Exact identifiers and nearby semantic APIs were searched in the pinned checkout."
+      },
+      {
+        "kind": "GitHub Lean code-search canary",
+        "status": "passed",
+        "query": "Nat.Coprime extension:lean repo:leanprover-community/mathlib4",
+        "detail": "The canary returned Mathlib/Data/PNat/Prime.lean, so the negative exact-name searches were not produced by a dead search surface."
+      },
+      {
+        "kind": "public Lean exact-identifier search",
+        "status": "passed",
+        "detail": "The candidate identifiers were searched with extension:lean. Exact-name absence is only a deduplication signal; semantic duplication must still be judged by a Mathlib maintainer."
+      }
+    ]
+  },
+  "modules": [
+    {
+      "module": "AgrawalCore/AgrawalBridge.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.pow_mod_five",
+          "status": "generalize_first",
+          "note": "Replace the fixed exponent five by an arbitrary positive exponent before considering upstream."
+        }
+      ],
+      "note": "The remaining declarations are the project-specific cyclotomic bridge."
+    },
+    {
+      "module": "AgrawalCore/BoxLemma.lean",
+      "disposition": "candidate",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.prod_pairs_sub_prod_squares",
+          "status": "candidate",
+          "note": "A coordinate-free commutative-ring identity with no Agrawal-specific definitions."
+        },
+        {
+          "declaration": "AgrawalCore.prod_pairs_ge_prod_squares",
+          "status": "candidate",
+          "note": "Ordered-integer corollary of the preceding identity."
+        },
+        {
+          "declaration": "AgrawalCore.lt_two_mul_of_sq_le",
+          "status": "candidate",
+          "note": "Elementary natural-number size lemma; naming and intended API location need maintainer review."
+        }
+      ],
+      "note": "All three statements are independent of the Agrawal vocabulary."
+    },
+    {
+      "module": "AgrawalCore/CanonicalSignature.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "The definitions encode the exact primitive H4 signature."
+    },
+    {
+      "module": "AgrawalCore/CardBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Bridge to the Lenstra-Pomerance proposition."
+    },
+    {
+      "module": "AgrawalCore/ClassMod80.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Fixed residue-class arithmetic for the stated proposition."
+    },
+    {
+      "module": "AgrawalCore/Corollaries.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Mod-five wrappers around the golden-inertia development."
+    },
+    {
+      "module": "AgrawalCore/Entanglement.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Fixed fifth-cyclotomic identities."
+    },
+    {
+      "module": "AgrawalCore/FermatShadow.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Arithmetic specialization of the Agrawal congruence."
+    },
+    {
+      "module": "AgrawalCore/FibBridge.lean",
+      "disposition": "generalize_first",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.golden_pow_of_sq",
+          "status": "generalize_first",
+          "note": "Could become a reusable recurrence lemma after separating the fixed golden polynomial."
+        },
+        {
+          "declaration": "AgrawalCore.golden_pow_pred",
+          "status": "generalize_first",
+          "note": "Same recurrence family; should be compared with Mathlib's Fibonacci APIs before any proposal."
+        }
+      ],
+      "note": "The inertia conclusions remain project-specific."
+    },
+    {
+      "module": "AgrawalCore/FinalRowSize.lean",
+      "disposition": "candidate",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.not_modEq_one_of_one_lt_of_lt",
+          "status": "candidate",
+          "note": "Small representative cannot be congruent to one under the stated interval bounds."
+        },
+        {
+          "declaration": "AgrawalCore.not_modEq_sq_of_pos_of_lt_of_le",
+          "status": "candidate",
+          "note": "Generic interval obstruction for Nat.ModEq."
+        },
+        {
+          "declaration": "AgrawalCore.modEq_cancel_left_of_coprime",
+          "status": "deduplicate_semantically",
+          "note": "Not new: Mathlib 3 data/nat/modeq.lean already contained modeq_cancel_left_of_coprime. The present Lean 4 theorem is only a possible API-restoration wrapper around cancel_left_div_gcd."
+        },
+        {
+          "declaration": "AgrawalCore.mitm_secondProduct_unique",
+          "status": "generalize_first",
+          "note": "A useful uniqueness wrapper, but currently named after the project algorithm."
+        }
+      ],
+      "note": "The other declarations express the project-specific final-row cases."
+    },
+    {
+      "module": "AgrawalCore/GlobalGlue.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.dvd_of_forall_primeFactors_dvd",
+          "status": "deduplicate_semantically",
+          "note": "Squarefree prime-factor gluing is general, but a semantic Mathlib lemma may already subsume it."
+        }
+      ],
+      "note": "Polynomial local-to-global reconstruction remains application-specific."
+    },
+    {
+      "module": "AgrawalCore/GoldenMoment.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.quintic_index_of_fifth_mul_cube",
+          "status": "candidate",
+          "note": "Generic commutative-group character calculation into ZMod 5."
+        }
+      ],
+      "note": "The factorization itself is the mathematical centerpiece and stays in this project."
+    },
+    {
+      "module": "AgrawalCore/H4Core.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Exact formal reduction of the H4 wall."
+    },
+    {
+      "module": "AgrawalCore/IndexLemma.lean",
+      "disposition": "candidate",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.mul_dvd_gcd_mul",
+          "status": "deduplicate_semantically",
+          "note": "Generic divisibility inequality; compare against GCDMonoid lemmas."
+        },
+        {
+          "declaration": "AgrawalCore.coprime_mul_dvd",
+          "status": "deduplicate_semantically",
+          "note": "Generic coprime product divisibility; an equivalent may already exist under another orientation."
+        }
+      ],
+      "note": "No project vocabulary occurs in these statements."
+    },
+    {
+      "module": "AgrawalCore/InertiaCore.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Golden quadratic-algebra development."
+    },
+    {
+      "module": "AgrawalCore/Korselt.lean",
+      "disposition": "coordinate_with_existing_project",
+      "candidates": [],
+      "note": "Carmichael-number definitions should first be aligned with google-deepmind/formal-conjectures; no independent upstream proposal is made here."
+    },
+    {
+      "module": "AgrawalCore/LcmIdentity.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Fixed mod-80 Lenstra-Pomerance identity."
+    },
+    {
+      "module": "AgrawalCore/Lenstra.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Formalization of a literature proposition."
+    },
+    {
+      "module": "AgrawalCore/LenstraLocal.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Local proof of the literature proposition."
+    },
+    {
+      "module": "AgrawalCore/LenstraProp.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Congruence wrapper for the literature proposition."
+    },
+    {
+      "module": "AgrawalCore/LocalGlue.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Recomposition at Phi_5."
+    },
+    {
+      "module": "AgrawalCore/LocalTransport.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Literal T5 transport and scalar bridge."
+    },
+    {
+      "module": "AgrawalCore/MomentObstruction.lean",
+      "disposition": "generalize_first",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.moment_covariance",
+          "status": "generalize_first",
+          "note": "Potential finite-group/Fourier lemma after replacing the finite-field-specific presentation by an action-theoretic one."
+        },
+        {
+          "declaration": "AgrawalCore.pow_succ_eq_one_of_moment_ne_zero",
+          "status": "generalize_first",
+          "note": "Corollary of the covariance lemma; useful only with the same generalization."
+        }
+      ],
+      "note": "No priority claim is made for the elementary change-of-variables argument."
+    },
+    {
+      "module": "AgrawalCore/NoncanonicalWitness.lean",
+      "disposition": "certificate_specific",
+      "candidates": [],
+      "note": "Explicit finite witness and order certificates."
+    },
+    {
+      "module": "AgrawalCore/NormOrder.lean",
+      "disposition": "candidate",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.orderOf_norm_power",
+          "status": "candidate",
+          "note": "Generic order formula for a power in a commutative monoid."
+        },
+        {
+          "declaration": "AgrawalCore.orderOf_norm_decomposition",
+          "status": "candidate",
+          "note": "Exact decomposition of an order through a norm power."
+        },
+        {
+          "declaration": "AgrawalCore.orderOf_norm_kernel",
+          "status": "candidate",
+          "note": "Exact order of the kernel component."
+        },
+        {
+          "declaration": "AgrawalCore.orderOf_norm_power_dvd",
+          "status": "candidate",
+          "note": "Divisibility form suitable for a small orderOf API extension."
+        }
+      ],
+      "note": "The later defect-product arithmetic stays project-local."
+    },
+    {
+      "module": "AgrawalCore/OrderBound.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Order bound for zeta_5 minus one."
+    },
+    {
+      "module": "AgrawalCore/Partition.lean",
+      "disposition": "literature_specific",
+      "candidates": [],
+      "note": "Reusable-looking divisibility steps implement the Williams/McIntosh paired-Korselt mechanism and should remain with that API unless Mathlib gains Carmichael numbers."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Intrinsic four-coefficient H4 bridge."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveCoefficients.lean",
+      "disposition": "generalize_first",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.gamma_remainder_eq",
+          "status": "generalize_first",
+          "note": "Could become a generic monic-quadratic remainder formula; currently fixed to the gamma polynomial."
+        }
+      ],
+      "note": "Other declarations are coefficients for the fixed gamma polynomial."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveEvaluation.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.coeffs_zero_of_both_gamma_evals",
+          "status": "generalize_first",
+          "note": "Generic two-point linear-form separation after replacing the fixed constants 2 and 5."
+        }
+      ],
+      "note": "The divisibility and four-coefficient wrappers are project-specific."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveOrderBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Exact primitive H4 order profile."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveScalarBridge.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.orderOf_eq_of_mul_eq_one",
+          "status": "generalize_first",
+          "note": "The inverse-elements order equality should be stated for a general group before upstream consideration."
+        }
+      ],
+      "note": "The gamma-to-golden scalar map is project-specific."
+    },
+    {
+      "module": "AgrawalCore/PrimitiveSupport.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Four-coefficient support compression and H4 semiorders."
+    },
+    {
+      "module": "AgrawalCore/QuadraticGamma.lean",
+      "disposition": "generalize_first",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.gamma_pow_formula",
+          "status": "generalize_first",
+          "note": "A fixed Lucas-sequence power formula; compare with and generalize over Mathlib's Lucas sequence APIs."
+        }
+      ],
+      "note": "The present statement is intentionally specialized to X^2-5X+5."
+    },
+    {
+      "module": "AgrawalCore/Reciprocity.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Specialization of quadratic reciprocity to five."
+    },
+    {
+      "module": "AgrawalCore/Recompose.lean",
+      "disposition": "deduplicate_semantically",
+      "candidates": [],
+      "note": "The elementary polynomial evaluation lemmas should be compared with existing Polynomial.eval APIs; no candidate is declared yet."
+    },
+    {
+      "module": "AgrawalCore/ScalarCompleteness.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Constructive sign repair for the T5 transport."
+    },
+    {
+      "module": "AgrawalCore/SingleSupportExclusion.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Closed H4 subfamily and its explicit factorizations."
+    },
+    {
+      "module": "AgrawalCore/SupportBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Golden support witnesses."
+    },
+    {
+      "module": "AgrawalCore/TwoAdicJaw.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.pow_two_dvd_of_not_dvd_half",
+          "status": "deduplicate_semantically",
+          "note": "Generic two-adic divisibility step; likely expressible using existing factorization APIs."
+        }
+      ],
+      "note": "The jaw itself is specific to the Agrawal bridge."
+    },
+    {
+      "module": "AgrawalCore/TwoRowTransport.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.finalSmallRow_transport",
+          "status": "generalize_first",
+          "note": "Generic pairwise Nat.ModEq transport, currently named in project language."
+        },
+        {
+          "declaration": "AgrawalCore.smallRows_triangle",
+          "status": "generalize_first",
+          "note": "Generic CRT compatibility on a gcd modulus."
+        },
+        {
+          "declaration": "AgrawalCore.coprime_right_of_dvd_mul_sub_one",
+          "status": "deduplicate_semantically",
+          "note": "Elementary coprimality consequence; compare against existing Nat.Coprime APIs."
+        },
+        {
+          "declaration": "AgrawalCore.boundedLift_exclusion",
+          "status": "candidate",
+          "note": "Generic bounded-representative exclusion for Nat.ModEq."
+        }
+      ],
+      "note": "The pure/twisted row wrappers remain project-specific."
+    },
+    {
+      "module": "AgrawalCore/UnconditionalDichotomy.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Logical interface for this project's open local/global walls."
+    }
+  ]
+}

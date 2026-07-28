@@ -30,7 +30,7 @@ lemma eps_mul_eps' : (eps : GoldenRing p) * eps' = -1 := by
   unfold eps'
   linear_combination -h
 
-set_option linter.unusedSectionVars false in
+omit [Fact p.Prime] in
 /-- Potenze di una qualunque radice dell'equazione aurea, via Fibonacci. -/
 lemma golden_pow_of_sq {x : GoldenRing p} (hx : x ^ 2 = x + 1) :
     ∀ n : ℕ, x ^ (n + 1)
@@ -42,6 +42,7 @@ lemma golden_pow_of_sq {x : GoldenRing p} (hx : x ^ 2 = x + 1) :
     push_cast
     linear_combination (Nat.fib (n + 1) : GoldenRing p) * hx
 
+omit [Fact p.Prime] in
 lemma golden_pow_pred {x : GoldenRing p} (hx : x ^ 2 = x + 1) {n : ℕ}
     (hn : 1 ≤ n) : x ^ n
       = (Nat.fib n : GoldenRing p) * x + (Nat.fib (n - 1) : GoldenRing p) := by

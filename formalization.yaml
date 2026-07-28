@@ -20,7 +20,10 @@ automation:
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
-      Solution statement before kernel replay. No proof step is accepted on
+      Solution statement before kernel replay. AssumptionAudit.lean inspects
+      all 319 public theorems and 185 instance binders, with 49 current
+      proof-route dependencies declared fail-closed; the complete 42-module
+      upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
     description: >-

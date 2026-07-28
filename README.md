@@ -22,6 +22,11 @@ The conservative result-by-result prior-art assessment is in
 [`QUALITY_AUDIT.md`](QUALITY_AUDIT.md) records exact-environment architecture
 measurements and their deliberately limited interpretation. The verification
 tier of every claim is summarized in [`CLAIM_STATUS.md`](CLAIM_STATUS.md).
+The gate-by-gate application of the public process is recorded in
+[`PIPELINE_AUDIT.md`](PIPELINE_AUDIT.md), and the complete module-level library
+triage is in [`UPSTREAM_CANDIDATES.md`](UPSTREAM_CANDIDATES.md). The measured
+public-instance boundary is documented separately in
+[`ASSUMPTION_AUDIT.md`](ASSUMPTION_AUDIT.md).
 
 <details>
 <summary><strong>UNICO/NOUS two-judge pipeline</strong></summary>
@@ -44,16 +49,18 @@ implemented by the pinned kernel build, per-declaration `#print axioms`,
 fail-closed release checks, four Comparator surfaces and CI replay.  The second
 judge is evidenced by the dated prior-art map, the fidelity log in
 `formalization.yaml`, model-based adversarial review, claim corrections
-recorded in Git, and regressions added after failures.  Two taste-canon checks
-are not claimed as complete in this release: a mechanical assumption-removal
-audit of every public theorem and a full upstream-candidate inventory for
-auxiliary lemmas.
+recorded in Git, and regressions added after failures. The final two
+taste-canon checks are now reproducible: `AssumptionAudit.lean` performs a
+fail-closed audit of every public theorem's instance assumptions against a
+declared proof-route-debt inventory, while `upstream_candidates.json`
+classifies every tracked formal module and is validated by
+`tools/check_upstream_inventory.py`.
 
 </details>
 
 ## Lean core
 
-The implementation core consists of forty-two modules (6,056 source lines)
+The implementation core consists of forty-two modules (6,057 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -62,6 +69,8 @@ statements, not part of the submitted implementation. Build:
 ```
 lake exe cache get
 lake build
+lake env lean AssumptionAudit.lean
+python3 tools/check_upstream_inventory.py
 ```
 
 The tracked [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms`

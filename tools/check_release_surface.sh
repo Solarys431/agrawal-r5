@@ -3,6 +3,22 @@ set -euo pipefail
 
 status=0
 
+required_release_files=(
+  ASSUMPTION_AUDIT.md
+  AssumptionAudit.lean
+  PIPELINE_AUDIT.md
+  UPSTREAM_CANDIDATES.md
+  upstream_candidates.json
+  tools/check_upstream_inventory.py
+)
+
+for required_file in "${required_release_files[@]}"; do
+  if [[ ! -f "${required_file}" ]]; then
+    echo "Required release-audit file is missing: ${required_file}" >&2
+    status=1
+  fi
+done
+
 if rg -n '\b(sorry|admit|native_decide)\b|^[[:space:]]*(axiom|opaque)[[:space:]]' \
     AgrawalCore AgrawalCore.lean Comparator/*/Solution.lean; then
   echo "Forbidden proof escape hatch found in the verified implementation." >&2
@@ -35,7 +51,10 @@ if [[ "${status}" -ne 0 ]]; then
   exit "${status}"
 fi
 
+python3 tools/check_upstream_inventory.py
+
 echo "Release surface audit: PASS"
 echo "  implementation: no sorry/admit/native_decide/project axiom/opaque"
 echo "  challenges: Mathlib-only and solution-independent"
 echo "  comparator triples: 4"
+echo "  process audits: assumption debt and upstream inventory present"
