@@ -3,8 +3,11 @@
 <details open>
 <summary><strong>English</strong></summary>
 
-A human-directed, LLM-assisted structural study of Agrawal's conjecture
-at r = 5. The flagship theorem identifies the quadratic moment unit
+A human-operated, LLM-assisted structural study of Agrawal's conjecture
+at r = 5. Daniele Cappello initiated and operated the project, curated its
+artifacts, and is responsible for their provenance, stated scope, and public
+release; this role is not presented as specialist mathematical verification.
+The flagship theorem identifies the quadratic moment unit
 from the congruence with the golden unit:
 
 ```
@@ -330,8 +333,10 @@ finite all-inert certificate, not a universal incompatibility theorem.
 <summary><strong>Italiano</strong></summary>
 
 Uno studio strutturale della congettura di Agrawal per r = 5,
-prodotto da una pipeline multi-modello sotto direzione umana, con audit
-avversariali indipendenti tra modelli.
+prodotto da una pipeline multi-modello avviata e operata da Daniele Cappello,
+responsabile della provenienza degli artefatti, della portata dichiarata e del
+rilascio pubblico, senza rivendicare una validazione matematica specialistica.
+La pipeline ha impiegato audit avversariali indipendenti tra modelli.
 Questo repository è la superficie di verifica: il nucleo Lean, il
 paper e i certificati computazionali. La congettura **non** è
 dimostrata; i due problemi aperti (l'ipotesi locale H4 e la vacuità
@@ -339,7 +344,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene quarantadue moduli (6.056 righe
+Il nucleo di implementazione contiene quarantadue moduli (6.057 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova
@@ -444,7 +449,9 @@ corpus prime-first a 10^9). Contengono hash, non artefatti.
 
 ---
 
-Pipeline operation and release stewardship: **Daniele Cappello**.
+Project initiation, pipeline operation, artifact curation, provenance, scope,
+and release stewardship: **Daniele Cappello**. This responsibility is distinct
+from specialist mathematical verification, which is explicitly invited.
 Mathematical development, paper, and formalization: **UNICO/NOUS**, an
 orchestrated multi-model pipeline using GPT-5.6-Sol (xhigh) in Codex and
 Claude Opus 4.8/5 in Claude Code. Every Lean declaration is checked by the

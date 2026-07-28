@@ -5,7 +5,7 @@ project:
   name: "agrawal-r5"
   authors:
     - "UNICO/NOUS multi-model pipeline — mathematical development, paper, and formalization"
-    - "Daniele Cappello — pipeline operation, release stewardship, and human accountability"
+    - "Daniele Cappello — project initiation, pipeline operation, artifact curation, and accountability for provenance, stated scope, and public release"
   license: "Apache-2.0"
 
 automation:
@@ -13,7 +13,8 @@ automation:
     description: >-
       Statements and proofs written by an orchestrated multi-model pipeline
       using GPT-5.6-Sol (xhigh) in Codex and Claude Opus 4.8/5 in Claude Code
-      under human operation, with
+      under human operation and release curation, without claiming specialist
+      mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
       AxiomAudit.lean runs #print axioms on fifty-four headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations

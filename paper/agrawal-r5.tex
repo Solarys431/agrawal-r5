@@ -36,11 +36,14 @@
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
 \author{UNICO/NOUS}
-\thanks{Preprint v22 of July 28, 2026. Mathematical development,
+\thanks{Preprint v23 of July 28, 2026. Mathematical development,
 paper, and formalization were produced within the UNICO/NOUS pipeline,
-operated by Daniele Cappello, using GPT-5.6-Sol (xhigh) in Codex and Claude
-Opus 4.8/5 in Claude Code. Model-based adversarial review was used during
-development; no human specialist review is claimed. A kernel-pure
+initiated and operated by Daniele Cappello, who curated the artifacts and is
+responsible for their provenance, stated scope, and public release. This role
+is not presented as specialist mathematical verification. The pipeline used
+GPT-5.6-Sol (xhigh) in Codex and Claude Opus 4.8/5 in Claude Code.
+Model-based adversarial review was used during development; no human
+specialist review is claimed. A kernel-pure
 Lean~4/Mathlib layer, with no \texttt{sorry}, covers the elementary core
 identified in the text. Separate Mathlib-only comparator challenges
 deliberately contain statement holes and are not implementation proofs.
@@ -120,9 +123,11 @@ to a CRT-combinable system of Korselt-type congruences; Popovych
 known; distributed searches found none in the ranges attempted.
 The paired Carmichael/Lucas--Carmichael conditions themselves predate this
 conjecture: Williams posed the analogous existence problem in 1977
-\cite{Williams1977}, and McIntosh--Mitra Dipra later developed finiteness and
-search results for the corresponding Williams numbers
-\cite{McIntoshDipra2015}.
+\cite{Williams1977}; McIntosh recorded the associated cross-support
+compatibility \cite{McIntosh2014}; Leng derived closely related congruence
+consequences in the setting of combined Fermat--Lucas tests \cite{Leng2017};
+and McIntosh--Mitra Dipra later developed finiteness and search results for
+the corresponding Williams numbers \cite{McIntoshDipra2015}.
 
 This paper is a study of the \emph{local} obstruction: what happens at a
 single prime $p$, in the ring $A = \F_p[X]/(\Phi_r)$. Our findings can be
@@ -218,7 +223,7 @@ $(\zeta_5-1)^{p^2} = -\zeta_5^{-1}(\zeta_5-1)$ and the bound
 $T_p \mid 10(p^2-1)$ are all in the Lenstra--Pomerance notes \cite{LP}.
 The paradigm of studying subgroups of $(\F_p[X]/(\Phi_r))^\times$ generated
 by cyclotomic elements such as $X - 1$, with lower bounds on their orders,
-is Popovych's \cite{Popovych2009}; our set $S(p,r)$ is a specific
+is Popovych's \cite{Popovych2009,Popovych2013}; our set $S(p,r)$ is a specific
 formulation within that paradigm, not a new idea. The reduction of the
 congruence to a CRT system of Korselt-type conditions appears in
 V\'a\v na's 2009 student paper \cite{Vana2009}, which deserves to be better
@@ -230,7 +235,13 @@ order decomposition. The quintic character of the golden ratio is classical
 Williams \cite{Williams1975}); the translation between power residuosity
 and splitting in Kummer extensions is completely classical (see e.g.\
 Helou \cite{Helou} for norm-residue symbols and cyclotomic units), as is
-the Fibonacci torus of Cubre--Rouse \cite{CR2014}.
+the Fibonacci torus of Cubre--Rouse \cite{CR2014}. The support theorem of
+Corrales--Rodrigáñez--Schoof \cite{CorralesSchoof1997} has different
+quantifiers from the moving-exponent finite-support problem here.
+Primitive-divisor theorems for Lucas and Lehmer sequences
+\cite{Voutier1996,BHV2001}, and Breuer's work on orders of Gauss periods
+\cite{Breuer2020}, are likewise close in method but do not directly impose
+the class-specific restrictions required below.
 
 What we have not found in the literature examined is: the moment theory
 applied to this congruence (Section~\ref{sec:moments}); the identification
@@ -245,8 +256,11 @@ occurrences.
 
 \subsection*{Disclosure and verification}
 The results were found and assembled in the UNICO/NOUS multi-model pipeline,
-operated by Daniele Cappello, with model-based adversarial review. No human
-specialist review is claimed. Results labelled
+initiated and operated by Daniele Cappello, who curated the public artifacts
+and accepts responsibility for their provenance, stated scope, and release.
+This process responsibility is not a claim of specialist mathematical
+verification. Model-based adversarial review was used; no human specialist
+review is claimed. Results labelled
 as theorems are mathematical claims of the paper; only the subset named in
 the repository's claim-status table is additionally checked end to end by
 Lean. Several deeper results are presented with proof architectures whose
@@ -1355,7 +1369,8 @@ remains on this route.
 
 We note finally that $D_h = N_{\Q(\sqrt5)/\Q}(U^h - 1)$ is a
 Lehmer--Pierce sequence for the quadratic integer $U$; the literature on
-primitive divisors of such sequences (see e.g.\ \cite{Flatters}) may
+primitive divisors of Lucas, Lehmer and Lehmer--Pierce sequences
+(see e.g.\ \cite{Voutier1996,BHV2001,Flatters}) may
 provide structural information on the divisors that our inertia filter
 then screens, though it does not replace the filter itself.
 
@@ -1846,6 +1861,18 @@ R.~J. McIntosh, M.~Dipra,
 J. Number Theory 147 (2015), 81--91,
 \url{https://doi.org/10.1016/j.jnt.2014.06.005}.
 
+\bibitem{McIntosh2014}
+R.~J. McIntosh,
+\emph{Carmichael numbers with $p+1\mid n-1$},
+Integers 14 (2014), Paper A59,
+\url{https://ftp.icm.edu.pl/packages/EMIS/journals/INTEGERS/papers/o59/o59.pdf}.
+
+\bibitem{Leng2017}
+A.~Leng,
+\emph{Independence of the Miller--Rabin and Lucas probable prime tests},
+research report (2017),
+\url{https://math.mit.edu/research/highschool/primes/materials/2016/Leng.pdf}.
+
 \bibitem{RS1962}
 J.~B. Rosser, L.~Schoenfeld,
 \emph{Approximate formulas for some functions of prime numbers},
@@ -1868,9 +1895,14 @@ student scientific conference paper, Comenius University, Bratislava (2009),
 R.~Popovych,
 \emph{A note on Agrawal conjecture},
 Cryptology ePrint Archive, Report 2009/008,
-\url{https://eprint.iacr.org/2009/008};
-see also \emph{Lower bounds on the orders of subgroups connected with
-Agrawal conjecture}, by the same author.
+\url{https://eprint.iacr.org/2009/008}.
+
+\bibitem{Popovych2013}
+R.~Popovych,
+\emph{Lower bounds on the orders of subgroups connected with Agrawal
+conjecture},
+Carpathian Math. Publ. 5 (2013), 310--314,
+\url{https://doi.org/10.15330/cmp.5.2.310-314}.
 
 \bibitem{HD2021}
 A.~Hegde, P.~Devaraj,
@@ -1914,6 +1946,31 @@ P.~Cubre, J.~Rouse,
 \emph{Divisibility properties of the Fibonacci entry point},
 Proc. Amer. Math. Soc. 142 (2014), 3771--3785,
 \url{https://doi.org/10.1090/S0002-9939-2014-12269-6}.
+
+\bibitem{CorralesSchoof1997}
+C.~Corrales-Rodrigáñez, R.~Schoof,
+\emph{The support problem and its elliptic analogue},
+J. Number Theory 64 (1997), 276--290,
+\url{https://doi.org/10.1006/jnth.1997.2114}.
+
+\bibitem{Breuer2020}
+F.~Breuer,
+\emph{Multiplicative orders of Gauss periods and the arithmetic of real
+quadratic fields},
+arXiv:2006.10344 (2020),
+\url{https://arxiv.org/abs/2006.10344}.
+
+\bibitem{Voutier1996}
+P.~M. Voutier,
+\emph{Primitive divisors of Lucas and Lehmer sequences, II},
+J. Théor. Nombres Bordeaux 8 (1996), 251--274,
+\url{https://doi.org/10.5802/jtnb.168}.
+
+\bibitem{BHV2001}
+Y.~Bilu, G.~Hanrot, P.~M. Voutier,
+\emph{Existence of primitive divisors of Lucas and Lehmer numbers},
+J. Reine Angew. Math. 539 (2001), 75--122,
+\url{https://doi.org/10.1515/crll.2001.080}.
 
 \bibitem{KW2021}
 H.~Kadiri, P.-J. Wong,
