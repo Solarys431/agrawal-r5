@@ -4,15 +4,16 @@ version: "v0.3"
 project:
   name: "agrawal-r5"
   authors:
-    - "Daniele Cappello — mathematical direction and project operation"
-    - "UNICO/NOUS multi-model pipeline — exploration and formalization"
+    - "UNICO/NOUS multi-model pipeline — mathematical development, paper, and formalization"
+    - "Daniele Cappello — pipeline operation, release stewardship, and human accountability"
   license: "Apache-2.0"
 
 automation:
   - method: "LLM-assisted formalization"
     description: >-
       Statements and proofs written by an orchestrated multi-model pipeline
-      using Claude-family and GPT-family models under human direction, with
+      using GPT-5.6-Sol (xhigh) in Codex and Claude Opus 4.8/5 in Claude Code
+      under human operation, with
       every declaration compiled by the Lean 4 kernel. The tracked
       AxiomAudit.lean runs #print axioms on fifty-four headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
@@ -28,16 +29,14 @@ automation:
       80 below 100000).
 
 review:
-  status: "private adversarial model review; human specialist review pending"
+  status: "model-based adversarial pre-review completed; human specialist review invited"
   details: >-
     Two independent model-based pre-publication reviews on 2026-07-26, both
-    instructed to find faults rather than confirm. Both returned NOT READY.
-    The substantive
-    finding was that an earlier version of this file claimed as new an
-    observation already present in the AIM proof; that claim has been
-    withdrawn (see the first source entry). The repository remains private
-    while the repaired version is re-audited. No human specialist review is
-    claimed.
+    instructed to find faults rather than confirm. Both initially returned
+    NOT READY. The substantive finding was that an earlier version of this
+    file claimed as new an observation already present in the AIM proof; that
+    claim was withdrawn and the release boundary repaired. No human
+    specialist review is claimed; this public artifact explicitly invites it.
 
 fidelity:
   divergences:
@@ -63,7 +62,7 @@ sources:
   - title: "The moment obstruction"
     authors:
       - "this pipeline"
-    id: "private repository; public identifier pending"
+    id: "https://github.com/Solarys431/agrawal-r5"
     type: "finite Fourier lemma used by the local theory"
     license: "Apache-2.0"
     author_contacted: "n/a"
@@ -81,7 +80,7 @@ sources:
   - title: "The golden moment of Agrawal's congruence at r = 5"
     authors:
       - "this pipeline"
-    id: "private repository; public identifier pending"
+    id: "https://github.com/Solarys431/agrawal-r5"
     type: "new bridge derived in the course of this study"
     license: "Apache-2.0"
     author_contacted: "n/a"
@@ -102,7 +101,7 @@ sources:
   - title: "The arithmetic H4 profile and its 2-adic saturation form"
     authors:
       - "this pipeline"
-    id: "private repository; public identifier pending"
+    id: "https://github.com/Solarys431/agrawal-r5"
     type: "exact formal reduction of the golden-inertia open problem"
     license: "Apache-2.0"
     author_contacted: "n/a"
@@ -167,7 +166,7 @@ sources:
   - title: "The unconditional local-or-global witness dichotomy"
     authors:
       - "this pipeline"
-    id: "private repository; public identifier pending"
+    id: "https://github.com/Solarys431/agrawal-r5"
     type: "formal interface theorem for the squarefree reduction"
     license: "Apache-2.0"
     author_contacted: "n/a"
@@ -187,7 +186,7 @@ sources:
   - title: "Four-coefficient primitive support: kernel arithmetic interface"
     authors:
       - "this pipeline"
-    id: "private repository; public identifier pending"
+    id: "https://github.com/Solarys431/agrawal-r5"
     type: "formal arithmetic interface for an open golden-inertia reduction"
     license: "Apache-2.0"
     author_contacted: "n/a"

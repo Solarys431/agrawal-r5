@@ -1,12 +1,20 @@
 .lake/
 __pycache__/
 *.py[cod]
+
+# Apple metadata/resource-fork ghosts
+.DS_Store
+._*
+__MACOSX/
+
 MANDATO_VERIFICA_SOL.md
 VERDETTO_SOL_PREVOLO.md
 ZULIP_REVIEW_INVITE_DRAFT.md
 *ZULIP*.md
 *ANNUNCIO*.md
 *COMUNICATO*.md
+PRIVATE_RELEASE_GATE.md
+ADVERSARIAL_AUDIT_*.md
 paper/*.aux
 paper/*.log
 paper/*.out

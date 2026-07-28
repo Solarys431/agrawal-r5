@@ -4,6 +4,10 @@
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+\hypersetup{
+  pdftitle={Local structure of Agrawal's congruence at r = 5},
+  pdfauthor={UNICO/NOUS}
+}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -31,14 +35,17 @@
 
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
-\author{Anonymous draft for review}
-\thanks{Private draft v21 of July 28, 2026. Results obtained within the UNICO/NOUS pipeline
-(an AI-assisted discovery-and-certification workflow with independent cross-model
-adversarial review). A kernel-pure Lean~4/Mathlib implementation layer, with no
-\texttt{sorry}, covers the elementary core identified in the text; separate
-trusted challenge statements contain explicit holes for statement comparison.
-All computational claims come
-with reproducible scripts, hashes and stated domains.}
+\author{UNICO/NOUS}
+\thanks{Preprint v22 of July 28, 2026. Mathematical development,
+paper, and formalization were produced within the UNICO/NOUS pipeline,
+operated by Daniele Cappello, using GPT-5.6-Sol (xhigh) in Codex and Claude
+Opus 4.8/5 in Claude Code. Model-based adversarial review was used during
+development; no human specialist review is claimed. A kernel-pure
+Lean~4/Mathlib layer, with no \texttt{sorry}, covers the elementary core
+identified in the text. Separate Mathlib-only comparator challenges
+deliberately contain statement holes and are not implementation proofs.
+All computational claims come with reproducible scripts, hashes and stated
+domains.}
 
 \begin{document}
 
@@ -111,6 +118,11 @@ to a CRT-combinable system of Korselt-type congruences; Popovych
 \cite{Popovych2009} generalized Lenstra's proposition; Hegde and Devaraj
 \cite{HD2021} constructed further heuristic families. No counterexample is
 known; distributed searches found none in the ranges attempted.
+The paired Carmichael/Lucas--Carmichael conditions themselves predate this
+conjecture: Williams posed the analogous existence problem in 1977
+\cite{Williams1977}, and McIntosh--Mitra Dipra later developed finiteness and
+search results for the corresponding Williams numbers
+\cite{McIntoshDipra2015}.
 
 This paper is a study of the \emph{local} obstruction: what happens at a
 single prime $p$, in the ring $A = \F_p[X]/(\Phi_r)$. Our findings can be
@@ -232,8 +244,9 @@ contribution claimed here; we would welcome pointers to earlier
 occurrences.
 
 \subsection*{Disclosure and verification}
-The results were found and assembled in a human-directed, AI-assisted
-pipeline with independent cross-model adversarial review. Results labelled
+The results were found and assembled in the UNICO/NOUS multi-model pipeline,
+operated by Daniele Cappello, with model-based adversarial review. No human
+specialist review is claimed. Results labelled
 as theorems are mathematical claims of the paper; only the subset named in
 the repository's claim-status table is additionally checked end to end by
 Lean. Several deeper results are presented with proof architectures whose
@@ -354,7 +367,8 @@ $406$ historically known local exceptions ($397$ at $r{=}3$, $8$ at $r{=}5$,
 $1$ at $r{=}7$) have all even moments vanishing, as the theory predicts.
 \end{verification}
 
-\section{$r = 5$: the golden unit}\label{sec:golden}
+\section{\texorpdfstring{$r = 5$: the golden unit}{r = 5: the golden unit}}
+\label{sec:golden}
 
 From now on $r = 5$, $p \equiv 1 \pmod 5$ in this section. Fix $z$ of order
 $5$ in $\F_p^\times$, coordinate $\sqrt5 = 1 + 2(z + z^{-1})$, and set
@@ -381,7 +395,9 @@ $5$ \emph{and} $\eps$ to be simultaneous quintic residues. Via the Dickson
 system of quintic cyclotomy, $\ind_5(\eps) \equiv 3v - u$ and $\ind_5(5)
 \equiv -2u - v \pmod 5$; the criterion for $\eps$ is classical
 (Williams--Hardy \cite{WH1985}, Thm~5 and Remark~2), while its
-identification with $M_2$ is new. The pair $(M_0, M_2)$ is a linear
+identification with $M_2$ is the candidate new bridge claimed here: it was
+not found in the targeted search, and priority remains provisional pending
+specialist review. The pair $(M_0, M_2)$ is a linear
 coordinate system on the Dickson plane $(u,v)$ mod $5$ (determinant $4$), so
 the degenerate locus $M_0 = M_2 = 0$ is exactly $u \equiv v \equiv 0$.
 
@@ -1120,7 +1136,8 @@ on $120 + 120$ random cases; the twisted witness of
 Section~\ref{sec:computations} as regression test). Cyclic-resultant
 recurrences of this kind are classical objects \cite{Hillar}; the
 reduction from Agrawal's row to this specific resultant trap, including
-the twisted branch after Frobenius elimination, appears to be new.
+the twisted branch after Frobenius elimination, was not found in the
+targeted search. We make no absolute priority claim.
 
 Two further exact statements make the fibers effectively computable.
 
@@ -1813,9 +1830,21 @@ Ann. of Math. (2) 139 (1994), 703--722,
 
 \bibitem{HB2007}
 D.~R. Heath-Brown,
-\emph{Carmichael numbers with three prime factors},
+\emph{Carmichael number with three prime factors},
 Hardy-Ramanujan J. 30 (2007), 6--12,
 \url{https://doi.org/10.46298/hrj.2007.156}.
+
+\bibitem{Williams1977}
+H.~C. Williams,
+\emph{On numbers analogous to the Carmichael numbers},
+Canad. Math. Bull. 20 (1977), 133--143,
+\url{https://doi.org/10.4153/CMB-1977-025-9}.
+
+\bibitem{McIntoshDipra2015}
+R.~J. McIntosh, M.~Dipra,
+\emph{Carmichael numbers with $p+1\mid n+1$},
+J. Number Theory 147 (2015), 81--91,
+\url{https://doi.org/10.1016/j.jnt.2014.06.005}.
 
 \bibitem{RS1962}
 J.~B. Rosser, L.~Schoenfeld,

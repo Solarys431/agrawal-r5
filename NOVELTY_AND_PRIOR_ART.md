@@ -1,9 +1,9 @@
 # Novelty and prior-art map
 
-Private working document — 2026-07-26. This file is deliberately more
-conservative than a release announcement. “Potentially new” means that a
-targeted search did not find the statement; it does not replace review by a
-specialist in cyclotomy or primality testing.
+Public conservative assessment — updated 2026-07-28. “Potentially new” means
+that a targeted search did not find the statement; it does not replace review
+by a specialist in cyclotomy or primality testing. Corrections and earlier
+references are explicitly welcome.
 
 ## Verified source-level audit (updated 2026-07-28)
 
@@ -155,7 +155,7 @@ They should enter the public theorem table only after each has:
   [Carmichael numbers with \(p+1\mid n-1\)](https://ftp.icm.edu.pl/packages/EMIS/journals/INTEGERS/papers/o59/o59.pdf),
   *Integers* 14 (2014), Paper A59; Section 4 explicitly
   records \(\gcd(p_i-1,p_j+1)=2\).
-- R. J. McIntosh and S. Mitra Dipra,
+- R. J. McIntosh and M. Dipra,
   [Carmichael numbers with \(p+1\mid n+1\)](https://www.sciencedirect.com/science/article/pii/S0022314X14002108),
   *Journal of Number Theory* 147 (2015), 81–91.
 - F. Breuer,

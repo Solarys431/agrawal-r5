@@ -11,20 +11,45 @@ from the congruence with the golden unit:
 ind₅(U₂) = 3 · ind₅((1 + √5) / 2).
 ```
 
-The identity and its index consequence are checked by Lean. This
-repository is the private verification surface: the formal core, the
-paper, and the computational certificates. We do **not** prove the
-conjecture; the two open problems (golden inertia/H4 and global
-emptiness of the fibers) are stated precisely in the paper.
+The identity and its index consequence are checked by Lean. This repository
+is the public verification surface: the formal core, the paper, and the
+computational certificates. We do **not** prove the conjecture; the two open
+problems (golden inertia/H4 and global emptiness of the fibers) are stated
+precisely in the paper.
 
-Release is intentionally on hold. The conservative claim-by-claim assessment
-is in [`NOVELTY_AND_PRIOR_ART.md`](NOVELTY_AND_PRIOR_ART.md), and the private
-publication checklist is in
-[`PRIVATE_RELEASE_GATE.md`](PRIVATE_RELEASE_GATE.md). A separate
+The conservative result-by-result prior-art assessment is in
+[`NOVELTY_AND_PRIOR_ART.md`](NOVELTY_AND_PRIOR_ART.md). A separate
 [`QUALITY_AUDIT.md`](QUALITY_AUDIT.md) records exact-environment architecture
-measurements and their deliberately limited interpretation.
-The verification tier of every public claim is summarized in
-[`CLAIM_STATUS.md`](CLAIM_STATUS.md).
+measurements and their deliberately limited interpretation. The verification
+tier of every claim is summarized in [`CLAIM_STATUS.md`](CLAIM_STATUS.md).
+
+<details>
+<summary><strong>UNICO/NOUS two-judge pipeline</strong></summary>
+
+<p align="center">
+  <img src="assets/pipeline-schema-dark.svg"
+       alt="UNICO/NOUS two-judge pipeline: mathematical quality gates and Lean kernel verification"
+       width="720">
+</p>
+
+This project follows the public
+[`UNICO/NOUS two-judge pipeline`](https://github.com/Solarys431/unico-lean-proofs/blob/main/PIPELINE.md).
+The diagram separates two decisions that this repository never conflates:
+Lean checks whether a formal statement follows from its hypotheses; prior-art
+review and mathematical judgment decide whether the statement is interesting,
+well scoped, and responsibly publishable.
+
+The application is auditable rather than merely asserted.  The first judge is
+implemented by the pinned kernel build, per-declaration `#print axioms`,
+fail-closed release checks, four Comparator surfaces and CI replay.  The second
+judge is evidenced by the dated prior-art map, the fidelity log in
+`formalization.yaml`, model-based adversarial review, claim corrections
+recorded in Git, and regressions added after failures.  Two taste-canon checks
+are not claimed as complete in this release: a mechanical assumption-removal
+audit of every public theorem and a full upstream-candidate inventory for
+auxiliary lemmas.
+
+</details>
 
 ## Lean core
 
@@ -242,7 +267,7 @@ SHA-256 index of the working artifacts of the wider study) and
 
 ### Exact level-intersection reduction of H4
 
-`certificates/h4_levels/` contains the current private audit surface
+`certificates/h4_levels/` contains the current audit surface
 for the remaining golden-inertia wall. With
 
 ```text
@@ -305,7 +330,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene quarantuno moduli (5.807 righe
+Il nucleo di implementazione contiene quarantadue moduli (6.056 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova
@@ -410,6 +435,8 @@ corpus prime-first a 10^9). Contengono hash, non artefatti.
 
 ---
 
-Direction and operation of the pipeline: **Daniele Cappello**.
-Formalization: Claude (Anthropic), orchestrated multi-model pipeline; every
-declaration checked by the Lean 4 kernel.
+Pipeline operation and release stewardship: **Daniele Cappello**.
+Mathematical development, paper, and formalization: **UNICO/NOUS**, an
+orchestrated multi-model pipeline using GPT-5.6-Sol (xhigh) in Codex and
+Claude Opus 4.8/5 in Claude Code. Every Lean declaration is checked by the
+Lean 4 kernel; model agreement is never treated as proof.

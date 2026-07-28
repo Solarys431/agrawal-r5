@@ -10,7 +10,7 @@ The exact dependency graph was extracted from the pinned build environment
 at source commit `5dad3f7754cc39beef5ca3a6dccb985327783bbe`,
 with `lean-code-reuse` at commit
 `aeeb9bb8fc873e46d54d2debedbe77d307037917`. The analyzer was extended
-locally only to register this private checkout and the `AgrawalCore`
+locally only to register this checkout and the `AgrawalCore`
 namespace. Its exact-tier name-resolution join rate was 99.07%.
 
 These statistics describe that pinned 40-module snapshot. The current
@@ -52,7 +52,7 @@ theorems reuse a small algebraic core rather than rebuilding it.
 1. The four implementation files that imported all of `Mathlib` were changed
    to named data/algebra modules plus the tactic bundle. A fresh textual scan
    now finds no exact `import Mathlib` in `AgrawalCore`.
-2. Three independent Mathlib-only Challenge surfaces were added, with
+2. Four independent Mathlib-only Challenge surfaces were added, with
    solutions compiled separately and replayed through a pinned official
    comparator.
 3. Comparator declarations received their own tracked `#print axioms` audit.
