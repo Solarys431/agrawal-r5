@@ -57,8 +57,9 @@ four properties at once:
 The public claim must remain:
 
 > We formalize the factorization of the quadratic moment unit and its
-> consequence for every quintic index. To our knowledge, the identification
-> with the Agrawal moment has not appeared previously.
+> consequence for every quintic index. We did not find the identification
+> with the Agrawal moment in the targeted literature search and welcome
+> prior-art corrections.
 
 It must **not** become:
 

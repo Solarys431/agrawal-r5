@@ -141,8 +141,9 @@ H4 is intentionally absent because it remains open.
 
 `lenstra_proposition` is the statement of Lenstra and Pomerance
 ([AIM notes, 2003](https://aimath.org/WWN/primesinp/articles/html/50a/),
-pp. 30–32), which to our knowledge had not been machine-checked before. Three
-things must be said plainly.
+pp. 30–32). The targeted search found no prior machine-checked version, but
+that negative result is not an absolute priority claim. Three things must be
+said plainly.
 
 **The mathematics is theirs, not ours.** The AIM proof already contains the
 identity (ζ₅−1)^(p²) = −ζ₅^(−1)(ζ₅−1), the bound on the order of ζ₅−1, and the
