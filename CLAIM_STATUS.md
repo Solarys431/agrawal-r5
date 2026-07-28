@@ -27,13 +27,13 @@ declarations. Four independent Comparator surfaces export seven statements.
 
 | Claim | Verification | Prior-art / novelty posture |
 |---|---|---|
-| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(\operatorname{ind}_5(U_2)=3\operatorname{ind}_5(\varepsilon)\) | **LEAN**, **COMPARATOR**: `golden_moment_factorization`, `zmod_golden_moment_index` | Williams–Hardy computed the classical golden-unit index. Only its identification with Agrawal's quadratic moment is a candidate new bridge; priority is provisional |
+| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(\operatorname{ind}_5(U_2)=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Index consequence: **LEAN** (`zmod_golden_moment_index`) | Williams–Hardy computed the classical golden-unit index. Only its identification with Agrawal's quadratic moment is a candidate new bridge; priority is provisional |
 | Agrawal's congruence at \(r=5\) implies the base-5 Fermat congruence for squarefree \(n\) | **LEAN**, **COMPARATOR**: `agrawal_fermat_shadow` | Underlying implication is classical (Lenstra); the contribution is the end-to-end formalization |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
-| Intrinsic primitive support is equivalent to simultaneous divisibility of four canonical coefficients | **LEAN**, **COMPARATOR**: `primitiveFourVanish_iff_dvd_D` and related declarations | Candidate new reduction; the paper-level bridge to the original integral \(G_{r,s}\) remains outside the kernel |
-| No split H-profile prime has \(p-1=8q^e\) | **LEAN**, **COMPARATOR**: `no_split_single_odd_support` | Universal excluded family; priority unassessed |
-| Deterministic final-row size bounds and meet-in-the-middle uniqueness | **LEAN**, **COMPARATOR**: declarations in `FinalRowSize.lean` | Exact arithmetic lemmas; no asymptotic multiplicative-order lower bound is claimed |
+| Intrinsic primitive support is equivalent to simultaneous divisibility of four canonical coefficients | Equivalence: **LEAN** (`primitiveFourVanish_iff_dvd_D`). Its exact-order consequence is independently **COMPARATOR**-checked as `four_coefficient_bridge` | Candidate new reduction; the paper-level bridge to the original integral \(G_{r,s}\) remains outside the kernel |
+| No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
+| Deterministic final-row size bounds and meet-in-the-middle uniqueness | **LEAN**; independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | Exact arithmetic lemmas; no asymptotic multiplicative-order lower bound is claimed |
 | Two-row transport, CRT triangle, odd shadow and quantized gaps | **LEAN**: declarations in `TwoRowTransport.lean` | Exact consequences of the row congruences; mathematical priority unassessed |
 
 ## Paper-level results not fully represented end to end in Lean
