@@ -15,7 +15,7 @@ current statement or name. No upstream issue or pull request has been opened.
 - Audit date: 2026-07-29.
 - Mathlib: pinned commit
   `4a7edd35ec64de7117995da659e9d4d80e6cca19`.
-- Every one of the 45 tracked `AgrawalCore/*.lean` modules has exactly one
+- Every one of the 46 tracked `AgrawalCore/*.lean` modules has exactly one
   disposition.
 - Candidate identifiers were searched in the pinned source and through
   GitHub's Lean code search. A positive canary query against
@@ -46,6 +46,9 @@ The strongest self-contained candidates are:
 - the generic character calculation
   `quintic_index_of_fifth_mul_cube`;
 - the four order-through-a-power declarations in `NormOrder.lean`;
+- the generic cyclic-group power-map criterion and residual-index depth
+  principle in `DyadicDepth.lean`, pending semantic deduplication and a more
+  invariant statement;
 - elementary `Nat.ModEq` interval and bounded-representative lemmas.
 
 Several other declarations are mathematically reusable but should first be

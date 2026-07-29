@@ -41,5 +41,6 @@ import AgrawalCore.CanonicalSignature
 import AgrawalCore.PrimitiveOrderBridge
 import AgrawalCore.PrimitiveScalarBridge
 import AgrawalCore.LevelReciprocity
+import AgrawalCore.DyadicDepth
 import AgrawalCore.FinalRowSize
 import AgrawalCore.TwoRowTransport

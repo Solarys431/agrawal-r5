@@ -19,8 +19,8 @@ Status date: 2026-07-29.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 45 `AgrawalCore` modules and 7,315
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 72 headline
+The implementation currently contains 46 `AgrawalCore` modules and 7,616
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 77 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -33,6 +33,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
 | Intrinsic primitive support is equivalent to simultaneous divisibility of four canonical coefficients | Equivalence: **LEAN** (`primitiveFourVanish_iff_dvd_D`). Its exact-order consequence is independently **COMPARATOR**-checked as `four_coefficient_bridge` | Candidate new reduction; the paper-level bridge to the original integral \(G_{r,s}\) remains outside the kernel |
 | Level reciprocity for a good split primitive divisor: if \(p-1=4rs\,h\), then \(h\) is even iff \(p\equiv1\pmod5\), and (since \(5\nmid4rs\)) iff \(5\mid h\) | **LEAN** (`dvd_D_residual_multiplier_even_iff_mod_five_one`, `dvd_D_residual_multiplier_even_iff_five_dvd`, `dvd_D_residual_multiplier_mod_ten_table`, `dvd_D_class_specific_lower_bounds`) | Universal restriction eliminating five of the ten residual classes; for fixed \(rs\bmod5\), only two classes remain, the odd one is explicitly \(7,1,9,3\), and the resulting four lower bounds are kernel-checked. It does not prove H4. The Gaussian-period core is classical; priority of this H4 application is unassessed |
+| Residual power depth: for \(d>0\), \(d\mid4rs\), one has \(-\gamma\in(\mathbb F_p^\times)^d\iff d\mid h\); for even \(d\), equivalently \(\operatorname{lcm}(d,5)\mid h\) | **LEAN** (`shifted_generator_isPower_iff`, `neg_isPower_iff_residual_multiplier_dvd`, `dvd_D_neg_gamma_isPower_iff_dvd`, `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`) | The cyclic-group core is classical in spirit; its exact primitive-H4 specialization and priority are unassessed. The quartic corollary is \(-\gamma\in(\mathbb F_p^\times)^4\iff20\mid h\). This refines level reciprocity but does not prove H4 |
 | No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
 | Deterministic final-row size bounds and meet-in-the-middle uniqueness | **LEAN**; independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | Exact arithmetic lemmas; no asymptotic multiplicative-order lower bound is claimed |
 | Two-row transport, CRT triangle, odd shadow and quantized gaps | **LEAN**: declarations in `TwoRowTransport.lean` | Exact consequences of the row congruences; mathematical priority unassessed |

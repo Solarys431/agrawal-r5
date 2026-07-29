@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-five modules (7,315 source lines)
+The implementation core consists of forty-six modules (7,616 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -161,6 +161,8 @@ not a premise of the Lean theorem.
 | **Level reciprocity: for \(p-1=4rs\,h\), \(h\) even iff \(p\equiv1\pmod5\), and in the good range iff \(5\mid h\)** | `dvd_D_residual_multiplier_even_iff_mod_five_one`, `dvd_D_residual_multiplier_even_iff_five_dvd` | `LevelReciprocity.lean` |
 | Five-class residual restriction: \(10\mid h\) iff \(p\equiv1\pmod5\) | `dvd_D_ten_dvd_residual_multiplier_iff_mod_five_one` | `LevelReciprocity.lean` |
 | **Class-specific residual table in the \(p\equiv4\pmod5\) branch: \(rs\bmod5=1,2,3,4\) forces \(h\bmod10=7,1,9,3\), hence four explicit lower bounds for \(p\)** | `dvd_D_residual_multiplier_mod_ten_table`, `dvd_D_class_specific_lower_bounds` | `LevelReciprocity.lean` |
+| **Residual power depth: for \(d>0\), \(d\mid4rs\), \(-\gamma\) is a \(d\)-th power iff \(d\mid h\)** | `dvd_D_neg_gamma_isPower_iff_dvd` | `DyadicDepth.lean` |
+| Even-depth coupling with the quintic lock; in particular \(-\gamma\) is a fourth power iff \(20\mid h\) | `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`, `dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd` | `DyadicDepth.lean` |
 | No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |

@@ -61,6 +61,11 @@ introduced.
 #print axioms AgrawalCore.dvd_D_residual_multiplier_branch_dichotomy
 #print axioms AgrawalCore.dvd_D_residual_multiplier_mod_ten_table
 #print axioms AgrawalCore.dvd_D_class_specific_lower_bounds
+#print axioms AgrawalCore.shifted_generator_isPower_iff
+#print axioms AgrawalCore.neg_isPower_iff_residual_multiplier_dvd
+#print axioms AgrawalCore.dvd_D_neg_gamma_isPower_iff_dvd
+#print axioms AgrawalCore.dvd_D_neg_gamma_isPower_iff_lcm_five_dvd
+#print axioms AgrawalCore.dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max

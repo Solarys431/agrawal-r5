@@ -217,6 +217,23 @@
       "note": "The residual-multiplier consequences are specific to the primitive H4 level."
     },
     {
+      "module": "AgrawalCore/DyadicDepth.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.mem_powMonoidHom_range_iff_pow_card_div_eq_one",
+          "status": "deduplicate_semantically",
+          "note": "Generic d-th-power criterion in a finite cyclic group; compare carefully with existing power-map range and kernel-cardinality APIs."
+        },
+        {
+          "declaration": "AgrawalCore.shifted_generator_isPower_iff",
+          "status": "generalize_first",
+          "note": "The residual-index power-depth principle is generic, but its present shifted-generator formulation should be replaced by an invariant exact-order statement before any upstream proposal."
+        }
+      ],
+      "note": "The cyclic-group core is reusable; the finite-field and primitive H4 corollaries are project-specific."
+    },
+    {
       "module": "AgrawalCore/LcmIdentity.lean",
       "disposition": "project_specific",
       "candidates": [],

@@ -827,6 +827,54 @@ Combining this congruence with the oddness of \(h\) gives the four
 entries of (4.10), and the lower bounds follow from \(p=4rs\,h+1\).
 \end{proof}
 
+\begin{theorem}[residual power depth]\label{thm:powerdepth}
+Under the hypotheses of Theorem~\ref{thm:levelreciprocity}, put
+\(m=4rs\), and let \(d>0\) divide \(m\). Then
+\[
+\boxed{\quad
+-\gamma\in(\F_p^\times)^d
+\quad\Longleftrightarrow\quad d\mid h.
+\quad}
+\]
+If \(d\) is even, then equivalently
+\[
+\boxed{\quad
+-\gamma\in(\F_p^\times)^d
+\quad\Longleftrightarrow\quad \operatorname{lcm}(d,5)\mid h.
+\quad}
+\]
+In particular,
+\[
+-\gamma\in(\F_p^\times)^4
+\quad\Longleftrightarrow\quad20\mid h.
+\tag{4.12}
+\]
+\end{theorem}
+
+\begin{proof}
+The element \(\gamma\) has exact order \(m\) in the cyclic group
+\(\F_p^\times\), whose order is \(mh\). Since \(4\mid m\),
+\(\gamma^{m/2}=-1\), and
+\[
+-\gamma=\gamma^{m/2+1}.
+\]
+Moreover \(\gcd(m,m/2+1)=1\), so \(-\gamma\) also has exact order \(m\).
+For \(d\mid m\), the standard power-map criterion in a finite cyclic
+group gives
+\[
+-\gamma\in(\F_p^\times)^d
+\quad\Longleftrightarrow\quad
+(-\gamma)^{mh/d}=1
+\quad\Longleftrightarrow\quad
+m\mid\frac{mh}{d}
+\quad\Longleftrightarrow\quad d\mid h.
+\]
+If \(d\) is even, then \(d\mid h\) forces \(h\) even; by
+Theorem~\ref{thm:levelreciprocity}, this is equivalent in the good
+range to \(5\mid h\). Thus \(d\mid h\) is equivalent to
+\(\operatorname{lcm}(d,5)\mid h\). The quartic case is \(d=4\).
+\end{proof}
+
 The intersection ideal
 \[
 \mathfrak I_{r,s}
@@ -910,7 +958,7 @@ with $d$ squarefree and $(d,10)=1$. In either split branch, the number of
 primes up to $X$ satisfying the complete mobile H-profile obeys
 \[
 N_{H,i}(X)\ll\frac{X}{(\log X)^2}.
-\tag{4.12}
+\tag{4.13}
 \]
 \end{theorem}
 
@@ -923,7 +971,7 @@ remainder for the explicit choice \(D=X^{1/7}\). This is a theorem under
 the stated GRH family, not an unconditional estimate.
 
 H4 remains open. Its candidates have unconditional density zero and the
-GRH compression (4.5), but neither statement implies emptiness. The
+GRH compression (4.13), but neither statement implies emptiness. The
 finite-level Frobenius classes of the scalar and cyclotomic systems remain
 nonempty at every tested and proved level. The pure metaplectic and
 spinorial routes do not see more than the already recorded residue data,

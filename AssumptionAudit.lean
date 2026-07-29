@@ -57,6 +57,7 @@ private def declaredProofRouteDebts : List String :=
     "AgrawalCore.instNontrivialPhi5Ring:[1]",
     "AgrawalCore.lenstra_local:[1]",
     "AgrawalCore.localFive_isUnit:[1]",
+    "AgrawalCore.mem_powMonoidHom_range_iff_pow_card_div_eq_one:[2, 3]",
     "AgrawalCore.natCast_eq_zero_of_dvd:[1]",
     "AgrawalCore.of_injective:[1]",
     "AgrawalCore.orderOf_norm_decomposition:[2]",
@@ -77,6 +78,8 @@ private def declaredProofRouteDebts : List String :=
     "AgrawalCore.pow_eq_one_of_dvd_lucas:[1]",
     "AgrawalCore.sqrt5_isUnit:[1]",
     "AgrawalCore.sqrt5_sq:[1]",
+    "AgrawalCore.shifted_generator_isFourthPower_iff:[2, 3]",
+    "AgrawalCore.shifted_generator_isPower_iff:[2, 3]",
     "AgrawalCore.support_witness:[1]",
     "AgrawalCore.u2_isUnit:[1]",
     "AgrawalCore.u3_isUnit:[1]",
@@ -101,6 +104,7 @@ run_cmd liftTermElabM do
 
   let mut theoremCount : Nat := 0
   let mut instanceBinderCount : Nat := 0
+  let mut debtBinderCount : Nat := 0
   let mut actualDebts : Array String := #[]
 
   for (name, info) in declarations do
@@ -114,6 +118,7 @@ run_cmd liftTermElabM do
     let unused : Array Nat :=
       type.getUnusedForallInstanceBinderIdxsWhere (fun _ => true)
     unless unused.isEmpty do
+      debtBinderCount := debtBinderCount + unused.size
       actualDebts := actualDebts.push s!"{name}:{unused.toList}"
 
   let missing :=
@@ -130,7 +135,8 @@ run_cmd liftTermElabM do
   logInfo m!"  theorems inspected: {theoremCount}"
   logInfo m!"  instance binders inspected: {instanceBinderCount}"
   logInfo m!"  generalized assumptions removed in this audit: 2"
-  logInfo m!"  declared proof-route debts: {actualDebts.size}"
+  logInfo m!"  declared proof-route debt entries: {actualDebts.size}"
+  logInfo m!"  declared proof-route binders: {debtBinderCount}"
   logInfo m!"  unrecorded debts: 0"
 
 end AgrawalCore.AssumptionAudit
