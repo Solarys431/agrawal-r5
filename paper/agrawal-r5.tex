@@ -36,7 +36,7 @@
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
 \author{UNICO/NOUS}
-\thanks{Preprint v23 of July 28, 2026. Mathematical development,
+\thanks{Preprint v24 of July 29, 2026. Mathematical development,
 paper, and formalization were produced within the UNICO/NOUS pipeline,
 initiated and operated by Daniele Cappello, who curated the artifacts and is
 responsible for their provenance, stated scope, and public release. This role
@@ -285,6 +285,19 @@ identification with the integral integer \(B_s\) remains paper-level,
 and the class-specific implication \((4.8)\) remains precisely H4; neither
 is represented by a hidden axiom.
 
+For the golden moment, the kernel layer now also closes the previously
+separate product-to-sum interface.  The declaration
+\texttt{quintic\_index\_indexedMomentUnit\_eq\_moment} proves that applying
+a quintic index to the weighted multiplicative unit gives the additive
+moment \(M_j\);
+\texttt{indexedMomentUnit\_two\_eq\_quadraticMomentUnit} enumerates
+\((\mathbf Z/5\mathbf Z)^\times\) and proves the weights \(1,4,4,1\);
+and \texttt{cyclotomic\_quadratic\_moment\_eq\_three\_golden\_index}
+composes this with the golden factorization.  These declarations use no
+published index table or computer-algebra transcript as a premise.  The
+derivation of the covariance family from the complete external definition
+of \(S(p,r)\) remains a separate paper-level interface.
+
 \section{The local set and its discrete-logarithm form}\label{sec:local}
 
 Fix distinct primes $p, r$ with $r$ odd. Let $k = \ord_r(p)$, $q = p^k$,
@@ -411,7 +424,15 @@ system of quintic cyclotomy, $\ind_5(\eps) \equiv 3v - u$ and $\ind_5(5)
 (Williams--Hardy \cite{WH1985}, Thm~5 and Remark~2), while its
 identification with $M_2$ is the candidate new bridge claimed here: it was
 not found in the targeted search, and priority remains provisional pending
-specialist review. The pair $(M_0, M_2)$ is a linear
+specialist review.  As a normalization check independent of the Lean proof,
+a tracked replay computes \(M_2\) directly for every one of the 22 rows in
+Williams--Hardy Table~5 and obtains
+\[
+  M_2 = 3\,\ind_5(\eps)\pmod 5
+\]
+in 22/22 cases.  This finite comparison checks conventions, signs and the
+factor \(3\); it is neither a proof premise nor evidence of historical
+priority. The pair $(M_0, M_2)$ is a linear
 coordinate system on the Dickson plane $(u,v)$ mod $5$ (determinant $4$), so
 the degenerate locus $M_0 = M_2 = 0$ is exactly $u \equiv v \equiv 0$.
 

@@ -63,7 +63,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-two modules (6,057 source lines)
+The implementation core consists of forty-three modules (6,254 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -88,6 +88,7 @@ this audit after every kernel build.
 | **Moment obstruction: Mⱼ ≠ 0 ⟹ tʲ⁺¹ = 1** | `pow_succ_eq_one_of_moment_ne_zero` | `MomentObstruction.lean` |
 | **Golden factorization: U₂ = (√5)⁵ε³** | `golden_moment_factorization` | `GoldenMoment.lean` |
 | **Golden theorem: ind₅(U₂) = 3·ind₅(ε)** | `zmod_golden_moment_index` | `GoldenMoment.lean` |
+| **Exact product-to-sum bridge: M₂ = 3·ind₅(ε)** | `cyclotomic_quadratic_moment_eq_three_golden_index` | `GoldenMomentBridge.lean` |
 | Index lemma | `mul_dvd_gcd_mul` | `IndexLemma.lean` |
 | Golden Frobenius: ε^p = 1 − ε (inert case) | `golden_frobenius` | `InertiaCore.lean` |
 | Golden half-period: ε^(p+1) = −1 | `golden_pow_p_succ` | `InertiaCore.lean` |
@@ -173,6 +174,12 @@ a separate `Solution.lean`. CI runs pinned
 checks declaration identity, permitted axioms and kernel replay. Exact
 versions and local replay commands are in [`COMPARATOR.md`](COMPARATOR.md).
 H4 is intentionally absent because it remains open.
+
+The separate
+[`certificates/CERTIFICATO_TABELLA5_WILLIAMS_HARDY.md`](certificates/CERTIFICATO_TABELLA5_WILLIAMS_HARDY.md)
+replays all twenty-two rows of Williams--Hardy Table 5; this is an external
+normalization check, not a premise of the Lean theorem or evidence of
+historical priority.
 
 ### On the Lenstra–Pomerance proposition
 

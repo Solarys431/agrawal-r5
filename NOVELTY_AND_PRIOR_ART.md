@@ -1,11 +1,11 @@
 # Novelty and prior-art map
 
-Public conservative assessment — updated 2026-07-28. “Potentially new” means
+Public conservative assessment — updated 2026-07-29. “Potentially new” means
 that a targeted search did not find the statement; it does not replace review
 by a specialist in cyclotomy or primality testing. Corrections and earlier
 references are explicitly welcome.
 
-## Verified source-level audit (updated 2026-07-28)
+## Verified source-level audit (updated 2026-07-29)
 
 The following boundaries were checked against primary texts, not inferred
 from titles or secondary summaries.
@@ -16,6 +16,7 @@ from titles or secondary summaries.
 | Váňa (2009), Lemmas 3.3–3.4 | Multiplicative relations among the residue exponents, the ring-level bound \(\rho\mid10(\lambda^2-1)\), and a CRT-combinable Korselt system | The field-component localization, exact decomposition and necessity results are presented as refinements, not as the first CRT reduction |
 | Popovych (2009) | The subgroup-growth paradigm in the cyclotomic quotient and a generalization of Lenstra’s construction | The use of cyclotomic subgroups is prior art |
 | Williams–Hardy (1985), Theorem 5 and Remark 2 | The exact quintic index of the golden unit in Dickson coordinates and its fifth-power criterion | Only the bridge from Agrawal’s quadratic moment to that classical character is a candidate new contribution |
+| Breuer (2020/2021) | Multiplicative orders of Gauss periods and their relation with units of real quadratic fields, including the \(p=5\) quadratic field | Adjacent prior art for the general cyclotomic/quadratic-unit theme; it uses the Gauss period and an inert-prime order problem, not the split-prime identity \(M_2=3\operatorname{ind}_5(\varepsilon)\) |
 | Corrales-Rodrigáñez–Schoof (1997) | A support theorem whose hypothesis quantifies over every exponent and almost all primes | It does not directly settle the moving-exponent, finite-support problem here |
 | Bilu–Hanrot–Voutier (2001) | Primitive divisors for Lucas and Lehmer sequences beyond the uniform exceptional range | The fourth-order norm sequences used in the fiber analysis are outside that direct Lucas/Lehmer hypothesis; the BHV threshold is not imported |
 
@@ -43,7 +44,7 @@ Publication-safe wording:
 
 | Result | Kernel status | Prior art | Current novelty assessment |
 |---|---|---|---|
-| `U₂ = (√5)⁵ ε³` and `ind₅(U₂) = 3 ind₅(ε)` | Lean-checked in `GoldenMoment.lean` | Williams–Hardy (1985), Theorem 5, computes `ind₅(ε)` in Dickson coordinates | **Potentially new bridge.** The classical side is the golden-unit character; the proposed new content is that Agrawal’s quadratic moment is exactly that character. Specialist priority check required. |
+| `U₂ = (√5)⁵ ε³` and `M₂ = 3 ind₅(ε)` | Factorization Lean-checked in `GoldenMoment.lean`; exact product-to-sum interface Lean-checked in `GoldenMomentBridge.lean` | Williams–Hardy (1985), Theorem 5, computes `ind₅(ε)` in Dickson coordinates; Breuer is adjacent but studies a different period/order problem | **Potentially new bridge.** The classical side is the golden-unit character; the proposed new content is that Agrawal’s quadratic moment is exactly that character. Specialist priority check required. |
 
 This is the scientifically strongest release narrative because it has all
 four properties at once:
@@ -54,12 +55,19 @@ four properties at once:
 4. a kernel-checked implementation using an actual quintic index on
    `(ZMod p)ˣ`, not only a symbolic placeholder.
 
+As an external normalization check, the reproducible script
+`certificates/verifica_tabella5_williams_hardy.py` compares the directly
+computed \(M_2\) with three times every one of the 22 golden-unit indices in
+Williams--Hardy Table 5 and obtains 22/22 agreement.  This is not a premise of
+the Lean theorem, not a universal proof and not evidence of historical
+priority.
+
 The public claim must remain:
 
-> We formalize the factorization of the quadratic moment unit and its
-> consequence for every quintic index. We did not find the identification
-> with the Agrawal moment in the targeted literature search and welcome
-> prior-art corrections.
+> We formalize the factorization of the quadratic moment unit, the exact
+> product-to-sum interface with Agrawal's additive moment, and its consequence
+> for every quintic index. We did not find this explicit identification in the
+> targeted literature search and welcome prior-art corrections.
 
 It must **not** become:
 

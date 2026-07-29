@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "audit_date": "2026-07-28",
+  "audit_date": "2026-07-29",
   "scope": {
     "lean_namespace": "AgrawalCore",
     "pinned_mathlib_commit": "4a7edd35ec64de7117995da659e9d4d80e6cca19",
@@ -162,6 +162,12 @@
         }
       ],
       "note": "The factorization itself is the mathematical centerpiece and stays in this project."
+    },
+    {
+      "module": "AgrawalCore/GoldenMomentBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Exact project interface between the additive Agrawal moment and the multiplicative golden-moment unit at r = 5."
     },
     {
       "module": "AgrawalCore/H4Core.lean",

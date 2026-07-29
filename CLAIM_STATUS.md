@@ -6,7 +6,7 @@ certification and open conjectures. A Lean check establishes that a formal
 statement follows from its formal hypotheses; it does not establish
 historical priority or automatically validate a stronger prose statement.
 
-Status date: 2026-07-28.
+Status date: 2026-07-29.
 
 ## Verification tiers
 
@@ -19,15 +19,15 @@ Status date: 2026-07-28.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 42 `AgrawalCore` modules and 6,057
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 54 headline
+The implementation currently contains 43 `AgrawalCore` modules and 6,254
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 57 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
 
 | Claim | Verification | Prior-art / novelty posture |
 |---|---|---|
-| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(\operatorname{ind}_5(U_2)=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Index consequence: **LEAN** (`zmod_golden_moment_index`) | Williams–Hardy computed the classical golden-unit index. Only its identification with Agrawal's quadratic moment is a candidate new bridge; priority is provisional |
+| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(M_2=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Product-to-sum interface and concrete \(r=5\) moment: **LEAN** (`quintic_index_indexedMomentUnit_eq_moment`, `indexedMomentUnit_two_eq_quadraticMomentUnit`, `cyclotomic_quadratic_moment_eq_three_golden_index`) | Williams–Hardy computed the classical golden-unit index. Only its explicit identification with the Agrawal quadratic moment is a candidate new bridge; priority is provisional. Their 22 published Table 5 rows are replayed independently, 22/22, as a normalization check—not as a proof premise or novelty test |
 | Agrawal's congruence at \(r=5\) implies the base-5 Fermat congruence for squarefree \(n\) | **LEAN**, **COMPARATOR**: `agrawal_fermat_shadow` | Underlying implication is classical (Lenstra); the contribution is the end-to-end formalization |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |

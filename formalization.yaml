@@ -16,14 +16,14 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on fifty-four headline declarations
+      AxiomAudit.lean runs #print axioms on fifty-seven headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 319 public theorems and 185 instance binders, with 49 current
-      proof-route dependencies declared fail-closed; the complete 42-module
+      all 336 public theorems and 189 instance binders, with 49 current
+      proof-route dependencies declared fail-closed; the complete 43-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
@@ -89,12 +89,19 @@ sources:
     license: "Apache-2.0"
     author_contacted: "n/a"
     prior_work: >-
-      Formalized on 2026-07-26 as `golden_moment_factorization`,
-      `golden_moment_index`, and `zmod_golden_moment_index`. If ζ satisfies
+      The factorization was formalized on 2026-07-26 as
+      `golden_moment_factorization`, `golden_moment_index`, and
+      `zmod_golden_moment_index`.  On 2026-07-29 the exact product-to-sum
+      interface was added as `quintic_index_indexedMomentUnit_eq_moment`,
+      `indexedMomentUnit_two_eq_quadraticMomentUnit`, and
+      `cyclotomic_quadratic_moment_eq_three_golden_index`. If ζ satisfies
       Φ₅(ζ)=0, the weighted quadratic moment unit
       U₂=∏_{a=1}^4(ζ^a−1)^(a² mod 5) factors as (√5)^5 ε^3, where
       √5=1+2(ζ+ζ^4) and ε=1+ζ+ζ^4. Consequently every quintic index satisfies
-      ind₅(U₂)=3 ind₅(ε).
+      ind₅(U₂)=3 ind₅(ε), and the new interface proves that this index is
+      literally the additive moment M₂ for the concrete family
+      u_a=ζ^a−1.  No published index table or computer-algebra transcript is
+      used as a premise.
       PRIOR ART BOUNDARY: Williams and Hardy, Acta Arith. 46 (1985), Theorem 5,
       compute the quintic index of ε in Dickson coordinates. That classical
       character is not ours. The potentially new contribution is identifying

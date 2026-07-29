@@ -13,6 +13,9 @@ introduced.
 #print axioms AgrawalCore.pow_succ_eq_one_of_moment_ne_zero
 #print axioms AgrawalCore.golden_moment_factorization
 #print axioms AgrawalCore.zmod_golden_moment_index
+#print axioms AgrawalCore.quintic_index_indexedMomentUnit_eq_moment
+#print axioms AgrawalCore.indexedMomentUnit_two_eq_quadraticMomentUnit
+#print axioms AgrawalCore.cyclotomic_quadratic_moment_eq_three_golden_index
 #print axioms AgrawalCore.agrawal_fermat_shadow
 #print axioms AgrawalCore.agrawal_two_adic_jaw
 #print axioms AgrawalCore.orderOf_norm_power

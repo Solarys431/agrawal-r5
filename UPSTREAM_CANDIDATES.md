@@ -12,10 +12,10 @@ current statement or name. No upstream issue or pull request has been opened.
 
 ## Reproducible scope
 
-- Audit date: 2026-07-28.
+- Audit date: 2026-07-29.
 - Mathlib: pinned commit
   `4a7edd35ec64de7117995da659e9d4d80e6cca19`.
-- Every one of the 42 tracked `AgrawalCore/*.lean` modules has exactly one
+- Every one of the 43 tracked `AgrawalCore/*.lean` modules has exactly one
   disposition.
 - Candidate identifiers were searched in the pinned source and through
   GitHub's Lean code search. A positive canary query against

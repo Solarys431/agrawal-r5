@@ -1,6 +1,6 @@
 # Public-instance assumption audit
 
-Audit date: 2026-07-28.
+Audit date: 2026-07-29.
 
 This audit implements gate 5 of the
 [UNICO/NOUS two-judge pipeline](https://github.com/Solarys431/unico-lean-proofs/blob/main/PIPELINE.md).
@@ -16,8 +16,8 @@ theorem in `AgrawalCore`. The ordinary `lake --wfail build` simultaneously
 checks Lean's `unusedSectionVars` linter against the elaborated proof terms.
 Together they give a reproducible boundary:
 
-- 319 public theorems inspected;
-- 185 instance binders inspected;
+- 336 public theorems inspected;
+- 189 instance binders inspected;
 - two genuinely removable assumptions eliminated from
   `golden_pow_of_sq` and `golden_pow_pred`;
 - 49 instance binders absent from the proposition body but still used by the
@@ -46,8 +46,8 @@ Expected final lines:
 
 ```text
 Public hypothesis-minimality audit: PASS
-  theorems inspected: 319
-  instance binders inspected: 185
+  theorems inspected: 336
+  instance binders inspected: 189
   generalized assumptions removed in this audit: 2
   declared proof-route debts: 49
   unrecorded debts: 0
