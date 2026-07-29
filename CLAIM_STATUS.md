@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 50 `AgrawalCore` modules and 8,411
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 95 headline
+The implementation currently contains 51 `AgrawalCore` modules and 8,561
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 100 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -32,6 +32,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | Exact squarefree ingress at \(r=5\): the global congruence is equivalent to `LocalS5 p (n/p)` at every prime factor | **LEAN**: `squarefree_ingress_iff` | Kernel completion of the arithmetic interface used by the paper's structure theorem; no novelty claim is made for the classical Frobenius reduction |
 | A good local row of residue \(2\) or \(3\bmod5\) is automatically odd and therefore yields the normalized order-four witness | **LEAN**: `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | Removes a previously implicit parity seam by comparing the rows at \(\zeta\) and \(\zeta^{-1}\); priority unassessed |
 | Every squarefree counterexample candidate has either a split order-four witness or an odd inert quartic skeleton with at least three prime factors | **LEAN**: `squarefree_counterexample_concrete_dichotomy`, `quarticSkeleton_card_ge_three` | The global-to-quartic reduction is now kernel-checked. The subsequent general-\(s\) reduction from this skeleton to finite fibers remains **PAPER** |
+| Every literal quartic row is congruent to the corresponding Frobenius power modulo \(\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)\); hence every factor of the inert skeleton satisfies the exact \(1\)-or-\(p^2\) row | **LEAN**: `localS5_modEq_frobenius_power`, `quarticOrderRow_of_local`, `quarticOrderRows_of_skeleton`, `squarefree_counterexample_order_dichotomy` | This kernel-checks the order-rigidity interface used by the explicit CRT system. It does not construct or empty the terminal resultant fibers |
 | Every two-prime candidate violating \(n^2\equiv1\pmod5\) has a split local order-four witness; local H4 therefore excludes it | **LEAN**: `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | Unconditional reduction of the bifactor case to H4, followed by an explicitly conditional closure. It does not prove H4 and therefore does not settle the bifactor case unconditionally |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |

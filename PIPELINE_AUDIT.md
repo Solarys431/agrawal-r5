@@ -13,7 +13,7 @@ paper proof to a Lean theorem or turn an open hypothesis into a result.
 | Requirement | Evidence | Status |
 |---|---|---|
 | Pinned kernel build | `lean-toolchain`, `lake-manifest.json`, GitHub Actions | complete |
-| Per-theorem axiom measurement | `AxiomAudit.lean` on 95 headline declarations | complete |
+| Per-theorem axiom measurement | `AxiomAudit.lean` on 100 headline declarations | complete |
 | Comparator axiom measurement | `ComparatorAxiomAudit.lean` on seven exported declarations | complete |
 | No hidden trust shortcuts | `tools/check_release_surface.sh` rejects `sorry`, `admit`, `native_decide`, project `axiom` and `opaque` in the implementation | complete |
 | Statement/solution separation | Four Mathlib-only `Challenge.lean` files and separate `Solution.lean` files | complete |
@@ -80,7 +80,7 @@ Status: **complete for the published headline routes**.
 
 ### 4. Library dividend
 
-[`upstream_candidates.json`](upstream_candidates.json) classifies all 46
+[`upstream_candidates.json`](upstream_candidates.json) classifies all 51
 tracked modules. [`UPSTREAM_CANDIDATES.md`](UPSTREAM_CANDIDATES.md) explains
 the triage, including candidates requiring generalization, semantic
 deduplication, or coordination with an existing project. The inventory is
@@ -92,7 +92,7 @@ is made without later human maintainer review.
 ### 5. Hypothesis minimality
 
 `AssumptionAudit.lean` uses Mathlib's elaborated-type dependency analysis on
-every public theorem. The audit inspected 382 public theorems and 239 instance
+every public theorem. The audit inspected 416 public theorems and 257 instance
 binders. Two assumptions were genuinely generalized away; 58 binders remain
 dependencies of the present proof route although their instance terms do not
 occur in the proposition body. Those 58 are explicitly declared in 55

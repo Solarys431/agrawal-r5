@@ -47,6 +47,11 @@ introduced.
 #print axioms AgrawalCore.quarticSkeleton_card_odd
 #print axioms AgrawalCore.quarticSkeleton_card_ge_three
 #print axioms AgrawalCore.squarefree_counterexample_concrete_dichotomy
+#print axioms AgrawalCore.localS5_frobenius_power
+#print axioms AgrawalCore.localS5_modEq_frobenius_power
+#print axioms AgrawalCore.quarticOrderRow_of_local
+#print axioms AgrawalCore.quarticOrderRows_of_skeleton
+#print axioms AgrawalCore.squarefree_counterexample_order_dichotomy
 #print axioms AgrawalCore.hasOrderFourTransport_iff_goldenH_support
 #print axioms AgrawalCore.no_squarefree_counterexample_of_no_witnesses
 #print axioms AgrawalCore.localS5_mul

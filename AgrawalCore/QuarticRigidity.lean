@@ -1,0 +1,158 @@
+/-
+Nucleo Lean della campagna Agrawal — RIGIDITÀ DELLO SCHELETRO QUARTICO.
+
+Una riga locale letterale `LocalS5 p m` identifica la potenza di
+`ζ₅ - 1` all'esponente `m` con quella ottenuta dal Frobenius.  Nel ramo
+inerte, il quoziente complementare ha residuo `1` oppure `4` modulo `5`;
+le due righe aritmetiche risultanti sono quindi
+
+  m ≡ 1   (mod lcm(ord(ζ₅ - 1), 5)),
+  m ≡ p²  (mod lcm(ord(ζ₅ - 1), 5)).
+
+Questo modulo porta nel kernel la rigidità che precede la costruzione
+delle fibre. Non afferma la vacuità di alcuna fibra.
+-/
+import AgrawalCore.UnconditionalDichotomy
+import AgrawalCore.LocalMomentBridge
+
+open Polynomial
+
+namespace AgrawalCore
+
+variable {p : ℕ} [Fact p.Prime]
+
+/-- The exponent `1` is always a literal local row. -/
+lemma localS5_one : LocalS5 p 1 := by
+  simp [LocalS5]
+
+/-- Every Frobenius power `p^j` is a literal local row. -/
+theorem localS5_frobenius_power (j : ℕ) :
+    LocalS5 p (p ^ j) := by
+  induction j with
+  | zero => simpa using (localS5_one (p := p))
+  | succ j ih =>
+      have h := localS5_prime_multiple (p := p) ih
+      simpa [pow_succ, Nat.mul_comm] using h
+
+/-- **Literal local row to order congruence.**
+
+If `m` and `p^j` induce the same permutation of the fifth roots, then a
+literal local row forces equality of the corresponding powers of the
+canonical unit `ζ₅ - 1`; hence the exponents are congruent modulo its
+multiplicative order. -/
+theorem localS5_modEq_frobenius_power {m j : ℕ}
+    (hp5 : p ≠ 5) (hrow : LocalS5 p m)
+    (hm : m % 5 = (p ^ j) % 5) :
+    m ≡ p ^ j
+      [MOD orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))] := by
+  apply pow_eq_pow_iff_modEq.mp
+  apply Units.ext
+  simp only [Units.val_pow_eq_pow_val, localCyclotomicUnit_val,
+    zmodFiveUnitOne_val, pow_one]
+  have hfrob := localS5_frobenius_power (p := p) j
+  calc
+    ((zeta5 : Phi5Ring p) - 1) ^ m = zeta5 ^ m - 1 := hrow
+    _ = zeta5 ^ (m % 5) - 1 := by rw [zeta5_pow_mod]
+    _ = zeta5 ^ ((p ^ j) % 5) - 1 := by rw [hm]
+    _ = zeta5 ^ (p ^ j) - 1 := by
+      exact congrArg (fun x : Phi5Ring p => x - 1)
+        (zeta5_pow_mod (p := p) (p ^ j)).symm
+    _ = ((zeta5 : Phi5Ring p) - 1) ^ (p ^ j) := hfrob.symm
+
+/-- Dividing an inert residue by another inert residue gives a split
+residue (`1` or `4`) modulo `5`. -/
+theorem splitModFive_div_of_inertModFive {n p : ℕ}
+    (hpdvd : p ∣ n) (hp : InertModFive p) (hn : InertModFive n) :
+    SplitModFive (n / p) := by
+  have hmul : p * (n / p) = n := Nat.mul_div_cancel' hpdvd
+  have hmod := congrArg (fun x : ℕ => x % 5) hmul
+  have hlt : (n / p) % 5 < 5 := Nat.mod_lt _ (by norm_num)
+  rcases hp with hp2 | hp3
+  · rcases hn with hn2 | hn3
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [SplitModFive, Nat.mul_mod, hp2, hn2, hq] at hmod ⊢
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [SplitModFive, Nat.mul_mod, hp2, hn3, hq] at hmod ⊢
+  · rcases hn with hn2 | hn3
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [SplitModFive, Nat.mul_mod, hp3, hn2, hq] at hmod ⊢
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [SplitModFive, Nat.mul_mod, hp3, hn3, hq] at hmod ⊢
+
+/-- The exact two-branch order row attached to a good inert prime. -/
+def QuarticOrderRow (p m : ℕ) [Fact p.Prime] : Prop :=
+  ∃ hp5 : p ≠ 5,
+    m ≡ 1
+      [MOD Nat.lcm
+        (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5]
+      ∨ m ≡ p ^ 2
+        [MOD Nat.lcm
+          (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5]
+
+/-- A literal local row in the quartic branch produces one of the two exact
+order congruences. -/
+theorem quarticOrderRow_of_local {m : ℕ}
+    (hp5 : p ≠ 5) (hp : InertModFive p)
+    (hm : SplitModFive m) (hrow : LocalS5 p m) :
+    QuarticOrderRow p m := by
+  refine ⟨hp5, ?_⟩
+  rcases hm with hm1 | hm4
+  · left
+    have hmod : m % 5 = (p ^ 0) % 5 := by simp [hm1]
+    have horder :=
+      localS5_modEq_frobenius_power (p := p) hp5 hrow hmod
+    have hfive : m ≡ p ^ 0 [MOD 5] := hmod
+    simpa using Nat.mod_lcm horder hfive
+  · right
+    have hpSq : (p ^ 2) % 5 = 4 := by
+      rcases hp with hp2 | hp3
+      · simp [Nat.pow_mod, hp2]
+      · simp [Nat.pow_mod, hp3]
+    have hmod : m % 5 = (p ^ 2) % 5 := hm4.trans hpSq.symm
+    have horder := localS5_modEq_frobenius_power hp5 hrow hmod
+    have hfive : m ≡ p ^ 2 [MOD 5] := hmod
+    exact Nat.mod_lcm horder hfive
+
+/-- Exact order rows at every factor of the quartic skeleton. -/
+def QuarticOrderRows (n : ℕ) : Prop :=
+  ∀ p (hp : p ∈ n.primeFactors),
+    @QuarticOrderRow p (n / p) ⟨Nat.prime_of_mem_primeFactors hp⟩
+
+/-- The concrete quartic skeleton supplies all exact order rows. -/
+theorem quarticOrderRows_of_skeleton {n : ℕ}
+    (hn : SquarefreeCounterexampleCandidate n)
+    (hskeleton : QuarticSkeleton n) :
+    QuarticOrderRows n := by
+  rcases hn with ⟨_hsq, _hnprime, h5, _hglobal, hbad⟩
+  have hnInert : InertModFive n :=
+    inertModFive_of_square_ne_one h5 hbad
+  intro p hpmem
+  have hpp : p.Prime := Nat.prime_of_mem_primeFactors hpmem
+  haveI : Fact p.Prime := ⟨hpp⟩
+  have hpdvd : p ∣ n := Nat.dvd_of_mem_primeFactors hpmem
+  have hp5 : p ≠ 5 := by
+    intro hp
+    exact h5 (hp ▸ hpdvd)
+  have hpInert : InertModFive p := (hskeleton p hpmem).1
+  have hmSplit : SplitModFive (n / p) :=
+    splitModFive_div_of_inertModFive hpdvd hpInert hnInert
+  exact quarticOrderRow_of_local hp5 hpInert hmSplit
+    (hskeleton p hpmem).2
+
+/-- **Order-level concrete dichotomy.**
+
+Every squarefree candidate either has a split order-four witness, or has
+the odd inert quartic skeleton (at least three factors) together with all
+of its exact order congruences. -/
+theorem squarefree_counterexample_order_dichotomy
+    {n : ℕ} (hn : SquarefreeCounterexampleCandidate n) :
+    SplitOrderFourWitness n ∨
+      (QuarticSkeleton n ∧ QuarticOrderRows n
+        ∧ Odd n.primeFactors.card ∧ 3 ≤ n.primeFactors.card) := by
+  rcases squarefree_counterexample_concrete_dichotomy hn with
+    hsplit | ⟨hskeleton, hodd, hcard⟩
+  · exact Or.inl hsplit
+  · exact Or.inr
+      ⟨hskeleton, quarticOrderRows_of_skeleton hn hskeleton, hodd, hcard⟩
+
+end AgrawalCore

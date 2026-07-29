@@ -1044,8 +1044,12 @@ class $2$ or $3\bmod 5$ is automatically odd, while
 squarefree candidate either has a split order-four witness or has all
 prime factors in the inert classes, with an odd number (at least three) of
 factors and with every complementary \texttt{LocalS5} row present.
-The later passage from this quartic skeleton to the general finite-fiber
-system remains paper-level.
+The kernel theorem
+\texttt{squarefree\_counterexample\_order\_dichotomy} now continues this
+chain through the exact $1$-or-$p^2$ congruence modulo
+$\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$ at every skeleton
+factor.  The later passage from these order rows to the general
+finite-fiber system remains paper-level.
 
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
@@ -1071,6 +1075,17 @@ $\lcm_a T_a = T \mid m'-1$, and $M = \lcm(T,5) \mid m'-1$. (Care is needed:
 distinct Frobenius orbits can have distinct row orders; the lcm over all
 rows repairs this.)
 \end{proof}
+
+The order-row interface needed below is kernel-checked independently of the
+full set equality in Theorem~\ref{thm:rigidity}.
+The declaration \texttt{localS5\_modEq\_frobenius\_power} compares a literal
+local row with the matching Frobenius-power row and proves congruence modulo
+$\operatorname{ord}(\zeta_5-1)$.  Combining it with the already determined
+residue modulo $5$, \texttt{quarticOrderRow\_of\_local} obtains the
+congruence modulo $M=\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$,
+and \texttt{quarticOrderRows\_of\_skeleton} supplies it simultaneously at
+every prime factor.  These declarations prove necessity of the rows used in
+Theorem~\ref{thm:k3}; they do not construct or empty any terminal fiber.
 
 \begin{theorem}[explicit $k=3$ system]\label{thm:k3}
 Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all

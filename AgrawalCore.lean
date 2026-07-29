@@ -32,6 +32,7 @@ import AgrawalCore.ScalarCompleteness
 import AgrawalCore.SquarefreeIngress
 import AgrawalCore.H4Witness
 import AgrawalCore.UnconditionalDichotomy
+import AgrawalCore.QuarticRigidity
 import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport
 import AgrawalCore.QuadraticGamma

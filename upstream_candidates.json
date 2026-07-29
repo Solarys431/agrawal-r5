@@ -404,6 +404,12 @@
       "note": "Four-coefficient support compression and H4 semiorders."
     },
     {
+      "module": "AgrawalCore/QuarticRigidity.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Exact order-row interface for the project-specific quartic skeleton."
+    },
+    {
       "module": "AgrawalCore/QuadraticGamma.lean",
       "disposition": "generalize_first",
       "candidates": [
