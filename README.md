@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-one modules (8,661 source lines)
+The implementation core consists of fifty-one modules (8,704 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -173,6 +173,7 @@ not a premise of the Lean theorem.
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
 | Universal local-row size bound | `localRow_order_le_max` | `FinalRowSize.lean` |
+| Concrete skeleton modulus bounds (including the exact pure/twisted gap) and factor-size exclusion | `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion` | `QuarticRigidity.lean` |
 | Normal middle defect forces the large-gap alternative \(r^2<P\) | `normalDefect_forces_sq_lt_complement` | `FinalRowSize.lean` |
 | Exact pure/twisted final-row divisibilities | `pureRow_dvd_product_sub_one`, `twistedRow_dvd_sq_sub_product` | `FinalRowSize.lean` |
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |

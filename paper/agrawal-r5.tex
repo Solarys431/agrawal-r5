@@ -1107,6 +1107,12 @@ $\ord_{p_i}(5) \mid n/p_i - 1$ for every $i$ (base-$5$ Korselt condition
 shifted to $n/p$), and $M_i \le \max(n/p_i - 1, |n/p_i - p_i^2|)$.
 \end{theorem}
 
+The displayed branch-sensitive bound is now kernel-checked; its companion
+kernel theorem gives the universal exclusion when
+$n/p_i<p_i^2\le M_i$.  The declaration names are recorded in the public
+claim-status table.  These are universal consequences of the literal row,
+not claims that the residual finite cases are empty.
+
 The determination of the exponents uses Theorem~\ref{thm:structure}(a) and
 the four-element lemma $p^4 \equiv 1 \pmod{M}$; necessity uses
 Theorem~\ref{thm:rigidity}. The base-$5$ condition follows from the norm

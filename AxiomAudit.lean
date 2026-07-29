@@ -96,6 +96,9 @@ introduced.
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max
+#print axioms AgrawalCore.quarticSkeleton_orderModulus_le_max
+#print axioms AgrawalCore.quarticSkeleton_orderModulus_le_gap
+#print axioms AgrawalCore.quarticSkeleton_factor_size_exclusion
 #print axioms AgrawalCore.normalDefect_forces_sq_lt_complement
 #print axioms AgrawalCore.pureRow_dvd_product_sub_one
 #print axioms AgrawalCore.twistedRow_dvd_sq_sub_product

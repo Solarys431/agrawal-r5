@@ -14,12 +14,18 @@ delle fibre. Non afferma la vacuità di alcuna fibra.
 -/
 import AgrawalCore.UnconditionalDichotomy
 import AgrawalCore.LocalMomentBridge
+import AgrawalCore.FinalRowSize
 
 open Polynomial
 
 namespace AgrawalCore
 
 variable {p : ℕ} [Fact p.Prime]
+
+/-- The concrete modulus used by the quartic order rows. -/
+noncomputable def quarticOrderModulus (p : ℕ) [Fact p.Prime]
+    (hp5 : p ≠ 5) : ℕ :=
+  Nat.lcm (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5
 
 /-- The exponent `1` is always a literal local row. -/
 lemma localS5_one : LocalS5 p 1 := by
@@ -64,9 +70,7 @@ CRT modulus used by the paper. -/
 theorem localS5_modEq_frobenius_power_lcm {m j : ℕ}
     (hp5 : p ≠ 5) (hrow : LocalS5 p m)
     (hm : m % 5 = (p ^ j) % 5) :
-    m ≡ p ^ j
-      [MOD Nat.lcm
-        (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5] := by
+    m ≡ p ^ j [MOD quarticOrderModulus p hp5] := by
   exact Nat.mod_lcm
     (localS5_modEq_frobenius_power hp5 hrow hm) hm
 
@@ -115,12 +119,8 @@ theorem inertQuotient_residue_determined {n p : ℕ}
 /-- The exact two-branch order row attached to a good inert prime. -/
 def QuarticOrderRow (p m : ℕ) [Fact p.Prime] : Prop :=
   ∃ hp5 : p ≠ 5,
-    m ≡ 1
-      [MOD Nat.lcm
-        (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5]
-      ∨ m ≡ p ^ 2
-        [MOD Nat.lcm
-          (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5]
+    m ≡ 1 [MOD quarticOrderModulus p hp5]
+      ∨ m ≡ p ^ 2 [MOD quarticOrderModulus p hp5]
 
 /-- A literal local row in the quartic branch produces one of the two exact
 order congruences. -/
@@ -147,13 +147,9 @@ relative to the residue of the whole candidate. -/
 def DeterminedQuarticOrderRow (n p m : ℕ) [Fact p.Prime] : Prop :=
   ∃ hp5 : p ≠ 5,
     (p % 5 = n % 5
-      ∧ m ≡ 1
-        [MOD Nat.lcm
-          (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5])
+      ∧ m ≡ 1 [MOD quarticOrderModulus p hp5])
       ∨ (p % 5 ≠ n % 5
-        ∧ m ≡ p ^ 2
-          [MOD Nat.lcm
-            (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5])
+        ∧ m ≡ p ^ 2 [MOD quarticOrderModulus p hp5])
 
 /-- A literal row has the branch prescribed by the quotient residue. -/
 theorem determinedQuarticOrderRow_of_local {n m : ℕ}
@@ -228,6 +224,53 @@ theorem determinedQuarticOrderRows_of_skeleton {n : ℕ}
     exact h5 (hp ▸ hpdvd)
   exact determinedQuarticOrderRow_of_local hpdvd hp5
     (hskeleton p hpmem).1 hnInert rfl (hskeleton p hpmem).2
+
+/-- Every nontrivial skeleton row bounds its concrete cyclotomic modulus by
+the larger of the Frobenius representative and the complementary product. -/
+theorem quarticSkeleton_orderModulus_le_max {n p : ℕ}
+    (hn : SquarefreeCounterexampleCandidate n)
+    (hskeleton : QuarticSkeleton n) (hpmem : p ∈ n.primeFactors)
+    (hquot : 1 < n / p) (hne : n / p ≠ p ^ 2) :
+    ∃ hp5 : p ≠ 5,
+      @quarticOrderModulus p ⟨Nat.prime_of_mem_primeFactors hpmem⟩ hp5
+        ≤ max (p ^ 2) (n / p) := by
+  letI : Fact p.Prime := ⟨Nat.prime_of_mem_primeFactors hpmem⟩
+  rcases quarticOrderRows_of_skeleton hn hskeleton p hpmem with
+    ⟨hp5, hrow⟩
+  exact ⟨hp5, localRow_order_le_max hquot hne hrow⟩
+
+/-- The sharp branch-sensitive gap bound used by the explicit CRT system. -/
+theorem quarticSkeleton_orderModulus_le_gap {n p : ℕ}
+    (hn : SquarefreeCounterexampleCandidate n)
+    (hskeleton : QuarticSkeleton n) (hpmem : p ∈ n.primeFactors)
+    (hquot : 1 < n / p) (hne : n / p ≠ p ^ 2) :
+    ∃ hp5 : p ≠ 5,
+      @quarticOrderModulus p ⟨Nat.prime_of_mem_primeFactors hpmem⟩ hp5
+        ≤ max (n / p - 1) ((n / p - p ^ 2) + (p ^ 2 - n / p)) := by
+  letI : Fact p.Prime := ⟨Nat.prime_of_mem_primeFactors hpmem⟩
+  rcases determinedQuarticOrderRows_of_skeleton hn hskeleton p hpmem with
+    ⟨hp5, ⟨_hsame, hrow⟩ | ⟨_hdiff, hrow⟩⟩
+  · exact ⟨hp5, (pureRow_order_le_product_sub_one hquot hrow).trans
+      (Nat.le_max_left _ _)⟩
+  · exact ⟨hp5, (twistedRow_order_le_absGap hne hrow).trans
+      (Nat.le_max_right _ _)⟩
+
+/-- **Concrete final-row size exclusion.**
+
+If the complementary product lies strictly below `p²`, while the concrete
+quartic order modulus is at least `p²`, the skeleton row is impossible. -/
+theorem quarticSkeleton_factor_size_exclusion {n p : ℕ}
+    (hn : SquarefreeCounterexampleCandidate n)
+    (hskeleton : QuarticSkeleton n) (hpmem : p ∈ n.primeFactors)
+    (hquot : 1 < n / p) (hlt : n / p < p ^ 2)
+    (hlarge : ∀ hp5 : p ≠ 5,
+      p ^ 2 ≤
+        @quarticOrderModulus p ⟨Nat.prime_of_mem_primeFactors hpmem⟩ hp5) :
+    False := by
+  letI : Fact p.Prime := ⟨Nat.prime_of_mem_primeFactors hpmem⟩
+  rcases quarticOrderRows_of_skeleton hn hskeleton p hpmem with
+    ⟨hp5, hrow⟩
+  exact threeFactor_finalRow_size_exclusion hquot hlt (hlarge hp5) hrow
 
 /-- **Order-level concrete dichotomy.**
 

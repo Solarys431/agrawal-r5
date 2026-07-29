@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 51 `AgrawalCore` modules and 8,661
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 104 headline
+The implementation currently contains 51 `AgrawalCore` modules and 8,704
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 107 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -41,7 +41,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | Residual power depth: for \(d>0\), \(d\mid4rs\), one has \(-\gamma\in(\mathbb F_p^\times)^d\iff d\mid h\); for even \(d\), equivalently \(\operatorname{lcm}(d,5)\mid h\) | **LEAN** (`shifted_generator_isPower_iff`, `neg_isPower_iff_residual_multiplier_dvd`, `dvd_D_neg_gamma_isPower_iff_dvd`, `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`) | The cyclic-group core is classical in spirit; its exact primitive-H4 specialization and priority are unassessed. The quartic corollary is \(-\gamma\in(\mathbb F_p^\times)^4\iff20\mid h\). This refines level reciprocity but does not prove H4 |
 | Order-product compression in the \(p\equiv1\pmod5\) branch: \(10\,\operatorname{ord}_p(5)\operatorname{ord}_p(\varepsilon^2)\mid p-1\) | **LEAN** (`dvd_D_order_product_residual_factorization`, `dvd_D_ten_mul_order_product_dvd_card_sub_one`) | Exact repackaging of the primitive scalar orders and level reciprocity. It isolates the missing multiplicative-order lower bound but does not supply it and does not prove H4 |
 | No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
-| Deterministic final-row size bounds and meet-in-the-middle uniqueness | **LEAN**; independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | Exact arithmetic lemmas; no asymptotic multiplicative-order lower bound is claimed |
+| Deterministic final-row size bounds, their sharp pure/twisted quartic-skeleton application, and meet-in-the-middle uniqueness | **LEAN**: `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion`; the arithmetic core is independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | The exact displayed gap bound and universal size exclusion are now connected to the literal skeleton modulus. No asymptotic multiplicative-order lower bound or universal fiber emptiness is claimed |
 | Two-row transport, CRT triangle, odd shadow and quantized gaps | **LEAN**: declarations in `TwoRowTransport.lean` | Exact consequences of the row congruences; mathematical priority unassessed |
 
 ## Paper-level results not fully represented end to end in Lean
