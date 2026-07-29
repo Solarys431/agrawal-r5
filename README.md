@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-four modules (6,707 source lines)
+The implementation core consists of forty-five modules (7,315 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -158,6 +158,9 @@ not a premise of the Lean theorem.
 | Canonical signature uniqueness | `canonicalSignature_unique` | `CanonicalSignature.lean` |
 | Four coefficients imply exact orders \(4rs,2r,2s\) | `dvd_primitiveFourCoefficientD_exact_order_profile` | `PrimitiveOrderBridge.lean` |
 | Four coefficients imply the exact scalar profile of \(5,\varepsilon^2\) | `dvd_D_exact_scalar_profile` | `PrimitiveScalarBridge.lean` |
+| **Level reciprocity: for \(p-1=4rs\,h\), \(h\) even iff \(p\equiv1\pmod5\), and in the good range iff \(5\mid h\)** | `dvd_D_residual_multiplier_even_iff_mod_five_one`, `dvd_D_residual_multiplier_even_iff_five_dvd` | `LevelReciprocity.lean` |
+| Five-class residual restriction: \(10\mid h\) iff \(p\equiv1\pmod5\) | `dvd_D_ten_dvd_residual_multiplier_iff_mod_five_one` | `LevelReciprocity.lean` |
+| **Class-specific residual table in the \(p\equiv4\pmod5\) branch: \(rs\bmod5=1,2,3,4\) forces \(h\bmod10=7,1,9,3\), hence four explicit lower bounds for \(p\)** | `dvd_D_residual_multiplier_mod_ten_table`, `dvd_D_class_specific_lower_bounds` | `LevelReciprocity.lean` |
 | No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |

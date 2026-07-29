@@ -205,6 +205,18 @@
       "note": "Carmichael-number definitions should first be aligned with google-deepmind/formal-conjectures; no independent upstream proposal is made here."
     },
     {
+      "module": "AgrawalCore/LevelReciprocity.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.neg_gamma_isSquare_iff_mod_five_one",
+          "status": "deduplicate_semantically",
+          "note": "A Gaussian-period square criterion for the roots of X^2-5X+5; compare with existing cyclotomic and finite-field APIs before proposing upstream."
+        }
+      ],
+      "note": "The residual-multiplier consequences are specific to the primitive H4 level."
+    },
+    {
       "module": "AgrawalCore/LcmIdentity.lean",
       "disposition": "project_specific",
       "candidates": [],

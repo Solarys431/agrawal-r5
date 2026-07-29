@@ -756,6 +756,77 @@ Since \(p\nmid m\), \(\gamma\) has exact order \(m\), and hence
 This recovers \(p\mid G_{r,s}\).
 \end{proof}
 
+\begin{theorem}[level reciprocity]\label{thm:levelreciprocity}
+Let \(p\nmid10rs\) be a split prime divisor of \(D_{r,s}\), and write
+\[
+ p-1=4rs\,h.
+\]
+Then
+\[
+\boxed{\quad h\equiv0\pmod2
+\quad\Longleftrightarrow\quad
+p\equiv1\pmod5
+\quad\Longleftrightarrow\quad
+5\mid h.\quad}
+\tag{4.9}
+\]
+Consequently \(10\mid h\) in the \(p\equiv1\pmod5\) branch, whereas
+\(\gcd(h,10)=1\) in the \(p\equiv4\pmod5\) branch.  Equivalently, only
+the five residue classes
+\[
+ h\equiv0,1,3,7,9\pmod {10}
+\]
+remain possible globally.  For a fixed pair \((r,s)\), the restriction
+is sharper: the branch \(p\equiv1\pmod5\) has \(h\equiv0\pmod {10}\),
+while in the branch \(p\equiv4\pmod5\) one has
+\[
+\begin{array}{c|cccc}
+rs\bmod5&1&2&3&4\\ \hline
+h\bmod10&7&1&9&3.
+\end{array}
+\tag{4.10}
+\]
+In particular, the corresponding elementary lower bounds for \(p\) are
+\[
+p\ge 28rs+1,\quad4rs+1,\quad36rs+1,\quad12rs+1,
+\]
+respectively.
+\end{theorem}
+
+\begin{proof}
+Let \(\gamma\in\F_p\) be either root of
+\(\gamma^2-5\gamma+5=0\).  A direct Gaussian-period argument gives
+\[
+ -\gamma\in(\F_p^\times)^2
+ \quad\Longleftrightarrow\quad p\equiv1\pmod5.
+\tag{4.11}
+\]
+Indeed, over a field containing a fifth root of unity \(\zeta\), the
+two roots are
+\(-(\zeta-\zeta^{-1})^2\) and
+\(-(\zeta^2-\zeta^{-2})^2\).  Conversely, from a square root \(v\) of
+\(-\gamma\), the element
+\[
+ z=\frac{\gamma-3+v}{2}
+\]
+satisfies \(z^5=1\) and \(z\ne1\); hence \(5\mid p-1\).
+
+Theorem~\ref{thm:Hfour} gives \(\ord_p(\gamma)=m=4rs\).
+Since \(\gamma^{m/2}=-1\) and \(m/2\) is even, Euler's criterion yields
+\[
+ (-\gamma)^{(p-1)/2}=(-1)^h.
+\]
+Thus \(-\gamma\) is a square exactly when \(h\) is even.  Finally
+\(5\nmid m\), so \(5\mid p-1=mh\) exactly when \(5\mid h\).  Combining
+these three equivalences proves (4.9).  The assertions modulo \(10\)
+follow immediately.  In the \(p\equiv4\pmod5\) branch,
+\[
+ 4rs\,h\equiv p-1\equiv3\pmod5.
+\]
+Combining this congruence with the oddness of \(h\) gives the four
+entries of (4.10), and the lower bounds follow from \(p=4rs\,h+1\).
+\end{proof}
+
 The intersection ideal
 \[
 \mathfrak I_{r,s}
@@ -839,7 +910,7 @@ with $d$ squarefree and $(d,10)=1$. In either split branch, the number of
 primes up to $X$ satisfying the complete mobile H-profile obeys
 \[
 N_{H,i}(X)\ll\frac{X}{(\log X)^2}.
-\tag{4.9}
+\tag{4.12}
 \]
 \end{theorem}
 

@@ -53,6 +53,14 @@ introduced.
 #print axioms AgrawalCore.primitiveFourVanish_exact_order_profile
 #print axioms AgrawalCore.dvd_primitiveFourCoefficientD_exact_order_profile
 #print axioms AgrawalCore.dvd_D_exact_scalar_profile
+#print axioms AgrawalCore.neg_gamma_isSquare_iff_mod_five_one
+#print axioms AgrawalCore.dvd_D_residual_multiplier_even_iff_mod_five_one
+#print axioms AgrawalCore.dvd_D_residual_multiplier_even_iff_five_dvd
+#print axioms AgrawalCore.dvd_D_ten_dvd_residual_multiplier_iff_mod_five_one
+#print axioms AgrawalCore.golden_root_mod_five_split
+#print axioms AgrawalCore.dvd_D_residual_multiplier_branch_dichotomy
+#print axioms AgrawalCore.dvd_D_residual_multiplier_mod_ten_table
+#print axioms AgrawalCore.dvd_D_class_specific_lower_bounds
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max
