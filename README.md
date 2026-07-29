@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-six modules (7,616 source lines)
+The implementation core consists of forty-nine modules (8,119 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -130,6 +130,7 @@ not a premise of the Lean theorem.
 | Recomposition: (X−1) ∣ f and Φ₅ ∣ f ⟹ (X⁵−1) ∣ f | `dvd_of_dvd_both` | `Recompose.lean` |
 | The congruence modulo p | `agrawal_mod_p` | `LocalGlue.lean` |
 | Local to global for squarefree n | `congruence_of_local` | `GlobalGlue.lean` |
+| **Exact squarefree ingress at \(r=5\): global congruence iff every complementary exponent \(n/p\) is a local row** | `squarefree_ingress_iff` | `SquarefreeIngress.lean` |
 | Bridge: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ n ≡ 3 (mod 80) | `mod_eighty_of_card` | `CardBridge.lean` |
 | **The Lenstra–Pomerance proposition, original hypotheses** | `lenstra_proposition_card` | `CardBridge.lean` |
 | The same with n ≡ 3 (mod 80) assumed directly | `lenstra_proposition` | `Lenstra.lean` |
@@ -150,6 +151,7 @@ not a premise of the Lean theorem.
 | Constructive repair of the negative defect | `localS5_sign_repair` | `ScalarCompleteness.lean` |
 | **Complete existential bridge: local order-4 transport ↔ support of Hₙ** | `hasOrderFourTransport_iff_goldenH_support` | `ScalarCompleteness.lean` |
 | **Unconditional witness dichotomy from the explicit reduction interface** | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
+| **Unconditional bifactor trap, and its exact closure under local H4** | `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | `TwoFactorIngress.lean` |
 | Four-coefficient support compression | `primitiveSupport_iff_fourCoefficientGcd` | `PrimitiveSupport.lean` |
 | Single-odd-prime semiorder obstruction | `one_order_dvd_eight_of_single_odd_prime` | `PrimitiveSupport.lean` |
 | Quadratic recurrence for γ | `gamma_pow_formula` | `QuadraticGamma.lean` |

@@ -434,6 +434,12 @@
       "note": "Closed H4 subfamily and its explicit factorizations."
     },
     {
+      "module": "AgrawalCore/SquarefreeIngress.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "The explicit inverse-Frobenius ingress is specialized to the r=5 Agrawal quotient; its general-r form belongs to the classical paper-level reduction."
+    },
+    {
       "module": "AgrawalCore/SupportBridge.lean",
       "disposition": "project_specific",
       "candidates": [],
@@ -450,6 +456,18 @@
         }
       ],
       "note": "The jaw itself is specific to the Agrawal bridge."
+    },
+    {
+      "module": "AgrawalCore/TwoFactorIngress.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.localS5_mul",
+          "status": "generalize_first",
+          "note": "Semigroup closure of labelled cyclotomic transport, currently specialized to Phi5Ring and LocalS5."
+        }
+      ],
+      "note": "The residue partition and bifactor witness theorem are project-specific; the local transport composition lemma may admit an invariant generalization."
     },
     {
       "module": "AgrawalCore/TwoRowTransport.lean",

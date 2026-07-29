@@ -350,7 +350,11 @@ prime $p \mid n$.
 \begin{proof}[Sketch]
 CRT over $p \mid n$; injectivity of the absolute Frobenius on
 $\F_p[X]/(X^r-1)$ replaces $(X-1)^n$ by $(X-1)^{n/p}$; the component at
-$X \mapsto 1$ is trivial.
+$X \mapsto 1$ is trivial.  For $r=5$, the complete equivalence is
+kernel-checked as \texttt{squarefree\_ingress\_iff}.  Its forward direction
+uses a fully explicit inverse-Frobenius evaluation: choose
+$a p\equiv1\pmod5$ and evaluate at $\zeta_5^a$, avoiding any abstract
+reducedness assumption on the quotient ring.
 \end{proof}
 
 We also record that $S \bmod M$ is a subgroup of $(\Z/M)^\times$ for
@@ -1035,7 +1039,11 @@ satisfies $k_- \equiv (k-1)/2 \pmod 2$.
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
 with at most two prime factors passing the test is prime or
-$n^2 \equiv 1 \pmod 5$.
+$n^2 \equiv 1 \pmod 5$.  The reduction of a two-prime candidate to a split
+order-four witness is kernel-checked, without H4, as
+\texttt{two\_prime\_candidate\_has\_splitOrderFourWitness}; H4 is used only
+to exclude that final witness, in the kernel theorem
+\texttt{no\_two\_prime\_candidate\_of\_localH4}.
 
 \begin{theorem}[rigidity in the Frobenius branch]\label{thm:rigidity}
 For any branch and any $m \in S(p,5)$ with $m \bmod 5 \in

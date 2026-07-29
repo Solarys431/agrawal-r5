@@ -1,6 +1,6 @@
 # Novelty and prior-art map
 
-Public conservative assessment — updated 2026-07-29. “Potentially new” means
+Public conservative assessment — updated 2026-07-30. “Potentially new” means
 that a targeted search did not find the statement; it does not replace review
 by a specialist in cyclotomy or primality testing. Corrections and earlier
 references are explicitly welcome.
@@ -95,6 +95,8 @@ novelty should be claimed for their underlying arguments.
 |---|---|---|
 | Abstract moment covariance and obstruction | Lean-checked | This is the exact finite-sum engine behind `im_r(S) ⊆ T`; the full interface to `S(p,r)` is not yet in the public core |
 | Agrawal congruence at `r=5` forces the base-5 Fermat congruence for squarefree `n` | Lean-checked | Classical consequence due to Lenstra; claim novelty only for the Lean formalization |
+| Exact squarefree ingress at `r=5` | Lean-checked end to end | `squarefree_ingress_iff` proves the global congruence equivalent to the complementary local rows `LocalS5 p (n/p)`. This is the classical CRT/Frobenius reduction specialized and formalized, not a new mathematical claim. |
+| Two-prime candidates reduce to a split order-four witness | Lean-checked end to end | `two_prime_candidate_has_splitOrderFourWitness` is an unconditional formal assembly of the mod-5 partition, the squarefree ingress and local transport closure. `no_two_prime_candidate_of_localH4` then closes the branch under explicitly stated local H4. No claim of mathematical priority is made; H4 itself remains open. |
 | Two-adic jaw on inert prime factors | Lean-checked | Useful corollary and good formal theorem; no priority claim |
 | Canonical inert support witness for `H_n` | Lean-checked | Useful exact explanation of the census; no broad novelty claim |
 | Golden–cyclotomic entanglement identity | Lean-checked | Structural identity supporting the main story; priority unassessed |

@@ -29,7 +29,9 @@ import AgrawalCore.Partition
 import AgrawalCore.H4Core
 import AgrawalCore.LocalTransport
 import AgrawalCore.ScalarCompleteness
+import AgrawalCore.SquarefreeIngress
 import AgrawalCore.UnconditionalDichotomy
+import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport
 import AgrawalCore.QuadraticGamma
 import AgrawalCore.NoncanonicalWitness

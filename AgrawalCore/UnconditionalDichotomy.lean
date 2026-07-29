@@ -17,16 +17,11 @@ non afferma né H4 né la vacuità universale delle fibre.
 Campagna UNICO, 27 luglio 2026.
 -/
 import AgrawalCore.ScalarCompleteness
+import AgrawalCore.SquarefreeIngress
 
 open Polynomial
 
 namespace AgrawalCore
-
-/-- La congruenza globale di Agrawal per `r = 5`, con il quoziente
-polinomiale esibito esplicitamente. -/
-def AgrawalCongruenceFive (n : ℕ) : Prop :=
-  ∃ g : Polynomial (ZMod n),
-    (X - 1) ^ n = X ^ n - 1 + (X ^ 5 - 1) * g
 
 /-- Un candidato squarefree non banale alla conclusione `n² ≡ 1 (mod 5)`.
 Questa definizione non afferma che un simile candidato esista. -/
