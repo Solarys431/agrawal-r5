@@ -1048,7 +1048,8 @@ The kernel theorem
 \texttt{squarefree\_counterexample\_order\_dichotomy} now continues this
 chain through the exact $1$-or-$p^2$ congruence modulo
 $\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$ at every skeleton
-factor.  The later passage from these order rows to the general
+factor, with the branch determined by whether $p_i\equiv n\pmod5$.
+The later passage from these order rows to the general
 finite-fiber system remains paper-level.
 
 In particular, under H4 the two-factor case of
@@ -1084,8 +1085,13 @@ $\operatorname{ord}(\zeta_5-1)$.  Combining it with the already determined
 residue modulo $5$, \texttt{quarticOrderRow\_of\_local} obtains the
 congruence modulo $M=\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$,
 and \texttt{quarticOrderRows\_of\_skeleton} supplies it simultaneously at
-every prime factor.  These declarations prove necessity of the rows used in
-Theorem~\ref{thm:k3}; they do not construct or empty any terminal fiber.
+every prime factor.  Finally,
+{\small\texttt{inertQuotient\_residue\_determined}} proves which quotient
+residue occurs, and a companion kernel theorem assembles this fact across
+all factors.  Together they give the precise labelling $j_i=0$ for
+$p_i\equiv\nu\pmod5$ and $j_i=2$ otherwise.  These declarations prove
+necessity of the rows used in Theorem~\ref{thm:k3}; they do not construct or
+empty any terminal fiber.
 
 \begin{theorem}[explicit $k=3$ system]\label{thm:k3}
 Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all

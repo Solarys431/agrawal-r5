@@ -59,6 +59,17 @@ theorem localS5_modEq_frobenius_power {m j : ℕ}
         (zeta5_pow_mod (p := p) (p ^ j)).symm
     _ = ((zeta5 : Phi5Ring p) - 1) ^ (p ^ j) := hfrob.symm
 
+/-- The same comparison, with the residue modulo `5` incorporated into the
+CRT modulus used by the paper. -/
+theorem localS5_modEq_frobenius_power_lcm {m j : ℕ}
+    (hp5 : p ≠ 5) (hrow : LocalS5 p m)
+    (hm : m % 5 = (p ^ j) % 5) :
+    m ≡ p ^ j
+      [MOD Nat.lcm
+        (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5] := by
+  exact Nat.mod_lcm
+    (localS5_modEq_frobenius_power hp5 hrow hm) hm
+
 /-- Dividing an inert residue by another inert residue gives a split
 residue (`1` or `4`) modulo `5`. -/
 theorem splitModFive_div_of_inertModFive {n p : ℕ}
@@ -78,6 +89,28 @@ theorem splitModFive_div_of_inertModFive {n p : ℕ}
         simp [SplitModFive, Nat.mul_mod, hp3, hn2, hq] at hmod ⊢
     · interval_cases hq : (n / p) % 5 <;>
         simp [SplitModFive, Nat.mul_mod, hp3, hn3, hq] at hmod ⊢
+
+/-- The complementary residue is determined, not merely known to be split:
+it is `1` when the prime and the product have the same inert residue, and
+`4` otherwise. -/
+theorem inertQuotient_residue_determined {n p : ℕ}
+    (hpdvd : p ∣ n) (hp : InertModFive p) (hn : InertModFive n) :
+    (p % 5 = n % 5 ∧ (n / p) % 5 = 1)
+      ∨ (p % 5 ≠ n % 5 ∧ (n / p) % 5 = 4) := by
+  have hmul : p * (n / p) = n := Nat.mul_div_cancel' hpdvd
+  have hmod := congrArg (fun x : ℕ => x % 5) hmul
+  have hlt : (n / p) % 5 < 5 := Nat.mod_lt _ (by norm_num)
+  rcases hp with hp2 | hp3
+  · rcases hn with hn2 | hn3
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [Nat.mul_mod, hp2, hn2, hq] at hmod ⊢
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [Nat.mul_mod, hp2, hn3, hq] at hmod ⊢
+  · rcases hn with hn2 | hn3
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [Nat.mul_mod, hp3, hn2, hq] at hmod ⊢
+    · interval_cases hq : (n / p) % 5 <;>
+        simp [Nat.mul_mod, hp3, hn3, hq] at hmod ⊢
 
 /-- The exact two-branch order row attached to a good inert prime. -/
 def QuarticOrderRow (p m : ℕ) [Fact p.Prime] : Prop :=
@@ -99,24 +132,63 @@ theorem quarticOrderRow_of_local {m : ℕ}
   rcases hm with hm1 | hm4
   · left
     have hmod : m % 5 = (p ^ 0) % 5 := by simp [hm1]
-    have horder :=
-      localS5_modEq_frobenius_power (p := p) hp5 hrow hmod
-    have hfive : m ≡ p ^ 0 [MOD 5] := hmod
-    simpa using Nat.mod_lcm horder hfive
+    simpa using
+      (localS5_modEq_frobenius_power_lcm (p := p) hp5 hrow hmod)
   · right
     have hpSq : (p ^ 2) % 5 = 4 := by
       rcases hp with hp2 | hp3
       · simp [Nat.pow_mod, hp2]
       · simp [Nat.pow_mod, hp3]
     have hmod : m % 5 = (p ^ 2) % 5 := hm4.trans hpSq.symm
-    have horder := localS5_modEq_frobenius_power hp5 hrow hmod
-    have hfive : m ≡ p ^ 2 [MOD 5] := hmod
-    exact Nat.mod_lcm horder hfive
+    exact localS5_modEq_frobenius_power_lcm hp5 hrow hmod
+
+/-- The exact row with its branch labelled by the residue of the prime
+relative to the residue of the whole candidate. -/
+def DeterminedQuarticOrderRow (n p m : ℕ) [Fact p.Prime] : Prop :=
+  ∃ hp5 : p ≠ 5,
+    (p % 5 = n % 5
+      ∧ m ≡ 1
+        [MOD Nat.lcm
+          (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5])
+      ∨ (p % 5 ≠ n % 5
+        ∧ m ≡ p ^ 2
+          [MOD Nat.lcm
+            (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))) 5])
+
+/-- A literal row has the branch prescribed by the quotient residue. -/
+theorem determinedQuarticOrderRow_of_local {n m : ℕ}
+    (hpdvd : p ∣ n) (hp5 : p ≠ 5)
+    (hp : InertModFive p) (hn : InertModFive n)
+    (hmul : m = n / p) (hrow : LocalS5 p m) :
+    DeterminedQuarticOrderRow n p m := by
+  refine ⟨hp5, ?_⟩
+  rcases inertQuotient_residue_determined hpdvd hp hn with
+    ⟨hsame, hm1⟩ | ⟨hdiff, hm4⟩
+  · left
+    refine ⟨hsame, ?_⟩
+    have hmod : m % 5 = (p ^ 0) % 5 := by simp [hmul, hm1]
+    simpa using
+      (localS5_modEq_frobenius_power_lcm (p := p) hp5 hrow hmod)
+  · right
+    refine ⟨hdiff, ?_⟩
+    have hpSq : (p ^ 2) % 5 = 4 := by
+      rcases hp with hp2 | hp3
+      · simp [Nat.pow_mod, hp2]
+      · simp [Nat.pow_mod, hp3]
+    have hmod : m % 5 = (p ^ 2) % 5 := by
+      simpa [hmul, hm4] using hpSq.symm
+    exact localS5_modEq_frobenius_power_lcm hp5 hrow hmod
 
 /-- Exact order rows at every factor of the quartic skeleton. -/
 def QuarticOrderRows (n : ℕ) : Prop :=
   ∀ p (hp : p ∈ n.primeFactors),
     @QuarticOrderRow p (n / p) ⟨Nat.prime_of_mem_primeFactors hp⟩
+
+/-- Exact, residue-labelled order rows at every factor. -/
+def DeterminedQuarticOrderRows (n : ℕ) : Prop :=
+  ∀ p (hp : p ∈ n.primeFactors),
+    @DeterminedQuarticOrderRow n p (n / p)
+      ⟨Nat.prime_of_mem_primeFactors hp⟩
 
 /-- The concrete quartic skeleton supplies all exact order rows. -/
 theorem quarticOrderRows_of_skeleton {n : ℕ}
@@ -139,6 +211,24 @@ theorem quarticOrderRows_of_skeleton {n : ℕ}
   exact quarticOrderRow_of_local hp5 hpInert hmSplit
     (hskeleton p hpmem).2
 
+/-- The skeleton determines the exponent branch at every factor. -/
+theorem determinedQuarticOrderRows_of_skeleton {n : ℕ}
+    (hn : SquarefreeCounterexampleCandidate n)
+    (hskeleton : QuarticSkeleton n) :
+    DeterminedQuarticOrderRows n := by
+  rcases hn with ⟨_hsq, _hnprime, h5, _hglobal, hbad⟩
+  have hnInert : InertModFive n :=
+    inertModFive_of_square_ne_one h5 hbad
+  intro p hpmem
+  have hpp : p.Prime := Nat.prime_of_mem_primeFactors hpmem
+  haveI : Fact p.Prime := ⟨hpp⟩
+  have hpdvd : p ∣ n := Nat.dvd_of_mem_primeFactors hpmem
+  have hp5 : p ≠ 5 := by
+    intro hp
+    exact h5 (hp ▸ hpdvd)
+  exact determinedQuarticOrderRow_of_local hpdvd hp5
+    (hskeleton p hpmem).1 hnInert rfl (hskeleton p hpmem).2
+
 /-- **Order-level concrete dichotomy.**
 
 Every squarefree candidate either has a split order-four witness, or has
@@ -148,11 +238,13 @@ theorem squarefree_counterexample_order_dichotomy
     {n : ℕ} (hn : SquarefreeCounterexampleCandidate n) :
     SplitOrderFourWitness n ∨
       (QuarticSkeleton n ∧ QuarticOrderRows n
+        ∧ DeterminedQuarticOrderRows n
         ∧ Odd n.primeFactors.card ∧ 3 ≤ n.primeFactors.card) := by
   rcases squarefree_counterexample_concrete_dichotomy hn with
     hsplit | ⟨hskeleton, hodd, hcard⟩
   · exact Or.inl hsplit
   · exact Or.inr
-      ⟨hskeleton, quarticOrderRows_of_skeleton hn hskeleton, hodd, hcard⟩
+      ⟨hskeleton, quarticOrderRows_of_skeleton hn hskeleton,
+        determinedQuarticOrderRows_of_skeleton hn hskeleton, hodd, hcard⟩
 
 end AgrawalCore
