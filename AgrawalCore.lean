@@ -42,5 +42,6 @@ import AgrawalCore.PrimitiveOrderBridge
 import AgrawalCore.PrimitiveScalarBridge
 import AgrawalCore.LevelReciprocity
 import AgrawalCore.DyadicDepth
+import AgrawalCore.OrderProductBarrier
 import AgrawalCore.FinalRowSize
 import AgrawalCore.TwoRowTransport

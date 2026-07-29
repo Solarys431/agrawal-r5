@@ -827,6 +827,24 @@ Combining this congruence with the oddness of \(h\) gives the four
 entries of (4.10), and the lower bounds follow from \(p=4rs\,h+1\).
 \end{proof}
 
+\begin{corollary}[order-product barrier]\label{cor:orderproduct}
+Under the hypotheses of Theorem~\ref{thm:levelreciprocity}, in the
+branch \(p\equiv1\pmod5\),
+\[
+\boxed{\quad
+10\,\ord_p(5)\,\ord_p(\eps^2)\mid p-1.
+\quad}
+\tag{4.12}
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:Hfour} gives
+\(\ord_p(5)=2r\) and \(\ord_p(\eps^2)=2s\), so their product is
+\(4rs\).  By Theorem~\ref{thm:levelreciprocity},
+\(p-1=4rs\,h\) with \(10\mid h\) in this branch.
+\end{proof}
+
 \begin{theorem}[residual power depth]\label{thm:powerdepth}
 Under the hypotheses of Theorem~\ref{thm:levelreciprocity}, put
 \(m=4rs\), and let \(d>0\) divide \(m\). Then
@@ -847,7 +865,7 @@ In particular,
 \[
 -\gamma\in(\F_p^\times)^4
 \quad\Longleftrightarrow\quad20\mid h.
-\tag{4.12}
+\tag{4.13}
 \]
 \end{theorem}
 
@@ -927,6 +945,21 @@ among \(4{,}253{,}287\) prime values and \(161{,}918\) survivors of the
 dyadic lock, it found no complete H-profile. This is a finite test of a
 structured family, not a proof of H4.
 
+A complete prime-first scan of \(10^9\le p<10^{10}\) examined
+\(202{,}100{,}126\) split primes and exactly factored all
+\(9{,}622{,}566\) survivors of the dyadic lock, again finding no
+complete H-profile.  The minimum gcd of the two semiorders is \(3\),
+attained at
+\[
+p=1{,}368{,}322{,}369,\qquad
+\ord_p(5)=6{,}108{,}582,\qquad
+\ord_p(\eps^2)=672.
+\]
+Thus even this closest recorded case still fails the odd coprimality
+condition.  The conditioned expected mass of the scanned interval is
+only \(0.217780\); its zero count is a finite falsification result, not
+evidence for a universal common divisor and not a proof of H4.
+
 The candidates are, at least, provably rare:
 
 \begin{theorem}[density zero of H4 candidates]\label{thm:densityzero}
@@ -958,7 +991,7 @@ with $d$ squarefree and $(d,10)=1$. In either split branch, the number of
 primes up to $X$ satisfying the complete mobile H-profile obeys
 \[
 N_{H,i}(X)\ll\frac{X}{(\log X)^2}.
-\tag{4.13}
+\tag{4.14}
 \]
 \end{theorem}
 
@@ -971,7 +1004,7 @@ remainder for the explicit choice \(D=X^{1/7}\). This is a theorem under
 the stated GRH family, not an unconditional estimate.
 
 H4 remains open. Its candidates have unconditional density zero and the
-GRH compression (4.13), but neither statement implies emptiness. The
+GRH compression (4.14), but neither statement implies emptiness. The
 finite-level Frobenius classes of the scalar and cyclotomic systems remain
 nonempty at every tested and proved level. The pure metaplectic and
 spinorial routes do not see more than the already recorded residue data,

@@ -71,6 +71,13 @@ jobs:
       - name: Independent scalar-completeness regression
         run: python3 tools/verify_scalar.py
 
+      - name: Replay the H4 minimum-gcd near miss
+        run: |
+          python3 certificates/h4_levels/verify_H_near_miss.py \
+            > /tmp/esito_H_near_miss_1368322369.json
+          cmp certificates/h4_levels/esito_H_near_miss_1368322369.json \
+            /tmp/esito_H_near_miss_1368322369.json
+
       - name: Replay the final-row size sieve
         run: |
           python3 certificates/fibre_size/verifica_fibre_taglia.py \

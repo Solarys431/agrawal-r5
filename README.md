@@ -163,6 +163,7 @@ not a premise of the Lean theorem.
 | **Class-specific residual table in the \(p\equiv4\pmod5\) branch: \(rs\bmod5=1,2,3,4\) forces \(h\bmod10=7,1,9,3\), hence four explicit lower bounds for \(p\)** | `dvd_D_residual_multiplier_mod_ten_table`, `dvd_D_class_specific_lower_bounds` | `LevelReciprocity.lean` |
 | **Residual power depth: for \(d>0\), \(d\mid4rs\), \(-\gamma\) is a \(d\)-th power iff \(d\mid h\)** | `dvd_D_neg_gamma_isPower_iff_dvd` | `DyadicDepth.lean` |
 | Even-depth coupling with the quintic lock; in particular \(-\gamma\) is a fourth power iff \(20\mid h\) | `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`, `dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd` | `DyadicDepth.lean` |
+| **Exact order-product barrier in the \(p\equiv1\pmod5\) branch: \(10\,\operatorname{ord}_p(5)\operatorname{ord}_p(\varepsilon^2)\mid p-1\)** | `dvd_D_ten_mul_order_product_dvd_card_sub_one` | `OrderProductBarrier.lean` |
 | No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
@@ -326,6 +327,14 @@ The certified box `r,s ≤ 5000` contains 6,754,610 admissible pairs,
 prime and every factorization reconstructed. This is a finite
 certificate, **not a proof of H4**; the universal inertia statement
 remains open.
+
+The complete prime-first falsifier has also been extended through
+\(10^9\le p<10^{10}\): 202,100,126 split primes and 9,622,566 exact
+dyadic candidates give zero H profiles. Its closest candidate is
+\(p=1\,368\,322\,369\), where the two semiorders have gcd \(3\).
+The scanner v2 and a standard-library replay of this near miss are
+included in `certificates/h4_levels/`. These are finite computational
+certificates, not evidence of a universal common-divisor theorem.
 
 `certificates/h4_assalto_finale/` is the portable v3 audit package for the
 later falsification campaign. Its standard-library verifier checks the

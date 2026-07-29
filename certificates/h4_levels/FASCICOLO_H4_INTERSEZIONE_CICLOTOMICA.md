@@ -321,19 +321,27 @@ Lo scanner è stato prima regredito sull'intervallo storico completo
 - zero profili H.
 
 Riproduce esattamente il censimento canonico della campagna. Sono stati
-poi eseguiti due falsificatori ulteriori:
+poi eseguiti tre falsificatori ulteriori:
 
 1. intervallo completo
+   \[
+   10^9\le p<10^{10};
+   \]
+   202.100.126 primi split, 9.622.566 candidati diadici fattorizzati
+   esattamente e zero profili completi. La massa attesa condizionata
+   è \(0{,}217780\): il run supera il contratto minimo di
+   falsificazione, ma l'esito nullo resta un certificato finito;
+2. intervallo completo
    \[
    10^{12}\le p<1{,}01\cdot10^{12};
    \]
    180.914.104 primi split, 8.616.342 candidati diadici, zero profili
    completi;
-2. famiglia completa dichiarata
+3. famiglia completa dichiarata
    \(p-1=2^bN\), con \(N\) squarefree sostenuto sui primi specificati,
    \(10^9\le p<10^{18}\); 1.313.692 primi e zero profili completi.
 
-In entrambi i casi il modello condizionato assegna però massa attesa
+Negli ultimi due casi il modello condizionato assegna massa attesa
 molto inferiore a uno: rispettivamente \(9{,}37\cdot10^{-4}\) e
 \(7{,}36\cdot10^{-4}\). Gli zeri sono quindi sanity checks, non
 evidenza sostanziale nuova.
@@ -341,10 +349,36 @@ evidenza sostanziale nuova.
 File:
 
 - `scan_profili_H_intervallo.cpp`;
+- `scan_profili_H_intervallo_v2.cpp`;
 - `caccia_H_pmeno1_squarefree.cpp`;
 - `esito_H_intervallo_2_1e9.json`;
+- `esito_H_intervallo_1e9_1e10_v2.json`;
 - `esito_H_intervallo_1e12_1p01e12.json`;
 - `esito_H_pmeno1_squarefree_1e9_1e18.json`.
+
+La versione `v2` conserva lo stesso rilevatore e aggiunge al certificato
+il testimone che realizza il minimo gcd dei semiordini. Nel nuovo
+intervallo è
+
+\[
+p=1\,368\,322\,369,\qquad
+\operatorname{ord}_p(5)=6\,108\,582,\qquad
+\operatorname{ord}_p(\varepsilon^2)=672.
+\]
+
+Quindi
+
+\[
+r=3\,054\,291,\qquad s=336,\qquad \gcd(r,s)=3.
+\]
+
+Il primo supera la serratura 2-adica a parità opposta e fallisce il
+profilo H precisamente sulla coprimalità dispari. Primalità,
+fattorizzazione di \(p-1\) e ordini esatti sono riprodotti, senza
+dipendenze esterne, da `verify_H_near_miss.py`; l'output congelato è
+`esito_H_near_miss_1368322369.json`. È un quasi-caso diagnostico, non
+un controesempio a H4 e non una prova che un divisore comune dispari
+esista sempre.
 
 ### Contratto d'arresto [DECISIONE METODOLOGICA]
 

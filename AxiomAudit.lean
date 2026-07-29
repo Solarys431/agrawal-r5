@@ -66,6 +66,8 @@ introduced.
 #print axioms AgrawalCore.dvd_D_neg_gamma_isPower_iff_dvd
 #print axioms AgrawalCore.dvd_D_neg_gamma_isPower_iff_lcm_five_dvd
 #print axioms AgrawalCore.dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd
+#print axioms AgrawalCore.dvd_D_order_product_residual_factorization
+#print axioms AgrawalCore.dvd_D_ten_mul_order_product_dvd_card_sub_one
 #print axioms AgrawalCore.no_split_single_odd_support
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max

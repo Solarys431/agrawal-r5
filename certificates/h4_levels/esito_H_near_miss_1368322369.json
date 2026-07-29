@@ -1,0 +1,33 @@
+{
+  "epsilon_square": 108065053,
+  "full_H_profile": false,
+  "gcd_r_s": 3,
+  "opposite_two_adic_profile": true,
+  "ord_5": 6108582,
+  "ord_epsilon2": 672,
+  "p": 1368322369,
+  "p_is_prime": true,
+  "p_minus_one_factorization": [
+    [
+      2,
+      6
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      1018097,
+      1
+    ]
+  ],
+  "r": 3054291,
+  "s": 336,
+  "schema": 1,
+  "sqrt5": 216130103,
+  "status": "PASS"
+}

@@ -234,6 +234,12 @@
       "note": "The cyclic-group core is reusable; the finite-field and primitive H4 corollaries are project-specific."
     },
     {
+      "module": "AgrawalCore/OrderProductBarrier.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Exact H4 specialization obtained by combining the primitive scalar orders with the residual multiplier; no standalone Mathlib candidate."
+    },
+    {
       "module": "AgrawalCore/LcmIdentity.lean",
       "disposition": "project_specific",
       "candidates": [],
