@@ -1,6 +1,6 @@
 # UNICO/NOUS pipeline audit
 
-Audit date: 2026-07-29. Pipeline specification:
+Audit date: 2026-07-30. Pipeline specification:
 [`PIPELINE.md`](https://github.com/Solarys431/unico-lean-proofs/blob/main/PIPELINE.md),
 version 1.1.
 
@@ -13,7 +13,7 @@ paper proof to a Lean theorem or turn an open hypothesis into a result.
 | Requirement | Evidence | Status |
 |---|---|---|
 | Pinned kernel build | `lean-toolchain`, `lake-manifest.json`, GitHub Actions | complete |
-| Per-theorem axiom measurement | `AxiomAudit.lean` on 89 headline declarations | complete |
+| Per-theorem axiom measurement | `AxiomAudit.lean` on 95 headline declarations | complete |
 | Comparator axiom measurement | `ComparatorAxiomAudit.lean` on seven exported declarations | complete |
 | No hidden trust shortcuts | `tools/check_release_surface.sh` rejects `sorry`, `admit`, `native_decide`, project `axiom` and `opaque` in the implementation | complete |
 | Statement/solution separation | Four Mathlib-only `Challenge.lean` files and separate `Solution.lean` files | complete |

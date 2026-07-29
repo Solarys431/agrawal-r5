@@ -41,6 +41,12 @@ introduced.
 #print axioms AgrawalCore.localS5_of_prime_multiple
 #print axioms AgrawalCore.localS5_of_global_factor
 #print axioms AgrawalCore.squarefree_ingress_iff
+#print axioms AgrawalCore.localS5_orderFour_odd
+#print axioms AgrawalCore.hasOrderFourTransport_of_local
+#print axioms AgrawalCore.quarticSkeleton_of_candidate_localH4
+#print axioms AgrawalCore.quarticSkeleton_card_odd
+#print axioms AgrawalCore.quarticSkeleton_card_ge_three
+#print axioms AgrawalCore.squarefree_counterexample_concrete_dichotomy
 #print axioms AgrawalCore.hasOrderFourTransport_iff_goldenH_support
 #print axioms AgrawalCore.no_squarefree_counterexample_of_no_witnesses
 #print axioms AgrawalCore.localS5_mul

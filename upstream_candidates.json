@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "audit_date": "2026-07-29",
+  "audit_date": "2026-07-30",
   "scope": {
     "lean_namespace": "AgrawalCore",
     "pinned_mathlib_commit": "4a7edd35ec64de7117995da659e9d4d80e6cca19",
@@ -174,6 +174,12 @@
       "disposition": "project_specific",
       "candidates": [],
       "note": "Exact formal reduction of the H4 wall."
+    },
+    {
+      "module": "AgrawalCore/H4Witness.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Local H4 interface factored into a dependency-neutral module."
     },
     {
       "module": "AgrawalCore/IndexLemma.lean",

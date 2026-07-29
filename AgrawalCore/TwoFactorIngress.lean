@@ -13,7 +13,7 @@ fattori a un solo sistema misto split–inerte, senza usare H4.
 -/
 import AgrawalCore.SquarefreeIngress
 import AgrawalCore.Reciprocity
-import AgrawalCore.UnconditionalDichotomy
+import AgrawalCore.H4Witness
 
 open Polynomial
 
@@ -68,6 +68,108 @@ theorem not_localS5_two {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (h2u.mul_right_eq_zero).mp hzero
   exact (zeta_sub_one_isUnit (p := p) hp5).ne_zero hz0
 
+/-- **Parity of an order-four local row.**
+
+In characteristic different from `2` and `5`, a literal local row whose
+residue modulo `5` is `2` or `3` is automatically odd.  Indeed, compare
+the row at `ζ` with the conjugate row at `ζ⁻¹ = ζ⁴`.  If the exponent
+were even, conjugation would force `ζ³ - 1 = -(ζ³ - 1)` in the residue-2
+case, or `ζ² - 1 = -(ζ² - 1)` in the residue-3 case.  Both elements are
+units away from `5`, while `2` is a unit away from characteristic `2`. -/
+theorem localS5_orderFour_odd {p m : ℕ} [Fact p.Prime]
+    (hp2 : p ≠ 2) (hp5 : p ≠ 5)
+    (hrow : LocalS5 p m) (hm : m % 5 = 2 ∨ m % 5 = 3) :
+    Odd m := by
+  rcases Nat.even_or_odd m with heven | hodd
+  · exfalso
+    have h4raw := localS5_row (p := p) hrow
+      (phi5_aeval_zeta_pow_four (p := p))
+    have h2z : IsUnit (2 : ZMod p) :=
+      isUnit_iff_ne_zero.mpr (two_ne_zero' hp2)
+    have h2u : IsUnit (2 : Phi5Ring p) := by
+      have hmap := h2z.map (AdjoinRoot.of (phi5 p))
+      rwa [map_ofNat] at hmap
+    rcases hm with hm2 | hm3
+    · have h1 :
+          ((zeta5 : Phi5Ring p) - 1) ^ m = zeta5 ^ 2 - 1 := by
+        unfold LocalS5 at hrow
+        calc
+          ((zeta5 : Phi5Ring p) - 1) ^ m = zeta5 ^ m - 1 := hrow
+          _ = zeta5 ^ 2 - 1 := by rw [zeta5_pow_mod, hm2]
+      have h4 :
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m = zeta5 ^ 3 - 1 := by
+        calc
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              zeta5 ^ (4 * m) - 1 := h4raw
+          _ = zeta5 ^ 3 - 1 := by
+            rw [zeta5_pow_mod]
+            congr 2
+            omega
+      have h4neg :
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              -(zeta5 ^ 3 - 1) := by
+        calc
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              (-(zeta5 ^ 4) * (zeta5 - 1)) ^ m := by
+                rw [u4_eq_cyclo_factor]
+          _ = (-(zeta5 ^ 4)) ^ m * (zeta5 - 1) ^ m := by
+                rw [mul_pow]
+          _ = (zeta5 ^ 4) ^ m * (zeta5 - 1) ^ m := by
+                rw [heven.neg_pow]
+          _ = zeta5 ^ (4 * m) * (zeta5 ^ 2 - 1) := by
+                rw [← pow_mul, h1]
+          _ = zeta5 ^ 3 * (zeta5 ^ 2 - 1) := by
+                rw [zeta5_pow_mod]
+                congr 2
+                omega
+          _ = -(zeta5 ^ 3 - 1) := by
+                have hz5 := zeta5_pow_five (p := p)
+                linear_combination hz5
+      have hzero :
+          (2 : Phi5Ring p) * (zeta5 ^ 3 - 1) = 0 := by
+        linear_combination h4neg - h4
+      exact (h2u.mul (u3_isUnit (p := p) hp5)).ne_zero hzero
+    · have h1 :
+          ((zeta5 : Phi5Ring p) - 1) ^ m = zeta5 ^ 3 - 1 := by
+        unfold LocalS5 at hrow
+        calc
+          ((zeta5 : Phi5Ring p) - 1) ^ m = zeta5 ^ m - 1 := hrow
+          _ = zeta5 ^ 3 - 1 := by rw [zeta5_pow_mod, hm3]
+      have h4 :
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m = zeta5 ^ 2 - 1 := by
+        calc
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              zeta5 ^ (4 * m) - 1 := h4raw
+          _ = zeta5 ^ 2 - 1 := by
+            rw [zeta5_pow_mod]
+            congr 2
+            omega
+      have h4neg :
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              -(zeta5 ^ 2 - 1) := by
+        calc
+          ((zeta5 : Phi5Ring p) ^ 4 - 1) ^ m =
+              (-(zeta5 ^ 4) * (zeta5 - 1)) ^ m := by
+                rw [u4_eq_cyclo_factor]
+          _ = (-(zeta5 ^ 4)) ^ m * (zeta5 - 1) ^ m := by
+                rw [mul_pow]
+          _ = (zeta5 ^ 4) ^ m * (zeta5 - 1) ^ m := by
+                rw [heven.neg_pow]
+          _ = zeta5 ^ (4 * m) * (zeta5 ^ 3 - 1) := by
+                rw [← pow_mul, h1]
+          _ = zeta5 ^ 2 * (zeta5 ^ 3 - 1) := by
+                rw [zeta5_pow_mod]
+                congr 2
+                omega
+          _ = -(zeta5 ^ 2 - 1) := by
+                have hz5 := zeta5_pow_five (p := p)
+                linear_combination hz5
+      have hzero :
+          (2 : Phi5Ring p) * (zeta5 ^ 2 - 1) = 0 := by
+        linear_combination h4neg - h4
+      exact (h2u.mul (u2_isUnit (p := p) hp5)).ne_zero hzero
+  · exact hodd
+
 /-- Un esponente locale dispari di ordine `4` modulo `5` produce sempre
 un testimone nella normalizzazione `2*n-1`, `n ≡ 4 (mod 5)`.
 
@@ -108,6 +210,16 @@ theorem hasOrderFourTransport_of_odd_local {p m : ℕ} [Fact p.Prime]
     have hcube5 : m ^ 3 % 5 = 2 := by
       rw [Nat.pow_mod, hm3]
     exact witness_of_odd hodd.pow hcube5 hcube
+
+/-- Any good local row of order four modulo `5` produces the normalized
+`HasOrderFourTransport` witness.  The parity input is no longer external:
+it follows from `localS5_orderFour_odd`. -/
+theorem hasOrderFourTransport_of_local {p m : ℕ} [Fact p.Prime]
+    (hp2 : p ≠ 2) (hp5 : p ≠ 5)
+    (hrow : LocalS5 p m) (hm : m % 5 = 2 ∨ m % 5 = 3) :
+    HasOrderFourTransport p :=
+  hasOrderFourTransport_of_odd_local
+    (localS5_orderFour_odd hp2 hp5 hrow hm) hrow hm
 
 /-- Se il prodotto di due primi buoni non ha quadrato `1 mod 5`, allora
 uno e uno solo dei due fattori è split e l'altro è inerte. -/

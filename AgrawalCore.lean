@@ -30,6 +30,7 @@ import AgrawalCore.H4Core
 import AgrawalCore.LocalTransport
 import AgrawalCore.ScalarCompleteness
 import AgrawalCore.SquarefreeIngress
+import AgrawalCore.H4Witness
 import AgrawalCore.UnconditionalDichotomy
 import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport

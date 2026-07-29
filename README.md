@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-nine modules (8,119 source lines)
+The implementation core consists of fifty modules (8,411 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -150,7 +150,9 @@ not a premise of the Lean theorem.
 | Common cyclotomic defect is globally `+1` or `−1` | `commonDefect_eq_one_or_neg_one` | `ScalarCompleteness.lean` |
 | Constructive repair of the negative defect | `localS5_sign_repair` | `ScalarCompleteness.lean` |
 | **Complete existential bridge: local order-4 transport ↔ support of Hₙ** | `hasOrderFourTransport_iff_goldenH_support` | `ScalarCompleteness.lean` |
-| **Unconditional witness dichotomy from the explicit reduction interface** | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
+| Order-four local rows are automatically odd away from characteristics 2 and 5 | `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | `TwoFactorIngress.lean` |
+| **Concrete squarefree dichotomy: split order-four witness or odd inert quartic skeleton with at least three factors** | `squarefree_counterexample_concrete_dichotomy` | `UnconditionalDichotomy.lean` |
+| Witness dichotomy after the explicitly named skeleton-to-fiber interface | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
 | **Unconditional bifactor trap, and its exact closure under local H4** | `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | `TwoFactorIngress.lean` |
 | Four-coefficient support compression | `primitiveSupport_iff_fourCoefficientGcd` | `PrimitiveSupport.lean` |
 | Single-odd-prime semiorder obstruction | `one_order_dvd_eight_of_single_odd_prime` | `PrimitiveSupport.lean` |

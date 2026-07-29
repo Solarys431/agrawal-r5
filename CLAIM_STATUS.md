@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 49 `AgrawalCore` modules and 8,119
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 89 headline
+The implementation currently contains 50 `AgrawalCore` modules and 8,411
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 95 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -30,6 +30,8 @@ declarations. Four independent Comparator surfaces export seven statements.
 | \(U_2=(\sqrt5)^5\varepsilon^3\) and \(M_2=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Product-to-sum and the concrete \(r=5\) row-to-character interface: **LEAN** (`cyclotomic_quadratic_moment_eq_three_golden_index`, `localS5_canonical_golden_moment_obstruction`, `localS5_canonical_quintic_locks_of_ne_one`) | Williams–Hardy computed the classical golden-unit index. Only its explicit identification with the Agrawal quadratic moment is a candidate new bridge; priority is provisional. Their 22 published Table 5 rows are replayed independently, 22/22, as a normalization check—not as a proof premise or novelty test |
 | Agrawal's congruence at \(r=5\) implies the base-5 Fermat congruence for squarefree \(n\) | **LEAN**, **COMPARATOR**: `agrawal_fermat_shadow` | Underlying implication is classical (Lenstra); the contribution is the end-to-end formalization |
 | Exact squarefree ingress at \(r=5\): the global congruence is equivalent to `LocalS5 p (n/p)` at every prime factor | **LEAN**: `squarefree_ingress_iff` | Kernel completion of the arithmetic interface used by the paper's structure theorem; no novelty claim is made for the classical Frobenius reduction |
+| A good local row of residue \(2\) or \(3\bmod5\) is automatically odd and therefore yields the normalized order-four witness | **LEAN**: `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | Removes a previously implicit parity seam by comparing the rows at \(\zeta\) and \(\zeta^{-1}\); priority unassessed |
+| Every squarefree counterexample candidate has either a split order-four witness or an odd inert quartic skeleton with at least three prime factors | **LEAN**: `squarefree_counterexample_concrete_dichotomy`, `quarticSkeleton_card_ge_three` | The global-to-quartic reduction is now kernel-checked. The subsequent general-\(s\) reduction from this skeleton to finite fibers remains **PAPER** |
 | Every two-prime candidate violating \(n^2\equiv1\pmod5\) has a split local order-four witness; local H4 therefore excludes it | **LEAN**: `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | Unconditional reduction of the bifactor case to H4, followed by an explicitly conditional closure. It does not prove H4 and therefore does not settle the bifactor case unconditionally |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
@@ -55,7 +57,8 @@ interfaces are not kernel theorems in this repository:
 - the lifted golden tower and its per-floor Kummer density;
 - the exact order decomposition of \(\zeta_5-1\) and the Kummer
   interpretation of its tail;
-- the general-\(s\) finite-fiber reduction;
+- the general-\(s\) reduction from the kernel-checked quartic skeleton to
+  finite fibers;
 - density-zero and GRH counting statements;
 - the full tail-anomaly Euler-product density.
 

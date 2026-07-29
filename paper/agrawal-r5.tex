@@ -1036,6 +1036,17 @@ factors, all $\equiv \pm2 \pmod 5$, and $k_- = \#\{p_i \equiv -\nu\}$
 satisfies $k_- \equiv (k-1)/2 \pmod 2$.
 \end{theorem}
 
+The local parity seam and the H4-to-skeleton part of
+Theorem~\ref{thm:structure} are kernel-checked.  More precisely,
+\texttt{localS5\_orderFour\_odd} proves that a good local row in residue
+class $2$ or $3\bmod 5$ is automatically odd, while
+\texttt{squarefree\_counterexample\_concrete\_dichotomy} proves that every
+squarefree candidate either has a split order-four witness or has all
+prime factors in the inert classes, with an odd number (at least three) of
+factors and with every complementary \texttt{LocalS5} row present.
+The later passage from this quartic skeleton to the general finite-fiber
+system remains paper-level.
+
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
 with at most two prime factors passing the test is prime or

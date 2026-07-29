@@ -181,7 +181,7 @@ sources:
       proof are Lenstra and Pomerance's. We claim only the mechanical
       verification.
 
-  - title: "The unconditional local-or-global witness dichotomy"
+  - title: "The concrete split-witness-or-quartic-skeleton dichotomy"
     authors:
       - "this pipeline"
     id: "https://github.com/Solarys431/agrawal-r5"
@@ -191,15 +191,21 @@ sources:
     prior_work: >-
       Formalized as `LocalH4For`, `SplitOrderFourWitness`,
       `not_localH4For_iff_splitOrderFourWitness`,
+      `localS5_orderFour_odd`,
+      `quarticSkeleton_of_candidate_localH4`,
+      `quarticSkeleton_card_odd`,
+      `quarticSkeleton_card_ge_three`,
+      `squarefree_counterexample_concrete_dichotomy`,
       `squarefree_counterexample_witness_dichotomy`, and
       `no_squarefree_counterexample_of_no_witnesses`. The theorem states
-      that an explicit reduction from a squarefree counterexample with no
-      local split order-four witness to a global fiber witness yields an
-      unconditional disjunction between those two certificate types. The
-      global reduction is passed as the named premise `ReductionToFiber`;
-      it is not postulated as an axiom. Thus the kernel checks the logical
-      remounting and the literal local witness, while the arithmetic
-      general-s fiber encoding remains outside this release.
+      unconditionally that a squarefree candidate either has a local split
+      order-four witness or has the full inert quartic skeleton, with odd
+      prime-factor cardinality at least three. A later reduction from that
+      concrete skeleton to a chosen global fiber witness is passed as the
+      named premise `SkeletonToFiber`; it is not postulated as an axiom.
+      Thus the kernel now checks the global-to-quartic arithmetic ingress,
+      while the subsequent general-s finite-fiber encoding remains outside
+      this release.
 
   - title: "Four-coefficient primitive support: kernel arithmetic interface"
     authors:
