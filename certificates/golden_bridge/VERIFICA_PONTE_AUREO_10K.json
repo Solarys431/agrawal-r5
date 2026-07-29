@@ -1,0 +1,5881 @@
+{
+  "schema": 1,
+  "limit_exclusive": 10000,
+  "primes_p_eq_1_mod_5": 306,
+  "tested_exponent_classes": 1158464,
+  "local_members": 387,
+  "nontrivial_local_members": [
+    {
+      "p": 5281,
+      "m": 529,
+      "t_mod_5": 4,
+      "chi_5": 0,
+      "chi_epsilon": 0,
+      "M0": 0,
+      "M2": 0
+    }
+  ],
+  "failures": [],
+  "status": "PASS",
+  "rows": [
+    {
+      "p": 11,
+      "primitive_root": 2,
+      "zeta": 4,
+      "tested_exponent_classes": 8,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 31,
+      "primitive_root": 3,
+      "zeta": 16,
+      "tested_exponent_classes": 24,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 41,
+      "primitive_root": 6,
+      "zeta": 10,
+      "tested_exponent_classes": 32,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 61,
+      "primitive_root": 2,
+      "zeta": 9,
+      "tested_exponent_classes": 48,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 71,
+      "primitive_root": 7,
+      "zeta": 54,
+      "tested_exponent_classes": 56,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 101,
+      "primitive_root": 2,
+      "zeta": 95,
+      "tested_exponent_classes": 80,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 131,
+      "primitive_root": 2,
+      "zeta": 53,
+      "tested_exponent_classes": 104,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 151,
+      "primitive_root": 6,
+      "zeta": 59,
+      "tested_exponent_classes": 120,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 181,
+      "primitive_root": 2,
+      "zeta": 59,
+      "tested_exponent_classes": 144,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 191,
+      "primitive_root": 19,
+      "zeta": 39,
+      "tested_exponent_classes": 152,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 211,
+      "primitive_root": 2,
+      "zeta": 107,
+      "tested_exponent_classes": 168,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 241,
+      "primitive_root": 7,
+      "zeta": 91,
+      "tested_exponent_classes": 192,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 251,
+      "primitive_root": 6,
+      "zeta": 219,
+      "tested_exponent_classes": 200,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 271,
+      "primitive_root": 6,
+      "zeta": 10,
+      "tested_exponent_classes": 216,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 281,
+      "primitive_root": 3,
+      "zeta": 86,
+      "tested_exponent_classes": 224,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 311,
+      "primitive_root": 17,
+      "zeta": 36,
+      "tested_exponent_classes": 248,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 331,
+      "primitive_root": 3,
+      "zeta": 64,
+      "tested_exponent_classes": 264,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 401,
+      "primitive_root": 3,
+      "zeta": 72,
+      "tested_exponent_classes": 320,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 421,
+      "primitive_root": 2,
+      "zeta": 279,
+      "tested_exponent_classes": 336,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 431,
+      "primitive_root": 7,
+      "zeta": 95,
+      "tested_exponent_classes": 344,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 461,
+      "primitive_root": 2,
+      "zeta": 88,
+      "tested_exponent_classes": 368,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        },
+        {
+          "m": 231,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 491,
+      "primitive_root": 2,
+      "zeta": 381,
+      "tested_exponent_classes": 392,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 521,
+      "primitive_root": 3,
+      "zeta": 25,
+      "tested_exponent_classes": 416,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 541,
+      "primitive_root": 2,
+      "zeta": 48,
+      "tested_exponent_classes": 432,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        },
+        {
+          "m": 271,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 571,
+      "primitive_root": 3,
+      "zeta": 481,
+      "tested_exponent_classes": 456,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 601,
+      "primitive_root": 7,
+      "zeta": 423,
+      "tested_exponent_classes": 480,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 631,
+      "primitive_root": 3,
+      "zeta": 242,
+      "tested_exponent_classes": 504,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 641,
+      "primitive_root": 3,
+      "zeta": 357,
+      "tested_exponent_classes": 512,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 661,
+      "primitive_root": 2,
+      "zeta": 247,
+      "tested_exponent_classes": 528,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 691,
+      "primitive_root": 3,
+      "zeta": 132,
+      "tested_exponent_classes": 552,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 701,
+      "primitive_root": 2,
+      "zeta": 210,
+      "tested_exponent_classes": 560,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 751,
+      "primitive_root": 3,
+      "zeta": 80,
+      "tested_exponent_classes": 600,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 761,
+      "primitive_root": 6,
+      "zeta": 67,
+      "tested_exponent_classes": 608,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        },
+        {
+          "m": 381,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 811,
+      "primitive_root": 3,
+      "zeta": 212,
+      "tested_exponent_classes": 648,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 821,
+      "primitive_root": 2,
+      "zeta": 470,
+      "tested_exponent_classes": 656,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 881,
+      "primitive_root": 3,
+      "zeta": 286,
+      "tested_exponent_classes": 704,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 911,
+      "primitive_root": 17,
+      "zeta": 19,
+      "tested_exponent_classes": 728,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 941,
+      "primitive_root": 2,
+      "zeta": 412,
+      "tested_exponent_classes": 752,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 971,
+      "primitive_root": 6,
+      "zeta": 341,
+      "tested_exponent_classes": 776,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 991,
+      "primitive_root": 6,
+      "zeta": 825,
+      "tested_exponent_classes": 792,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1021,
+      "primitive_root": 10,
+      "zeta": 802,
+      "tested_exponent_classes": 816,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        },
+        {
+          "m": 511,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1031,
+      "primitive_root": 14,
+      "zeta": 264,
+      "tested_exponent_classes": 824,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1051,
+      "primitive_root": 7,
+      "zeta": 413,
+      "tested_exponent_classes": 840,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1061,
+      "primitive_root": 2,
+      "zeta": 381,
+      "tested_exponent_classes": 848,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        },
+        {
+          "m": 531,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1091,
+      "primitive_root": 2,
+      "zeta": 93,
+      "tested_exponent_classes": 872,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1151,
+      "primitive_root": 17,
+      "zeta": 224,
+      "tested_exponent_classes": 920,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1171,
+      "primitive_root": 2,
+      "zeta": 70,
+      "tested_exponent_classes": 936,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1181,
+      "primitive_root": 7,
+      "zeta": 656,
+      "tested_exponent_classes": 944,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1201,
+      "primitive_root": 11,
+      "zeta": 1062,
+      "tested_exponent_classes": 960,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1231,
+      "primitive_root": 3,
+      "zeta": 401,
+      "tested_exponent_classes": 984,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1291,
+      "primitive_root": 2,
+      "zeta": 344,
+      "tested_exponent_classes": 1032,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        },
+        {
+          "m": 431,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        },
+        {
+          "m": 861,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1301,
+      "primitive_root": 2,
+      "zeta": 163,
+      "tested_exponent_classes": 1040,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1321,
+      "primitive_root": 13,
+      "zeta": 133,
+      "tested_exponent_classes": 1056,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1361,
+      "primitive_root": 3,
+      "zeta": 211,
+      "tested_exponent_classes": 1088,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        },
+        {
+          "m": 681,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1381,
+      "primitive_root": 2,
+      "zeta": 101,
+      "tested_exponent_classes": 1104,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1451,
+      "primitive_root": 2,
+      "zeta": 712,
+      "tested_exponent_classes": 1160,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1471,
+      "primitive_root": 6,
+      "zeta": 1394,
+      "tested_exponent_classes": 1176,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1481,
+      "primitive_root": 3,
+      "zeta": 1383,
+      "tested_exponent_classes": 1184,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1511,
+      "primitive_root": 11,
+      "zeta": 534,
+      "tested_exponent_classes": 1208,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1531,
+      "primitive_root": 2,
+      "zeta": 225,
+      "tested_exponent_classes": 1224,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1571,
+      "primitive_root": 2,
+      "zeta": 746,
+      "tested_exponent_classes": 1256,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1601,
+      "primitive_root": 3,
+      "zeta": 442,
+      "tested_exponent_classes": 1280,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        },
+        {
+          "m": 801,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1621,
+      "primitive_root": 2,
+      "zeta": 1489,
+      "tested_exponent_classes": 1296,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        },
+        {
+          "m": 811,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1721,
+      "primitive_root": 3,
+      "zeta": 399,
+      "tested_exponent_classes": 1376,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1741,
+      "primitive_root": 2,
+      "zeta": 1697,
+      "tested_exponent_classes": 1392,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        },
+        {
+          "m": 871,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1801,
+      "primitive_root": 11,
+      "zeta": 350,
+      "tested_exponent_classes": 1440,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1811,
+      "primitive_root": 6,
+      "zeta": 1040,
+      "tested_exponent_classes": 1448,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1831,
+      "primitive_root": 3,
+      "zeta": 571,
+      "tested_exponent_classes": 1464,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1861,
+      "primitive_root": 2,
+      "zeta": 758,
+      "tested_exponent_classes": 1488,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1871,
+      "primitive_root": 14,
+      "zeta": 932,
+      "tested_exponent_classes": 1496,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1901,
+      "primitive_root": 2,
+      "zeta": 1126,
+      "tested_exponent_classes": 1520,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1931,
+      "primitive_root": 2,
+      "zeta": 1817,
+      "tested_exponent_classes": 1544,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 1951,
+      "primitive_root": 3,
+      "zeta": 955,
+      "tested_exponent_classes": 1560,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2011,
+      "primitive_root": 3,
+      "zeta": 1328,
+      "tested_exponent_classes": 1608,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2081,
+      "primitive_root": 3,
+      "zeta": 844,
+      "tested_exponent_classes": 1664,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2111,
+      "primitive_root": 7,
+      "zeta": 1403,
+      "tested_exponent_classes": 1688,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2131,
+      "primitive_root": 2,
+      "zeta": 1734,
+      "tested_exponent_classes": 1704,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2141,
+      "primitive_root": 2,
+      "zeta": 893,
+      "tested_exponent_classes": 1712,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2161,
+      "primitive_root": 23,
+      "zeta": 953,
+      "tested_exponent_classes": 1728,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2221,
+      "primitive_root": 2,
+      "zeta": 330,
+      "tested_exponent_classes": 1776,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        },
+        {
+          "m": 741,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        },
+        {
+          "m": 1481,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2251,
+      "primitive_root": 7,
+      "zeta": 2014,
+      "tested_exponent_classes": 1800,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2281,
+      "primitive_root": 7,
+      "zeta": 633,
+      "tested_exponent_classes": 1824,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2311,
+      "primitive_root": 3,
+      "zeta": 585,
+      "tested_exponent_classes": 1848,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2341,
+      "primitive_root": 7,
+      "zeta": 809,
+      "tested_exponent_classes": 1872,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2351,
+      "primitive_root": 13,
+      "zeta": 531,
+      "tested_exponent_classes": 1880,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2371,
+      "primitive_root": 2,
+      "zeta": 1554,
+      "tested_exponent_classes": 1896,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2381,
+      "primitive_root": 3,
+      "zeta": 1347,
+      "tested_exponent_classes": 1904,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2411,
+      "primitive_root": 6,
+      "zeta": 214,
+      "tested_exponent_classes": 1928,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2441,
+      "primitive_root": 6,
+      "zeta": 590,
+      "tested_exponent_classes": 1952,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2521,
+      "primitive_root": 17,
+      "zeta": 2060,
+      "tested_exponent_classes": 2016,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 841,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 1681,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2531,
+      "primitive_root": 2,
+      "zeta": 232,
+      "tested_exponent_classes": 2024,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2551,
+      "primitive_root": 6,
+      "zeta": 2189,
+      "tested_exponent_classes": 2040,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2591,
+      "primitive_root": 7,
+      "zeta": 670,
+      "tested_exponent_classes": 2072,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2621,
+      "primitive_root": 2,
+      "zeta": 1860,
+      "tested_exponent_classes": 2096,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 1311,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2671,
+      "primitive_root": 7,
+      "zeta": 1203,
+      "tested_exponent_classes": 2136,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2711,
+      "primitive_root": 7,
+      "zeta": 18,
+      "tested_exponent_classes": 2168,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2731,
+      "primitive_root": 3,
+      "zeta": 1633,
+      "tested_exponent_classes": 2184,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2741,
+      "primitive_root": 2,
+      "zeta": 1775,
+      "tested_exponent_classes": 2192,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2791,
+      "primitive_root": 6,
+      "zeta": 800,
+      "tested_exponent_classes": 2232,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2801,
+      "primitive_root": 3,
+      "zeta": 2401,
+      "tested_exponent_classes": 2240,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2851,
+      "primitive_root": 2,
+      "zeta": 2744,
+      "tested_exponent_classes": 2280,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2861,
+      "primitive_root": 2,
+      "zeta": 2174,
+      "tested_exponent_classes": 2288,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        },
+        {
+          "m": 1431,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 2971,
+      "primitive_root": 10,
+      "zeta": 2223,
+      "tested_exponent_classes": 2376,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3001,
+      "primitive_root": 14,
+      "zeta": 1998,
+      "tested_exponent_classes": 2400,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 501,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 1001,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 1501,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 2001,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 2501,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3011,
+      "primitive_root": 2,
+      "zeta": 1248,
+      "tested_exponent_classes": 2408,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3041,
+      "primitive_root": 3,
+      "zeta": 1046,
+      "tested_exponent_classes": 2432,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3061,
+      "primitive_root": 6,
+      "zeta": 2589,
+      "tested_exponent_classes": 2448,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3121,
+      "primitive_root": 7,
+      "zeta": 2163,
+      "tested_exponent_classes": 2496,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3181,
+      "primitive_root": 7,
+      "zeta": 425,
+      "tested_exponent_classes": 2544,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3191,
+      "primitive_root": 11,
+      "zeta": 1330,
+      "tested_exponent_classes": 2552,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3221,
+      "primitive_root": 10,
+      "zeta": 1757,
+      "tested_exponent_classes": 2576,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3251,
+      "primitive_root": 6,
+      "zeta": 2014,
+      "tested_exponent_classes": 2600,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3271,
+      "primitive_root": 3,
+      "zeta": 1096,
+      "tested_exponent_classes": 2616,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3301,
+      "primitive_root": 6,
+      "zeta": 3217,
+      "tested_exponent_classes": 2640,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3331,
+      "primitive_root": 3,
+      "zeta": 1177,
+      "tested_exponent_classes": 2664,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3361,
+      "primitive_root": 22,
+      "zeta": 200,
+      "tested_exponent_classes": 2688,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3371,
+      "primitive_root": 2,
+      "zeta": 1886,
+      "tested_exponent_classes": 2696,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3391,
+      "primitive_root": 3,
+      "zeta": 3131,
+      "tested_exponent_classes": 2712,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3461,
+      "primitive_root": 2,
+      "zeta": 1292,
+      "tested_exponent_classes": 2768,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        },
+        {
+          "m": 1731,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3491,
+      "primitive_root": 2,
+      "zeta": 1231,
+      "tested_exponent_classes": 2792,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3511,
+      "primitive_root": 7,
+      "zeta": 1800,
+      "tested_exponent_classes": 2808,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3541,
+      "primitive_root": 7,
+      "zeta": 2160,
+      "tested_exponent_classes": 2832,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3571,
+      "primitive_root": 2,
+      "zeta": 2910,
+      "tested_exponent_classes": 2856,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3581,
+      "primitive_root": 2,
+      "zeta": 2219,
+      "tested_exponent_classes": 2864,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3631,
+      "primitive_root": 15,
+      "zeta": 2102,
+      "tested_exponent_classes": 2904,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3671,
+      "primitive_root": 13,
+      "zeta": 846,
+      "tested_exponent_classes": 2936,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3691,
+      "primitive_root": 2,
+      "zeta": 643,
+      "tested_exponent_classes": 2952,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3701,
+      "primitive_root": 2,
+      "zeta": 391,
+      "tested_exponent_classes": 2960,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3761,
+      "primitive_root": 3,
+      "zeta": 2744,
+      "tested_exponent_classes": 3008,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3821,
+      "primitive_root": 3,
+      "zeta": 1753,
+      "tested_exponent_classes": 3056,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        },
+        {
+          "m": 1911,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3851,
+      "primitive_root": 2,
+      "zeta": 2809,
+      "tested_exponent_classes": 3080,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3881,
+      "primitive_root": 13,
+      "zeta": 1107,
+      "tested_exponent_classes": 3104,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3911,
+      "primitive_root": 13,
+      "zeta": 3349,
+      "tested_exponent_classes": 3128,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 3931,
+      "primitive_root": 2,
+      "zeta": 3250,
+      "tested_exponent_classes": 3144,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4001,
+      "primitive_root": 3,
+      "zeta": 1401,
+      "tested_exponent_classes": 3200,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        },
+        {
+          "m": 2001,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4021,
+      "primitive_root": 2,
+      "zeta": 2708,
+      "tested_exponent_classes": 3216,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4051,
+      "primitive_root": 10,
+      "zeta": 4019,
+      "tested_exponent_classes": 3240,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4091,
+      "primitive_root": 2,
+      "zeta": 1781,
+      "tested_exponent_classes": 3272,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4111,
+      "primitive_root": 12,
+      "zeta": 4070,
+      "tested_exponent_classes": 3288,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4201,
+      "primitive_root": 11,
+      "zeta": 353,
+      "tested_exponent_classes": 3360,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4211,
+      "primitive_root": 6,
+      "zeta": 2404,
+      "tested_exponent_classes": 3368,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4231,
+      "primitive_root": 3,
+      "zeta": 2242,
+      "tested_exponent_classes": 3384,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        },
+        {
+          "m": 1411,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        },
+        {
+          "m": 2821,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4241,
+      "primitive_root": 3,
+      "zeta": 1395,
+      "tested_exponent_classes": 3392,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4261,
+      "primitive_root": 2,
+      "zeta": 398,
+      "tested_exponent_classes": 3408,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 1421,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 2841,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4271,
+      "primitive_root": 7,
+      "zeta": 3463,
+      "tested_exponent_classes": 3416,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4391,
+      "primitive_root": 14,
+      "zeta": 2263,
+      "tested_exponent_classes": 3512,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4421,
+      "primitive_root": 3,
+      "zeta": 301,
+      "tested_exponent_classes": 3536,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4441,
+      "primitive_root": 21,
+      "zeta": 3551,
+      "tested_exponent_classes": 3552,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4451,
+      "primitive_root": 2,
+      "zeta": 2174,
+      "tested_exponent_classes": 3560,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4481,
+      "primitive_root": 3,
+      "zeta": 475,
+      "tested_exponent_classes": 3584,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4561,
+      "primitive_root": 11,
+      "zeta": 1439,
+      "tested_exponent_classes": 3648,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        },
+        {
+          "m": 1521,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        },
+        {
+          "m": 3041,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4591,
+      "primitive_root": 11,
+      "zeta": 2776,
+      "tested_exponent_classes": 3672,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4621,
+      "primitive_root": 2,
+      "zeta": 1153,
+      "tested_exponent_classes": 3696,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4651,
+      "primitive_root": 3,
+      "zeta": 3722,
+      "tested_exponent_classes": 3720,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4691,
+      "primitive_root": 2,
+      "zeta": 2854,
+      "tested_exponent_classes": 3752,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4721,
+      "primitive_root": 6,
+      "zeta": 950,
+      "tested_exponent_classes": 3776,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4751,
+      "primitive_root": 19,
+      "zeta": 3944,
+      "tested_exponent_classes": 3800,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4801,
+      "primitive_root": 7,
+      "zeta": 4351,
+      "tested_exponent_classes": 3840,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4831,
+      "primitive_root": 3,
+      "zeta": 4128,
+      "tested_exponent_classes": 3864,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4861,
+      "primitive_root": 11,
+      "zeta": 3260,
+      "tested_exponent_classes": 3888,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        },
+        {
+          "m": 1621,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        },
+        {
+          "m": 3241,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4871,
+      "primitive_root": 11,
+      "zeta": 4693,
+      "tested_exponent_classes": 3896,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4931,
+      "primitive_root": 6,
+      "zeta": 225,
+      "tested_exponent_classes": 3944,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 4951,
+      "primitive_root": 6,
+      "zeta": 2469,
+      "tested_exponent_classes": 3960,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5011,
+      "primitive_root": 2,
+      "zeta": 273,
+      "tested_exponent_classes": 4008,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5021,
+      "primitive_root": 3,
+      "zeta": 3703,
+      "tested_exponent_classes": 4016,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        },
+        {
+          "m": 2511,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5051,
+      "primitive_root": 2,
+      "zeta": 4945,
+      "tested_exponent_classes": 4040,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5081,
+      "primitive_root": 3,
+      "zeta": 4436,
+      "tested_exponent_classes": 4064,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5101,
+      "primitive_root": 6,
+      "zeta": 4646,
+      "tested_exponent_classes": 4080,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5171,
+      "primitive_root": 2,
+      "zeta": 4384,
+      "tested_exponent_classes": 4136,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5231,
+      "primitive_root": 7,
+      "zeta": 91,
+      "tested_exponent_classes": 4184,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5261,
+      "primitive_root": 2,
+      "zeta": 4510,
+      "tested_exponent_classes": 4208,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5281,
+      "primitive_root": 7,
+      "zeta": 2190,
+      "tested_exponent_classes": 4224,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        },
+        {
+          "m": 529,
+          "t_mod_5": 4,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": [
+        {
+          "m": 529,
+          "t_mod_5": 4,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ]
+    },
+    {
+      "p": 5351,
+      "primitive_root": 11,
+      "zeta": 1842,
+      "tested_exponent_classes": 4280,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5381,
+      "primitive_root": 3,
+      "zeta": 3334,
+      "tested_exponent_classes": 4304,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5431,
+      "primitive_root": 3,
+      "zeta": 2419,
+      "tested_exponent_classes": 4344,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5441,
+      "primitive_root": 3,
+      "zeta": 1685,
+      "tested_exponent_classes": 4352,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5471,
+      "primitive_root": 7,
+      "zeta": 4397,
+      "tested_exponent_classes": 4376,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5501,
+      "primitive_root": 2,
+      "zeta": 3901,
+      "tested_exponent_classes": 4400,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5521,
+      "primitive_root": 11,
+      "zeta": 1374,
+      "tested_exponent_classes": 4416,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5531,
+      "primitive_root": 10,
+      "zeta": 4120,
+      "tested_exponent_classes": 4424,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5581,
+      "primitive_root": 6,
+      "zeta": 3771,
+      "tested_exponent_classes": 4464,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5591,
+      "primitive_root": 11,
+      "zeta": 507,
+      "tested_exponent_classes": 4472,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5641,
+      "primitive_root": 14,
+      "zeta": 781,
+      "tested_exponent_classes": 4512,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5651,
+      "primitive_root": 2,
+      "zeta": 246,
+      "tested_exponent_classes": 4520,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5701,
+      "primitive_root": 2,
+      "zeta": 326,
+      "tested_exponent_classes": 4560,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        },
+        {
+          "m": 1901,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        },
+        {
+          "m": 3801,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5711,
+      "primitive_root": 19,
+      "zeta": 1020,
+      "tested_exponent_classes": 4568,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5741,
+      "primitive_root": 2,
+      "zeta": 1229,
+      "tested_exponent_classes": 4592,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        },
+        {
+          "m": 2871,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5791,
+      "primitive_root": 6,
+      "zeta": 1689,
+      "tested_exponent_classes": 4632,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5801,
+      "primitive_root": 3,
+      "zeta": 5189,
+      "tested_exponent_classes": 4640,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5821,
+      "primitive_root": 6,
+      "zeta": 226,
+      "tested_exponent_classes": 4656,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5851,
+      "primitive_root": 2,
+      "zeta": 3816,
+      "tested_exponent_classes": 4680,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5861,
+      "primitive_root": 3,
+      "zeta": 386,
+      "tested_exponent_classes": 4688,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        },
+        {
+          "m": 2931,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5881,
+      "primitive_root": 31,
+      "zeta": 5006,
+      "tested_exponent_classes": 4704,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 5981,
+      "primitive_root": 3,
+      "zeta": 3718,
+      "tested_exponent_classes": 4784,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6011,
+      "primitive_root": 2,
+      "zeta": 759,
+      "tested_exponent_classes": 4808,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6091,
+      "primitive_root": 7,
+      "zeta": 5392,
+      "tested_exponent_classes": 4872,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6101,
+      "primitive_root": 2,
+      "zeta": 1774,
+      "tested_exponent_classes": 4880,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6121,
+      "primitive_root": 7,
+      "zeta": 2234,
+      "tested_exponent_classes": 4896,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6131,
+      "primitive_root": 2,
+      "zeta": 5111,
+      "tested_exponent_classes": 4904,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6151,
+      "primitive_root": 3,
+      "zeta": 4609,
+      "tested_exponent_classes": 4920,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6211,
+      "primitive_root": 2,
+      "zeta": 3985,
+      "tested_exponent_classes": 4968,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6221,
+      "primitive_root": 3,
+      "zeta": 4981,
+      "tested_exponent_classes": 4976,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        },
+        {
+          "m": 3111,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 4,
+          "M0": 1,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6271,
+      "primitive_root": 11,
+      "zeta": 692,
+      "tested_exponent_classes": 5016,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6301,
+      "primitive_root": 10,
+      "zeta": 93,
+      "tested_exponent_classes": 5040,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6311,
+      "primitive_root": 7,
+      "zeta": 3053,
+      "tested_exponent_classes": 5048,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6361,
+      "primitive_root": 19,
+      "zeta": 399,
+      "tested_exponent_classes": 5088,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6421,
+      "primitive_root": 6,
+      "zeta": 681,
+      "tested_exponent_classes": 5136,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 3211,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6451,
+      "primitive_root": 3,
+      "zeta": 1968,
+      "tested_exponent_classes": 5160,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6481,
+      "primitive_root": 7,
+      "zeta": 5880,
+      "tested_exponent_classes": 5184,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6491,
+      "primitive_root": 2,
+      "zeta": 5791,
+      "tested_exponent_classes": 5192,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6521,
+      "primitive_root": 6,
+      "zeta": 1420,
+      "tested_exponent_classes": 5216,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        },
+        {
+          "m": 3261,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6551,
+      "primitive_root": 17,
+      "zeta": 3261,
+      "tested_exponent_classes": 5240,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6571,
+      "primitive_root": 3,
+      "zeta": 155,
+      "tested_exponent_classes": 5256,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6581,
+      "primitive_root": 14,
+      "zeta": 1928,
+      "tested_exponent_classes": 5264,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 3291,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6661,
+      "primitive_root": 6,
+      "zeta": 4334,
+      "tested_exponent_classes": 5328,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6691,
+      "primitive_root": 2,
+      "zeta": 1542,
+      "tested_exponent_classes": 5352,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6701,
+      "primitive_root": 2,
+      "zeta": 4696,
+      "tested_exponent_classes": 5360,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6761,
+      "primitive_root": 3,
+      "zeta": 3514,
+      "tested_exponent_classes": 5408,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6781,
+      "primitive_root": 2,
+      "zeta": 4709,
+      "tested_exponent_classes": 5424,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6791,
+      "primitive_root": 7,
+      "zeta": 4066,
+      "tested_exponent_classes": 5432,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6841,
+      "primitive_root": 22,
+      "zeta": 4106,
+      "tested_exponent_classes": 5472,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 3421,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6871,
+      "primitive_root": 3,
+      "zeta": 4349,
+      "tested_exponent_classes": 5496,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 2291,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        },
+        {
+          "m": 4581,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6911,
+      "primitive_root": 7,
+      "zeta": 5508,
+      "tested_exponent_classes": 5528,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6961,
+      "primitive_root": 13,
+      "zeta": 6081,
+      "tested_exponent_classes": 5568,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        },
+        {
+          "m": 3481,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6971,
+      "primitive_root": 2,
+      "zeta": 3439,
+      "tested_exponent_classes": 5576,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 6991,
+      "primitive_root": 6,
+      "zeta": 1530,
+      "tested_exponent_classes": 5592,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7001,
+      "primitive_root": 3,
+      "zeta": 3403,
+      "tested_exponent_classes": 5600,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7121,
+      "primitive_root": 3,
+      "zeta": 4504,
+      "tested_exponent_classes": 5696,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7151,
+      "primitive_root": 7,
+      "zeta": 6521,
+      "tested_exponent_classes": 5720,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7211,
+      "primitive_root": 2,
+      "zeta": 2676,
+      "tested_exponent_classes": 5768,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7321,
+      "primitive_root": 7,
+      "zeta": 5396,
+      "tested_exponent_classes": 5856,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7331,
+      "primitive_root": 2,
+      "zeta": 6873,
+      "tested_exponent_classes": 5864,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7351,
+      "primitive_root": 6,
+      "zeta": 5992,
+      "tested_exponent_classes": 5880,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7411,
+      "primitive_root": 2,
+      "zeta": 1542,
+      "tested_exponent_classes": 5928,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7451,
+      "primitive_root": 2,
+      "zeta": 2963,
+      "tested_exponent_classes": 5960,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7481,
+      "primitive_root": 6,
+      "zeta": 1270,
+      "tested_exponent_classes": 5984,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7541,
+      "primitive_root": 2,
+      "zeta": 7223,
+      "tested_exponent_classes": 6032,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7561,
+      "primitive_root": 13,
+      "zeta": 5087,
+      "tested_exponent_classes": 6048,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7591,
+      "primitive_root": 6,
+      "zeta": 2708,
+      "tested_exponent_classes": 6072,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7621,
+      "primitive_root": 2,
+      "zeta": 383,
+      "tested_exponent_classes": 6096,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7681,
+      "primitive_root": 17,
+      "zeta": 5095,
+      "tested_exponent_classes": 6144,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7691,
+      "primitive_root": 2,
+      "zeta": 6179,
+      "tested_exponent_classes": 6152,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7741,
+      "primitive_root": 7,
+      "zeta": 5233,
+      "tested_exponent_classes": 6192,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7841,
+      "primitive_root": 12,
+      "zeta": 3308,
+      "tested_exponent_classes": 6272,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 1961,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 3921,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 5881,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7901,
+      "primitive_root": 2,
+      "zeta": 4053,
+      "tested_exponent_classes": 6320,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 7951,
+      "primitive_root": 6,
+      "zeta": 5362,
+      "tested_exponent_classes": 6360,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8011,
+      "primitive_root": 14,
+      "zeta": 930,
+      "tested_exponent_classes": 6408,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8081,
+      "primitive_root": 3,
+      "zeta": 4349,
+      "tested_exponent_classes": 6464,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8101,
+      "primitive_root": 6,
+      "zeta": 3547,
+      "tested_exponent_classes": 6480,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8111,
+      "primitive_root": 11,
+      "zeta": 3023,
+      "tested_exponent_classes": 6488,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8161,
+      "primitive_root": 7,
+      "zeta": 6333,
+      "tested_exponent_classes": 6528,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        },
+        {
+          "m": 4081,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8171,
+      "primitive_root": 2,
+      "zeta": 4860,
+      "tested_exponent_classes": 6536,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 0,
+          "M0": 2,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8191,
+      "primitive_root": 17,
+      "zeta": 3002,
+      "tested_exponent_classes": 6552,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8221,
+      "primitive_root": 2,
+      "zeta": 2822,
+      "tested_exponent_classes": 6576,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8231,
+      "primitive_root": 11,
+      "zeta": 3032,
+      "tested_exponent_classes": 6584,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8291,
+      "primitive_root": 2,
+      "zeta": 3333,
+      "tested_exponent_classes": 6632,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8311,
+      "primitive_root": 3,
+      "zeta": 1986,
+      "tested_exponent_classes": 6648,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8431,
+      "primitive_root": 3,
+      "zeta": 2128,
+      "tested_exponent_classes": 6744,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8461,
+      "primitive_root": 6,
+      "zeta": 2455,
+      "tested_exponent_classes": 6768,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 2,
+          "M0": 2,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8501,
+      "primitive_root": 7,
+      "zeta": 3215,
+      "tested_exponent_classes": 6800,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8521,
+      "primitive_root": 13,
+      "zeta": 2392,
+      "tested_exponent_classes": 6816,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 3,
+          "M0": 1,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8581,
+      "primitive_root": 6,
+      "zeta": 7477,
+      "tested_exponent_classes": 6864,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8641,
+      "primitive_root": 17,
+      "zeta": 7644,
+      "tested_exponent_classes": 6912,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 721,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 1441,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 2161,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 2881,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 3601,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 4321,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 5041,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 5761,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 6481,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 7201,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        },
+        {
+          "m": 7921,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 3,
+          "M0": 4,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8681,
+      "primitive_root": 15,
+      "zeta": 5966,
+      "tested_exponent_classes": 6944,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        },
+        {
+          "m": 2171,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        },
+        {
+          "m": 4341,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        },
+        {
+          "m": 6511,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8731,
+      "primitive_root": 2,
+      "zeta": 6999,
+      "tested_exponent_classes": 6984,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        },
+        {
+          "m": 2911,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        },
+        {
+          "m": 5821,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8741,
+      "primitive_root": 2,
+      "zeta": 4626,
+      "tested_exponent_classes": 6992,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        },
+        {
+          "m": 4371,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8761,
+      "primitive_root": 23,
+      "zeta": 5034,
+      "tested_exponent_classes": 7008,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8821,
+      "primitive_root": 2,
+      "zeta": 4912,
+      "tested_exponent_classes": 7056,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        },
+        {
+          "m": 2941,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        },
+        {
+          "m": 5881,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8831,
+      "primitive_root": 7,
+      "zeta": 920,
+      "tested_exponent_classes": 7064,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8861,
+      "primitive_root": 2,
+      "zeta": 7199,
+      "tested_exponent_classes": 7088,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8941,
+      "primitive_root": 6,
+      "zeta": 7924,
+      "tested_exponent_classes": 7152,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        },
+        {
+          "m": 4471,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8951,
+      "primitive_root": 13,
+      "zeta": 454,
+      "tested_exponent_classes": 7160,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 8971,
+      "primitive_root": 2,
+      "zeta": 5083,
+      "tested_exponent_classes": 7176,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        },
+        {
+          "m": 2991,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        },
+        {
+          "m": 5981,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 2,
+          "M0": 0,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9001,
+      "primitive_root": 7,
+      "zeta": 7453,
+      "tested_exponent_classes": 7200,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 1501,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 3001,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 4501,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 6001,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 7501,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9011,
+      "primitive_root": 2,
+      "zeta": 6386,
+      "tested_exponent_classes": 7208,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9041,
+      "primitive_root": 3,
+      "zeta": 5525,
+      "tested_exponent_classes": 7232,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 2,
+          "M0": 3,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9091,
+      "primitive_root": 3,
+      "zeta": 100,
+      "tested_exponent_classes": 7272,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9151,
+      "primitive_root": 3,
+      "zeta": 178,
+      "tested_exponent_classes": 7320,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 2,
+          "M0": 4,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9161,
+      "primitive_root": 3,
+      "zeta": 625,
+      "tested_exponent_classes": 7328,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9181,
+      "primitive_root": 2,
+      "zeta": 7417,
+      "tested_exponent_classes": 7344,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 3,
+          "M0": 2,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9221,
+      "primitive_root": 2,
+      "zeta": 6523,
+      "tested_exponent_classes": 7376,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9241,
+      "primitive_root": 13,
+      "zeta": 3564,
+      "tested_exponent_classes": 7392,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9281,
+      "primitive_root": 3,
+      "zeta": 5092,
+      "tested_exponent_classes": 7424,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9311,
+      "primitive_root": 7,
+      "zeta": 6906,
+      "tested_exponent_classes": 7448,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9341,
+      "primitive_root": 2,
+      "zeta": 3695,
+      "tested_exponent_classes": 7472,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 3,
+          "M0": 0,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9371,
+      "primitive_root": 2,
+      "zeta": 5795,
+      "tested_exponent_classes": 7496,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 0,
+          "M0": 1,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9391,
+      "primitive_root": 3,
+      "zeta": 494,
+      "tested_exponent_classes": 7512,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 1,
+          "M0": 3,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9421,
+      "primitive_root": 2,
+      "zeta": 4685,
+      "tested_exponent_classes": 7536,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9431,
+      "primitive_root": 7,
+      "zeta": 7523,
+      "tested_exponent_classes": 7544,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9461,
+      "primitive_root": 3,
+      "zeta": 5228,
+      "tested_exponent_classes": 7568,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9491,
+      "primitive_root": 2,
+      "zeta": 5502,
+      "tested_exponent_classes": 7592,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9511,
+      "primitive_root": 3,
+      "zeta": 7104,
+      "tested_exponent_classes": 7608,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 2,
+          "M0": 1,
+          "M2": 1
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9521,
+      "primitive_root": 3,
+      "zeta": 8172,
+      "tested_exponent_classes": 7616,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9551,
+      "primitive_root": 11,
+      "zeta": 3631,
+      "tested_exponent_classes": 7640,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 1,
+          "M0": 2,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9601,
+      "primitive_root": 13,
+      "zeta": 5013,
+      "tested_exponent_classes": 7680,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 3201,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        },
+        {
+          "m": 6401,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 4,
+          "M0": 4,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9631,
+      "primitive_root": 3,
+      "zeta": 3947,
+      "tested_exponent_classes": 7704,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 1,
+          "M0": 0,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9661,
+      "primitive_root": 2,
+      "zeta": 5301,
+      "tested_exponent_classes": 7728,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        },
+        {
+          "m": 4831,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 0,
+          "M0": 0,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9721,
+      "primitive_root": 7,
+      "zeta": 4264,
+      "tested_exponent_classes": 7776,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 1,
+          "chi_epsilon": 1,
+          "M0": 1,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9781,
+      "primitive_root": 6,
+      "zeta": 2779,
+      "tested_exponent_classes": 7824,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 3,
+          "M0": 3,
+          "M2": 4
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9791,
+      "primitive_root": 11,
+      "zeta": 2443,
+      "tested_exponent_classes": 7832,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 1,
+          "M0": 4,
+          "M2": 3
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9811,
+      "primitive_root": 3,
+      "zeta": 7039,
+      "tested_exponent_classes": 7848,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 4,
+          "M0": 3,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9851,
+      "primitive_root": 2,
+      "zeta": 2234,
+      "tested_exponent_classes": 7880,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 0,
+          "chi_epsilon": 4,
+          "M0": 0,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9871,
+      "primitive_root": 3,
+      "zeta": 4996,
+      "tested_exponent_classes": 7896,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 2,
+          "chi_epsilon": 4,
+          "M0": 2,
+          "M2": 2
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9901,
+      "primitive_root": 2,
+      "zeta": 7611,
+      "tested_exponent_classes": 7920,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9931,
+      "primitive_root": 10,
+      "zeta": 4693,
+      "tested_exponent_classes": 7944,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 3,
+          "chi_epsilon": 0,
+          "M0": 3,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    },
+    {
+      "p": 9941,
+      "primitive_root": 2,
+      "zeta": 6090,
+      "tested_exponent_classes": 7952,
+      "local_members": [
+        {
+          "m": 1,
+          "t_mod_5": 1,
+          "chi_5": 4,
+          "chi_epsilon": 0,
+          "M0": 4,
+          "M2": 0
+        }
+      ],
+      "nontrivial_members": []
+    }
+  ]
+}

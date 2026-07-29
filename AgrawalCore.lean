@@ -3,6 +3,7 @@ import AgrawalCore.InertiaCore
 import AgrawalCore.Entanglement
 import AgrawalCore.GoldenMoment
 import AgrawalCore.GoldenMomentBridge
+import AgrawalCore.LocalMomentBridge
 import AgrawalCore.MomentObstruction
 import AgrawalCore.FibBridge
 import AgrawalCore.Reciprocity

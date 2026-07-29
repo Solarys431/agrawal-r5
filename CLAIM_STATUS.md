@@ -19,15 +19,15 @@ Status date: 2026-07-29.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 43 `AgrawalCore` modules and 6,254
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 57 headline
+The implementation currently contains 44 `AgrawalCore` modules and 6,707
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 64 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
 
 | Claim | Verification | Prior-art / novelty posture |
 |---|---|---|
-| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(M_2=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Product-to-sum interface and concrete \(r=5\) moment: **LEAN** (`quintic_index_indexedMomentUnit_eq_moment`, `indexedMomentUnit_two_eq_quadraticMomentUnit`, `cyclotomic_quadratic_moment_eq_three_golden_index`) | Williams–Hardy computed the classical golden-unit index. Only its explicit identification with the Agrawal quadratic moment is a candidate new bridge; priority is provisional. Their 22 published Table 5 rows are replayed independently, 22/22, as a normalization check—not as a proof premise or novelty test |
+| \(U_2=(\sqrt5)^5\varepsilon^3\) and \(M_2=3\operatorname{ind}_5(\varepsilon)\) | Factorization: **LEAN**, **COMPARATOR** (`golden_moment_factorization`). Product-to-sum and the concrete \(r=5\) row-to-character interface: **LEAN** (`cyclotomic_quadratic_moment_eq_three_golden_index`, `localS5_canonical_golden_moment_obstruction`, `localS5_canonical_quintic_locks_of_ne_one`) | Williams–Hardy computed the classical golden-unit index. Only its explicit identification with the Agrawal quadratic moment is a candidate new bridge; priority is provisional. Their 22 published Table 5 rows are replayed independently, 22/22, as a normalization check—not as a proof premise or novelty test |
 | Agrawal's congruence at \(r=5\) implies the base-5 Fermat congruence for squarefree \(n\) | **LEAN**, **COMPARATOR**: `agrawal_fermat_shadow` | Underlying implication is classical (Lenstra); the contribution is the end-to-end formalization |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
@@ -42,7 +42,10 @@ The following are **PAPER** claims. Some have Lean-checked algebraic
 sublemmas, but their complete finite-field, Kummer, analytic or global
 interfaces are not kernel theorems in this repository:
 
-- the full moment interface \(\operatorname{im}_r(S)\subseteq T\);
+- the general-\(r\) moment interface
+  \(\operatorname{im}_r(S)\subseteq T\) from the complete external
+  definition of \(S(p,r)\); the concrete \(r=5\) `LocalS5` row-to-character
+  seam is **LEAN**;
 - the complete two-lock classification of local exceptions at \(r=5\);
 - the lifted golden tower and its per-floor Kummer density;
 - the exact order decomposition of \(\zeta_5-1\) and the Kummer
@@ -58,6 +61,9 @@ not be described merely as “Lean verified”.
 
 The repository ships replayable certificates for:
 
+- an independent end-to-end finite audit of the golden bridge for every
+  \(p\equiv1\pmod5\), \(p<10\,000\), including all relevant exponent
+  classes;
 - seven explicitly empty three-factor fibers;
 - the \(H_n\) census through its stated index bound;
 - the final-row size experiments for the stated \(k=3\) and \(k=5\)

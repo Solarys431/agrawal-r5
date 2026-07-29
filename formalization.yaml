@@ -16,14 +16,14 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on fifty-seven headline declarations
+      AxiomAudit.lean runs #print axioms on sixty-four headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 336 public theorems and 189 instance binders, with 49 current
-      proof-route dependencies declared fail-closed; the complete 43-module
+      all 361 public theorems and 213 instance binders, with 52 current
+      proof-route dependencies declared fail-closed; the complete 44-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
@@ -78,8 +78,10 @@ sources:
       (t^(j+1)−1)M_j=0. This is a short finite-Fourier/change-of-variables
       argument. We claim no priority for the abstract algebraic lemma. The
       potentially substantive object in the wider study is its application to
-      the local set S(p,r); that end-to-end interface is not yet formalized in
-      this repository.
+      the local set S(p,r). The complete general-r interface remains
+      paper-level, while `LocalMomentBridge.lean` now formalizes the literal
+      quotient-ring row, same-character covariance, and golden obstruction at
+      r=5.
 
   - title: "The golden moment of Agrawal's congruence at r = 5"
     authors:
@@ -94,7 +96,12 @@ sources:
       `zmod_golden_moment_index`.  On 2026-07-29 the exact product-to-sum
       interface was added as `quintic_index_indexedMomentUnit_eq_moment`,
       `indexedMomentUnit_two_eq_quadraticMomentUnit`, and
-      `cyclotomic_quadratic_moment_eq_three_golden_index`. If ζ satisfies
+      `cyclotomic_quadratic_moment_eq_three_golden_index`; the same-character
+      local seam was added as `localS5_unit_rows`,
+      `localS5_quintic_covariance`, and the lift-free corollary
+      `localS5_canonical_golden_moment_obstruction`; the direct simultaneous
+      vanishing of the five and golden indices is
+      `localS5_canonical_quintic_locks_of_ne_one`. If ζ satisfies
       Φ₅(ζ)=0, the weighted quadratic moment unit
       U₂=∏_{a=1}^4(ζ^a−1)^(a² mod 5) factors as (√5)^5 ε^3, where
       √5=1+2(ζ+ζ^4) and ε=1+ζ+ζ^4. Consequently every quintic index satisfies

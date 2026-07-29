@@ -293,10 +293,19 @@ moment \(M_j\);
 \texttt{indexedMomentUnit\_two\_eq\_quadraticMomentUnit} enumerates
 \((\mathbf Z/5\mathbf Z)^\times\) and proves the weights \(1,4,4,1\);
 and \texttt{cyclotomic\_quadratic\_moment\_eq\_three\_golden\_index}
-composes this with the golden factorization.  These declarations use no
-published index table or computer-algebra transcript as a premise.  The
-derivation of the covariance family from the complete external definition
-of \(S(p,r)\) remains a separate paper-level interface.
+composes this with the golden factorization.  The declaration
+\texttt{localS5\_unit\_rows} starts from the literal quotient-ring predicate
+\texttt{LocalS5}, evaluates the four primitive fifth-root rows, and
+\texttt{localS5\_canonical\_golden\_moment\_obstruction} constructs the
+cyclotomic units internally and applies one and the same quintic character
+to obtain covariance and the golden obstruction.  Finally,
+\texttt{localS5\_canonical\_quintic\_locks\_of\_ne\_one} formalizes the
+direct conclusion that a nonidentity residue coordinate annihilates both
+the scalar-five and golden-unit indices for that same character.  These
+declarations use no published index table, discrete-logarithm generator, or
+computer-algebra transcript as a premise.  The analogous derivation from the
+complete external definition of \(S(p,r)\) for general \(r\) remains a
+separate paper-level interface.
 
 \section{The local set and its discrete-logarithm form}\label{sec:local}
 
@@ -323,8 +332,13 @@ for every $a \in G$.
 $A \cong \prod K$ over Frobenius orbits of primitive $r$-th roots;
 the congruence in each component reads $(\zeta^a - 1)^m = \zeta^{am}-1$,
 which in $\log_\gamma$-coordinates is the displayed congruence; Frobenius
-transports the identity across an orbit. Full details (and the Lean
-formalization of this section) are in the project repository.
+transports the identity across an orbit.  The complete general-$r$
+decomposition and discrete-logarithm equivalence are proved here at paper
+level.  For $r=5$, the project repository separately gives a kernel-checked
+specialization: \texttt{localS5\_unit\_rows} derives the four rows from the
+literal quotient-ring predicate \texttt{LocalS5}, and
+\texttt{localS5\_quintic\_covariance} applies a quintic character directly,
+without choosing a discrete-logarithm generator.
 \end{proof}
 
 \begin{lemma}[squarefree reduction]\label{lem:ingress}
@@ -399,8 +413,14 @@ $1$ at $r{=}7$) have all even moments vanishing, as the theory predicts.
 
 From now on $r = 5$, $p \equiv 1 \pmod 5$ in this section. Fix $z$ of order
 $5$ in $\F_p^\times$, coordinate $\sqrt5 = 1 + 2(z + z^{-1})$, and set
-$\eps = (1+\sqrt5)/2$, the golden unit. Let $\ind_5(x) \in \{0,\dots,4\}$
-denote the quintic index with respect to $z$.
+$\eps = (1+\sqrt5)/2$, the golden unit. Fix a quintic character
+$\chi:\F_p^\times\to\F_5$ (equivalently, fix one discrete-logarithm
+normalization modulo $5$), and write $\ind_5(x)=\chi(x)$.  The same
+character is used in the definitions of $M_2$ and $\ind_5(\eps)$.
+Changing the normalization multiplies both sides of the identity below by
+the same nonzero scalar, so its vanishing content is canonical.  In the
+Williams--Hardy certificate this choice is coordinated by a primitive
+generator $g$ and $z=g^{(p-1)/5}$.
 
 \begin{theorem}[golden theorem]\label{thm:golden}
 $M_2 = 3 \cdot \ind_5(\eps)$. In particular $M_2 = 0 \iff \eps \in
@@ -432,7 +452,11 @@ Williams--Hardy Table~5 and obtains
 \]
 in 22/22 cases.  This finite comparison checks conventions, signs and the
 factor \(3\); it is neither a proof premise nor evidence of historical
-priority. The pair $(M_0, M_2)$ is a linear
+priority.  A second independent replay enumerates all \(1{,}158{,}464\)
+relevant exponent classes for the \(306\) primes
+\(p\equiv1\pmod5\), \(p<10^4\), and finds zero violations of the local-row,
+same-character covariance and golden-obstruction chain.  This is again a
+finite regression, not a universal proof. The pair $(M_0, M_2)$ is a linear
 coordinate system on the Dickson plane $(u,v)$ mod $5$ (determinant $4$), so
 the degenerate locus $M_0 = M_2 = 0$ is exactly $u \equiv v \equiv 0$.
 

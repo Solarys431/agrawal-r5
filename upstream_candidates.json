@@ -235,6 +235,12 @@
       "note": "Recomposition at Phi_5."
     },
     {
+      "module": "AgrawalCore/LocalMomentBridge.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Concrete quotient-row to same-character covariance and golden obstruction at r = 5."
+    },
+    {
       "module": "AgrawalCore/LocalTransport.lean",
       "disposition": "project_specific",
       "candidates": [],

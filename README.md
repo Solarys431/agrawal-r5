@@ -14,11 +14,13 @@ from the congruence with the golden unit:
 ind₅(U₂) = 3 · ind₅((1 + √5) / 2).
 ```
 
-The identity and its index consequence are checked by Lean. This repository
-is the public verification surface: the formal core, the paper, and the
-computational certificates. We do **not** prove the conjecture; the two open
-problems (golden inertia/H4 and global emptiness of the fibers) are stated
-precisely in the paper.
+The identity and its index consequence are checked by Lean.  The kernel also
+starts from the literal local quotient-ring row, constructs its four
+cyclotomic units, and applies the same quintic character to derive the golden
+moment obstruction. This repository is the public verification surface: the
+formal core, the paper, and the computational certificates. We do **not**
+prove the conjecture; the two open problems (golden inertia/H4 and global
+emptiness of the fibers) are stated precisely in the paper.
 
 The conservative result-by-result prior-art assessment is in
 [`NOVELTY_AND_PRIOR_ART.md`](NOVELTY_AND_PRIOR_ART.md). A separate
@@ -63,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-three modules (6,254 source lines)
+The implementation core consists of forty-four modules (6,707 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -82,6 +84,12 @@ on the headline declarations. Its output contains only `propext`,
 by Mathlib; no project-defined axiom is present. GitHub Actions runs
 this audit after every kernel build.
 
+The separate
+[`certificates/golden_bridge`](certificates/golden_bridge/README.md)
+package preserves an independent audit and replays 1,158,464 local exponent
+classes below \(10^4\).  It is a finite regression and normalization check,
+not a premise of the Lean theorem.
+
 | Result | Declaration | File |
 |---|---|---|
 | **Moment covariance: t·Mⱼ = t⁻ʲ·Mⱼ** | `moment_covariance` | `MomentObstruction.lean` |
@@ -89,6 +97,7 @@ this audit after every kernel build.
 | **Golden factorization: U₂ = (√5)⁵ε³** | `golden_moment_factorization` | `GoldenMoment.lean` |
 | **Golden theorem: ind₅(U₂) = 3·ind₅(ε)** | `zmod_golden_moment_index` | `GoldenMoment.lean` |
 | **Exact product-to-sum bridge: M₂ = 3·ind₅(ε)** | `cyclotomic_quadratic_moment_eq_three_golden_index` | `GoldenMomentBridge.lean` |
+| **Concrete local row → same-character covariance → both quintic locks** | `localS5_canonical_golden_moment_obstruction`, `localS5_canonical_quintic_locks_of_ne_one` | `LocalMomentBridge.lean` |
 | Index lemma | `mul_dvd_gcd_mul` | `IndexLemma.lean` |
 | Golden Frobenius: ε^p = 1 − ε (inert case) | `golden_frobenius` | `InertiaCore.lean` |
 | Golden half-period: ε^(p+1) = −1 | `golden_pow_p_succ` | `InertiaCore.lean` |
@@ -207,10 +216,11 @@ quadratic moment of Agrawal = 3 × quintic index of the golden unit.
 ```
 
 The kernel proof first establishes the division-free ring identity
-`U₂ = (√5)⁵ ε³`, then applies an actual discrete quintic index on
-`(ZMod p)ˣ`. We have not found this identification in the targeted
-literature search; that novelty assessment remains provisional until
-specialist review.
+`U₂ = (√5)⁵ ε³`.  It then constructs the four canonical cyclotomic units
+from the literal `LocalS5` quotient row and applies one and the same quintic
+character to the local covariance and to the golden unit. We have not found
+this identification in the targeted literature search; that novelty
+assessment remains provisional until specialist review.
 
 **The statement covers the original hypotheses.** `lenstra_proposition_card`
 assumes exactly what the source assumes: k ≡ 1 (mod 4) prime factors, all
@@ -251,6 +261,11 @@ pinned:
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # certificate replay
 python3 tools/verify_scalar.py                # independent quotient-ring regression
+(cd certificates/golden_bridge && shasum -a 256 -c SHA256_PONTE_AUREO.txt)
+python3 certificates/golden_bridge/verify_golden_bridge_end_to_end.py \
+  --limit 10000 --output /tmp/VERIFICA_PONTE_AUREO_10K.json
+cmp certificates/golden_bridge/VERIFICA_PONTE_AUREO_10K.json \
+  /tmp/VERIFICA_PONTE_AUREO_10K.json
 python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --k3-limit 100000 --k5-limit 3000 \
   --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \
@@ -351,7 +366,7 @@ globale delle fibre) sono enunciati con precisione nel paper.
 
 ## Nucleo Lean
 
-Il nucleo di implementazione contiene quarantadue moduli (6.057 righe
+Il nucleo di implementazione contiene quarantaquattro moduli (6.592 righe
 sorgente) su Mathlib puro e pinnato, senza `sorry`, `admit`,
 `native_decide`, assiomi di progetto o scorciatoie opache. I file
 `Challenge.lean`, separati e fidati, contengono invece i buchi di prova
@@ -399,6 +414,11 @@ pinnata:
 python3 -m pip install --requirement requirements.txt
 python3 tools/verify_certificates.py          # replay dei certificati
 python3 tools/verify_scalar.py                # regressione indipendente nel quoziente
+(cd certificates/golden_bridge && shasum -a 256 -c SHA256_PONTE_AUREO.txt)
+python3 certificates/golden_bridge/verify_golden_bridge_end_to_end.py \
+  --limit 10000 --output /tmp/VERIFICA_PONTE_AUREO_10K.json
+cmp certificates/golden_bridge/VERIFICA_PONTE_AUREO_10K.json \
+  /tmp/VERIFICA_PONTE_AUREO_10K.json
 python3 certificates/fibre_size/verifica_fibre_taglia.py \
   --k3-limit 100000 --k5-limit 3000 \
   --expected certificates/fibre_size/VERIFICA_FIBRE_TAGLIA.json \

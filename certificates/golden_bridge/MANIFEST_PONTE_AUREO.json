@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "task": "Independent audit of the golden bridge",
+  "repository": "Solarys431/agrawal-r5",
+  "commit": "5e894ab98bc7f6c89969d83e52d8b2493031a3e1",
+  "verdict": "mathematically correct; end-to-end local-to-character Lean interface still missing",
+  "artifacts": [
+    {
+      "path": "AUDIT_PONTE_AUREO.md",
+      "size_bytes": 8515,
+      "sha256": "1fc6e6a3243ea5896d44c01f70751d59e6ea34dc8dc8648573ab9c82b8b1d5d0"
+    },
+    {
+      "path": "verify_golden_bridge_end_to_end.py",
+      "size_bytes": 5410,
+      "sha256": "301e20d57eb967ecbdfc4a1e23ff56c756304f189bb05c85f2842bb38db9db72"
+    },
+    {
+      "path": "VERIFICA_PONTE_AUREO_10K.json",
+      "size_bytes": 113700,
+      "sha256": "6f6c248ae897717909c095728be2fbc4861342432ac39291e759ac4902398f5b"
+    }
+  ]
+}

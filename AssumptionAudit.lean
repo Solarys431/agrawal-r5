@@ -39,6 +39,7 @@ The suffix records the zero-based binder indices returned by
 -/
 private def declaredProofRouteDebts : List String :=
   [
+    "AgrawalCore.cyclotomicSqrtFive_isUnit:[1]",
     "AgrawalCore.dvd_fib_of_pow_eq_neg_one:[1]",
     "AgrawalCore.dvd_lucas_of_pow_eq_neg_one:[1]",
     "AgrawalCore.dvd_of_natCast_eq_zero:[1]",
@@ -55,6 +56,7 @@ private def declaredProofRouteDebts : List String :=
     "AgrawalCore.instNontrivialGoldenRing:[1]",
     "AgrawalCore.instNontrivialPhi5Ring:[1]",
     "AgrawalCore.lenstra_local:[1]",
+    "AgrawalCore.localFive_isUnit:[1]",
     "AgrawalCore.natCast_eq_zero_of_dvd:[1]",
     "AgrawalCore.of_injective:[1]",
     "AgrawalCore.orderOf_norm_decomposition:[2]",
@@ -87,7 +89,8 @@ private def declaredProofRouteDebts : List String :=
     "AgrawalCore.zeta5_rel:[1]",
     "AgrawalCore.zeta_sub_one_isUnit:[1]",
     "AgrawalCore.zeta_sub_one_pow_p:[1]",
-    "AgrawalCore.zeta_sub_one_pow_sq:[1]"
+    "AgrawalCore.zeta_sub_one_pow_sq:[1]",
+    "AgrawalCore.zeta5_unit_power_sub_one_isUnit:[1]"
   ]
 
 run_cmd liftTermElabM do

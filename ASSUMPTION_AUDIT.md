@@ -16,18 +16,18 @@ theorem in `AgrawalCore`. The ordinary `lake --wfail build` simultaneously
 checks Lean's `unusedSectionVars` linter against the elaborated proof terms.
 Together they give a reproducible boundary:
 
-- 336 public theorems inspected;
-- 189 instance binders inspected;
+- 361 public theorems inspected;
+- 213 instance binders inspected;
 - two genuinely removable assumptions eliminated from
   `golden_pow_of_sq` and `golden_pow_pred`;
-- 49 instance binders absent from the proposition body but still used by the
+- 52 instance binders absent from the proposition body but still used by the
   present proof route;
 - zero unrecorded debts.
 
-The 49 entries are deliberately retained in the exact allowlist inside
+The 52 entries are deliberately retained in the exact allowlist inside
 `AssumptionAudit.lean`. They consist of:
 
-- 45 uses of `[Fact p.Prime]` in finite-field and quotient-ring arguments;
+- 48 uses of `[Fact p.Prime]` in finite-field and quotient-ring arguments;
 - four uses of `[Finite G]` in the order-through-a-power lemmas.
 
 These are not hidden axioms, `sorry`s, or claims that the hypotheses are
@@ -46,9 +46,9 @@ Expected final lines:
 
 ```text
 Public hypothesis-minimality audit: PASS
-  theorems inspected: 336
-  instance binders inspected: 189
+  theorems inspected: 361
+  instance binders inspected: 213
   generalized assumptions removed in this audit: 2
-  declared proof-route debts: 49
+  declared proof-route debts: 52
   unrecorded debts: 0
 ```

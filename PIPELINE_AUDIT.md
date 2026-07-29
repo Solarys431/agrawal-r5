@@ -13,7 +13,7 @@ paper proof to a Lean theorem or turn an open hypothesis into a result.
 | Requirement | Evidence | Status |
 |---|---|---|
 | Pinned kernel build | `lean-toolchain`, `lake-manifest.json`, GitHub Actions | complete |
-| Per-theorem axiom measurement | `AxiomAudit.lean` on 57 headline declarations | complete |
+| Per-theorem axiom measurement | `AxiomAudit.lean` on 64 headline declarations | complete |
 | Comparator axiom measurement | `ComparatorAxiomAudit.lean` on seven exported declarations | complete |
 | No hidden trust shortcuts | `tools/check_release_surface.sh` rejects `sorry`, `admit`, `native_decide`, project `axiom` and `opaque` in the implementation | complete |
 | Statement/solution separation | Four Mathlib-only `Challenge.lean` files and separate `Solution.lean` files | complete |
@@ -80,7 +80,7 @@ Status: **complete for the published headline routes**.
 
 ### 4. Library dividend
 
-[`upstream_candidates.json`](upstream_candidates.json) classifies all 42
+[`upstream_candidates.json`](upstream_candidates.json) classifies all 44
 tracked modules. [`UPSTREAM_CANDIDATES.md`](UPSTREAM_CANDIDATES.md) explains
 the triage, including candidates requiring generalization, semantic
 deduplication, or coordination with an existing project. The inventory is
@@ -92,10 +92,10 @@ is made without later human maintainer review.
 ### 5. Hypothesis minimality
 
 `AssumptionAudit.lean` uses Mathlib's elaborated-type dependency analysis on
-every public theorem. The audit inspected 336 public theorems and 189 instance
-binders. Two assumptions were genuinely generalized away; 49 binders remain
+every public theorem. The audit inspected 361 public theorems and 213 instance
+binders. Two assumptions were genuinely generalized away; 51 binders remain
 dependencies of the present proof route although their instance terms do not
-occur in the proposition body. Those 49 are explicitly declared and CI fails
+occur in the proposition body. Those 51 are explicitly declared and CI fails
 on inventory drift. They are not silently advertised as logically minimal.
 
 Status: **complete, debt-declaring, and mechanically enforced**.

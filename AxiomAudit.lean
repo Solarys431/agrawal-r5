@@ -16,6 +16,13 @@ introduced.
 #print axioms AgrawalCore.quintic_index_indexedMomentUnit_eq_moment
 #print axioms AgrawalCore.indexedMomentUnit_two_eq_quadraticMomentUnit
 #print axioms AgrawalCore.cyclotomic_quadratic_moment_eq_three_golden_index
+#print axioms AgrawalCore.quintic_covariance_of_local_row
+#print axioms AgrawalCore.localS5_unit_rows
+#print axioms AgrawalCore.localS5_golden_moment_obstruction
+#print axioms AgrawalCore.localS5_golden_order_constraint
+#print axioms AgrawalCore.localS5_canonical_golden_moment_obstruction
+#print axioms AgrawalCore.localS5_canonical_golden_order_constraint
+#print axioms AgrawalCore.localS5_canonical_quintic_locks_of_ne_one
 #print axioms AgrawalCore.agrawal_fermat_shadow
 #print axioms AgrawalCore.agrawal_two_adic_jaw
 #print axioms AgrawalCore.orderOf_norm_power

@@ -44,7 +44,7 @@ Publication-safe wording:
 
 | Result | Kernel status | Prior art | Current novelty assessment |
 |---|---|---|---|
-| `U₂ = (√5)⁵ ε³` and `M₂ = 3 ind₅(ε)` | Factorization Lean-checked in `GoldenMoment.lean`; exact product-to-sum interface Lean-checked in `GoldenMomentBridge.lean` | Williams–Hardy (1985), Theorem 5, computes `ind₅(ε)` in Dickson coordinates; Breuer is adjacent but studies a different period/order problem | **Potentially new bridge.** The classical side is the golden-unit character; the proposed new content is that Agrawal’s quadratic moment is exactly that character. Specialist priority check required. |
+| `U₂ = (√5)⁵ ε³` and `M₂ = 3 ind₅(ε)` | Factorization Lean-checked in `GoldenMoment.lean`; exact product-to-sum interface in `GoldenMomentBridge.lean`; concrete `LocalS5` row-to-same-character covariance and obstruction in `LocalMomentBridge.lean` | Williams–Hardy (1985), Theorem 5, computes `ind₅(ε)` in Dickson coordinates; Breuer is adjacent but studies a different period/order problem | **Potentially new bridge.** The classical side is the golden-unit character; the proposed new content is that Agrawal’s quadratic moment is exactly that character. Specialist priority check required. |
 
 This is the scientifically strongest release narrative because it has all
 four properties at once:
@@ -52,8 +52,10 @@ four properties at once:
 1. a short exact statement;
 2. a transparent four-line algebraic proof;
 3. a direct connection between two previously separate theories;
-4. a kernel-checked implementation using an actual quintic index on
-   `(ZMod p)ˣ`, not only a symbolic placeholder.
+4. a kernel-checked implementation that starts from the literal
+   quotient-ring predicate `LocalS5` and uses one actual quintic character
+   on both the local rows and the golden unit, not two independently
+   normalized indices.
 
 As an external normalization check, the reproducible script
 `certificates/verifica_tabella5_williams_hardy.py` compares the directly
