@@ -84,6 +84,45 @@
       "note": "Mod-five wrappers around the golden-inertia development."
     },
     {
+      "module": "AgrawalCore/CyclotomicDyadic.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.orderOf_factorization_two_of_orderOf_pow_eq_ten",
+          "status": "generalize_first",
+          "note": "The group-theoretic valuation step is independent of the cyclotomic application, but should be generalized from the fixed primes two and five before upstream review."
+        }
+      ],
+      "note": "The exact cyclotomic order law is project-specific; its opening group-order lemma may admit a reusable valuation formulation."
+    },
+    {
+      "module": "AgrawalCore/DyadicTriangle.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.exactTwoDepth_eq_of_modEq",
+          "status": "generalize_first",
+          "note": "Generic equality of exact two-primary depths under one-extra-level congruence; a valuation-based formulation may be cleaner upstream."
+        },
+        {
+          "declaration": "AgrawalCore.exactTwoDepth_cube",
+          "status": "generalize_first",
+          "note": "Generic preservation of the two-primary depth of p squared minus one under odd cubing."
+        },
+        {
+          "declaration": "AgrawalCore.square_modEq_one_add_exactTwoPower",
+          "status": "candidate",
+          "note": "Exact next-level congruence for a square at its two-primary depth; useful independently of the Agrawal application."
+        },
+        {
+          "declaration": "AgrawalCore.rowTarget_modEq_base",
+          "status": "generalize_first",
+          "note": "Elementary reduction of the two allowed odd powers modulo a divisor of p squared minus one; the present statement retains project-specific exponent choices."
+        }
+      ],
+      "note": "The pair and triangle theorems classify the binary component of the project-specific quartic CRT rows."
+    },
+    {
       "module": "AgrawalCore/Entanglement.lean",
       "disposition": "project_specific",
       "candidates": [],

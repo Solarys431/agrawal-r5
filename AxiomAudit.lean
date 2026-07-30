@@ -116,6 +116,14 @@ introduced.
 #print axioms AgrawalCore.pureSmallRow_lift_iff
 #print axioms AgrawalCore.twistedSmallRow_lift_iff
 #print axioms AgrawalCore.boundedLift_exclusion
+#print axioms AgrawalCore.orderOf_factorization_two_of_orderOf_pow_eq_ten
+#print axioms AgrawalCore.localCyclotomicUnit_order_factorization_two
+#print axioms AgrawalCore.quarticOrderModulus_factorization_two
+#print axioms AgrawalCore.square_modEq_one_add_exactTwoPower
+#print axioms AgrawalCore.rowTargets_force_equal_dyadicDepth
+#print axioms AgrawalCore.quarticThreeRows_common_dyadicDepth
+#print axioms AgrawalCore.quarticThreeRows_single_dyadicRay
+#print axioms AgrawalCore.quarticThreeRows_exact_dyadicRays
 #print axioms AgrawalCore.phi5_irreducible_of_inert
 #print axioms AgrawalCore.prime_pow_natDegree_dvd_resultant_of_common_root
 #print axioms AgrawalCore.pure_row_dvd_resultant

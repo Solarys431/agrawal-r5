@@ -1172,10 +1172,15 @@ Both the conjugation identity $u_1^{p^2-1} = -\zeta^{-1}$ and the resulting
 bound $T_p \mid 10(p^2-1)$ already appear in the Lenstra--Pomerance notes
 \cite{LP}, and a ring version ($\rho \mid 10(\lambda^2-1)$ modulo $X^5-1$)
 in \cite{Vana2009}, Lemma~3.4: we claim no novelty for them. The exact
-$2$-adic law, the coprime tail decomposition, and the Kummer
-interpretation of the tail below were not found in the targeted search;
-their priority remains provisional. The binary
-consequence for the Korselt rows is a single bit:
+$2$-adic law is kernel-checked by
+\texttt{localCyclotomicUnit\_\allowbreak order\_\allowbreak factorization\_\allowbreak two}
+and
+\texttt{quarticOrderModulus\_\allowbreak factorization\_\allowbreak two}.
+The coprime odd-tail
+decomposition and the Kummer interpretation below remain paper-level.
+None of these refinements was found in the targeted search; their priority
+remains provisional. The binary consequence for the Korselt rows is a
+single bit:
 
 \begin{corollary}[binary rows]\label{cor:bit}
 Row $i$ of the system implies
@@ -1186,7 +1191,9 @@ associated ``at most one bit can hold'' candidate theorem is \emph{false}:
 an exhaustive enumeration modulo $2^7$ over the skeleton finds $96 + 18{,}720$
 configurations (out of $2^{21}$) where two, respectively three, bits hold
 simultaneously. Any universal incompatibility must therefore involve the
-odd tails.
+odd tails.  The later exact-ray corollary makes this binary compatibility
+completely explicit in the kernel; it is a classification of the binary
+projection, not an additional sieve after the full CRT triangle.
 \end{corollary}
 
 \section{Kummer identification of the tail}\label{sec:kummer}
@@ -1543,6 +1550,44 @@ Reduce the two congruences for the same integer \(Pq\) modulo
 \(\gcd(T_p,T_r)\).  Together with the two instances of
 Theorem~\ref{thm:two-row-transport}, this is the complete triangle of
 pairwise CRT compatibility.
+\end{proof}
+
+\begin{corollary}[exact labelled dyadic rays]\label{cor:dyadic-rays}
+For each \(x\in\{p,q,r\}\), put
+\[
+ b_x=v_2(x^2-1),\qquad e_x=j_x+1\in\{1,3\},
+\]
+and let \(\delta(1)=0,\ \delta(3)=1\).  Every complete three-row triangle
+satisfies
+\[
+ b_p=b_q=b_r=:b
+\]
+and
+\[
+ p+\delta(e_p)2^b
+ \equiv q+\delta(e_q)2^b
+ \equiv r+\delta(e_r)2^b
+ \pmod{2^{b+1}}.
+\]
+In particular \(p\equiv q\equiv r\pmod{2^b}\).
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:decomposition} gives
+\(2^{b_x+1}\mid T_x\).  If two row targets are congruent modulo
+\(\gcd(T_x,T_y)\), comparison one level above the smaller exact depth
+forces \(b_x=b_y\).  At the common depth,
+\[
+ x^1\equiv x,\qquad x^3\equiv x+2^b\pmod{2^{b+1}},
+\]
+because \(x^2\equiv1+2^b\pmod{2^{b+1}}\).  Applying this to the two
+transported sides of the triangle proves the displayed chain.
+The complete literal-row statement is kernel-checked as
+\texttt{quarticThreeRows\_\allowbreak exact\_\allowbreak dyadicRays}; the
+intermediate declarations include
+\texttt{square\_\allowbreak modEq\_\allowbreak one\_\allowbreak add\_\allowbreak exactTwoPower}
+and
+\texttt{quarticTriangle\_\allowbreak exact\_\allowbreak dyadicRays}.
 \end{proof}
 
 \begin{corollary}[middle-prime defect cascade]\label{cor:defect-cascade}

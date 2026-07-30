@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 53 `AgrawalCore` modules and 9,746
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 127 headline
+The implementation currently contains 55 `AgrawalCore` modules and 10,615
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 135 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -45,6 +45,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
 | Deterministic final-row size bounds, their sharp pure/twisted quartic-skeleton application, and meet-in-the-middle uniqueness | **LEAN**: `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion`; the arithmetic core is independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | The exact displayed gap bound and universal size exclusion are now connected to the literal skeleton modulus. No asymptotic multiplicative-order lower bound or universal fiber emptiness is claimed |
 | Two-row transport, CRT triangle, odd shadow and quantized gaps | **LEAN**: declarations in `TwoRowTransport.lean` | Exact consequences of the row congruences; mathematical priority unassessed |
+| Exact binary law \(v_2(T_p)=v_2(p^2-1)+1\), common depth, and exact labelled dyadic rays for the complete three-row system | **LEAN**: `localCyclotomicUnit_order_factorization_two`, `quarticOrderModulus_factorization_two`, `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_exact_dyadicRays` | This classifies the complete binary projection of the quartic CRT triangle. It is a consequence of the exact rows, not an additional sieve after them, and it does not constrain or empty the remaining odd Kummer tails; priority unassessed |
 
 ## Paper-level results not fully represented end to end in Lean
 
@@ -58,8 +59,9 @@ interfaces are not kernel theorems in this repository:
   seam is **LEAN**;
 - the complete two-lock classification of local exceptions at \(r=5\);
 - the lifted golden tower and its per-floor Kummer density;
-- the exact order decomposition of \(\zeta_5-1\) and the Kummer
-  interpretation of its tail;
+- the coprime odd-tail decomposition of the order of \(\zeta_5-1\) and
+  the Kummer interpretation of that tail. Its exact binary law is
+  **LEAN** in `CyclotomicDyadic.lean`;
 - compatible-prefix CRT assembly and the complete global fiber-emptiness
   theorem. The skeleton-to-terminal-resultant assembly, the literal
   implications \(q^4\mid\operatorname{Res}\ne0\), and the closed estimate

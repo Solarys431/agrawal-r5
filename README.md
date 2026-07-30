@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-three modules (9,746 source lines)
+The implementation core consists of fifty-five modules (10,615 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -115,6 +115,7 @@ not a premise of the Lean theorem.
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 | Kernel form of the order bound: (ζ−1)^(10p²) = (ζ−1)^10, both inert classes | `order_bounded` | `OrderBound.lean` |
+| **Exact binary law for the quartic cyclotomic order: \(v_2(T_p)=v_2(p^2-1)+1\)** | `localCyclotomicUnit_order_factorization_two`, `quarticOrderModulus_factorization_two` | `CyclotomicDyadic.lean` |
 | Exact decomposition of an order through a norm power | `orderOf_norm_decomposition` | `NormOrder.lean` |
 | Exact order of the norm-kernel component | `orderOf_norm_kernel` | `NormOrder.lean` |
 | Exact \(q^2\)-threshold from the odd defect product | `odd_defectProduct_threshold`, `odd_defectProduct_normal_iff` | `NormOrder.lean` |
@@ -185,10 +186,16 @@ not a premise of the Lean theorem.
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |
 | Third side of the exact three-row CRT triangle | `smallRows_triangle` | `TwoRowTransport.lean` |
+| **Complete binary classification of the three-row triangle: common depth and exact labelled dyadic rays** | `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_single_dyadicRay`, `quarticThreeRows_exact_dyadicRays` | `DyadicTriangle.lean` |
 | Branch-independent odd shadow of a local row | `localRow_oddShadow` | `TwoRowTransport.lean` |
 | Shared odd order support divides the prime gap | `sharedOddSupport_dvd_gap` | `TwoRowTransport.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
+
+The exact scope and the negative binary-only conclusion are recorded in
+[`docs/DYADIC_TRIANGLE_AUDIT.md`](docs/DYADIC_TRIANGLE_AUDIT.md): the binary
+projection is completely classified, while universal incompatibility of the
+odd Kummer tails remains open.
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and
