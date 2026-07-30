@@ -49,3 +49,4 @@ import AgrawalCore.DyadicDepth
 import AgrawalCore.OrderProductBarrier
 import AgrawalCore.FinalRowSize
 import AgrawalCore.TwoRowTransport
+import AgrawalCore.ResultantTrap

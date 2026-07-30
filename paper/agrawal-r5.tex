@@ -1049,8 +1049,11 @@ The kernel theorem
 chain through the exact $1$-or-$p^2$ congruence modulo
 $\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$ at every skeleton
 factor, with the branch determined by whether $p_i\equiv n\pmod5$.
-The later passage from these order rows to the general
-finite-fiber system remains paper-level.
+For each inert final row, the kernel now also carries the corresponding
+pure or twisted branch to divisibility by \(q\) of the explicit integer
+resultant used in Section~\ref{sec:fibers}.  The general tuple assembly and
+the number-field norm step upgrading this to \(q^4\)-divisibility remain
+paper-level.
 
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
@@ -1090,8 +1093,12 @@ every prime factor.  Finally,
 residue occurs, and a companion kernel theorem assembles this fact across
 all factors.  Together they give the precise labelling $j_i=0$ for
 $p_i\equiv\nu\pmod5$ and $j_i=2$ otherwise.  These declarations prove
-necessity of the rows used in Theorem~\ref{thm:k3}; they do not construct or
-empty any terminal fiber.
+necessity of the rows used in Theorem~\ref{thm:k3}.  The new declarations
+\texttt{pure\_row\_dvd\_resultant} and
+\texttt{twisted\_row\_dvd\_resultant} continue either literal final row to
+\(q\)-divisibility of the corresponding resultant.  They do not prove the
+stronger \(q^4\)-divisibility, the effective finiteness bound, or emptiness
+of any terminal fiber.
 
 \begin{theorem}[explicit $k=3$ system]\label{thm:k3}
 Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all
@@ -1361,6 +1368,21 @@ The fiber of admissible third primes over a compatible pair is therefore
 finite and enumerable among the inert prime divisors of two explicit
 integers.
 \end{theorem}
+
+The common-root part of this theorem is kernel-checked by
+\begin{center}
+\small
+\path{phi5_irreducible_of_inert},\qquad
+\path{pure_row_dvd_resultant},\\
+\path{twisted_row_dvd_resultant}.
+\end{center}
+The first declaration proves that the cyclotomic quotient is a field in the
+inert branch; the other two derive the displayed pure and twisted vanishing
+relations from a literal \texttt{LocalS5} row and prove
+\(q\mid\operatorname{Res}\) by a generic common-root/resultant lemma.
+The inert prime-ideal norm argument giving \(q^4\mid\operatorname{Res}\),
+the nonvanishing and archimedean bound, and hence the complete finite-fiber
+statement remain paper-level.
 
 \begin{lemma}[quadratic descent]\label{lem:descent}
 Both norms are squares. With $t = \zeta_5 + \zeta_5^{-1} = (\sqrt5-1)/2$:

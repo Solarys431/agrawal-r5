@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-one modules (8,704 source lines)
+The implementation core consists of fifty-two modules (8,998 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -177,6 +177,7 @@ not a premise of the Lean theorem.
 | Normal middle defect forces the large-gap alternative \(r^2<P\) | `normalDefect_forces_sq_lt_complement` | `FinalRowSize.lean` |
 | Exact pure/twisted final-row divisibilities | `pureRow_dvd_product_sub_one`, `twistedRow_dvd_sq_sub_product` | `FinalRowSize.lean` |
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |
+| **Literal inert final row \(\Longrightarrow q\) divides the explicit pure/twisted resultant** | `pure_row_dvd_resultant`, `twisted_row_dvd_resultant` | `ResultantTrap.lean` |
 | Quantized pure/twisted local gaps | `pureRow_order_le_product_sub_one`, `twistedRow_order_le_absGap` | `FinalRowSize.lean` |
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |

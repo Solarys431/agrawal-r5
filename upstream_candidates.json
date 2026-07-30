@@ -428,6 +428,23 @@
       "note": "Specialization of quadratic reciprocity to five."
     },
     {
+      "module": "AgrawalCore/ResultantTrap.lean",
+      "disposition": "mixed",
+      "candidates": [
+        {
+          "declaration": "AgrawalCore.map_resultant_eq_zero_of_common_root",
+          "status": "deduplicate_semantically",
+          "note": "Generic common-root implication for a monic resultant after a coefficient map; compare against the existing resultant and IsCoprime APIs."
+        },
+        {
+          "declaration": "AgrawalCore.prime_dvd_resultant_of_common_root",
+          "status": "generalize_first",
+          "note": "Integer divisibility specialization through a field extension of ZMod q; the current statement may admit a cleaner CharP formulation."
+        }
+      ],
+      "note": "The pure and twisted row-to-resultant theorems are project-specific; the common-root lemmas may be reusable after API review."
+    },
+    {
       "module": "AgrawalCore/Recompose.lean",
       "disposition": "deduplicate_semantically",
       "candidates": [],

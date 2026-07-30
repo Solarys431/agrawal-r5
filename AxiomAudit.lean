@@ -116,3 +116,6 @@ introduced.
 #print axioms AgrawalCore.pureSmallRow_lift_iff
 #print axioms AgrawalCore.twistedSmallRow_lift_iff
 #print axioms AgrawalCore.boundedLift_exclusion
+#print axioms AgrawalCore.phi5_irreducible_of_inert
+#print axioms AgrawalCore.pure_row_dvd_resultant
+#print axioms AgrawalCore.twisted_row_dvd_resultant

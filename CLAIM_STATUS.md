@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 51 `AgrawalCore` modules and 8,704
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 107 headline
+The implementation currently contains 52 `AgrawalCore` modules and 8,998
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 110 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -33,6 +33,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | A good local row of residue \(2\) or \(3\bmod5\) is automatically odd and therefore yields the normalized order-four witness | **LEAN**: `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | Removes a previously implicit parity seam by comparing the rows at \(\zeta\) and \(\zeta^{-1}\); priority unassessed |
 | Every squarefree counterexample candidate has either a split order-four witness or an odd inert quartic skeleton with at least three prime factors | **LEAN**: `squarefree_counterexample_concrete_dichotomy`, `quarticSkeleton_card_ge_three` | The global-to-quartic reduction is now kernel-checked. The subsequent general-\(s\) reduction from this skeleton to finite fibers remains **PAPER** |
 | Every literal quartic row is congruent to the corresponding Frobenius power modulo \(\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)\); at every inert skeleton factor the residue determines \(j=0\) when \(p\equiv n\pmod5\) and \(j=2\) otherwise | **LEAN**: `localS5_modEq_frobenius_power_lcm`, `inertQuotient_residue_determined`, `determinedQuarticOrderRows_of_skeleton`, `squarefree_counterexample_order_dichotomy` | This kernel-checks the exact labelled order-rigidity interface used by the explicit CRT system. It does not construct or empty the terminal resultant fibers |
+| For an inert prime \(q\), a literal pure or twisted final `LocalS5` row forces \(q\) to divide its corresponding explicit integer resultant | **LEAN**: `phi5_irreducible_of_inert`, `pure_row_dvd_resultant`, `twisted_row_dvd_resultant` | This is the first kernel-checked row-to-resultant bridge. It proves \(q\mid\operatorname{Res}\), not the stronger paper-level \(q^4\mid\operatorname{Res}\); inert prime-ideal norms, nonvanishing, the effective bound and global fiber emptiness remain outside this theorem |
 | Every two-prime candidate violating \(n^2\equiv1\pmod5\) has a split local order-four witness; local H4 therefore excludes it | **LEAN**: `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | Unconditional reduction of the bifactor case to H4, followed by an explicitly conditional closure. It does not prove H4 and therefore does not settle the bifactor case unconditionally |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
@@ -58,8 +59,11 @@ interfaces are not kernel theorems in this repository:
 - the lifted golden tower and its per-floor Kummer density;
 - the exact order decomposition of \(\zeta_5-1\) and the Kummer
   interpretation of its tail;
-- the general-\(s\) reduction from the kernel-checked quartic skeleton to
-  finite fibers;
+- the general-\(s\) assembly from the kernel-checked quartic skeleton to
+  compatible tuples, and the inert prime-ideal norm step upgrading the
+  kernel-checked \(q\mid\operatorname{Res}\) trap to
+  \(q^4\mid\operatorname{Res}\), nonvanishing, effective bounds and finite
+  fibers;
 - density-zero and GRH counting statements;
 - the full tail-anomaly Euler-product density.
 

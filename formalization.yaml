@@ -16,14 +16,14 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on 107 headline declarations
+      AxiomAudit.lean runs #print axioms on 110 headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 424 public theorems and 260 instance binders, with 58 current
-      proof-route dependencies declared fail-closed; the complete 51-module
+      all 442 public theorems and 275 instance binders, with 59 current
+      proof-route dependencies declared fail-closed; the complete 52-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
@@ -204,6 +204,8 @@ sources:
       `quarticSkeleton_orderModulus_le_max`,
       `quarticSkeleton_orderModulus_le_gap`,
       `quarticSkeleton_factor_size_exclusion`,
+      `pure_row_dvd_resultant`,
+      `twisted_row_dvd_resultant`,
       `squarefree_counterexample_order_dichotomy`,
       `squarefree_counterexample_witness_dichotomy`, and
       `no_squarefree_counterexample_of_no_witnesses`. The theorem states
@@ -215,8 +217,11 @@ sources:
       Thus the kernel now checks the global-to-quartic arithmetic ingress and
       the exact residue-determined `1`-or-`p^2` row modulo
       `lcm(orderOf(zeta_5-1),5)` at every skeleton factor, while the
-      concrete final-row size obstruction is also kernel-checked. The
-      subsequent general-s finite-fiber encoding remains outside this release.
+      concrete final-row size obstruction is also kernel-checked. The two
+      literal inert final-row branches now also imply divisibility by q of
+      their explicit integer resultants in the kernel. The stronger q^4
+      prime-ideal norm step, nonvanishing and effective finite-fiber theorem,
+      and the subsequent general-s tuple assembly remain outside this release.
 
   - title: "Four-coefficient primitive support: kernel arithmetic interface"
     authors:
