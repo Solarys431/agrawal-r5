@@ -158,6 +158,12 @@
       "note": "The inertia conclusions remain project-specific."
     },
     {
+      "module": "AgrawalCore/FiveSmoothSupportExclusion.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "The order-two lemmas and the five-smooth exclusion are specialized to the primitive H4 scalar profile."
+    },
+    {
       "module": "AgrawalCore/FinalRowSize.lean",
       "disposition": "candidate",
       "candidates": [
@@ -392,7 +398,13 @@
       "module": "AgrawalCore/QuarticNormJaw.lean",
       "disposition": "project_specific",
       "candidates": [],
-      "note": "The literal norm identity, exact two-jaw decomposition and cross-sign partition are specialized to the concrete quartic Agrawal order modulus."
+      "note": "The literal norm identity, exact norm-kernel order factorization, two-jaw decomposition and cross-sign partition are specialized to the concrete quartic Agrawal order modulus."
+    },
+    {
+      "module": "AgrawalCore/QuarticSignedIncidence.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "The exact same-sign gcd factorization and signed incidence triangle are specialized to the concrete quartic Agrawal row system."
     },
     {
       "module": "AgrawalCore/OrderBound.lean",
@@ -517,7 +529,7 @@
       "module": "AgrawalCore/SingleSupportExclusion.lean",
       "disposition": "project_specific",
       "candidates": [],
-      "note": "Closed H4 subfamily and its explicit factorizations."
+      "note": "Four closed single-odd-support H4 depth families and their explicit factorizations."
     },
     {
       "module": "AgrawalCore/SquarefreeIngress.lean",

@@ -94,6 +94,10 @@ introduced.
 #print axioms AgrawalCore.dvd_D_order_product_residual_factorization
 #print axioms AgrawalCore.dvd_D_ten_mul_order_product_dvd_card_sub_one
 #print axioms AgrawalCore.no_split_single_odd_support
+#print axioms AgrawalCore.one_order_dvd_two_pow_succ_of_single_odd_prime
+#print axioms AgrawalCore.no_split_single_odd_support_sixteen_primitive
+#print axioms AgrawalCore.no_split_single_odd_support_thirtytwo_primitive
+#print axioms AgrawalCore.no_split_single_odd_support_sixtyfour_primitive
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max
 #print axioms AgrawalCore.quarticSkeleton_orderModulus_le_max
@@ -135,6 +139,11 @@ introduced.
 #print axioms AgrawalCore.quarticJaws_coprime
 #print axioms AgrawalCore.quarticCrossJaws_partition_of_incidence
 #print axioms AgrawalCore.quarticCrossJaw_dvd_two
+#print axioms AgrawalCore.orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent
+#print axioms AgrawalCore.cyclotomic_order_eq_five_order_mul_normKernelFactor
+#print axioms AgrawalCore.quarticSharedTail_gcd_eq_sameSignProduct_of_incidence
+#print axioms AgrawalCore.quarticSignedIncidenceTriangle
+#print axioms AgrawalCore.no_split_five_smooth_primitive_support
 #print axioms AgrawalCore.quarticOddTail_oversize_exclusion
 #print axioms AgrawalCore.phi5_irreducible_of_inert
 #print axioms AgrawalCore.prime_pow_natDegree_dvd_resultant_of_common_root

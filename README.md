@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-seven modules (11,361 source lines)
+The implementation core consists of fifty-nine modules (12,528 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -171,7 +171,7 @@ not a premise of the Lean theorem.
 | **Residual power depth: for \(d>0\), \(d\mid4rs\), \(-\gamma\) is a \(d\)-th power iff \(d\mid h\)** | `dvd_D_neg_gamma_isPower_iff_dvd` | `DyadicDepth.lean` |
 | Even-depth coupling with the quintic lock; in particular \(-\gamma\) is a fourth power iff \(20\mid h\) | `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`, `dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd` | `DyadicDepth.lean` |
 | **Exact order-product barrier in the \(p\equiv1\pmod5\) branch: \(10\,\operatorname{ord}_p(5)\operatorname{ord}_p(\varepsilon^2)\mid p-1\)** | `dvd_D_ten_mul_order_product_dvd_card_sub_one` | `OrderProductBarrier.lean` |
-| No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
+| **No split H-profile with \(p-1=2^bq^e\) for \(b=3,4,5,6\)** | `no_split_single_odd_support`, `no_split_single_odd_support_sixteen_primitive`, `no_split_single_odd_support_thirtytwo_primitive`, `no_split_single_odd_support_sixtyfour_primitive` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
 | Universal local-row size bound | `localRow_order_le_max` | `FinalRowSize.lean` |
@@ -190,7 +190,10 @@ not a premise of the Lean theorem.
 | Canonical odd tail \(D_p\), with \(T_p\mid10(p^2-1)\), \(\gcd(D_p,10)=1\), and \(D_p\mid p^2-1\) | `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one` | `OddTailTriangle.lean` |
 | **Complete odd-support incidence triangle and oversized-tail exclusion** | `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | `OddTailTriangle.lean` |
 | **Literal norm identity and exact two-jaw factorization \(D_p=D_{p,-}D_{p,+}\)** | `localCyclotomicUnit_pow_normExponent_eq_five`, `quarticMinusJaw_eq_gcd_oddTail_sub_one`, `quarticOddTail_eq_mul_jaws`, `quarticJaws_coprime` | `QuarticNormJaw.lean` |
+| **Exact norm-order quotient and norm-kernel factorization** | `orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent`, `cyclotomic_order_eq_five_order_mul_normKernelFactor` | `QuarticNormJaw.lean` |
 | **Forced cross-sign partition for incident quartic rows** | `quarticCrossJaws_partition_of_incidence`, `quarticCrossJaw_dvd_two` | `QuarticNormJaw.lean` |
+| **Exact signed factorization of every shared tail and the signed incidence triangle** | `quarticSharedTail_gcd_eq_sameSignProduct_of_incidence`, `quarticSignedIncidenceTriangle` | `QuarticSignedIncidence.lean` |
+| **No split H-profile with \(p-1=2^b5^f\)** | `no_split_five_smooth_primitive_support` | `FiveSmoothSupportExclusion.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
 
@@ -204,9 +207,15 @@ the exact oversized-tail rejection criterion; it also records why a universal
 lower bound for one of those shared tails is still missing. The follow-up
 [`docs/QUARTIC_NORM_JAWS_AUDIT.md`](docs/QUARTIC_NORM_JAWS_AUDIT.md)
 kernel-checks the literal norm identity, the exact \(p-1\)/\(p+1\) jaw
-factorization and the forced cross-sign partition, together with an explicit
-shadow countermodel showing why these identities alone do not empty the row
-system.
+factorization, the norm-kernel order identity, and the exact signed incidence
+triangle, together with an explicit shadow countermodel showing why these
+identities alone do not empty the row system. The independent infinite-family
+exclusion \(p-1\ne2^b5^f\) in the split \(p\equiv1\pmod5\) H4 branch is
+recorded in
+[`docs/FIVE_SMOOTH_H4_AUDIT.md`](docs/FIVE_SMOOTH_H4_AUDIT.md).  The
+independent four-depth exclusion
+\(p-1\ne2^bq^e\) for \(b\in\{3,4,5,6\}\) is recorded in
+[`docs/SINGLE_SUPPORT_DEPTH_AUDIT.md`](docs/SINGLE_SUPPORT_DEPTH_AUDIT.md).
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and

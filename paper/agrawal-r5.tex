@@ -36,7 +36,7 @@
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
 \author{UNICO/NOUS}
-\thanks{Preprint v24 of July 29, 2026. Mathematical development,
+\thanks{Preprint v25 of July 30, 2026. Mathematical development,
 paper, and formalization were produced within the UNICO/NOUS pipeline,
 initiated and operated by Daniele Cappello, who curated the artifacts and is
 responsible for their provenance, stated scope, and public release. This role
@@ -84,7 +84,8 @@ explicit local Hypothesis~H4, the squarefree problem reduces exactly to
 the emptiness of finite resultant fibers over compatible tuples. We also
 replace the norm surrogate in H4 by an exact four-coefficient primitive
 support in the integral basis of $\Q(\sqrt5)$, and exclude universally the
-infinite candidate family $p-1=8q^e$. We certify
+four infinite candidate families
+$p-1=2^bq^e$ for $b\in\{3,4,5,6\}$. We certify
 a stated three-factor region and seven individual empty fibers. For every
 fixed number $s$ of prime factors, the terminal row gives the unconditional
 quartic-skeleton bound
@@ -912,29 +913,101 @@ from \(10rs\), its radical is the radical of
 \(D_{r,s}\mathcal O_{\Q(\sqrt5)}\). No universal equality of
 multiplicities is claimed.
 
-\begin{theorem}[single odd-prime support is impossible]
+\begin{theorem}[the first four single odd-prime support depths are impossible]
 \label{thm:Hsingleprime}
 No split H-profile prime satisfies
 \[
-p-1=8q^e
+p-1=2^bq^e,\qquad b\in\{3,4,5,6\},
 \]
 with \(q\) an odd prime and \(e\ge1\).
 \end{theorem}
 
 \begin{proof}
 Write \(\ord_p(5)=2r\), \(\ord_p(\eps^2)=2s\), with
-\(\gcd(r,s)=1\). The prime \(q\) cannot divide both \(r,s\).
-If \(q\nmid r\), then \(2r\mid8\), so
+\(\gcd(r,s)=1\). Since the two semiorders divide
+\(2^{b-1}q^e\), the prime \(q\) cannot divide both, and the semiorder
+on at least one side is a power of two.  Thus one of the two complete
+orders divides \(2^b\).
+
+For \(b=3\), if the base-\(5\) order is \(2\)-primary, then
 \[
 p\mid5^8-1=2^5\cdot3\cdot13\cdot313,
 \]
-whose good prime factors are all inert. If \(q\nmid s\), then
-\(2s\mid8\), so
+whose good prime factors are all inert.  If the golden order is
+\(2\)-primary, then
 \[
 p\mid\left|N_{\Q(\sqrt5)/\Q}\bigl((\eps^2)^8-1\bigr)\right|
 =2205=3^2\cdot5\cdot7^2,
 \]
 again with no good split factor.
+
+The next three depths are finite exact resultant calculations.  The
+following table records every split factor not already eliminated by
+inertia or by \(p\in\{2,5\}\):
+\[
+\begin{array}{c|c|c}
+2^b & \text{base-5 side} & \text{golden side}\\ \hline
+16 & 11489,\quad (11489-1)/16=718 & \varnothing\\
+32 & 11489,\quad (11489-1)/32=359 & \varnothing\\
+64 & 641,\ 11489,\ 29423041,\ 241931001601
+   & 4481
+\end{array}
+\]
+Here the factorizations used by the kernel are
+\[
+\begin{aligned}
+5^{16}-1&=2^6\cdot3\cdot13\cdot17\cdot313\cdot11489,\\
+5^{32}-1&=2^7\cdot3\cdot13\cdot17\cdot313\cdot2593
+ \cdot11489\cdot29423041,\\
+5^{32}+1&=2\cdot641\cdot75068993\cdot241931001601,\\
+\left|N((\eps^2)^{32}-1)\right|
+ &=3^2\cdot5\cdot7^2\cdot47^2\cdot2207^2,\\
+\left|N((\eps^2)^{32}+1)\right|
+ &=1087^2\cdot4481^2.
+\end{aligned}
+\]
+At depth \(16\), the displayed cofactor \(718\) is even.  At depth
+\(32\), the only arithmetically compatible split factor is \(11489\).
+There \(\ord_{11489}(5)=16\), hence \(r=8\) and \(q^e=359\).
+Coprimality forces \(s\in\{1,359\}\).  The first choice would make
+\(\eps^2\) have order \(2\), while the second would give
+\((\eps^2)^{718}=1\); both are impossible, the latter because the exact
+kernel certificate gives
+\[
+(\eps^2)^{718}=-1\pmod{11489}
+\]
+for either root of \(X^2-3X+1\).
+
+At depth \(64\), the cofactors attached to \(641\), \(241931001601\),
+and \(4481\) are even, \(11489-1\) is not divisible by \(64\), and
+\[
+\frac{29423041-1}{64}=459735=3\cdot5\cdot30649
+\]
+is not a prime power.  These exhaust the split factors in the exact
+factorizations above, completing all four depths.
+\end{proof}
+
+\begin{theorem}[5-smooth split support is impossible]
+\label{thm:Hfivesmooth}
+No split H-profile prime in the branch \(p\equiv1\pmod5\) satisfies
+\[
+p-1=2^b5^f
+\]
+for any \(b,f\ge0\).
+\end{theorem}
+
+\begin{proof}
+Write the exact scalar orders as
+\(\ord_p(5)=2r\) and \(\ord_p(\eps^2)=2s\).  The primitive level
+\(4rs\) is prime to \(5\), while both orders divide \(p-1\).  Hence
+\(r,s\mid2^b\).  Since \(r+s\) is odd, one of \(r,s\) is odd, and an
+odd divisor of a power of two is \(1\).
+
+If \(r=1\), then \(5\) has order \(2\), so \(5\equiv-1\pmod p\);
+thus \(p\mid6\), which is incompatible with \(p\equiv1\pmod5\).
+If \(s=1\), then \(x=\eps^2\) has order \(2\), so \(x=-1\).  But
+\(x^2-3x+1=0\), and substitution gives \(5=0\), contrary to
+\(p\ne5\).
 \end{proof}
 
 An independent exact replay on the 244 admissible pairs
@@ -1282,7 +1355,12 @@ Consequently $d_{p,5} = \ord_p(5)_{\mathrm{odd}}$ exactly, i.e.\
 \begin{proof}
 By the norm lemma (Lemma~\ref{lem:norm}), $5 = u^{S}$ with $u = \zeta - 1$
 and $S = 1 + p + p^2 + p^3 = (p^4-1)/(p-1)$, so in the cyclic group
-$\F_{p^4}^\times$ we have $\ord_p(5) = T_p/\gcd(T_p, S)$. For
+$\F_{p^4}^\times$ we have the two exact identities
+\[
+\ord_p(5)=\frac{T_p}{\gcd(T_p,S)},\qquad
+T_p=\ord_p(5)\gcd(T_p,S).
+\]
+For
 $\ell \mid p-1$: $S \equiv 4 \pmod \ell$, and $\ell$ is odd, so
 $\ell \nmid S$ and $v_\ell(\ord_p 5) = v_\ell(T_p)$. Since
 $\ell \nmid p+1$, $v_\ell(d_{p,+}) = 0$, so
@@ -1702,6 +1780,18 @@ prime has a consistent sign:
 \qquad
 \ell\mid D_{p,+},D_{r,-}\Longrightarrow\ell\mid2.
 \]
+In fact the complete common tail has the exact signed factorization
+\[
+\boxed{
+\gcd(D_p,D_r)=
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+}).}
+\]
+Consequently both same-sign overlaps occur simultaneously in the gap:
+\[
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+})\mid r-p.
+\]
 \end{corollary}
 
 \begin{proof}
@@ -1720,8 +1810,10 @@ For the cross-sign assertion, Corollary~\ref{cor:odd-shadow} gives
 \(\gcd(D_p,D_r)\mid r-p\).  A divisor of \(D_{p,-}\) and \(D_{r,+}\)
 therefore divides \(p-1\), \(r+1\), and \(r-p\), hence divides \(2\);
 the reverse orientation is identical.  The literal norm identity, exact
-factorization, coprimality and both cross orientations are kernel-checked
-in \texttt{QuarticNormJaw.lean}.
+order quotient and norm-kernel factorization are kernel-checked in
+\texttt{QuarticNormJaw.lean}.  Cancelling the two cross gcds gives the
+exact same-sign factorization and the signed incidence triangle,
+kernel-checked in \texttt{QuarticSignedIncidence.lean}.
 \end{proof}
 
 \begin{remark}[the exact remaining odd wall]

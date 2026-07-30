@@ -37,12 +37,14 @@ import AgrawalCore.CyclotomicDyadic
 import AgrawalCore.DyadicTriangle
 import AgrawalCore.OddTailTriangle
 import AgrawalCore.QuarticNormJaw
+import AgrawalCore.QuarticSignedIncidence
 import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport
 import AgrawalCore.QuadraticGamma
 import AgrawalCore.NoncanonicalWitness
 import AgrawalCore.PrimitiveEvaluation
 import AgrawalCore.SingleSupportExclusion
+import AgrawalCore.FiveSmoothSupportExclusion
 import AgrawalCore.PrimitiveCoefficients
 import AgrawalCore.PrimitiveBridge
 import AgrawalCore.CanonicalSignature

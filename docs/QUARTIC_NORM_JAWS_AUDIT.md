@@ -4,7 +4,8 @@ Status date: 2026-07-30.
 
 This note records the exact decomposition of the canonical odd quartic
 tail into its two field sides. Every universal statement below is checked
-by Lean in `AgrawalCore/QuarticNormJaw.lean`. The final section explains
+by Lean in `AgrawalCore/QuarticNormJaw.lean` or
+`AgrawalCore/QuarticSignedIncidence.lean`. The final section explains
 precisely why the decomposition is not, by itself, a proof that the
 quartic row system is empty.
 
@@ -35,6 +36,17 @@ Consequently,
 \qquad
 \operatorname{ord}(5)\mid p-1.
 \]
+
+More precisely, if \(T=\operatorname{ord}(u)\), then
+\[
+\boxed{
+\operatorname{ord}_p(5)=\frac{T}{\gcd(T,S)},\qquad
+T=\operatorname{ord}_p(5)\gcd(T,S).}
+\]
+The second factor is the exact residual order in the norm kernel.  These
+identities are checked as
+`orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent` and
+`cyclotomic_order_eq_five_order_mul_normKernelFactor`.
 
 ## 2. Exact two-jaw decomposition
 
@@ -112,6 +124,23 @@ Thus every shared odd prime support has one globally consistent sign.
 The incidence form and the literal two-row form are kernel-checked as
 `quarticCrossJaws_partition_of_incidence` and
 `quarticCrossJaw_dvd_two`.
+
+Because both jaws are odd, the two cross gcds are actually \(1\).
+Therefore the whole unsigned overlap factors without loss:
+\[
+\boxed{
+\gcd(D_p,D_r)=
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+}).}
+\]
+In particular,
+\[
+\boxed{
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+})\mid r-p.}
+\]
+The exact equality, its literal two-row form, and the three-row signed
+triangle are checked in `QuarticSignedIncidence.lean`.
 
 This mechanism is closely related to the classical forced support
 partition for simultaneous Carmichael/Lucas--Carmichael conditions. No

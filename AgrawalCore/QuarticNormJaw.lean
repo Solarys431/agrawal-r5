@@ -99,6 +99,51 @@ theorem orderOf_localFiveUnit_dvd_cyclotomic
     _ = (u ^ orderOf u) ^ quarticNormExponent p := by rw [pow_mul]
     _ = 1 := by rw [pow_orderOf_eq_one, one_pow]
 
+/-- **Exact norm-order quotient.**
+
+The scalar-five order is the cyclotomic order divided by the part killed
+by the norm exponent. -/
+theorem orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent
+    (hp : p % 5 = 2 ∨ p % 5 = 3) (hp5 : p ≠ 5) :
+    orderOf (localFiveUnit hp5) =
+      orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ)) /
+        Nat.gcd
+          (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ)))
+          (quarticNormExponent p) := by
+  rw [← localCyclotomicUnit_pow_normExponent_eq_five hp hp5]
+  exact orderOf_pow'
+    (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))
+    (by simp [quarticNormExponent])
+
+/-- The complementary factor in the norm-order identity.  It is the
+portion of the cyclotomic order living in the norm kernel. -/
+noncomputable def quarticNormKernelFactor (p : ℕ) [Fact p.Prime]
+    (hp5 : p ≠ 5) : ℕ :=
+  Nat.gcd
+    (orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ)))
+    (quarticNormExponent p)
+
+/-- **Exact norm-kernel factorization of the cyclotomic order.**
+
+`ord(zeta_5-1) = ord_p(5) * gcd(ord(zeta_5-1), 1+p+p²+p³)`.
+
+The first factor is norm-visible; the second is the precise residual
+order in the norm kernel. -/
+theorem cyclotomic_order_eq_five_order_mul_normKernelFactor
+    (hp : p % 5 = 2 ∨ p % 5 = 3) (hp5 : p ≠ 5) :
+    orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ)) =
+      orderOf (localFiveUnit hp5) * quarticNormKernelFactor p hp5 := by
+  let T := orderOf (localCyclotomicUnit hp5 (1 : (ZMod 5)ˣ))
+  let S := quarticNormExponent p
+  have hquot :
+      orderOf (localFiveUnit hp5) = T / Nat.gcd T S := by
+    simpa [T, S] using
+      orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent hp hp5
+  have hg : Nat.gcd T S ∣ T := Nat.gcd_dvd_left _ _
+  rw [hquot]
+  simpa [quarticNormKernelFactor, T, S] using
+    (Nat.div_mul_cancel hg).symm
+
 /-- The norm-visible odd jaw: remove the complete two-primary part from
 the scalar-five order.  The prime `5` does not occur for inert `p`, so no
 second stripping is needed. -/

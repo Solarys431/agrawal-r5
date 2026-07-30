@@ -32,6 +32,38 @@ theorem gamma_mul_conj (γ : ZMod p) (hγ : γ ^ 2 = 5 * γ - 5) :
     γ * (5 - γ) = 5 := by
   linear_combination -hγ
 
+/-- The intrinsic golden square coordinated with `γ` satisfies
+`X²-3X+1`. -/
+theorem goldenSquareFromGamma_sq_eq_three_mul_sub_one
+    (hp5 : p ≠ 5) (γ : ZMod p) (hγ : γ ^ 2 = 5 * γ - 5) :
+    (goldenSquareFromGamma γ) ^ 2 =
+      3 * goldenSquareFromGamma γ - 1 := by
+  have hprod := gamma_mul_conj γ hγ
+  have hconj : (5 - γ : ZMod p) ≠ 0 := by
+    intro hzero
+    rw [hzero, mul_zero] at hprod
+    exact five_ne_zero hp5 hprod.symm
+  have hrel : γ ^ 2 - 5 * γ + 5 = 0 := by
+    linear_combination hγ
+  unfold goldenSquareFromGamma
+  field_simp [hconj]
+  linear_combination 5 * hrel
+
+/-- A root of `X²-3X+1` cannot have order two away from
+characteristics two and five. -/
+theorem orderOf_golden_square_ne_two
+    (hp2 : p ≠ 2) (hp5 : p ≠ 5)
+    (x : ZMod p) (hx : x ^ 2 = 3 * x - 1) :
+    orderOf x ≠ 2 := by
+  intro hord
+  have hneg : x = -1 :=
+    (CharP.orderOf_eq_two_iff p hp2).mp hord
+  have hfive : (5 : ZMod p) = 0 := by
+    rw [hneg] at hx
+    norm_num at hx ⊢
+    linear_combination hx
+  exact five_ne_zero hp5 hfive
+
 /-- Sotto il trasporto canonico, la potenza `k+1` è lo scalare `5`. -/
 theorem gamma_pow_succ_transport (γ : ZMod p)
     (hγ : γ ^ 2 = 5 * γ - 5) (htransport : γ ^ k = 5 - γ) :
