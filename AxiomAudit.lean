@@ -124,6 +124,12 @@ introduced.
 #print axioms AgrawalCore.quarticThreeRows_common_dyadicDepth
 #print axioms AgrawalCore.quarticThreeRows_single_dyadicRay
 #print axioms AgrawalCore.quarticThreeRows_exact_dyadicRays
+#print axioms AgrawalCore.quarticOrderModulus_dvd_ten_mul_sq_sub_one
+#print axioms AgrawalCore.quarticOddTail_dvd_sq_sub_one
+#print axioms AgrawalCore.quarticRow_oddTailShadow
+#print axioms AgrawalCore.quarticOddTail_incidenceTriangle
+#print axioms AgrawalCore.quarticOddTail_incidenceBounds
+#print axioms AgrawalCore.quarticOddTail_oversize_exclusion
 #print axioms AgrawalCore.phi5_irreducible_of_inert
 #print axioms AgrawalCore.prime_pow_natDegree_dvd_resultant_of_common_root
 #print axioms AgrawalCore.pure_row_dvd_resultant

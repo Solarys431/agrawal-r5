@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-five modules (10,615 source lines)
+The implementation core consists of fifty-six modules (10,847 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -187,15 +187,19 @@ not a premise of the Lean theorem.
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |
 | Third side of the exact three-row CRT triangle | `smallRows_triangle` | `TwoRowTransport.lean` |
 | **Complete binary classification of the three-row triangle: common depth and exact labelled dyadic rays** | `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_single_dyadicRay`, `quarticThreeRows_exact_dyadicRays` | `DyadicTriangle.lean` |
-| Branch-independent odd shadow of a local row | `localRow_oddShadow` | `TwoRowTransport.lean` |
-| Shared odd order support divides the prime gap | `sharedOddSupport_dvd_gap` | `TwoRowTransport.lean` |
+| Canonical odd tail \(D_p\), with \(T_p\mid10(p^2-1)\), \(\gcd(D_p,10)=1\), and \(D_p\mid p^2-1\) | `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one` | `OddTailTriangle.lean` |
+| **Complete odd-support incidence triangle and oversized-tail exclusion** | `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | `OddTailTriangle.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
 
-The exact scope and the negative binary-only conclusion are recorded in
+The exact binary scope and its negative binary-only conclusion are recorded in
 [`docs/DYADIC_TRIANGLE_AUDIT.md`](docs/DYADIC_TRIANGLE_AUDIT.md): the binary
 projection is completely classified, while universal incompatibility of the
-odd Kummer tails remains open.
+odd Kummer tails remains open. The complementary
+[`docs/ODD_TAIL_TRIANGLE_AUDIT.md`](docs/ODD_TAIL_TRIANGLE_AUDIT.md)
+kernel-checks the canonical odd tails, all three support-gap incidences and
+the exact oversized-tail rejection criterion; it also records why a universal
+lower bound for one of those shared tails is still missing.
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and

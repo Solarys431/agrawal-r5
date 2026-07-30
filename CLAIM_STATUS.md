@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 55 `AgrawalCore` modules and 10,615
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 135 headline
+The implementation currently contains 56 `AgrawalCore` modules and 10,847
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 141 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -44,7 +44,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | Order-product compression in the \(p\equiv1\pmod5\) branch: \(10\,\operatorname{ord}_p(5)\operatorname{ord}_p(\varepsilon^2)\mid p-1\) | **LEAN** (`dvd_D_order_product_residual_factorization`, `dvd_D_ten_mul_order_product_dvd_card_sub_one`) | Exact repackaging of the primitive scalar orders and level reciprocity. It isolates the missing multiplicative-order lower bound but does not supply it and does not prove H4 |
 | No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
 | Deterministic final-row size bounds, their sharp pure/twisted quartic-skeleton application, and meet-in-the-middle uniqueness | **LEAN**: `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion`; the arithmetic core is independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | The exact displayed gap bound and universal size exclusion are now connected to the literal skeleton modulus. No asymptotic multiplicative-order lower bound or universal fiber emptiness is claimed |
-| Two-row transport, CRT triangle, odd shadow and quantized gaps | **LEAN**: declarations in `TwoRowTransport.lean` | Exact consequences of the row congruences; mathematical priority unassessed |
+| Canonical odd tail and complete support-gap incidence triangle | **LEAN**: `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one`, `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | The component of the concrete row modulus away from \(2,5\) divides \(p^2-1\); every pairwise shared tail divides, and hence is bounded by, the corresponding prime gap. This is a deterministic rejection criterion, not a universal incompatibility theorem; a lower bound forcing one oversized shared tail remains **OPEN** |
 | Exact binary law \(v_2(T_p)=v_2(p^2-1)+1\), common depth, and exact labelled dyadic rays for the complete three-row system | **LEAN**: `localCyclotomicUnit_order_factorization_two`, `quarticOrderModulus_factorization_two`, `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_exact_dyadicRays` | This classifies the complete binary projection of the quartic CRT triangle. It is a consequence of the exact rows, not an additional sieve after them, and it does not constrain or empty the remaining odd Kummer tails; priority unassessed |
 
 ## Paper-level results not fully represented end to end in Lean

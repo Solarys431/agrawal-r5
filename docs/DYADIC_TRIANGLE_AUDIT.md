@@ -103,11 +103,13 @@ consequence is compatible with, rather than contradictory to, the mod-\(5\)
 profile.
 
 The remaining obstruction must use an odd component of the order moduli.
-The kernel theorem `sharedOddSupport_dvd_gap` already shows that an odd
-prime-power shared by two row moduli divides the corresponding prime gap.
-What is still missing is a universal reason why all three odd Kummer tails
-cannot be arranged simultaneously, or an independent theorem that empties
-every explicit resultant fiber.
+The follow-up
+[`ODD_TAIL_TRIANGLE_AUDIT.md`](ODD_TAIL_TRIANGLE_AUDIT.md) now extracts the
+canonical component away from \(2,5\), proves that it divides \(p^2-1\), and
+kernel-checks all three support-gap incidences and their exact size bounds.
+What is still missing is a universal lower bound forcing one of those shared
+tails to exceed its gap, or an independent theorem that empties every explicit
+resultant fiber.
 
 ## Claim status
 

@@ -35,6 +35,7 @@ import AgrawalCore.UnconditionalDichotomy
 import AgrawalCore.QuarticRigidity
 import AgrawalCore.CyclotomicDyadic
 import AgrawalCore.DyadicTriangle
+import AgrawalCore.OddTailTriangle
 import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport
 import AgrawalCore.QuadraticGamma

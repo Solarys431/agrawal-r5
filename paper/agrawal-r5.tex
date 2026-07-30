@@ -1647,6 +1647,15 @@ Moreover,
 \gcd(D_p,D_r)\mid r-p
 \]
 and cyclically for the other two pairs.
+For \(p<r<q\), equivalently,
+\[
+\boxed{
+\gcd(D_p,D_r)\le r-p,\quad
+\gcd(D_p,D_q)\le q-p,\quad
+\gcd(D_r,D_q)\le q-r.}
+\]
+Thus any reversed strict inequality is an exact certificate excluding the
+three-row triangle.
 \end{corollary}
 
 \begin{proof}
@@ -1655,7 +1664,24 @@ and \(x^2\) agree modulo \(D_x\).  For the last assertion, reduce two
 relations in~\eqref{eq:odd-shadow-three} modulo
 \(\gcd(D_p,D_r)\).  The common factor \(q\) is
 a unit because \(rq\equiv1\); cancellation gives \(p\equiv r\).
+The concrete definition of \(D_x\), the deduction
+\(T_x\mid10(x^2-1)\Rightarrow D_x\mid x^2-1\), the complete three-pair
+incidence matrix and the strict rejection criterion are kernel-checked as
+\texttt{quarticOddTail\_\allowbreak dvd\_\allowbreak sq\_\allowbreak sub\_\allowbreak one},
+\texttt{quarticOddTail\_\allowbreak incidenceTriangle},
+\texttt{quarticOddTail\_\allowbreak incidenceBounds}, and
+\texttt{quarticOddTail\_\allowbreak oversize\_\allowbreak exclusion}.
 \end{proof}
+
+\begin{remark}[the exact remaining odd wall]
+Corollary~\ref{cor:odd-shadow} is a deterministic sieve, but it is not a
+universal contradiction.  The current theory does not force any one of the
+three shared gcds to exceed its corresponding prime gap.  Multiplying the
+three displayed upper bounds only repackages the same incidence data.  A
+universal closure therefore still requires either a class-specific lower
+bound for the joint odd tails or a theorem emptying every explicit terminal
+resultant fiber.
+\end{remark}
 
 The chain of reductions supports a correctness theorem for machine
 certificates, which a referee can audit once instead of trusting each
