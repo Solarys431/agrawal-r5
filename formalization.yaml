@@ -16,14 +16,14 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on 119 headline declarations
+      AxiomAudit.lean runs #print axioms on 127 headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 453 public theorems and 283 instance binders, with 59 current
-      proof-route dependencies declared fail-closed; the complete 52-module
+      all 470 public theorems and 285 instance binders, with 59 current
+      proof-route dependencies declared fail-closed; the complete 53-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
   - method: "numerical pre-verification"
@@ -213,14 +213,23 @@ sources:
       `twisted_resultant_ne_zero`,
       `pure_row_pow_four_le_resultant_natAbs`,
       `twisted_row_pow_four_le_resultant_natAbs`,
+      `pure_resultant_natAbs_le`,
+      `twisted_resultant_natAbs_le`,
+      `pure_row_pow_four_le_sixteen_mul_five_pow`,
+      `twisted_row_pow_four_le_sixteen_mul_five_pow`,
+      `quotient_gt_one_of_quarticSkeleton`,
+      `explicitResultantRows_of_skeleton`,
+      `squarefree_counterexample_explicit_resultant_dichotomy`,
+      `no_squarefree_counterexample_of_no_split_and_no_explicit_rows`,
       `squarefree_counterexample_order_dichotomy`,
       `squarefree_counterexample_witness_dichotomy`, and
       `no_squarefree_counterexample_of_no_witnesses`. The theorem states
       unconditionally that a squarefree candidate either has a local split
       order-four witness or has the full inert quartic skeleton, with odd
-      prime-factor cardinality at least three. A later reduction from that
-      concrete skeleton to a chosen global fiber witness is passed as the
-      named premise `SkeletonToFiber`; it is not postulated as an axiom.
+      prime-factor cardinality at least three. The generic logical theorem
+      accepts a named premise `SkeletonToFiber`; it is not postulated as an
+      axiom, and `explicitResultantRows_of_skeleton` now proves its concrete
+      instance for the two terminal resultants.
       Thus the kernel now checks the global-to-quartic arithmetic ingress and
       the exact residue-determined `1`-or-`p^2` row modulo
       `lcm(orderOf(zeta_5-1),5)` at every skeleton factor, while the
@@ -229,9 +238,11 @@ sources:
       their explicit integer resultants in the kernel, by irreducibility,
       coefficientwise remainder divisibility and resultant homogeneity.
       Their reductions modulo 5 are exactly 1, so nonvanishing and the fixed
-      size traps q^4 <= |Res| are kernel-checked as well. A closed-form
-      archimedean estimate, the complete finite-fiber theorem, and the
-      subsequent general-s tuple assembly remain outside this release.
+      size traps q^4 <= |Res| <= 16 * 5^A are kernel-checked as well.
+      `explicitResultantRows_of_skeleton` instantiates the formerly abstract
+      interface and sends every skeleton factor to its correct pure or
+      twisted terminal resultant. Compatible-prefix CRT sufficiency and
+      universal fiber emptiness remain outside this release.
 
   - title: "Four-coefficient primitive support: kernel arithmetic interface"
     authors:

@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-two modules (9,234 source lines)
+The implementation core consists of fifty-three modules (9,746 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -154,6 +154,7 @@ not a premise of the Lean theorem.
 | **Concrete squarefree dichotomy: split order-four witness or odd inert quartic skeleton with at least three factors** | `squarefree_counterexample_concrete_dichotomy` | `UnconditionalDichotomy.lean` |
 | **Exact, residue-determined quartic order rows modulo \(\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)\) at every skeleton factor** | `localS5_modEq_frobenius_power_lcm`, `determinedQuarticOrderRows_of_skeleton`, `squarefree_counterexample_order_dichotomy` | `QuarticRigidity.lean` |
 | Witness dichotomy after the explicitly named skeleton-to-fiber interface | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
+| **Concrete skeleton-to-terminal-resultant assembly and exact two-wall closure** | `explicitResultantRows_of_skeleton`, `squarefree_counterexample_explicit_resultant_dichotomy`, `no_squarefree_counterexample_of_no_split_and_no_explicit_rows` | `ExplicitFiber.lean` |
 | **Unconditional bifactor trap, and its exact closure under local H4** | `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | `TwoFactorIngress.lean` |
 | Four-coefficient support compression | `primitiveSupport_iff_fourCoefficientGcd` | `PrimitiveSupport.lean` |
 | Single-odd-prime semiorder obstruction | `one_order_dvd_eight_of_single_odd_prime` | `PrimitiveSupport.lean` |
@@ -179,6 +180,7 @@ not a premise of the Lean theorem.
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |
 | **Literal inert final row \(\Longrightarrow q^4\) divides the explicit pure/twisted resultant** | `pure_row_pow_four_dvd_resultant`, `twisted_row_pow_four_dvd_resultant` | `ResultantTrap.lean` |
 | **The two explicit resultants are nonzero and give \(q^4\le|\operatorname{Res}|\)** | `pure_resultant_ne_zero`, `twisted_resultant_ne_zero`, `pure_row_pow_four_le_resultant_natAbs`, `twisted_row_pow_four_le_resultant_natAbs` | `ResultantTrap.lean` |
+| **Closed archimedean estimate \(q^4\le|\operatorname{Res}|\le16\cdot5^A\)** | `pure_resultant_natAbs_le`, `twisted_resultant_natAbs_le`, `pure_row_pow_four_le_sixteen_mul_five_pow`, `twisted_row_pow_four_le_sixteen_mul_five_pow` | `ResultantTrap.lean` |
 | Quantized pure/twisted local gaps | `pureRow_order_le_product_sub_one`, `twistedRow_order_le_absGap` | `FinalRowSize.lean` |
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |

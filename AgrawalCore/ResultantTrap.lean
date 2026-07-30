@@ -15,14 +15,20 @@ the resultant in its second input then supplies the full factor `q^4`.
 Independently, reduction modulo `5` identifies `Φ₅` with `(X - 1)^4`;
 evaluation at `1` shows that both resultants are `1 mod 5`, hence nonzero.
 Together these facts yield the fixed-exponent size trap
-`q^4 ≤ natAbs resultant`.
+`q^4 ≤ natAbs resultant`.  A complex-root product then proves the closed
+estimate `natAbs resultant ≤ 16 * 5^A`.
 -/
 import AgrawalCore.QuarticRigidity
 import Mathlib.FieldTheory.Minpoly.Field
 import Mathlib.RingTheory.Polynomial.Resultant.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Factorization
+import Mathlib.Analysis.Complex.Norm
+import Mathlib.Analysis.Complex.Polynomial.Basic
+import Mathlib.RingTheory.RootsOfUnity.Complex
+import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Multiset
 
 open Polynomial
+open scoped ComplexConjugate
 
 namespace AgrawalCore
 
@@ -526,5 +532,350 @@ theorem twisted_row_pow_four_le_resultant_natAbs {q A : ℕ} [Fact q.Prime]
       (twisted_row_pow_four_dvd_resultant hq hres hrow)
       (twisted_resultant_ne_zero A)
   simpa [Int.natAbs_pow] using hle
+
+/-! ## The explicit archimedean bound
+
+The fixed-resultant trap above is already enough for pointwise finiteness.
+The following section proves the sharper paper bound
+
+`natAbs resultant ≤ 16 * 5 ^ A`.
+
+The proof is intrinsic.  Every complex root `z` of `Φ₅` is primitive, hence
+has norm one.  Its distance from `1` is at least one, and the product of the
+four distances is exactly `5`.  Each pure or twisted fiber value is therefore
+at most twice the corresponding `A`-th power of that distance.  Multiplying
+over the four roots gives `2^4 * 5^A`.
+-/
+
+/-- Every primitive fifth root of unity is at complex distance at least one
+from `1`.  The proof uses only the fifth cyclotomic equation and the identity
+for the squared complex norm. -/
+lemma norm_sub_one_one_le_of_isPrimitiveRoot_five
+    {z : ℂ} (hz : IsPrimitiveRoot z 5) :
+    1 ≤ ‖z - 1‖ := by
+  have hnorm : ‖z‖ = 1 := hz.norm'_eq_one (by norm_num)
+  have hpow5 : z ^ 5 = 1 := hz.pow_eq_one
+  have hz0 : z ≠ 0 := by
+    intro h
+    rw [h, zero_pow (by norm_num)] at hpow5
+    exact zero_ne_one hpow5
+  have hconj : conj z = z⁻¹ := by
+    exact (Complex.inv_eq_conj hnorm).symm
+  have hz4inv : z ^ 4 = z⁻¹ := by
+    have hmul : z ^ 4 * z = 1 := by
+      simpa [pow_succ] using hpow5
+    have h := (eq_mul_inv_iff_mul_eq₀ hz0).2 hmul
+    simpa using h
+  have hz4 : z ^ 4 = conj z := hz4inv.trans hconj.symm
+  have hz3inv : z ^ 3 = (z ^ 2)⁻¹ := by
+    have hmul : z ^ 3 * z ^ 2 = 1 := by
+      simpa [← pow_add] using hpow5
+    have h := (eq_mul_inv_iff_mul_eq₀ (pow_ne_zero 2 hz0)).2 hmul
+    simpa using h
+  have hz3 : z ^ 3 = conj (z ^ 2) := by
+    rw [hz3inv, Complex.inv_eq_conj]
+    rw [norm_pow, hnorm, one_pow]
+  have hroot : eval z (cyclotomic 5 ℂ) = 0 := by
+    exact hz.isRoot_cyclotomic (by norm_num)
+  rw [cyclotomic_prime] at hroot
+  norm_num [Finset.sum_range_succ] at hroot
+  have hre : 4 * z.re ^ 2 + 2 * z.re - 1 = 0 := by
+    have hnormsq : z.re ^ 2 + z.im ^ 2 = 1 := by
+      calc
+        z.re ^ 2 + z.im ^ 2 = Complex.normSq z := by
+          rw [Complex.normSq_apply]
+          ring
+        _ = ‖z‖ ^ 2 := (Complex.sq_norm z).symm
+        _ = 1 := by rw [hnorm]; norm_num
+    have hrootre := congrArg Complex.re hroot
+    rw [hz4, hz3] at hrootre
+    simp only [Complex.add_re, Complex.one_re, Complex.zero_re,
+      Complex.conj_re, pow_two, Complex.mul_re] at hrootre
+    nlinarith
+  have hzre : z.re ≤ 1 / 2 := by
+    by_contra h
+    have hgt : 1 / 2 < z.re := lt_of_not_ge h
+    nlinarith [sq_nonneg (z.re - 1 / 2)]
+  have hsquare := Complex.norm_sub_one_sq_eq_of_norm_eq_one hnorm
+  have hone_sq : 1 ^ 2 ≤ ‖z - 1‖ ^ 2 := by
+    rw [hsquare]
+    nlinarith
+  nlinarith [norm_nonneg (z - 1)]
+
+/-- After embedding into `ℂ`, the integral resultant is the product of the
+values of the second polynomial over the four complex roots of `Φ₅`. -/
+lemma complex_cast_resultant_eq_prod_eval (g : ℤ[X]) :
+    (((cyclotomic 5 ℤ).resultant g : ℤ) : ℂ) =
+      (((cyclotomic 5 ℂ).roots.map
+        fun z => eval z (g.map (Int.castRingHom ℂ))).prod) := by
+  let φ : ℤ →+* ℂ := Int.castRingHom ℂ
+  have hφinj : Function.Injective φ := Int.cast_injective
+  have hsplit : (cyclotomic 5 ℂ).Splits := IsAlgClosed.splits _
+  have hprod :=
+    Polynomial.resultant_eq_prod_eval
+      (cyclotomic 5 ℂ) (g.map φ) (g.map φ).natDegree le_rfl hsplit
+  have hlead : (cyclotomic 5 ℂ).leadingCoeff = 1 :=
+    (cyclotomic.monic 5 ℂ).leadingCoeff
+  rw [hlead, one_pow, one_mul] at hprod
+  change φ ((cyclotomic 5 ℤ).resultant g) = _
+  rw [← Polynomial.resultant_map_map]
+  rw [map_cyclotomic_int]
+  simpa [φ, natDegree_cyclotomic,
+    natDegree_map_eq_of_injective hφinj] using hprod
+
+lemma intPhi5_resultant_X_sub_one :
+    (cyclotomic 5 ℤ).resultant (X - 1) = 5 := by
+  have hdeg : (cyclotomic 5 ℤ).natDegree = 4 := by
+    rw [natDegree_cyclotomic]
+    decide
+  have hgdeg : (X - (1 : ℤ[X])).natDegree = 1 := by
+    change (X - C (1 : ℤ)).natDegree = 1
+    rw [natDegree_X_sub_C]
+  have heval : eval (1 : ℤ) (cyclotomic 5 ℤ) = 5 := by
+    rw [cyclotomic_prime]
+    norm_num [Finset.sum_range_succ]
+  change
+    (cyclotomic 5 ℤ).resultant (X - 1)
+      (cyclotomic 5 ℤ).natDegree (X - (1 : ℤ[X])).natDegree = 5
+  rw [hdeg, hgdeg]
+  change
+    (cyclotomic 5 ℤ).resultant (X - C (1 : ℤ)) 4 1 = 5
+  rw [Polynomial.resultant_X_sub_C_right, heval]
+  all_goals norm_num [hdeg]
+
+/-- The product of the distances of the four primitive fifth roots from
+`1` is exactly `5`. -/
+lemma prod_norm_sub_one_roots_cyclotomic_five :
+    (((cyclotomic 5 ℂ).roots.map fun z => ‖z - 1‖).prod) = 5 := by
+  have hprod :=
+    complex_cast_resultant_eq_prod_eval (X - 1 : ℤ[X])
+  rw [intPhi5_resultant_X_sub_one] at hprod
+  have hnorm := congrArg norm hprod
+  have hnormprod :
+      ‖((cyclotomic 5 ℂ).roots.map fun z => z - 1).prod‖ =
+        (((cyclotomic 5 ℂ).roots.map fun z => ‖z - 1‖).prod) := by
+    change
+      normHom (((cyclotomic 5 ℂ).roots.map fun z => z - 1).prod) = _
+    rw [map_multiset_prod, Multiset.map_map]
+    simp [Function.comp_apply]
+  rw [show
+    ((cyclotomic 5 ℂ).roots.map
+      fun z => eval z ((X - 1 : ℤ[X]).map (Int.castRingHom ℂ))).prod =
+      ((cyclotomic 5 ℂ).roots.map fun z => z - 1).prod by
+        congr 1
+        apply Multiset.map_congr rfl
+        intro z hz
+        simp] at hnorm
+  rw [hnormprod] at hnorm
+  norm_num at hnorm
+  exact hnorm.symm
+
+lemma multiset_prod_map_le_prod_map
+    {α : Type*} (s : Multiset α) (f g : α → ℝ)
+    (hf : ∀ x ∈ s, 0 ≤ f x) (hg : ∀ x ∈ s, 0 ≤ g x)
+    (hfg : ∀ x ∈ s, f x ≤ g x) :
+    (s.map f).prod ≤ (s.map g).prod := by
+  induction s using Multiset.induction_on with
+  | empty => simp
+  | @cons a s ih =>
+      simp only [Multiset.map_cons, Multiset.prod_cons]
+      apply mul_le_mul
+      · exact hfg a (by simp)
+      · exact ih
+          (fun x hx => hf x (by simp [hx]))
+          (fun x hx => hg x (by simp [hx]))
+          (fun x hx => hfg x (by simp [hx]))
+      · exact Multiset.prod_nonneg fun y hy => by
+          obtain ⟨x, hx, rfl⟩ := Multiset.mem_map.mp hy
+          exact hf x (by simp [hx])
+      · exact hg a (by simp)
+
+lemma root_of_cyclotomic_five_isPrimitive
+    {z : ℂ} (hz : z ∈ (cyclotomic 5 ℂ).roots) :
+    IsPrimitiveRoot z 5 := by
+  rw [← isRoot_cyclotomic_iff (R := ℂ)]
+  rw [← mem_roots (cyclotomic_ne_zero 5 ℂ)]
+  exact hz
+
+lemma pure_root_product_norm_le (A : ℕ) :
+    (((cyclotomic 5 ℂ).roots.map
+      fun z => ‖(z - 1) ^ A - 1‖).prod) ≤
+        16 * 5 ^ A := by
+  let s := (cyclotomic 5 ℂ).roots
+  have hpoint :
+      ∀ z ∈ s, ‖(z - 1) ^ A - 1‖ ≤ 2 * ‖z - 1‖ ^ A := by
+    intro z hz
+    have hbase : 1 ≤ ‖z - 1‖ :=
+      norm_sub_one_one_le_of_isPrimitiveRoot_five
+        (root_of_cyclotomic_five_isPrimitive hz)
+    have hpowbase : 1 ≤ ‖z - 1‖ ^ A := one_le_pow₀ hbase
+    calc
+      ‖(z - 1) ^ A - 1‖
+          ≤ ‖(z - 1) ^ A‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
+      _ = ‖z - 1‖ ^ A + 1 := by rw [norm_pow, norm_one]
+      _ ≤ 2 * ‖z - 1‖ ^ A := by linarith
+  calc
+    (s.map fun z => ‖(z - 1) ^ A - 1‖).prod
+        ≤ (s.map fun z => 2 * ‖z - 1‖ ^ A).prod :=
+          multiset_prod_map_le_prod_map s _ _
+            (fun z hz => norm_nonneg _)
+            (fun z hz => mul_nonneg (by norm_num) (pow_nonneg (norm_nonneg _) _))
+            hpoint
+    _ = 2 ^ s.card * ((s.map fun z => ‖z - 1‖).prod) ^ A := by
+      rw [Multiset.prod_map_mul, Multiset.prod_map_pow]
+      simp
+    _ = 16 * 5 ^ A := by
+      have hcard : s.card = 4 := by
+        dsimp [s]
+        rw [IsAlgClosed.card_roots_eq_natDegree, natDegree_cyclotomic]
+        decide
+      rw [hcard, prod_norm_sub_one_roots_cyclotomic_five]
+      norm_num
+
+lemma twisted_root_product_norm_le (A : ℕ) :
+    (((cyclotomic 5 ℂ).roots.map
+      fun z => ‖z * (z - 1) ^ A + 1‖).prod) ≤
+        16 * 5 ^ A := by
+  let s := (cyclotomic 5 ℂ).roots
+  have hpoint :
+      ∀ z ∈ s, ‖z * (z - 1) ^ A + 1‖ ≤ 2 * ‖z - 1‖ ^ A := by
+    intro z hz
+    have hzprim := root_of_cyclotomic_five_isPrimitive hz
+    have hznorm : ‖z‖ = 1 := hzprim.norm'_eq_one (by norm_num)
+    have hbase : 1 ≤ ‖z - 1‖ :=
+      norm_sub_one_one_le_of_isPrimitiveRoot_five hzprim
+    have hpowbase : 1 ≤ ‖z - 1‖ ^ A := one_le_pow₀ hbase
+    calc
+      ‖z * (z - 1) ^ A + 1‖
+          ≤ ‖z * (z - 1) ^ A‖ + ‖(1 : ℂ)‖ := norm_add_le _ _
+      _ = ‖z - 1‖ ^ A + 1 := by
+        rw [norm_mul, hznorm, one_mul, norm_pow, norm_one]
+      _ ≤ 2 * ‖z - 1‖ ^ A := by linarith
+  calc
+    (s.map fun z => ‖z * (z - 1) ^ A + 1‖).prod
+        ≤ (s.map fun z => 2 * ‖z - 1‖ ^ A).prod :=
+          multiset_prod_map_le_prod_map s _ _
+            (fun z hz => norm_nonneg _)
+            (fun z hz => mul_nonneg (by norm_num) (pow_nonneg (norm_nonneg _) _))
+            hpoint
+    _ = 2 ^ s.card * ((s.map fun z => ‖z - 1‖).prod) ^ A := by
+      rw [Multiset.prod_map_mul, Multiset.prod_map_pow]
+      simp
+    _ = 16 * 5 ^ A := by
+      have hcard : s.card = 4 := by
+        dsimp [s]
+        rw [IsAlgClosed.card_roots_eq_natDegree, natDegree_cyclotomic]
+        decide
+      rw [hcard, prod_norm_sub_one_roots_cyclotomic_five]
+      norm_num
+
+lemma norm_intCast_complex_eq_natAbs (z : ℤ) :
+    ‖(z : ℂ)‖ = (Int.natAbs z : ℝ) := by
+  simp
+
+/-- Closed-form archimedean estimate for the pure resultant. -/
+theorem pure_resultant_natAbs_le (A : ℕ) :
+    Int.natAbs
+        ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A))
+      ≤ 16 * 5 ^ A := by
+  have hprod :=
+    complex_cast_resultant_eq_prod_eval (pureFiberPolynomial A)
+  have hnorm := congrArg norm hprod
+  have hevals :
+      ((cyclotomic 5 ℂ).roots.map fun z =>
+        eval z ((pureFiberPolynomial A).map (Int.castRingHom ℂ))).prod =
+      ((cyclotomic 5 ℂ).roots.map fun z =>
+        (z - 1) ^ A - 1).prod := by
+    congr 1
+    apply Multiset.map_congr rfl
+    intro z hz
+    simp [pureFiberPolynomial]
+  rw [hevals] at hnorm
+  have hnormprod :
+      ‖((cyclotomic 5 ℂ).roots.map fun z =>
+          (z - 1) ^ A - 1).prod‖ =
+        ((cyclotomic 5 ℂ).roots.map fun z =>
+          ‖(z - 1) ^ A - 1‖).prod := by
+    change (normHom : ℂ →*₀ ℝ) _ = _
+    rw [map_multiset_prod, Multiset.map_map]
+    simp [Function.comp_apply]
+  rw [norm_intCast_complex_eq_natAbs, hnormprod] at hnorm
+  have hreal :
+      (Int.natAbs
+          ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A)) : ℝ)
+        ≤ (16 * 5 ^ A : ℕ) := by
+    calc
+      (Int.natAbs
+          ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A)) : ℝ)
+          = ((cyclotomic 5 ℂ).roots.map fun z =>
+              ‖(z - 1) ^ A - 1‖).prod := hnorm
+      _ ≤ ((16 * 5 ^ A : ℕ) : ℝ) := by
+        have hcast :
+            (16 : ℝ) * (5 : ℝ) ^ A =
+              ((16 * 5 ^ A : ℕ) : ℝ) := by norm_cast
+        exact (pure_root_product_norm_le A).trans_eq hcast
+  exact_mod_cast hreal
+
+/-- Closed-form archimedean estimate for the twisted resultant. -/
+theorem twisted_resultant_natAbs_le (A : ℕ) :
+    Int.natAbs
+        ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A))
+      ≤ 16 * 5 ^ A := by
+  have hprod :=
+    complex_cast_resultant_eq_prod_eval (twistedFiberPolynomial A)
+  have hnorm := congrArg norm hprod
+  have hevals :
+      ((cyclotomic 5 ℂ).roots.map fun z =>
+        eval z ((twistedFiberPolynomial A).map (Int.castRingHom ℂ))).prod =
+      ((cyclotomic 5 ℂ).roots.map fun z =>
+        z * (z - 1) ^ A + 1).prod := by
+    congr 1
+    apply Multiset.map_congr rfl
+    intro z hz
+    simp [twistedFiberPolynomial]
+  rw [hevals] at hnorm
+  have hnormprod :
+      ‖((cyclotomic 5 ℂ).roots.map fun z =>
+          z * (z - 1) ^ A + 1).prod‖ =
+        ((cyclotomic 5 ℂ).roots.map fun z =>
+          ‖z * (z - 1) ^ A + 1‖).prod := by
+    change (normHom : ℂ →*₀ ℝ) _ = _
+    rw [map_multiset_prod, Multiset.map_map]
+    simp [Function.comp_apply]
+  rw [norm_intCast_complex_eq_natAbs, hnormprod] at hnorm
+  have hreal :
+      (Int.natAbs
+          ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A)) : ℝ)
+        ≤ (16 * 5 ^ A : ℕ) := by
+    calc
+      (Int.natAbs
+          ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A)) : ℝ)
+          = ((cyclotomic 5 ℂ).roots.map fun z =>
+              ‖z * (z - 1) ^ A + 1‖).prod := hnorm
+      _ ≤ ((16 * 5 ^ A : ℕ) : ℝ) := by
+        have hcast :
+            (16 : ℝ) * (5 : ℝ) ^ A =
+              ((16 * 5 ^ A : ℕ) : ℝ) := by norm_cast
+        exact (twisted_root_product_norm_le A).trans_eq hcast
+  exact_mod_cast hreal
+
+/-- A literal pure final row satisfies the fully explicit fourth-power
+bound used in the finite-fiber theorem. -/
+theorem pure_row_pow_four_le_sixteen_mul_five_pow
+    {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q) (hA : 0 < A)
+    (hres : (A + 1) % 5 = 1) (hrow : LocalS5 q (A + 1)) :
+    q ^ 4 ≤ 16 * 5 ^ A :=
+  (pure_row_pow_four_le_resultant_natAbs hq hA hres hrow).trans
+    (pure_resultant_natAbs_le A)
+
+/-- The corresponding explicit fourth-power bound in the twisted branch. -/
+theorem twisted_row_pow_four_le_sixteen_mul_five_pow
+    {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q)
+    (hres : (A + 1) % 5 = 4) (hrow : LocalS5 q (A + 1)) :
+    q ^ 4 ≤ 16 * 5 ^ A :=
+  (twisted_row_pow_four_le_resultant_natAbs hq hres hrow).trans
+    (twisted_resultant_natAbs_le A)
 
 end AgrawalCore

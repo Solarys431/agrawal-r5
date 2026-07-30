@@ -8,9 +8,11 @@ nel kernel:
   candidato -> testimone locale H4
              oppure scheletro inerte, cardinalità dispari >= 3.
 
-Soltanto il passaggio successivo dallo scheletro alle fibre resta una
-premessa esplicita `SkeletonToFiber`. Non viene trasformata in un assioma
-e il modulo non afferma né H4 né la vacuità universale delle fibre.
+In questo modulo il passaggio successivo dallo scheletro a una nozione
+arbitraria di fibra resta la premessa parametrica `SkeletonToFiber`.
+`ExplicitFiber.lean` la istanzia poi, senza assiomi, con i due risultanti
+terminali concreti. Nessun modulo afferma H4 o la vacuità universale delle
+fibre.
 
 Campagna UNICO, 27 luglio 2026.
 -/
@@ -200,9 +202,9 @@ theorem squarefree_counterexample_concrete_dichotomy
   · exact Or.inl
       ((not_localH4For_iff_splitOrderFourWitness n).mp hlocal)
 
-/-- The only remaining abstract interface starts *after* the concrete
-quartic skeleton: it asks the subsequent arithmetic theory to turn that
-skeleton into its chosen finite-fiber witness. -/
+/-- The generic interface starts *after* the concrete quartic skeleton: it
+asks subsequent arithmetic theory to turn that skeleton into its chosen
+finite-fiber witness. `ExplicitFiber.lean` supplies a concrete instance. -/
 def SkeletonToFiber (FiberWitness : ℕ → Prop) : Prop :=
   ∀ n, SquarefreeCounterexampleCandidate n → QuarticSkeleton n →
     FiberWitness n

@@ -90,6 +90,12 @@
       "note": "Fixed fifth-cyclotomic identities."
     },
     {
+      "module": "AgrawalCore/ExplicitFiber.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "Project-specific assembly from the quartic skeleton to the two explicit terminal resultants."
+    },
+    {
       "module": "AgrawalCore/FermatShadow.lean",
       "disposition": "project_specific",
       "candidates": [],

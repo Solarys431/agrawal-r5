@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 52 `AgrawalCore` modules and 9,234
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 119 headline
+The implementation currently contains 53 `AgrawalCore` modules and 9,746
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 127 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -31,9 +31,10 @@ declarations. Four independent Comparator surfaces export seven statements.
 | Agrawal's congruence at \(r=5\) implies the base-5 Fermat congruence for squarefree \(n\) | **LEAN**, **COMPARATOR**: `agrawal_fermat_shadow` | Underlying implication is classical (Lenstra); the contribution is the end-to-end formalization |
 | Exact squarefree ingress at \(r=5\): the global congruence is equivalent to `LocalS5 p (n/p)` at every prime factor | **LEAN**: `squarefree_ingress_iff` | Kernel completion of the arithmetic interface used by the paper's structure theorem; no novelty claim is made for the classical Frobenius reduction |
 | A good local row of residue \(2\) or \(3\bmod5\) is automatically odd and therefore yields the normalized order-four witness | **LEAN**: `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | Removes a previously implicit parity seam by comparing the rows at \(\zeta\) and \(\zeta^{-1}\); priority unassessed |
-| Every squarefree counterexample candidate has either a split order-four witness or an odd inert quartic skeleton with at least three prime factors | **LEAN**: `squarefree_counterexample_concrete_dichotomy`, `quarticSkeleton_card_ge_three` | The global-to-quartic reduction is now kernel-checked. The subsequent general-\(s\) reduction from this skeleton to finite fibers remains **PAPER** |
+| Every squarefree counterexample candidate has either a split order-four witness or an odd inert quartic skeleton with at least three prime factors | **LEAN**: `squarefree_counterexample_concrete_dichotomy`, `quarticSkeleton_card_ge_three` | The global-to-quartic reduction is kernel-checked. `explicitResultantRows_of_skeleton` now continues every skeleton factor to its literal pure/twisted resultant row; compatible-prefix CRT assembly and universal fiber emptiness remain **PAPER/OPEN** |
 | Every literal quartic row is congruent to the corresponding Frobenius power modulo \(\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)\); at every inert skeleton factor the residue determines \(j=0\) when \(p\equiv n\pmod5\) and \(j=2\) otherwise | **LEAN**: `localS5_modEq_frobenius_power_lcm`, `inertQuotient_residue_determined`, `determinedQuarticOrderRows_of_skeleton`, `squarefree_counterexample_order_dichotomy` | This kernel-checks the exact labelled order-rigidity interface used by the explicit CRT system. It does not construct or empty the terminal resultant fibers |
-| For an inert prime \(q\), a literal pure or twisted final `LocalS5` row forces \(q^4\) to divide a fixed nonzero explicit integer resultant, hence \(q^4\le|\operatorname{Res}|\) | **LEAN**: `prime_pow_natDegree_dvd_resultant_of_common_root`, `pure_row_pow_four_dvd_resultant`, `twisted_row_pow_four_dvd_resultant`, `pure_resultant_ne_zero`, `twisted_resultant_ne_zero`, `pure_row_pow_four_le_resultant_natAbs`, `twisted_row_pow_four_le_resultant_natAbs` | The full inert-degree contribution and fixed-exponent size trap are kernel-checked. Nonvanishing follows from the stronger congruence \(\operatorname{Res}\equiv1\pmod5\). A closed-form archimedean estimate, general tuple assembly and global fiber emptiness remain outside these theorems |
+| For an inert prime \(q\), a literal pure or twisted final `LocalS5` row forces \(q^4\) to divide a fixed nonzero explicit integer resultant and satisfies \(q^4\le|\operatorname{Res}|\le16\cdot5^A\) | **LEAN**: `prime_pow_natDegree_dvd_resultant_of_common_root`, `pure_row_pow_four_dvd_resultant`, `twisted_row_pow_four_dvd_resultant`, `pure_resultant_ne_zero`, `twisted_resultant_ne_zero`, `pure_resultant_natAbs_le`, `twisted_resultant_natAbs_le`, `pure_row_pow_four_le_sixteen_mul_five_pow`, `twisted_row_pow_four_le_sixteen_mul_five_pow` | The full inert-degree contribution, nonvanishing certificate \(\operatorname{Res}\equiv1\pmod5\), and exact closed-form archimedean estimate are kernel-checked |
+| Every quartic skeleton factor lands in the correct explicit pure/twisted resultant fiber, with fourth-power divisibility and the closed-form size bound | **LEAN**: `quotient_gt_one_of_quarticSkeleton`, `explicitResultantRows_of_skeleton`, `squarefree_counterexample_explicit_resultant_dichotomy`, `no_squarefree_counterexample_of_no_split_and_no_explicit_rows` | This closes the formerly abstract skeleton-to-terminal-resultant interface for every number of factors and packages the exact two-wall closure. It does **not** prove either open wall or that any terminal fiber is empty |
 | Every two-prime candidate violating \(n^2\equiv1\pmod5\) has a split local order-four witness; local H4 therefore excludes it | **LEAN**: `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | Unconditional reduction of the bifactor case to H4, followed by an explicitly conditional closure. It does not prove H4 and therefore does not settle the bifactor case unconditionally |
 | An odd prime cannot occur simultaneously in a \(p-1\) and a \(p'+1\) Korselt support | **LEAN**: `partition_forced` | The compatibility mechanism is present in Williams/McIntosh/Leng; this is a reusable formal extraction, not a claimed new discovery |
 | Local order-four transport is equivalent to support of the mixed Fibonacci–Lucas sequence \(H_n\) | **LEAN**: `hasOrderFourTransport_iff_goldenH_support` | Exact reduction; it does not prove H4 |
@@ -59,12 +60,10 @@ interfaces are not kernel theorems in this repository:
 - the lifted golden tower and its per-floor Kummer density;
 - the exact order decomposition of \(\zeta_5-1\) and the Kummer
   interpretation of its tail;
-- the general-\(s\) assembly from the kernel-checked quartic skeleton to
-  compatible tuples, the closed-form archimedean estimate for the explicit
-  resultant fibers and the complete global finite-fiber theorem; the literal
-  inert final-row implications
-  \(q^4\mid\operatorname{Res}\ne0\) and
-  \(q^4\le|\operatorname{Res}|\) are **LEAN**;
+- compatible-prefix CRT assembly and the complete global fiber-emptiness
+  theorem. The skeleton-to-terminal-resultant assembly, the literal
+  implications \(q^4\mid\operatorname{Res}\ne0\), and the closed estimate
+  \(q^4\le|\operatorname{Res}|\le16\cdot5^A\) are **LEAN**;
 - density-zero and GRH counting statements;
 - the full tail-anomaly Euler-product density.
 

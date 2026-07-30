@@ -16,8 +16,8 @@ theorem in `AgrawalCore`. The ordinary `lake --wfail build` simultaneously
 checks Lean's `unusedSectionVars` linter against the elaborated proof terms.
 Together they give a reproducible boundary:
 
-- 453 public theorems inspected;
-- 283 instance binders inspected;
+- 470 public theorems inspected;
+- 285 instance binders inspected;
 - two genuinely removable assumptions eliminated from
   `golden_pow_of_sq` and `golden_pow_pred`;
 - 59 instance binders absent from the proposition body but still used by the
@@ -47,8 +47,8 @@ Expected final lines:
 
 ```text
 Public hypothesis-minimality audit: PASS
-  theorems inspected: 453
-  instance binders inspected: 283
+  theorems inspected: 470
+  instance binders inspected: 285
   generalized assumptions removed in this audit: 2
   declared proof-route debt entries: 56
   declared proof-route binders: 59

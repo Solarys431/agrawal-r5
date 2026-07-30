@@ -128,3 +128,11 @@ introduced.
 #print axioms AgrawalCore.twisted_resultant_ne_zero
 #print axioms AgrawalCore.pure_row_pow_four_le_resultant_natAbs
 #print axioms AgrawalCore.twisted_row_pow_four_le_resultant_natAbs
+#print axioms AgrawalCore.pure_resultant_natAbs_le
+#print axioms AgrawalCore.twisted_resultant_natAbs_le
+#print axioms AgrawalCore.pure_row_pow_four_le_sixteen_mul_five_pow
+#print axioms AgrawalCore.twisted_row_pow_four_le_sixteen_mul_five_pow
+#print axioms AgrawalCore.quotient_gt_one_of_quarticSkeleton
+#print axioms AgrawalCore.explicitResultantRows_of_skeleton
+#print axioms AgrawalCore.squarefree_counterexample_explicit_resultant_dichotomy
+#print axioms AgrawalCore.no_squarefree_counterexample_of_no_split_and_no_explicit_rows
