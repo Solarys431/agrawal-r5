@@ -14,7 +14,7 @@
 > \[
 > p-1=2^bq^e
 > \]
-> with \(q\) an odd prime and \(b\in\{3,4,5,6\}\), then a contradiction
+> with \(q\) an odd prime and \(b\in\{3,4,5,6,7\}\), then a contradiction
 > follows.
 
 The end-to-end four-coefficient entry points are:
@@ -22,6 +22,7 @@ The end-to-end four-coefficient entry points are:
 - `no_split_single_odd_support_sixteen_primitive`;
 - `no_split_single_odd_support_thirtytwo_primitive`;
 - `no_split_single_odd_support_sixtyfour_primitive`.
+- `no_split_single_odd_support_onetwentyeight_primitive`.
 
 The depth-three theorem is
 `no_split_single_odd_support`; its conclusion is directly that \(p\) is
@@ -79,10 +80,14 @@ The only odd cofactor requiring more than a parity check is
 which is not a prime power. This non-prime-power assertion is itself
 proved in Lean as `prime_power_ne_459735`.
 
-## Boundary
+## Depth seven and boundary
 
-No theorem is claimed here for \(b\ge7\). A trial certificate for the
-next factorization was deliberately stopped when its large primality
-subcertificate exceeded the resource budget. The result is therefore a
-four-depth universal exclusion, not an induction over all dyadic
-depths and not a proof of H4.
+At depth seven, quadratic residuacity eliminates the negative
+half-period without factoring the new cyclotomic cofactor.  The positive
+half-period reduces to the depth-six factors.  The only compatible split
+residues are \(641\), eliminated by its exact scalar and golden orders,
+and \(4481\), for which \((4481-1)/128=35\) is not a prime power.
+
+No theorem is claimed here for \(b\ge8\). The result is therefore a
+five-depth universal exclusion, not an induction over all dyadic depths
+and not a proof of H4.

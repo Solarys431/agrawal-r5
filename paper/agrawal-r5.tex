@@ -84,8 +84,8 @@ explicit local Hypothesis~H4, the squarefree problem reduces exactly to
 the emptiness of finite resultant fibers over compatible tuples. We also
 replace the norm surrogate in H4 by an exact four-coefficient primitive
 support in the integral basis of $\Q(\sqrt5)$, and exclude universally the
-four infinite candidate families
-$p-1=2^bq^e$ for $b\in\{3,4,5,6\}$. We certify
+five infinite candidate families
+$p-1=2^bq^e$ for $b\in\{3,4,5,6,7\}$. We certify
 a stated three-factor region and seven individual empty fibers. For every
 fixed number $s$ of prime factors, the terminal row gives the unconditional
 quartic-skeleton bound
@@ -913,11 +913,11 @@ from \(10rs\), its radical is the radical of
 \(D_{r,s}\mathcal O_{\Q(\sqrt5)}\). No universal equality of
 multiplicities is claimed.
 
-\begin{theorem}[the first four single odd-prime support depths are impossible]
+\begin{theorem}[the first five single odd-prime support depths are impossible]
 \label{thm:Hsingleprime}
 No split H-profile prime satisfies
 \[
-p-1=2^bq^e,\qquad b\in\{3,4,5,6\},
+p-1=2^bq^e,\qquad b\in\{3,4,5,6,7\},
 \]
 with \(q\) an odd prime and \(e\ge1\).
 \end{theorem}
@@ -984,7 +984,17 @@ and \(4481\) are even, \(11489-1\) is not divisible by \(64\), and
 \frac{29423041-1}{64}=459735=3\cdot5\cdot30649
 \]
 is not a prime power.  These exhaust the split factors in the exact
-factorizations above, completing all four depths.
+factorizations above, completing the first four depths.
+
+For \(b=7\), no new large factorization is needed.  Both \(5\) and
+\(\eps^2\) are squares in the split branch.  Hence a negative
+half-period \(a^{64}=-1\) would give
+\(a^{(p-1)/2}=-1\), contradicting quadratic residuacity.  The positive
+half-period reduces to the depth-\(64\) factorizations above.  Their
+only arithmetically compatible split residues are \(641\) and \(4481\).
+For \(641\), one has \(\ord_{641}(5)=64\), while either golden root has
+order \(320\), contradicting coprimality of the semiorders.  For \(4481\),
+\((4481-1)/128=35\) is not a prime power.  This completes depth seven.
 \end{proof}
 
 \begin{theorem}[5-smooth split support is impossible]

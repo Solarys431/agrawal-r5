@@ -49,6 +49,21 @@ theorem goldenSquareFromGamma_sq_eq_three_mul_sub_one
   field_simp [hconj]
   linear_combination 5 * hrel
 
+/-- The coordinated golden element is literally the square of `γ - 2`.
+This exposes the quadratic-residue input needed by the next dyadic
+single-support layer. -/
+theorem goldenSquareFromGamma_eq_sq_sub_two
+    (hp5 : p ≠ 5) (γ : ZMod p) (hγ : γ ^ 2 = 5 * γ - 5) :
+    goldenSquareFromGamma γ = (γ - 2) ^ 2 := by
+  have hprod := gamma_mul_conj γ hγ
+  have hconj : (5 - γ : ZMod p) ≠ 0 := by
+    intro hzero
+    rw [hzero, mul_zero] at hprod
+    exact five_ne_zero hp5 hprod.symm
+  unfold goldenSquareFromGamma
+  field_simp [hconj]
+  linear_combination (γ - 4) * hγ
+
 /-- A root of `X²-3X+1` cannot have order two away from
 characteristics two and five. -/
 theorem orderOf_golden_square_ne_two

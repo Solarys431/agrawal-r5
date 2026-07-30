@@ -98,6 +98,8 @@ introduced.
 #print axioms AgrawalCore.no_split_single_odd_support_sixteen_primitive
 #print axioms AgrawalCore.no_split_single_odd_support_thirtytwo_primitive
 #print axioms AgrawalCore.no_split_single_odd_support_sixtyfour_primitive
+#print axioms AgrawalCore.goldenSquareFromGamma_eq_sq_sub_two
+#print axioms AgrawalCore.no_split_single_odd_support_onetwentyeight_primitive
 #print axioms AgrawalCore.threeFactor_finalRow_size_exclusion
 #print axioms AgrawalCore.localRow_order_le_max
 #print axioms AgrawalCore.quarticSkeleton_orderModulus_le_max

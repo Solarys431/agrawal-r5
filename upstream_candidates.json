@@ -529,7 +529,7 @@
       "module": "AgrawalCore/SingleSupportExclusion.lean",
       "disposition": "project_specific",
       "candidates": [],
-      "note": "Four closed single-odd-support H4 depth families and their explicit factorizations."
+      "note": "Five closed single-odd-support H4 depth families and their explicit factorizations."
     },
     {
       "module": "AgrawalCore/SquarefreeIngress.lean",

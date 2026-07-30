@@ -8,6 +8,7 @@ formalizzati i due certificati algebrico-aritmetici che eliminano il caso
 in cui uno degli ordini completi divide la potenza di due fissata.
 -/
 import AgrawalCore.PrimitiveScalarBridge
+import AgrawalCore.Reciprocity
 
 namespace AgrawalCore
 
@@ -250,6 +251,41 @@ theorem prime_power_ne_459735 {q e : ℕ} (hq : q.Prime) :
 
 variable {p : ℕ} [Fact p.Prime]
 
+/-- At exact depth seven, a nonzero square cannot have the negative
+half-period. -/
+theorem square_pow_sixtyfour_ne_neg_one
+    {q e : ℕ} (hqOdd : Odd q)
+    (hp2 : p ≠ 2) (hpform : p - 1 = 128 * q ^ e)
+    (a : ZMod p) (ha0 : a ≠ 0) (hsq : IsSquare a) :
+    a ^ 64 ≠ -1 := by
+  rintro hneg
+  obtain ⟨y, rfl⟩ := hsq
+  have hy0 : y ≠ 0 := by
+    intro hy
+    apply ha0
+    simp [hy]
+  have hfermat : y ^ (128 * q ^ e) = 1 := by
+    rw [← hpform]
+    exact ZMod.pow_card_sub_one_eq_one hy0
+  have hodd : Odd (q ^ e) := hqOdd.pow
+  obtain ⟨c, hc⟩ := hodd
+  have hneg' : (y ^ 2) ^ 64 = -1 := by
+    simpa [pow_two] using hneg
+  have hminus : y ^ (128 * q ^ e) = -1 := by
+    rw [show 128 * q ^ e = 128 * (q ^ e) by ring, pow_mul,
+      show y ^ 128 = (y ^ 2) ^ 64 by ring, hneg', hc]
+    simp [pow_add, pow_mul]
+  have hne : (-1 : ZMod p) ≠ 1 := by
+    intro hone
+    have htwo : (2 : ZMod p) = 0 := by
+      calc
+        (2 : ZMod p) = 1 - (-1) := by ring
+        _ = 0 := by rw [hone]; ring
+    have hpdiv : p ∣ 2 :=
+      (CharP.cast_eq_zero_iff (ZMod p) p 2).mp htwo
+    exact hp2 ((Nat.prime_dvd_prime_iff_eq Fact.out (by norm_num)).mp hpdiv)
+  exact hne (hminus.symm.trans hfermat)
+
 /-- Se `5^8=1` modulo un buon primo, quel primo è inerte. -/
 theorem inert_of_five_pow_eight_eq_one (hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (hpow : (5 : ZMod p) ^ 8 = 1) :
@@ -420,6 +456,63 @@ private theorem five_pow_sixteen_eq_one_mod_11489 :
 private theorem neg_one_ne_one_mod_11489 :
     (-1 : ZMod 11489) ≠ 1 := by
   decide
+
+set_option maxRecDepth 100000 in
+private theorem golden_square_pow_ten_ne_one_mod_641
+    (x : ZMod 641) (hx : x ^ 2 = 3 * x - 1) :
+    x ^ 10 ≠ 1 := by
+  letI : Fact (Nat.Prime 641) := ⟨by norm_num⟩
+  have hsum : (280 + 364 : ZMod 641) = 3 := by decide
+  have hprod : (280 * 364 : ZMod 641) = 1 := by decide
+  have hfac : (x - 280) * (x - 364) = 0 := by
+    calc
+      (x - 280) * (x - 364) =
+          x ^ 2 - (280 + 364) * x + 280 * 364 := by ring
+      _ = x ^ 2 - 3 * x + 1 := by rw [hsum, hprod]
+      _ = 0 := by linear_combination hx
+  rcases mul_eq_zero.mp hfac with hroot | hroot
+  · have hxv : x = 280 := by linear_combination hroot
+    rw [hxv]
+    decide
+  · have hxv : x = 364 := by linear_combination hroot
+    rw [hxv]
+    decide
+
+private theorem five_pow_thirtytwo_eq_neg_one_mod_641 :
+    (5 : ZMod 641) ^ 32 = -1 := by
+  decide
+
+private theorem five_pow_sixtyfour_eq_one_mod_641 :
+    (5 : ZMod 641) ^ 64 = 1 := by
+  decide
+
+private theorem neg_one_ne_one_mod_641 :
+    (-1 : ZMod 641) ≠ 1 := by
+  decide
+
+theorem prime_power_ne_35 {q e : ℕ} (hq : q.Prime) :
+    q ^ e ≠ 35 := by
+  intro hqe
+  have he : e ≠ 0 := by
+    intro he0
+    simp [he0] at hqe
+  have hqdiv : q ∣ 35 := by
+    rw [← hqe]
+    exact dvd_pow_self q he
+  have hqcase : q = 5 ∨ q = 7 := by
+    have h' : q ∣ 5 * 7 := by norm_num at hqdiv ⊢; exact hqdiv
+    rcases hq.dvd_mul.mp h' with h5 | h7
+    · left; exact (Nat.prime_dvd_prime_iff_eq hq (by norm_num)).mp h5
+    · right; exact (Nat.prime_dvd_prime_iff_eq hq (by norm_num)).mp h7
+  rcases hqcase with rfl | rfl
+  · have h7div : 7 ∣ 5 ^ e := by rw [hqe]; norm_num
+    have hcop := (by norm_num : Nat.Coprime 7 5).pow_right e
+    have hone := hcop.eq_one_of_dvd h7div
+    norm_num at hone
+  · have h5div : 5 ∣ 7 ^ e := by rw [hqe]; norm_num
+    have hcop := (by norm_num : Nat.Coprime 5 7).pow_right e
+    have hone := hcop.eq_one_of_dvd h5div
+    norm_num at hone
 
 /-- Anche il ramo aureo `x^8=1` forza un buon primo a essere inerte. -/
 theorem inert_of_golden_square_pow_eight (hp2 : p ≠ 2) (hp5 : p ≠ 5)
@@ -841,5 +934,168 @@ theorem no_split_single_odd_support_sixtyfour_primitive
       (goldenSquareFromGamma γ)
       (goldenSquareFromGamma_sq_eq_three_mul_sub_one hp5 γ hγ)
       hordx
+
+/-- **Depth seven is impossible without factoring the new giant
+cyclotomic cofactor.**  Quadratic residuacity excludes the negative
+half-period, reducing the proof to the already certified depth-six
+resultants. -/
+theorem no_split_single_odd_support_onetwentyeight
+    {q e r s : ℕ} (hq : q.Prime) (hq2 : q ≠ 2)
+    (hp2 : p ≠ 2) (hp5 : p ≠ 5)
+    (hpSplit : p % 5 = 1 ∨ p % 5 = 4)
+    (hrs : Nat.Coprime r s)
+    (hpform : p - 1 = 128 * q ^ e)
+    (hord5 : orderOf (5 : ZMod p) = 2 * r)
+    (x : ZMod p) (hx : x ^ 2 = 3 * x - 1) (hxSquare : IsSquare x)
+    (hordx : orderOf x = 2 * s) :
+    False := by
+  have h5zero : (5 : ZMod p) ≠ 0 := by
+    intro h50
+    have hpdiv : p ∣ 5 := (CharP.cast_eq_zero_iff (ZMod p) p 5).mp h50
+    exact hp5 ((Nat.prime_dvd_prime_iff_eq Fact.out (by norm_num)).mp hpdiv)
+  have hx0 : x ≠ 0 := by
+    intro hxzero
+    rw [hxzero, zero_pow (by norm_num : (2 : ℕ) ≠ 0)] at hx
+    norm_num at hx
+  have hR : 2 * r ∣ 128 * q ^ e := by
+    rw [← hpform, ← hord5]
+    exact ZMod.orderOf_dvd_card_sub_one h5zero
+  have hE : 2 * s ∣ 128 * q ^ e := by
+    rw [← hpform, ← hordx]
+    exact ZMod.orderOf_dvd_card_sub_one hx0
+  have hqOdd : Odd q := hq.odd_of_ne_two hq2
+  have hqPowOdd : Odd (q ^ e) := hqOdd.pow
+  rcases one_order_dvd_two_pow_succ_of_single_odd_prime
+      (b := 6) hq hrs (by norm_num at hR ⊢; exact hR)
+        (by norm_num at hE ⊢; exact hE) with h128 | h128
+  · have hpow128 : (5 : ZMod p) ^ 128 = 1 :=
+      orderOf_dvd_iff_pow_eq_one.mp (by rwa [hord5])
+    have hsquare : ((5 : ZMod p) ^ 64) * (5 ^ 64) = 1 := by
+      rw [← pow_add]; norm_num at hpow128 ⊢; exact hpow128
+    rcases mul_self_eq_one_iff.mp hsquare with h64 | h64neg
+    · have hsquare32 : ((5 : ZMod p) ^ 32) * (5 ^ 32) = 1 := by
+        rw [← pow_add]; norm_num at h64 ⊢; exact h64
+      rcases mul_self_eq_one_iff.mp hsquare32 with h32 | h32neg
+      · have hdvd : p ∣ 5 ^ 32 - 1 := by
+          apply (CharP.cast_eq_zero_iff (ZMod p) p _).mp
+          norm_num at h32 ⊢; linear_combination h32
+        rcases prime_dvd_five_pow_thirtytwo_sub_one_cases Fact.out hdvd with
+            rfl | rfl | rfl | rfl | rfl | rfl | hp11489 | hp29423041
+        · exact hp2 rfl
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+        · subst p; norm_num at hpform; omega
+        · subst p; norm_num at hpform; omega
+      · have hdvd : p ∣ 5 ^ 32 + 1 := by
+          apply (CharP.cast_eq_zero_iff (ZMod p) p _).mp
+          norm_num at h32neg ⊢; linear_combination h32neg
+        rcases prime_dvd_five_pow_thirtytwo_add_one_cases Fact.out hdvd with
+            rfl | hp641 | hp75068993 | hp241931001601
+        · exact hp2 rfl
+        · subst p
+          have hordDiv64 : 2 * r ∣ 64 := by
+            rw [← hord5]
+            exact orderOf_dvd_of_pow_eq_one h64
+          have hordNotDiv32 : ¬2 * r ∣ 32 := by
+            rw [← hord5]
+            intro hd
+            have := orderOf_dvd_iff_pow_eq_one.mp hd
+            exact neg_one_ne_one_mod_641
+              (five_pow_thirtytwo_eq_neg_one_mod_641.symm.trans this)
+          have hr32 : r = 32 := by
+            have hd : 2 * r ∣ 2 ^ 6 := by norm_num; exact hordDiv64
+            obtain ⟨j, hjle, hj⟩ :=
+              (Nat.dvd_prime_pow (by norm_num : Nat.Prime 2)).mp hd
+            have hj6 : j = 6 := by
+              by_contra hn
+              apply hordNotDiv32
+              rw [hj, show 32 = 2 ^ 5 by norm_num]
+              exact Nat.pow_dvd_pow 2 (by omega)
+            rw [hj6] at hj; norm_num at hj; omega
+          have hqEq : q ^ e = 5 := by norm_num at hpform; omega
+          have hsDiv : s ∣ 64 * q ^ e := by
+            obtain ⟨c, hc⟩ := hE
+            refine ⟨c, ?_⟩
+            have hc' : 2 * (64 * q ^ e) = 2 * (s * c) := by
+              calc
+                2 * (64 * q ^ e) = 128 * q ^ e := by ring
+                _ = (2 * s) * c := hc
+                _ = 2 * (s * c) := by ring
+            exact Nat.mul_left_cancel (by norm_num) hc'
+          have hsOdd : Odd s := Nat.coprime_two_left.mp (by
+            apply hrs.coprime_dvd_left
+            rw [hr32]; norm_num)
+          have hsQ : s ∣ q ^ e := by
+            apply (show Nat.Coprime s 64 by
+              simpa using (Nat.coprime_two_right.mpr hsOdd).pow_right 6
+              ).dvd_of_dvd_mul_left hsDiv
+          have hs5 : s ∣ 5 := by rwa [hqEq] at hsQ
+          rcases (Nat.dvd_prime (by norm_num : Nat.Prime 5)).mp hs5 with
+              hsOne | hsFive
+          · apply orderOf_golden_square_ne_two
+              (p := 641) (by norm_num) (by norm_num) x hx
+            simpa [hsOne] using hordx
+          · apply golden_square_pow_ten_ne_one_mod_641 x hx
+            have : x ^ (2 * s) = 1 := by
+              rw [← hordx]; exact pow_orderOf_eq_one x
+            simpa [hsFive] using this
+        · subst p; norm_num at hpSplit
+        · subst p
+          obtain ⟨a, ha⟩ := hqPowOdd
+          norm_num at hpform
+          omega
+    · exact square_pow_sixtyfour_ne_neg_one hqOdd hp2 hpform
+        (5 : ZMod p) h5zero (isSquare_five_of_split hp2 hpSplit) h64neg
+  · have hpow128 : x ^ 128 = 1 :=
+      orderOf_dvd_iff_pow_eq_one.mp (by rwa [hordx])
+    have hsquare : (x ^ 64) * (x ^ 64) = 1 := by
+      rw [← pow_add]; norm_num at hpow128 ⊢; exact hpow128
+    rcases mul_self_eq_one_iff.mp hsquare with h64 | h64neg
+    · have hsquare32 : (x ^ 32) * (x ^ 32) = 1 := by
+        rw [← pow_add]; norm_num at h64 ⊢; exact h64
+      rcases mul_self_eq_one_iff.mp hsquare32 with h32 | h32neg
+      · rcases prime_dvd_23725150497405_cases Fact.out
+            (dvd_23725150497405_of_golden_square_pow_thirtytwo x hx h32) with
+            rfl | rfl | rfl | rfl | rfl
+        · norm_num at hpSplit
+        · exact hp5 rfl
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+        · norm_num at hpSplit
+      · rcases prime_dvd_23725150497409_cases Fact.out
+            (dvd_23725150497409_of_golden_square_pow_thirtytwo_eq_neg_one
+              x hx h32neg) with rfl | hp4481
+        · norm_num at hpSplit
+        · subst p
+          have hqEq : q ^ e = 35 := by norm_num at hpform; omega
+          exact prime_power_ne_35 hq hqEq
+    · exact square_pow_sixtyfour_ne_neg_one hqOdd hp2 hpform
+        x hx0 hxSquare h64neg
+
+theorem no_split_single_odd_support_onetwentyeight_primitive
+    {q e r s k : ℕ} (hq : q.Prime) (hq2 : q ≠ 2)
+    (hp2 : p ≠ 2) (hp5 : p ≠ 5)
+    (hpSplit : p % 5 = 1 ∨ p % 5 = 4)
+    (hr : 0 < r) (hs : 0 < s) (hrs : Nat.Coprime r s)
+    (hkpos : 1 ≤ k) (hpm : ¬p ∣ 4 * r * s)
+    (hsig : CanonicalSignature (4 * r * s) r s k)
+    (γ : ZMod p) (hγ : γ ^ 2 = 5 * γ - 5)
+    (hD : p ∣ primitiveFourCoefficientD (4 * r * s) k)
+    (hpform : p - 1 = 128 * q ^ e) :
+    False := by
+  obtain ⟨hord5, hordx⟩ :=
+    dvd_D_exact_scalar_profile hp5 hr hs hkpos hpm hsig γ hγ hD
+  let x := goldenSquareFromGamma γ
+  have hxSquare : IsSquare x := by
+    refine ⟨γ - 2, ?_⟩
+    simpa [x, pow_two] using
+      (goldenSquareFromGamma_eq_sq_sub_two hp5 γ hγ)
+  exact no_split_single_odd_support_onetwentyeight
+    hq hq2 hp2 hp5 hpSplit hrs hpform hord5 x
+      (goldenSquareFromGamma_sq_eq_three_mul_sub_one hp5 γ hγ)
+      hxSquare hordx
 
 end AgrawalCore

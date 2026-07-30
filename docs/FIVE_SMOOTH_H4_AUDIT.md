@@ -53,7 +53,7 @@ The two order-two exclusions and the intrinsic quadratic relation for
 ## Scope
 
 This removes the complete \(5\)-smooth family in the \(p\equiv1\pmod5\)
-branch.  It complements, but does not subsume, the four-depth theorem
+branch.  It complements, but does not subsume, the five-depth theorem
 excluding
 \[
 p-1=2^bq^e,\qquad b\in\{3,4,5,6\},

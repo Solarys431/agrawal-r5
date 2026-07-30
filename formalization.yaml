@@ -16,13 +16,13 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on 156 headline declarations
+      AxiomAudit.lean runs #print axioms on 158 headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 579 public theorems and 394 instance binders, with 59 current
+      all 585 public theorems and 399 instance binders, with 59 current
       proof-route dependencies declared fail-closed; the complete 57-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
