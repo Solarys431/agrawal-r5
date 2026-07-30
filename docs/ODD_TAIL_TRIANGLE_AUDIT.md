@@ -116,6 +116,14 @@ Equivalently, one still needs either:
    prospective triangle; or
 2. a theorem emptying every explicit terminal resultant fiber.
 
+The subsequent
+[`QUARTIC_NORM_JAWS_AUDIT.md`](QUARTIC_NORM_JAWS_AUDIT.md) sharpens this
+picture by proving the exact factorization
+\(D_p=D_{p,-}D_{p,+}\), with the two jaws on the \(p-1\) and \(p+1\)
+sides, and the forced cross-sign partition. It also records explicitly why
+that stronger decomposition still does not supply the missing lower bound
+or mixing theorem.
+
 ## Claim status
 
 | Statement | Status |

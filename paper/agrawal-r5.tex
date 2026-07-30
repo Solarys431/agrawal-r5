@@ -1673,14 +1673,66 @@ incidence matrix and the strict rejection criterion are kernel-checked as
 \texttt{quarticOddTail\_\allowbreak oversize\_\allowbreak exclusion}.
 \end{proof}
 
+\begin{corollary}[exact norm-visible two-jaw decomposition]
+\label{cor:norm-jaws}
+For a good inert prime \(x\), put \(u=\zeta_5-1\) and define
+\[
+D_{x,-}=\operatorname{ordCompl}_2(\operatorname{ord}_x(5)),
+\qquad
+D_{x,+}=\gcd(D_x,x+1).
+\]
+Then
+\[
+\boxed{
+u^{\,1+x+x^2+x^3}=5,\qquad
+D_{x,-}=\gcd(D_x,x-1),}
+\]
+and the complete odd tail factors as
+\[
+\boxed{
+D_x=D_{x,-}D_{x,+},\qquad
+D_{x,-}\mid x-1,\qquad
+D_{x,+}\mid x+1,\qquad
+\gcd(D_{x,-},D_{x,+})=1.}
+\]
+If two compatible rows are attached to \(p\le r\), every common odd
+prime has a consistent sign:
+\[
+\ell\mid D_{p,-},D_{r,+}\Longrightarrow\ell\mid2,
+\qquad
+\ell\mid D_{p,+},D_{r,-}\Longrightarrow\ell\mid2.
+\]
+\end{corollary}
+
+\begin{proof}
+The norm exponent
+\[
+1+x+x^2+x^3=(x+1)(x^2+1)
+\]
+runs through the four Frobenius conjugates of \(u\), whose product is
+\(\Phi_5(1)=5\).  Every odd divisor of \(x-1\) is coprime to this exponent,
+so the norm cannot erase any odd \(x-1\)-component of
+\(\operatorname{ord}(u)\).  This proves the formula for \(D_{x,-}\).
+Since \(D_x\mid(x-1)(x+1)\) and \(D_x\) is odd, Euclidean cancellation
+gives the complementary factor and coprimality.
+
+For the cross-sign assertion, Corollary~\ref{cor:odd-shadow} gives
+\(\gcd(D_p,D_r)\mid r-p\).  A divisor of \(D_{p,-}\) and \(D_{r,+}\)
+therefore divides \(p-1\), \(r+1\), and \(r-p\), hence divides \(2\);
+the reverse orientation is identical.  The literal norm identity, exact
+factorization, coprimality and both cross orientations are kernel-checked
+in \texttt{QuarticNormJaw.lean}.
+\end{proof}
+
 \begin{remark}[the exact remaining odd wall]
-Corollary~\ref{cor:odd-shadow} is a deterministic sieve, but it is not a
-universal contradiction.  The current theory does not force any one of the
-three shared gcds to exceed its corresponding prime gap.  Multiplying the
-three displayed upper bounds only repackages the same incidence data.  A
-universal closure therefore still requires either a class-specific lower
-bound for the joint odd tails or a theorem emptying every explicit terminal
-resultant fiber.
+Corollaries~\ref{cor:odd-shadow} and~\ref{cor:norm-jaws} are deterministic
+sieves, but they are not a universal contradiction.  The exact
+factorization forces a consistent sign on every shared odd prime, but it
+does not force two rows to share an odd prime or force a sign change.  Nor
+does the current theory force any one of the three shared gcds to exceed its
+corresponding prime gap.  A universal closure therefore still requires
+either a class-specific lower bound or mixing theorem for the joint jaws, or
+a theorem emptying every explicit terminal resultant fiber.
 \end{remark}
 
 The chain of reductions supports a correctness theorem for machine

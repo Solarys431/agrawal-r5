@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of fifty-six modules (10,847 source lines)
+The implementation core consists of fifty-seven modules (11,361 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -189,6 +189,8 @@ not a premise of the Lean theorem.
 | **Complete binary classification of the three-row triangle: common depth and exact labelled dyadic rays** | `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_single_dyadicRay`, `quarticThreeRows_exact_dyadicRays` | `DyadicTriangle.lean` |
 | Canonical odd tail \(D_p\), with \(T_p\mid10(p^2-1)\), \(\gcd(D_p,10)=1\), and \(D_p\mid p^2-1\) | `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one` | `OddTailTriangle.lean` |
 | **Complete odd-support incidence triangle and oversized-tail exclusion** | `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | `OddTailTriangle.lean` |
+| **Literal norm identity and exact two-jaw factorization \(D_p=D_{p,-}D_{p,+}\)** | `localCyclotomicUnit_pow_normExponent_eq_five`, `quarticMinusJaw_eq_gcd_oddTail_sub_one`, `quarticOddTail_eq_mul_jaws`, `quarticJaws_coprime` | `QuarticNormJaw.lean` |
+| **Forced cross-sign partition for incident quartic rows** | `quarticCrossJaws_partition_of_incidence`, `quarticCrossJaw_dvd_two` | `QuarticNormJaw.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
 
@@ -199,7 +201,12 @@ odd Kummer tails remains open. The complementary
 [`docs/ODD_TAIL_TRIANGLE_AUDIT.md`](docs/ODD_TAIL_TRIANGLE_AUDIT.md)
 kernel-checks the canonical odd tails, all three support-gap incidences and
 the exact oversized-tail rejection criterion; it also records why a universal
-lower bound for one of those shared tails is still missing.
+lower bound for one of those shared tails is still missing. The follow-up
+[`docs/QUARTIC_NORM_JAWS_AUDIT.md`](docs/QUARTIC_NORM_JAWS_AUDIT.md)
+kernel-checks the literal norm identity, the exact \(p-1\)/\(p+1\) jaw
+factorization and the forced cross-sign partition, together with an explicit
+shadow countermodel showing why these identities alone do not empty the row
+system.
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and

@@ -19,8 +19,8 @@ Status date: 2026-07-30.
 | **CONDITIONAL** | The result explicitly assumes H4, GRH, or another named hypothesis |
 | **OPEN** | No proof is claimed |
 
-The implementation currently contains 56 `AgrawalCore` modules and 10,847
-kernel-source lines. `AxiomAudit.lean` prints the axioms of 141 headline
+The implementation currently contains 57 `AgrawalCore` modules and 11,361
+kernel-source lines. `AxiomAudit.lean` prints the axioms of 147 headline
 declarations. Four independent Comparator surfaces export seven statements.
 
 ## Headline mathematical claims
@@ -45,6 +45,7 @@ declarations. Four independent Comparator surfaces export seven statements.
 | No split H-profile prime has \(p-1=8q^e\) | **LEAN** (`no_split_single_odd_support`); independently **COMPARATOR**-checked as `single_support_exclusion` | Universal excluded family; priority unassessed |
 | Deterministic final-row size bounds, their sharp pure/twisted quartic-skeleton application, and meet-in-the-middle uniqueness | **LEAN**: `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion`; the arithmetic core is independently **COMPARATOR**-checked as `three_factor_exclusion` and `second_product_unique` | The exact displayed gap bound and universal size exclusion are now connected to the literal skeleton modulus. No asymptotic multiplicative-order lower bound or universal fiber emptiness is claimed |
 | Canonical odd tail and complete support-gap incidence triangle | **LEAN**: `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one`, `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | The component of the concrete row modulus away from \(2,5\) divides \(p^2-1\); every pairwise shared tail divides, and hence is bounded by, the corresponding prime gap. This is a deterministic rejection criterion, not a universal incompatibility theorem; a lower bound forcing one oversized shared tail remains **OPEN** |
+| Exact norm-visible two-jaw decomposition of the canonical odd tail | **LEAN**: `localCyclotomicUnit_pow_normExponent_eq_five`, `quarticMinusJaw_eq_gcd_oddTail_sub_one`, `quarticOddTail_eq_mul_jaws`, `quarticJaws_coprime`, `quarticCrossJaws_partition_of_incidence`, `quarticCrossJaw_dvd_two` | The literal norm identity \(u^{1+p+p^2+p^3}=5\) yields \(D_p=D_{p,-}D_{p,+}\), with \(D_{p,-}=\gcd(D_p,p-1)\), \(D_{p,+}\mid p+1\), and coprime jaws. Under row incidence, a shared odd prime cannot change sign between two rows. This realizes the classical support-partition mechanism inside the exact quartic modulus; it still does not force a shared prime or a sign change, so universal incompatibility remains **OPEN** |
 | Exact binary law \(v_2(T_p)=v_2(p^2-1)+1\), common depth, and exact labelled dyadic rays for the complete three-row system | **LEAN**: `localCyclotomicUnit_order_factorization_two`, `quarticOrderModulus_factorization_two`, `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_exact_dyadicRays` | This classifies the complete binary projection of the quartic CRT triangle. It is a consequence of the exact rows, not an additional sieve after them, and it does not constrain or empty the remaining odd Kummer tails; priority unassessed |
 
 ## Paper-level results not fully represented end to end in Lean
@@ -59,9 +60,10 @@ interfaces are not kernel theorems in this repository:
   seam is **LEAN**;
 - the complete two-lock classification of local exceptions at \(r=5\);
 - the lifted golden tower and its per-floor Kummer density;
-- the coprime odd-tail decomposition of the order of \(\zeta_5-1\) and
-  the Kummer interpretation of that tail. Its exact binary law is
-  **LEAN** in `CyclotomicDyadic.lean`;
+- the Kummer-field interpretation and distribution of the two exact odd
+  jaws. Their norm-visible decomposition and coprimality are **LEAN** in
+  `QuarticNormJaw.lean`, and the exact binary law is **LEAN** in
+  `CyclotomicDyadic.lean`;
 - compatible-prefix CRT assembly and the complete global fiber-emptiness
   theorem. The skeleton-to-terminal-resultant assembly, the literal
   implications \(q^4\mid\operatorname{Res}\ne0\), and the closed estimate

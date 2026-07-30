@@ -389,6 +389,12 @@
       "note": "Canonical odd-tail extraction and the three-row incidence bounds are specialized to the concrete quartic Agrawal order modulus."
     },
     {
+      "module": "AgrawalCore/QuarticNormJaw.lean",
+      "disposition": "project_specific",
+      "candidates": [],
+      "note": "The literal norm identity, exact two-jaw decomposition and cross-sign partition are specialized to the concrete quartic Agrawal order modulus."
+    },
+    {
       "module": "AgrawalCore/OrderBound.lean",
       "disposition": "project_specific",
       "candidates": [],

@@ -36,6 +36,7 @@ import AgrawalCore.QuarticRigidity
 import AgrawalCore.CyclotomicDyadic
 import AgrawalCore.DyadicTriangle
 import AgrawalCore.OddTailTriangle
+import AgrawalCore.QuarticNormJaw
 import AgrawalCore.TwoFactorIngress
 import AgrawalCore.PrimitiveSupport
 import AgrawalCore.QuadraticGamma

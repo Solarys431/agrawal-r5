@@ -129,6 +129,12 @@ introduced.
 #print axioms AgrawalCore.quarticRow_oddTailShadow
 #print axioms AgrawalCore.quarticOddTail_incidenceTriangle
 #print axioms AgrawalCore.quarticOddTail_incidenceBounds
+#print axioms AgrawalCore.localCyclotomicUnit_pow_normExponent_eq_five
+#print axioms AgrawalCore.quarticMinusJaw_eq_gcd_oddTail_sub_one
+#print axioms AgrawalCore.quarticOddTail_eq_mul_jaws
+#print axioms AgrawalCore.quarticJaws_coprime
+#print axioms AgrawalCore.quarticCrossJaws_partition_of_incidence
+#print axioms AgrawalCore.quarticCrossJaw_dvd_two
 #print axioms AgrawalCore.quarticOddTail_oversize_exclusion
 #print axioms AgrawalCore.phi5_irreducible_of_inert
 #print axioms AgrawalCore.prime_pow_natDegree_dvd_resultant_of_common_root
