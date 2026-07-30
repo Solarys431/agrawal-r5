@@ -122,3 +122,9 @@ introduced.
 #print axioms AgrawalCore.twisted_row_dvd_resultant
 #print axioms AgrawalCore.pure_row_pow_four_dvd_resultant
 #print axioms AgrawalCore.twisted_row_pow_four_dvd_resultant
+#print axioms AgrawalCore.pure_resultant_mod_five_eq_one
+#print axioms AgrawalCore.twisted_resultant_mod_five_eq_one
+#print axioms AgrawalCore.pure_resultant_ne_zero
+#print axioms AgrawalCore.twisted_resultant_ne_zero
+#print axioms AgrawalCore.pure_row_pow_four_le_resultant_natAbs
+#print axioms AgrawalCore.twisted_row_pow_four_le_resultant_natAbs

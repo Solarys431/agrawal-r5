@@ -13,7 +13,7 @@ paper proof to a Lean theorem or turn an open hypothesis into a result.
 | Requirement | Evidence | Status |
 |---|---|---|
 | Pinned kernel build | `lean-toolchain`, `lake-manifest.json`, GitHub Actions | complete |
-| Per-theorem axiom measurement | `AxiomAudit.lean` on 113 headline declarations | complete |
+| Per-theorem axiom measurement | `AxiomAudit.lean` on 119 headline declarations | complete |
 | Comparator axiom measurement | `ComparatorAxiomAudit.lean` on seven exported declarations | complete |
 | No hidden trust shortcuts | `tools/check_release_surface.sh` rejects `sorry`, `admit`, `native_decide`, project `axiom` and `opaque` in the implementation | complete |
 | Statement/solution separation | Four Mathlib-only `Challenge.lean` files and separate `Solution.lean` files | complete |
@@ -92,7 +92,7 @@ is made without later human maintainer review.
 ### 5. Hypothesis minimality
 
 `AssumptionAudit.lean` uses Mathlib's elaborated-type dependency analysis on
-every public theorem. The audit inspected 446 public theorems and 281 instance
+every public theorem. The audit inspected 453 public theorems and 283 instance
 binders. Two assumptions were genuinely generalized away; 59 binders remain
 dependencies of the present proof route although their instance terms do not
 occur in the proposition body. Those 59 are explicitly declared in 56

@@ -12,6 +12,10 @@ The Sylvester resultant therefore vanishes modulo `q`.  Irreducibility of
 `Φ₅ mod q` gives more: `Φ₅` divides the fiber polynomial modulo `q`, so the
 integral remainder has every coefficient divisible by `q`.  Homogeneity of
 the resultant in its second input then supplies the full factor `q^4`.
+Independently, reduction modulo `5` identifies `Φ₅` with `(X - 1)^4`;
+evaluation at `1` shows that both resultants are `1 mod 5`, hence nonzero.
+Together these facts yield the fixed-exponent size trap
+`q^4 ≤ natAbs resultant`.
 -/
 import AgrawalCore.QuarticRigidity
 import Mathlib.FieldTheory.Minpoly.Field
@@ -231,12 +235,100 @@ lemma twistedFiberPolynomial_monic (A : ℕ) :
 lemma intPhi5_monic : (cyclotomic 5 ℤ).Monic :=
   cyclotomic.monic 5 ℤ
 
+lemma intPhi5_map_zmod_five :
+    (cyclotomic 5 ℤ).map (Int.castRingHom (ZMod 5)) =
+      (X - 1) ^ 4 := by
+  rw [map_cyclotomic_int, cyclotomic_prime]
+  norm_num [Finset.sum_range_succ]
+  have hfour : (4 : ZMod 5) = -1 := by decide
+  have hsix : (6 : ZMod 5) = 1 := by decide
+  ring_nf
+  ext n
+  by_cases hn : n ≤ 3
+  · interval_cases n <;>
+      simp [coeff_add, coeff_sub, coeff_X_pow, coeff_X,
+        coeff_one, hfour, hsix]
+  · have hn0 : n ≠ 0 := by omega
+    have hn1 : n ≠ 1 := by omega
+    have hn2 : n ≠ 2 := by omega
+    have hn3 : n ≠ 3 := by omega
+    simp [coeff_add, coeff_sub, coeff_X_pow, coeff_X,
+      coeff_one, hfour, hsix, hn0, hn2, hn3, Ne.symm hn1]
+
 theorem intPhi5_map_irreducible_of_inert {q : ℕ} [Fact q.Prime]
     (hq : InertModFive q) :
     Irreducible
       ((cyclotomic 5 ℤ).map (Int.castRingHom (ZMod q))) := by
   rw [map_cyclotomic_int, ← phi5_eq_cyclotomic]
   exact phi5_irreducible_of_inert hq
+
+theorem pure_resultant_mod_five_eq_one {A : ℕ} (hA : 0 < A) :
+    ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A) : ZMod 5) =
+      1 := by
+  let φ : ℤ →+* ZMod 5 := Int.castRingHom (ZMod 5)
+  let gbar : (ZMod 5)[X] := (pureFiberPolynomial A).map φ
+  have hres :=
+    resultant_X_sub_C_pow_left (1 : ZMod 5) gbar 4 gbar.natDegree le_rfl
+  have hdegPhi : (cyclotomic 5 ℤ).natDegree = 4 := by
+    rw [natDegree_cyclotomic]
+    decide
+  have hdegG :
+      gbar.natDegree = (pureFiberPolynomial A).natDegree := by
+    simpa [gbar] using
+      (pureFiberPolynomial_monic hA).natDegree_map φ
+  rw [hdegG] at hres
+  have heval : eval 1 gbar = (-1 : ZMod 5) := by
+    simp [gbar, pureFiberPolynomial, hA.ne']
+  have hpure : ((-1 : ZMod 5) ^ 4) = 1 := by decide
+  rw [heval, hpure] at hres
+  change φ ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A)) = 1
+  rw [← resultant_map_map]
+  rw [intPhi5_map_zmod_five]
+  simpa [gbar, pureFiberPolynomial, hdegPhi, hA.ne', C_1] using hres
+
+theorem twisted_resultant_mod_five_eq_one (A : ℕ) :
+    ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A) : ZMod 5) =
+      1 := by
+  let φ : ℤ →+* ZMod 5 := Int.castRingHom (ZMod 5)
+  let gbar : (ZMod 5)[X] := (twistedFiberPolynomial A).map φ
+  have hres :=
+    resultant_X_sub_C_pow_left (1 : ZMod 5) gbar 4 gbar.natDegree le_rfl
+  have hdegPhi : (cyclotomic 5 ℤ).natDegree = 4 := by
+    rw [natDegree_cyclotomic]
+    decide
+  have hdegG :
+      gbar.natDegree = (twistedFiberPolynomial A).natDegree := by
+    simpa [gbar] using
+      (twistedFiberPolynomial_monic A).natDegree_map φ
+  rw [hdegG] at hres
+  have heval : eval 1 gbar = (0 : ZMod 5) ^ A + 1 := by
+    simp [gbar, twistedFiberPolynomial]
+  have htwisted : (((0 : ZMod 5) ^ A + 1) ^ 4) = 1 := by
+    cases A with
+    | zero => decide
+    | succ A => simp
+  rw [heval, htwisted] at hres
+  change φ ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A)) = 1
+  rw [← resultant_map_map]
+  rw [intPhi5_map_zmod_five]
+  simpa [gbar, twistedFiberPolynomial, hdegPhi, C_1] using hres
+
+/-- The pure resultant is a nonzero integer for every positive fiber
+exponent.  In fact, its reduction modulo `5` is `1`. -/
+theorem pure_resultant_ne_zero {A : ℕ} (hA : 0 < A) :
+    (cyclotomic 5 ℤ).resultant (pureFiberPolynomial A) ≠ 0 := by
+  intro hzero
+  have hmod := pure_resultant_mod_five_eq_one hA
+  rw [hzero] at hmod
+  exact zero_ne_one hmod
+
+/-- The twisted resultant is a nonzero integer for every fiber exponent. -/
+theorem twisted_resultant_ne_zero (A : ℕ) :
+    (cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A) ≠ 0 := by
+  intro hzero
+  have hmod := twisted_resultant_mod_five_eq_one A
+  rw [hzero] at hmod
+  exact zero_ne_one hmod
 
 theorem intPhi5_eval_zeta_of_inert {q : ℕ} [Fact q.Prime]
     (hq : InertModFive q) :
@@ -407,5 +499,32 @@ theorem twisted_row_pow_four_dvd_resultant {q A : ℕ} [Fact q.Prime]
           twisted_row_vanishing hq hres hrow])
   have htot : Nat.totient 5 = 4 := by decide
   simpa [natDegree_cyclotomic, htot] using hpow
+
+/-- A pure final row at positive exponent gives a finite size trap:
+`q^4` is bounded by the absolute value of the fixed nonzero resultant. -/
+theorem pure_row_pow_four_le_resultant_natAbs {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q) (hA : 0 < A)
+    (hres : (A + 1) % 5 = 1) (hrow : LocalS5 q (A + 1)) :
+    q ^ 4 ≤
+      Int.natAbs
+        ((cyclotomic 5 ℤ).resultant (pureFiberPolynomial A)) := by
+  have hle :=
+    Int.natAbs_le_of_dvd_ne_zero
+      (pure_row_pow_four_dvd_resultant hq hres hrow)
+      (pure_resultant_ne_zero hA)
+  simpa [Int.natAbs_pow] using hle
+
+/-- The corresponding finite size trap in the twisted branch. -/
+theorem twisted_row_pow_four_le_resultant_natAbs {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q)
+    (hres : (A + 1) % 5 = 4) (hrow : LocalS5 q (A + 1)) :
+    q ^ 4 ≤
+      Int.natAbs
+        ((cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A)) := by
+  have hle :=
+    Int.natAbs_le_of_dvd_ne_zero
+      (twisted_row_pow_four_dvd_resultant hq hres hrow)
+      (twisted_resultant_ne_zero A)
+  simpa [Int.natAbs_pow] using hle
 
 end AgrawalCore

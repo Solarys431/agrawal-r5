@@ -16,13 +16,13 @@ automation:
       under human operation and release curation, without claiming specialist
       mathematical verification by the human operator, with
       every declaration compiled by the Lean 4 kernel. The tracked
-      AxiomAudit.lean runs #print axioms on 113 headline declarations
+      AxiomAudit.lean runs #print axioms on 119 headline declarations
       in CI; ComparatorAxiomAudit.lean does the same for the seven declarations
       exported by the independent theorem surfaces. Both report only propext,
       Classical.choice, and Quot.sound. Pinned leanprover/comparator checks
       that each Mathlib-only Challenge statement is identical to its separate
       Solution statement before kernel replay. AssumptionAudit.lean inspects
-      all 446 public theorems and 281 instance binders, with 59 current
+      all 453 public theorems and 283 instance binders, with 59 current
       proof-route dependencies declared fail-closed; the complete 52-module
       upstream inventory is checked separately. No proof step is accepted on
       the strength of a model's assertion or agreement between models.
@@ -207,6 +207,12 @@ sources:
       `prime_pow_natDegree_dvd_resultant_of_common_root`,
       `pure_row_pow_four_dvd_resultant`,
       `twisted_row_pow_four_dvd_resultant`,
+      `pure_resultant_mod_five_eq_one`,
+      `twisted_resultant_mod_five_eq_one`,
+      `pure_resultant_ne_zero`,
+      `twisted_resultant_ne_zero`,
+      `pure_row_pow_four_le_resultant_natAbs`,
+      `twisted_row_pow_four_le_resultant_natAbs`,
       `squarefree_counterexample_order_dichotomy`,
       `squarefree_counterexample_witness_dichotomy`, and
       `no_squarefree_counterexample_of_no_witnesses`. The theorem states
@@ -222,8 +228,10 @@ sources:
       literal inert final-row branches now also imply divisibility by q^4 of
       their explicit integer resultants in the kernel, by irreducibility,
       coefficientwise remainder divisibility and resultant homogeneity.
-      Nonvanishing, the effective finite-fiber theorem, and the subsequent
-      general-s tuple assembly remain outside this release.
+      Their reductions modulo 5 are exactly 1, so nonvanishing and the fixed
+      size traps q^4 <= |Res| are kernel-checked as well. A closed-form
+      archimedean estimate, the complete finite-fiber theorem, and the
+      subsequent general-s tuple assembly remain outside this release.
 
   - title: "Four-coefficient primitive support: kernel arithmetic interface"
     authors:

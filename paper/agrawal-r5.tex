@@ -1055,8 +1055,11 @@ resultant used in Section~\ref{sec:fibers}.  The proof avoids a separate
 number-field norm interface: irreducibility of \(\Phi_5\bmod q\) makes
 \(\Phi_5\) divide the fiber polynomial modulo \(q\), so the integral
 remainder is coefficientwise divisible by \(q\), and resultant homogeneity
-supplies all four factors.  General tuple assembly, nonvanishing and the
-effective bound remain paper-level.
+supplies all four factors.  Reduction modulo \(5\), where
+\(\Phi_5=(X-1)^4\), shows that each resultant is \(1\bmod5\); the kernel
+therefore also proves nonvanishing and
+\(q^4\le|\operatorname{Res}|\).  General tuple assembly and the closed-form
+archimedean estimate remain paper-level.
 
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
@@ -1096,12 +1099,13 @@ every prime factor.  Finally,
 residue occurs, and a companion kernel theorem assembles this fact across
 all factors.  Together they give the precise labelling $j_i=0$ for
 $p_i\equiv\nu\pmod5$ and $j_i=2$ otherwise.  These declarations prove
-necessity of the rows used in Theorem~\ref{thm:k3}.  The new declarations
-\texttt{pure\_row\_pow\_four\_dvd\_resultant} and
-\texttt{twisted\_row\_pow\_four\_dvd\_resultant} continue either literal
-final row to \(q^4\)-divisibility of the corresponding resultant.  They do
-not prove nonvanishing, the effective finiteness bound, general tuple
-assembly, or emptiness of any terminal fiber.
+necessity of the rows used in Theorem~\ref{thm:k3}.  The corresponding
+\texttt{ResultantTrap} declarations continue either literal final row to
+\(q^4\)-divisibility of its resultant, prove that the two fixed resultants
+are nonzero, and bound \(q^4\) by their absolute values.  They do not prove
+the closed-form archimedean estimate, general tuple assembly, or emptiness
+of any terminal fiber; the exact declaration names are listed in
+Section~\ref{sec:fibers}.
 
 \begin{theorem}[explicit $k=3$ system]\label{thm:k3}
 Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all
@@ -1372,22 +1376,32 @@ finite and enumerable among the inert prime divisors of two explicit
 integers.
 \end{theorem}
 
-The row-to-fourth-power-divisibility part of this theorem is kernel-checked by
+The row-to-fixed-nonzero-resultant part of this theorem is kernel-checked by
 \begin{center}
 \small
 \path{phi5_irreducible_of_inert},\qquad
 \path{prime_pow_natDegree_dvd_resultant_of_common_root},\\
-\path{pure_row_pow_four_dvd_resultant},\qquad
-\path{twisted_row_pow_four_dvd_resultant}.
+\path{pure_row_pow_four_dvd_resultant},\quad
+\path{twisted_row_pow_four_dvd_resultant},\\
+\path{pure_resultant_mod_five_eq_one},\quad
+\path{twisted_resultant_mod_five_eq_one},\\
+\path{pure_row_pow_four_le_resultant_natAbs},\quad
+\path{twisted_row_pow_four_le_resultant_natAbs}.
 \end{center}
 The first declaration proves irreducibility in the inert branch.  The
 generic theorem identifies the reduction of \(\Phi_5\) with the minimal
 polynomial of the common root, proves that the integral division remainder
 is coefficientwise divisible by \(q\), and uses resultant homogeneity to
-extract \(q^{\deg\Phi_5}=q^4\).  The last two declarations supply the
-displayed pure and twisted vanishing relations from a literal
-\texttt{LocalS5} row.  Nonvanishing, the archimedean bound, general tuple
-assembly and hence the complete finite-fiber statement remain paper-level.
+extract \(q^{\deg\Phi_5}=q^4\).  The two
+\texttt{pow\_four\_dvd\_resultant} declarations supply the displayed pure
+and twisted vanishing relations from a literal
+\texttt{LocalS5} row.  The mod-\(5\) declarations then use
+\(\Phi_5=(X-1)^4\) and evaluation at \(X=1\) to prove
+\(\operatorname{Res}\equiv1\pmod5\), while the final pair combines
+nonvanishing with divisibility to obtain
+\(q^4\le|\operatorname{Res}|\).  The displayed closed-form archimedean
+bound, general tuple assembly and hence the complete global finite-fiber
+statement remain paper-level.
 
 \begin{lemma}[quadratic descent]\label{lem:descent}
 Both norms are squares. With $t = \zeta_5 + \zeta_5^{-1} = (\sqrt5-1)/2$:
