@@ -20,13 +20,13 @@
   ],
   "artifacts": {
     "CLAIM_MATRIX_H4.md": "5217d1995b3e002a8cdb89c0a9afedcfacee8c834ee0f09dd2f5c9e742929baa",
-    "scan_inert_pk.cpp": "87c1c32d908cad78719202705b3492890629c60f09ce1a6bf7b36275f206cbdb",
+    "scan_inert_pk.cpp": "b145cc824b65a703f722dce6d304b8cf47ede09374b575c74ba7975cbca60161",
     "INERT_PK_5E7_REPLAY.log": "37d1002e69cab15e6aeb5ea09528494ebb72ef166ea075ab24347c933546cb1a",
     "INERT_PK_5E7_REPLAY.txt": "6acf687aac6f7ae08a10fcd499cc0baaadefe92d6986e8926dfb319936229e38",
     "search_H_two_support_powers.cpp": "7c8de77b20f282551812b131954aa820ff4d10a85c50df269cd12ebd4520b0f3",
     "H_TWO_SUPPORT_POWERS_Q5K_1E18_REPLAY.log": "20b860b99b09448428cdee85282004f6988edcd747605117ab9cff06e4b28582",
     "verify_h4_final_assault_v3.py": "83be3a19f107dd858a949a40e4e14040eeb568ce0be502e532e04b6debc673c4",
-    "VERIFICA_H4_ASSALTO_FINALE_v3.json": "61b0ba8f427f256d6eb24a4dbdd64521fe67549352033c816962497b6ae550a9"
+    "VERIFICA_H4_ASSALTO_FINALE_v3.json": "8ad7821c0b4db0d3a0a085fa9edff6477682c0bcbeb278e03d60f6121ef3159c"
   },
   "scope_warning": "These are finite certified censuses. They do not prove H4 or universal inert support."
 }

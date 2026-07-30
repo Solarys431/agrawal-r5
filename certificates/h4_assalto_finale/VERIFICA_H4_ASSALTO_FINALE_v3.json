@@ -39,7 +39,7 @@
     },
     "scan_source": {
       "path": "scan_inert_pk.cpp",
-      "sha256": "87c1c32d908cad78719202705b3492890629c60f09ce1a6bf7b36275f206cbdb"
+      "sha256": "b145cc824b65a703f722dce6d304b8cf47ede09374b575c74ba7975cbca60161"
     },
     "two_log": {
       "path": "H_TWO_SUPPORT_POWERS_Q5K_1E18_REPLAY.log",
