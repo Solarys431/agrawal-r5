@@ -1,6 +1,6 @@
 # UNICO/NOUS pipeline audit
 
-Audit date: 2026-07-29. Pipeline specification:
+Audit date: 2026-07-30. Pipeline specification:
 [`PIPELINE.md`](https://github.com/Solarys431/unico-lean-proofs/blob/main/PIPELINE.md),
 version 1.1.
 
@@ -13,7 +13,7 @@ paper proof to a Lean theorem or turn an open hypothesis into a result.
 | Requirement | Evidence | Status |
 |---|---|---|
 | Pinned kernel build | `lean-toolchain`, `lake-manifest.json`, GitHub Actions | complete |
-| Per-theorem axiom measurement | `AxiomAudit.lean` on 77 headline declarations | complete |
+| Per-theorem axiom measurement | `AxiomAudit.lean` on 158 headline declarations | complete |
 | Comparator axiom measurement | `ComparatorAxiomAudit.lean` on seven exported declarations | complete |
 | No hidden trust shortcuts | `tools/check_release_surface.sh` rejects `sorry`, `admit`, `native_decide`, project `axiom` and `opaque` in the implementation | complete |
 | Statement/solution separation | Four Mathlib-only `Challenge.lean` files and separate `Solution.lean` files | complete |
@@ -80,7 +80,7 @@ Status: **complete for the published headline routes**.
 
 ### 4. Library dividend
 
-[`upstream_candidates.json`](upstream_candidates.json) classifies all 46
+[`upstream_candidates.json`](upstream_candidates.json) classifies all 59
 tracked modules. [`UPSTREAM_CANDIDATES.md`](UPSTREAM_CANDIDATES.md) explains
 the triage, including candidates requiring generalization, semantic
 deduplication, or coordination with an existing project. The inventory is
@@ -92,10 +92,10 @@ is made without later human maintainer review.
 ### 5. Hypothesis minimality
 
 `AssumptionAudit.lean` uses Mathlib's elaborated-type dependency analysis on
-every public theorem. The audit inspected 382 public theorems and 239 instance
-binders. Two assumptions were genuinely generalized away; 58 binders remain
+every public theorem. The audit inspected 585 public theorems and 399 instance
+binders. Two assumptions were genuinely generalized away; 59 binders remain
 dependencies of the present proof route although their instance terms do not
-occur in the proposition body. Those 58 are explicitly declared in 55
+occur in the proposition body. Those 59 are explicitly declared in 56
 allowlist entries, and CI fails on inventory drift. They are not silently
 advertised as logically minimal.
 

@@ -65,7 +65,7 @@ classifies every tracked formal module and is validated by
 
 ## Lean core
 
-The implementation core consists of forty-six modules (7,616 source lines)
+The implementation core consists of fifty-nine modules (12,799 source lines)
 over pinned, unmodified Mathlib. It contains no `sorry`, `admit`,
 `native_decide`, project-defined axiom, or opaque escape hatch. The separate
 trusted `Challenge.lean` files necessarily contain proof holes; they are
@@ -115,6 +115,7 @@ not a premise of the Lean theorem.
 | Product identity (ζ−1)(ζ²−1)(ζ³−1)(ζ⁴−1) = 5 | `prod_pow_sub_one` | `AgrawalBridge.lean` |
 | Mod-5 corollaries | `inertia_J_fib_mod5`, `inertia_J_lucas_mod5` | `Corollaries.lean` |
 | Kernel form of the order bound: (ζ−1)^(10p²) = (ζ−1)^10, both inert classes | `order_bounded` | `OrderBound.lean` |
+| **Exact binary law for the quartic cyclotomic order: \(v_2(T_p)=v_2(p^2-1)+1\)** | `localCyclotomicUnit_order_factorization_two`, `quarticOrderModulus_factorization_two` | `CyclotomicDyadic.lean` |
 | Exact decomposition of an order through a norm power | `orderOf_norm_decomposition` | `NormOrder.lean` |
 | Exact order of the norm-kernel component | `orderOf_norm_kernel` | `NormOrder.lean` |
 | Exact \(q^2\)-threshold from the odd defect product | `odd_defectProduct_threshold`, `odd_defectProduct_normal_iff` | `NormOrder.lean` |
@@ -130,6 +131,7 @@ not a premise of the Lean theorem.
 | Recomposition: (X−1) ∣ f and Φ₅ ∣ f ⟹ (X⁵−1) ∣ f | `dvd_of_dvd_both` | `Recompose.lean` |
 | The congruence modulo p | `agrawal_mod_p` | `LocalGlue.lean` |
 | Local to global for squarefree n | `congruence_of_local` | `GlobalGlue.lean` |
+| **Exact squarefree ingress at \(r=5\): global congruence iff every complementary exponent \(n/p\) is a local row** | `squarefree_ingress_iff` | `SquarefreeIngress.lean` |
 | Bridge: k ≡ 1 (mod 4) factors ≡ 3 (mod 80) ⟹ n ≡ 3 (mod 80) | `mod_eighty_of_card` | `CardBridge.lean` |
 | **The Lenstra–Pomerance proposition, original hypotheses** | `lenstra_proposition_card` | `CardBridge.lean` |
 | The same with n ≡ 3 (mod 80) assumed directly | `lenstra_proposition` | `Lenstra.lean` |
@@ -149,7 +151,12 @@ not a premise of the Lean theorem.
 | Common cyclotomic defect is globally `+1` or `−1` | `commonDefect_eq_one_or_neg_one` | `ScalarCompleteness.lean` |
 | Constructive repair of the negative defect | `localS5_sign_repair` | `ScalarCompleteness.lean` |
 | **Complete existential bridge: local order-4 transport ↔ support of Hₙ** | `hasOrderFourTransport_iff_goldenH_support` | `ScalarCompleteness.lean` |
-| **Unconditional witness dichotomy from the explicit reduction interface** | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
+| Order-four local rows are automatically odd away from characteristics 2 and 5 | `localS5_orderFour_odd`, `hasOrderFourTransport_of_local` | `TwoFactorIngress.lean` |
+| **Concrete squarefree dichotomy: split order-four witness or odd inert quartic skeleton with at least three factors** | `squarefree_counterexample_concrete_dichotomy` | `UnconditionalDichotomy.lean` |
+| **Exact, residue-determined quartic order rows modulo \(\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)\) at every skeleton factor** | `localS5_modEq_frobenius_power_lcm`, `determinedQuarticOrderRows_of_skeleton`, `squarefree_counterexample_order_dichotomy` | `QuarticRigidity.lean` |
+| Witness dichotomy after the explicitly named skeleton-to-fiber interface | `squarefree_counterexample_witness_dichotomy` | `UnconditionalDichotomy.lean` |
+| **Concrete skeleton-to-terminal-resultant assembly and exact two-wall closure** | `explicitResultantRows_of_skeleton`, `squarefree_counterexample_explicit_resultant_dichotomy`, `no_squarefree_counterexample_of_no_split_and_no_explicit_rows` | `ExplicitFiber.lean` |
+| **Unconditional bifactor trap, and its exact closure under local H4** | `two_prime_candidate_has_splitOrderFourWitness`, `no_two_prime_candidate_of_localH4` | `TwoFactorIngress.lean` |
 | Four-coefficient support compression | `primitiveSupport_iff_fourCoefficientGcd` | `PrimitiveSupport.lean` |
 | Single-odd-prime semiorder obstruction | `one_order_dvd_eight_of_single_odd_prime` | `PrimitiveSupport.lean` |
 | Quadratic recurrence for γ | `gamma_pow_formula` | `QuadraticGamma.lean` |
@@ -164,21 +171,51 @@ not a premise of the Lean theorem.
 | **Residual power depth: for \(d>0\), \(d\mid4rs\), \(-\gamma\) is a \(d\)-th power iff \(d\mid h\)** | `dvd_D_neg_gamma_isPower_iff_dvd` | `DyadicDepth.lean` |
 | Even-depth coupling with the quintic lock; in particular \(-\gamma\) is a fourth power iff \(20\mid h\) | `dvd_D_neg_gamma_isPower_iff_lcm_five_dvd`, `dvd_D_neg_gamma_isFourthPower_iff_twenty_dvd` | `DyadicDepth.lean` |
 | **Exact order-product barrier in the \(p\equiv1\pmod5\) branch: \(10\,\operatorname{ord}_p(5)\operatorname{ord}_p(\varepsilon^2)\mid p-1\)** | `dvd_D_ten_mul_order_product_dvd_card_sub_one` | `OrderProductBarrier.lean` |
-| No split H-profile with \(p-1=8q^e\) | `no_split_single_odd_support` | `SingleSupportExclusion.lean` |
+| **No split H-profile with \(p-1=2^bq^e\) for \(b=3,4,5,6\)** | `no_split_single_odd_support`, `no_split_single_odd_support_sixteen_primitive`, `no_split_single_odd_support_thirtytwo_primitive`, `no_split_single_odd_support_sixtyfour_primitive`, `no_split_single_odd_support_onetwentyeight_primitive` | `SingleSupportExclusion.lean` |
 | Noncanonical inert witness \(p=18\,251\,687=k+4rs\) and \(\operatorname{ord}_p(5)=158\) | `noncanonical_pk_identity`, `noncanonical_five_order` | `NoncanonicalWitness.lean` |
 | Final-row size exclusion for three factors | `threeFactor_finalRow_size_exclusion` | `FinalRowSize.lean` |
 | Universal local-row size bound | `localRow_order_le_max` | `FinalRowSize.lean` |
+| Concrete skeleton modulus bounds (including the exact pure/twisted gap) and factor-size exclusion | `quarticSkeleton_orderModulus_le_max`, `quarticSkeleton_orderModulus_le_gap`, `quarticSkeleton_factor_size_exclusion` | `QuarticRigidity.lean` |
 | Normal middle defect forces the large-gap alternative \(r^2<P\) | `normalDefect_forces_sq_lt_complement` | `FinalRowSize.lean` |
 | Exact pure/twisted final-row divisibilities | `pureRow_dvd_product_sub_one`, `twistedRow_dvd_sq_sub_product` | `FinalRowSize.lean` |
 | Twisted final-row clamp \(P\le q^2-T\) | `twistedRow_product_le_sq_sub_order` | `FinalRowSize.lean` |
+| **Literal inert final row \(\Longrightarrow q^4\) divides the explicit pure/twisted resultant** | `pure_row_pow_four_dvd_resultant`, `twisted_row_pow_four_dvd_resultant` | `ResultantTrap.lean` |
+| **The two explicit resultants are nonzero and give \(q^4\le|\operatorname{Res}|\)** | `pure_resultant_ne_zero`, `twisted_resultant_ne_zero`, `pure_row_pow_four_le_resultant_natAbs`, `twisted_row_pow_four_le_resultant_natAbs` | `ResultantTrap.lean` |
+| **Closed archimedean estimate \(q^4\le|\operatorname{Res}|\le16\cdot5^A\)** | `pure_resultant_natAbs_le`, `twisted_resultant_natAbs_le`, `pure_row_pow_four_le_sixteen_mul_five_pow`, `twisted_row_pow_four_le_sixteen_mul_five_pow` | `ResultantTrap.lean` |
 | Quantized pure/twisted local gaps | `pureRow_order_le_product_sub_one`, `twistedRow_order_le_absGap` | `FinalRowSize.lean` |
 | Uniqueness of the second meet-in-the-middle product below \(T_q\) | `mitm_secondProduct_unique` | `FinalRowSize.lean` |
 | Two-row transport modulo \(\gcd(T_p,T_q)\) | `finalSmallRow_transport`, `pureSmallRow_transport`, `twistedSmallRow_transport` | `TwoRowTransport.lean` |
 | Third side of the exact three-row CRT triangle | `smallRows_triangle` | `TwoRowTransport.lean` |
-| Branch-independent odd shadow of a local row | `localRow_oddShadow` | `TwoRowTransport.lean` |
-| Shared odd order support divides the prime gap | `sharedOddSupport_dvd_gap` | `TwoRowTransport.lean` |
+| **Complete binary classification of the three-row triangle: common depth and exact labelled dyadic rays** | `quarticThreeRows_common_dyadicDepth`, `quarticThreeRows_single_dyadicRay`, `quarticThreeRows_exact_dyadicRays` | `DyadicTriangle.lean` |
+| Canonical odd tail \(D_p\), with \(T_p\mid10(p^2-1)\), \(\gcd(D_p,10)=1\), and \(D_p\mid p^2-1\) | `quarticOrderModulus_dvd_ten_mul_sq_sub_one`, `quarticOddTail_dvd_sq_sub_one` | `OddTailTriangle.lean` |
+| **Complete odd-support incidence triangle and oversized-tail exclusion** | `quarticOddTail_incidenceTriangle`, `quarticOddTail_incidenceBounds`, `quarticOddTail_oversize_exclusion` | `OddTailTriangle.lean` |
+| **Literal norm identity and exact two-jaw factorization \(D_p=D_{p,-}D_{p,+}\)** | `localCyclotomicUnit_pow_normExponent_eq_five`, `quarticMinusJaw_eq_gcd_oddTail_sub_one`, `quarticOddTail_eq_mul_jaws`, `quarticJaws_coprime` | `QuarticNormJaw.lean` |
+| **Exact norm-order quotient and norm-kernel factorization** | `orderOf_localFiveUnit_eq_cyclotomic_div_gcd_normExponent`, `cyclotomic_order_eq_five_order_mul_normKernelFactor` | `QuarticNormJaw.lean` |
+| **Forced cross-sign partition for incident quartic rows** | `quarticCrossJaws_partition_of_incidence`, `quarticCrossJaw_dvd_two` | `QuarticNormJaw.lean` |
+| **Exact signed factorization of every shared tail and the signed incidence triangle** | `quarticSharedTail_gcd_eq_sameSignProduct_of_incidence`, `quarticSignedIncidenceTriangle` | `QuarticSignedIncidence.lean` |
+| **No split H-profile with \(p-1=2^b5^f\)** | `no_split_five_smooth_primitive_support` | `FiveSmoothSupportExclusion.lean` |
 | Exact pure/twisted linear lift in the final-row multiplier | `pureSmallRow_lift_iff`, `twistedSmallRow_lift_iff` | `TwoRowTransport.lean` |
 | Exclusion of a bounded multiplier interval from its canonical residue | `boundedLift_exclusion` | `TwoRowTransport.lean` |
+
+The exact binary scope and its negative binary-only conclusion are recorded in
+[`docs/DYADIC_TRIANGLE_AUDIT.md`](docs/DYADIC_TRIANGLE_AUDIT.md): the binary
+projection is completely classified, while universal incompatibility of the
+odd Kummer tails remains open. The complementary
+[`docs/ODD_TAIL_TRIANGLE_AUDIT.md`](docs/ODD_TAIL_TRIANGLE_AUDIT.md)
+kernel-checks the canonical odd tails, all three support-gap incidences and
+the exact oversized-tail rejection criterion; it also records why a universal
+lower bound for one of those shared tails is still missing. The follow-up
+[`docs/QUARTIC_NORM_JAWS_AUDIT.md`](docs/QUARTIC_NORM_JAWS_AUDIT.md)
+kernel-checks the literal norm identity, the exact \(p-1\)/\(p+1\) jaw
+factorization, the norm-kernel order identity, and the exact signed incidence
+triangle, together with an explicit shadow countermodel showing why these
+identities alone do not empty the row system. The independent infinite-family
+exclusion \(p-1\ne2^b5^f\) in the split \(p\equiv1\pmod5\) H4 branch is
+recorded in
+[`docs/FIVE_SMOOTH_H4_AUDIT.md`](docs/FIVE_SMOOTH_H4_AUDIT.md).  The
+independent five-depth exclusion
+\(p-1\ne2^bq^e\) for \(b\in\{3,4,5,6\}\) is recorded in
+[`docs/SINGLE_SUPPORT_DEPTH_AUDIT.md`](docs/SINGLE_SUPPORT_DEPTH_AUDIT.md).
 
 Four independent review surfaces in [`Comparator/`](Comparator/) state the
 golden factorization, Fermat shadow, the closed primitive-support results, and

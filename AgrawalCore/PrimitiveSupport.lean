@@ -87,4 +87,44 @@ theorem one_order_dvd_eight_of_single_odd_prime
   · right
     exact Nat.mul_dvd_mul_left 2 hs4
 
+/-- General dyadic form of `one_semiorder_dvd_four_of_single_odd_prime`:
+if two coprime semiorders divide a number supported on `2` and a single
+odd prime `q`, one of them is supported on `2` alone. -/
+theorem one_semiorder_dvd_two_power_of_single_odd_prime
+    {q e b r s : ℕ} (hq : q.Prime) (hrs : Nat.Coprime r s)
+    (hr : r ∣ 2 ^ b * q ^ e) (hs : s ∣ 2 ^ b * q ^ e) :
+    r ∣ 2 ^ b ∨ s ∣ 2 ^ b := by
+  by_cases hqr : q ∣ r
+  · right
+    have hqns : ¬q ∣ s := by
+      intro hqs
+      have hqgcd : q ∣ Nat.gcd r s := Nat.dvd_gcd hqr hqs
+      rw [hrs.gcd_eq_one] at hqgcd
+      exact hq.not_dvd_one hqgcd
+    exact (hq.coprime_pow_of_not_dvd hqns).dvd_mul_right.mp hs
+  · left
+    exact (hq.coprime_pow_of_not_dvd hqr).dvd_mul_right.mp hr
+
+/-- Complete-order version at arbitrary dyadic depth.  If `2r` and `2s`
+divide `2^(b+1) q^e`, one complete order already divides `2^(b+1)`. -/
+theorem one_order_dvd_two_pow_succ_of_single_odd_prime
+    {q e b r s : ℕ} (hq : q.Prime) (hrs : Nat.Coprime r s)
+    (hR : 2 * r ∣ 2 ^ (b + 1) * q ^ e)
+    (hE : 2 * s ∣ 2 ^ (b + 1) * q ^ e) :
+    2 * r ∣ 2 ^ (b + 1) ∨ 2 * s ∣ 2 ^ (b + 1) := by
+  have hpow : 2 ^ (b + 1) = 2 * 2 ^ b := by
+    rw [pow_succ']
+  have hr : r ∣ 2 ^ b * q ^ e := by
+    apply (Nat.mul_dvd_mul_iff_left (by norm_num : 0 < 2)).mp
+    simpa only [hpow, mul_assoc] using hR
+  have hs : s ∣ 2 ^ b * q ^ e := by
+    apply (Nat.mul_dvd_mul_iff_left (by norm_num : 0 < 2)).mp
+    simpa only [hpow, mul_assoc] using hE
+  rcases one_semiorder_dvd_two_power_of_single_odd_prime
+      hq hrs hr hs with hrTwo | hsTwo
+  · left
+    simpa only [hpow] using Nat.mul_dvd_mul_left 2 hrTwo
+  · right
+    simpa only [hpow] using Nat.mul_dvd_mul_left 2 hsTwo
+
 end AgrawalCore

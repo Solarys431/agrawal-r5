@@ -70,6 +70,7 @@ private def declaredProofRouteDebts : List String :=
     "AgrawalCore.phi5_charP:[1]",
     "AgrawalCore.phi5_degree:[1]",
     "AgrawalCore.phi5_expChar:[1]",
+    "AgrawalCore.phi5_irreducible_of_inert:[1]",
     "AgrawalCore.phi5_monic:[1]",
     "AgrawalCore.phi5_of_injective:[1]",
     "AgrawalCore.pow_eq_neg_one_of_dvd_fib_odd:[1]",

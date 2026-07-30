@@ -12,10 +12,10 @@ current statement or name. No upstream issue or pull request has been opened.
 
 ## Reproducible scope
 
-- Audit date: 2026-07-29.
+- Audit date: 2026-07-30.
 - Mathlib: pinned commit
   `4a7edd35ec64de7117995da659e9d4d80e6cca19`.
-- Every one of the 47 tracked `AgrawalCore/*.lean` modules has exactly one
+- Every one of the 59 tracked `AgrawalCore/*.lean` modules has exactly one
   disposition.
 - Candidate identifiers were searched in the pinned source and through
   GitHub's Lean code search. A positive canary query against
@@ -49,6 +49,11 @@ The strongest self-contained candidates are:
 - the generic cyclic-group power-map criterion and residual-index depth
   principle in `DyadicDepth.lean`, pending semantic deduplication and a more
   invariant statement;
+- the common-root/resultant vanishing lemma in `ResultantTrap.lean`, pending
+  comparison with Mathlib's existing resultant and coprimality API;
+- the exact next-level two-primary square congruence in
+  `DyadicTriangle.lean`, together with three nearby lemmas that should first
+  be generalized out of the fixed quartic target language;
 - elementary `Nat.ModEq` interval and bounded-representative lemmas.
 
 Several other declarations are mathematically reusable but should first be

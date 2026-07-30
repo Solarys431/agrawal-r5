@@ -14,7 +14,7 @@ locally only to register this checkout and the `AgrawalCore`
 namespace. Its exact-tier name-resolution join rate was 99.07%.
 
 These statistics describe that pinned 40-module snapshot. The current
-release has 46 modules and 7,616 kernel-source lines; the six later modules
+release has 59 modules and 12,799 kernel-source lines; the nineteen later modules
 are covered by the kernel, axiom, Comparator and CI checks, but are not
 silently folded into the older dependency-graph measurements below.
 
@@ -61,12 +61,12 @@ theorems reuse a small algebraic core rather than rebuilding it.
 5. The final-row size module was added only after its deterministic core was
    separated from asymptotic and finite-computation claims; the exact-tier
    audit above was then regenerated on external scratch storage.
-6. The public-instance audit inspected 382 theorems and 239 instance binders.
-   Two assumptions were generalized away; the remaining 58 proof-route
-   dependencies are declared in 55 exact entries and checked fail-closed in
+6. The public-instance audit inspected 585 theorems and 399 instance binders.
+   Two assumptions were generalized away; the remaining 59 proof-route
+   dependencies are declared in 56 exact entries and checked fail-closed in
    CI.
-7. Every one of the 46 modules is classified in the tracked upstream-candidate
-   inventory; 32 declarations are flagged for possible generalization,
+7. Every one of the 59 modules is classified in the tracked upstream-candidate
+   inventory; 40 declarations are flagged for possible generalization,
    semantic deduplication, or later maintainer review.
 
 ## Resource options

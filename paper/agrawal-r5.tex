@@ -36,7 +36,7 @@
 \title[Local structure of Agrawal's congruence at $r=5$]{Local structure of Agrawal's congruence at $r = 5$:\\ cyclotomic moments, the golden unit, and Kummer defects}
 
 \author{UNICO/NOUS}
-\thanks{Preprint v24 of July 29, 2026. Mathematical development,
+\thanks{Preprint v25 of July 30, 2026. Mathematical development,
 paper, and formalization were produced within the UNICO/NOUS pipeline,
 initiated and operated by Daniele Cappello, who curated the artifacts and is
 responsible for their provenance, stated scope, and public release. This role
@@ -84,7 +84,8 @@ explicit local Hypothesis~H4, the squarefree problem reduces exactly to
 the emptiness of finite resultant fibers over compatible tuples. We also
 replace the norm surrogate in H4 by an exact four-coefficient primitive
 support in the integral basis of $\Q(\sqrt5)$, and exclude universally the
-infinite candidate family $p-1=8q^e$. We certify
+five infinite candidate families
+$p-1=2^bq^e$ for $b\in\{3,4,5,6,7\}$. We certify
 a stated three-factor region and seven individual empty fibers. For every
 fixed number $s$ of prime factors, the terminal row gives the unconditional
 quartic-skeleton bound
@@ -350,7 +351,11 @@ prime $p \mid n$.
 \begin{proof}[Sketch]
 CRT over $p \mid n$; injectivity of the absolute Frobenius on
 $\F_p[X]/(X^r-1)$ replaces $(X-1)^n$ by $(X-1)^{n/p}$; the component at
-$X \mapsto 1$ is trivial.
+$X \mapsto 1$ is trivial.  For $r=5$, the complete equivalence is
+kernel-checked as \texttt{squarefree\_ingress\_iff}.  Its forward direction
+uses a fully explicit inverse-Frobenius evaluation: choose
+$a p\equiv1\pmod5$ and evaluate at $\zeta_5^a$, avoiding any abstract
+reducedness assumption on the quotient ring.
 \end{proof}
 
 We also record that $S \bmod M$ is a subgroup of $(\Z/M)^\times$ for
@@ -908,29 +913,111 @@ from \(10rs\), its radical is the radical of
 \(D_{r,s}\mathcal O_{\Q(\sqrt5)}\). No universal equality of
 multiplicities is claimed.
 
-\begin{theorem}[single odd-prime support is impossible]
+\begin{theorem}[the first five single odd-prime support depths are impossible]
 \label{thm:Hsingleprime}
 No split H-profile prime satisfies
 \[
-p-1=8q^e
+p-1=2^bq^e,\qquad b\in\{3,4,5,6,7\},
 \]
 with \(q\) an odd prime and \(e\ge1\).
 \end{theorem}
 
 \begin{proof}
 Write \(\ord_p(5)=2r\), \(\ord_p(\eps^2)=2s\), with
-\(\gcd(r,s)=1\). The prime \(q\) cannot divide both \(r,s\).
-If \(q\nmid r\), then \(2r\mid8\), so
+\(\gcd(r,s)=1\). Since the two semiorders divide
+\(2^{b-1}q^e\), the prime \(q\) cannot divide both, and the semiorder
+on at least one side is a power of two.  Thus one of the two complete
+orders divides \(2^b\).
+
+For \(b=3\), if the base-\(5\) order is \(2\)-primary, then
 \[
 p\mid5^8-1=2^5\cdot3\cdot13\cdot313,
 \]
-whose good prime factors are all inert. If \(q\nmid s\), then
-\(2s\mid8\), so
+whose good prime factors are all inert.  If the golden order is
+\(2\)-primary, then
 \[
 p\mid\left|N_{\Q(\sqrt5)/\Q}\bigl((\eps^2)^8-1\bigr)\right|
 =2205=3^2\cdot5\cdot7^2,
 \]
 again with no good split factor.
+
+The next three depths are finite exact resultant calculations.  The
+following table records every split factor not already eliminated by
+inertia or by \(p\in\{2,5\}\):
+\[
+\begin{array}{c|c|c}
+2^b & \text{base-5 side} & \text{golden side}\\ \hline
+16 & 11489,\quad (11489-1)/16=718 & \varnothing\\
+32 & 11489,\quad (11489-1)/32=359 & \varnothing\\
+64 & 641,\ 11489,\ 29423041,\ 241931001601
+   & 4481
+\end{array}
+\]
+Here the factorizations used by the kernel are
+\[
+\begin{aligned}
+5^{16}-1&=2^6\cdot3\cdot13\cdot17\cdot313\cdot11489,\\
+5^{32}-1&=2^7\cdot3\cdot13\cdot17\cdot313\cdot2593
+ \cdot11489\cdot29423041,\\
+5^{32}+1&=2\cdot641\cdot75068993\cdot241931001601,\\
+\left|N((\eps^2)^{32}-1)\right|
+ &=3^2\cdot5\cdot7^2\cdot47^2\cdot2207^2,\\
+\left|N((\eps^2)^{32}+1)\right|
+ &=1087^2\cdot4481^2.
+\end{aligned}
+\]
+At depth \(16\), the displayed cofactor \(718\) is even.  At depth
+\(32\), the only arithmetically compatible split factor is \(11489\).
+There \(\ord_{11489}(5)=16\), hence \(r=8\) and \(q^e=359\).
+Coprimality forces \(s\in\{1,359\}\).  The first choice would make
+\(\eps^2\) have order \(2\), while the second would give
+\((\eps^2)^{718}=1\); both are impossible, the latter because the exact
+kernel certificate gives
+\[
+(\eps^2)^{718}=-1\pmod{11489}
+\]
+for either root of \(X^2-3X+1\).
+
+At depth \(64\), the cofactors attached to \(641\), \(241931001601\),
+and \(4481\) are even, \(11489-1\) is not divisible by \(64\), and
+\[
+\frac{29423041-1}{64}=459735=3\cdot5\cdot30649
+\]
+is not a prime power.  These exhaust the split factors in the exact
+factorizations above, completing the first four depths.
+
+For \(b=7\), no new large factorization is needed.  Both \(5\) and
+\(\eps^2\) are squares in the split branch.  Hence a negative
+half-period \(a^{64}=-1\) would give
+\(a^{(p-1)/2}=-1\), contradicting quadratic residuacity.  The positive
+half-period reduces to the depth-\(64\) factorizations above.  Their
+only arithmetically compatible split residues are \(641\) and \(4481\).
+For \(641\), one has \(\ord_{641}(5)=64\), while either golden root has
+order \(320\), contradicting coprimality of the semiorders.  For \(4481\),
+\((4481-1)/128=35\) is not a prime power.  This completes depth seven.
+\end{proof}
+
+\begin{theorem}[5-smooth split support is impossible]
+\label{thm:Hfivesmooth}
+No split H-profile prime in the branch \(p\equiv1\pmod5\) satisfies
+\[
+p-1=2^b5^f
+\]
+for any \(b,f\ge0\).
+\end{theorem}
+
+\begin{proof}
+Write the exact scalar orders as
+\(\ord_p(5)=2r\) and \(\ord_p(\eps^2)=2s\).  The primitive level
+\(4rs\) is prime to \(5\), while both orders divide \(p-1\).  Hence
+\(r,s\mid2^b\).  Since \(r+s\) is odd, one of \(r,s\) is odd, and an
+odd divisor of a power of two is \(1\).
+
+If \(r=1\), then \(5\) has order \(2\), so \(5\equiv-1\pmod p\);
+thus \(p\mid6\), which is incompatible with \(p\equiv1\pmod5\).
+If \(s=1\), then \(x=\eps^2\) has order \(2\), so \(x=-1\).  But
+\(x^2-3x+1=0\), and substitution gives \(5=0\), contrary to
+\(p\ne5\).
 \end{proof}
 
 An independent exact replay on the 244 admissible pairs
@@ -1032,10 +1119,49 @@ factors, all $\equiv \pm2 \pmod 5$, and $k_- = \#\{p_i \equiv -\nu\}$
 satisfies $k_- \equiv (k-1)/2 \pmod 2$.
 \end{theorem}
 
+The local parity seam and the H4-to-skeleton part of
+Theorem~\ref{thm:structure} are kernel-checked.  More precisely,
+\texttt{localS5\_orderFour\_odd} proves that a good local row in residue
+class $2$ or $3\bmod 5$ is automatically odd, while
+\texttt{squarefree\_counterexample\_concrete\_dichotomy} proves that every
+squarefree candidate either has a split order-four witness or has all
+prime factors in the inert classes, with an odd number (at least three) of
+factors and with every complementary \texttt{LocalS5} row present.
+The kernel theorem
+\texttt{squarefree\_counterexample\_order\_dichotomy} now continues this
+chain through the exact $1$-or-$p^2$ congruence modulo
+$\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$ at every skeleton
+factor, with the branch determined by whether $p_i\equiv n\pmod5$.
+For each inert final row, the kernel now also carries the corresponding
+pure or twisted branch to divisibility by \(q^4\) of the explicit integer
+resultant used in Section~\ref{sec:fibers}.  The proof avoids a separate
+number-field norm interface: irreducibility of \(\Phi_5\bmod q\) makes
+\(\Phi_5\) divide the fiber polynomial modulo \(q\), so the integral
+remainder is coefficientwise divisible by \(q\), and resultant homogeneity
+supplies all four factors.  Reduction modulo \(5\), where
+\(\Phi_5=(X-1)^4\), shows that each resultant is \(1\bmod5\); the kernel
+therefore also proves nonvanishing and
+\(q^4\le|\operatorname{Res}|\).  A complex-root product argument is now
+kernel-checked as well and gives
+\(|\operatorname{Res}|\le16\cdot5^A\).  Finally,
+\texttt{explicitResultantRows\_of\_skeleton} instantiates the formerly
+abstract skeleton-to-fiber interface: at every skeleton factor it selects
+the correct pure or twisted terminal resultant and supplies both bounds.
+Compatible-prefix CRT sufficiency and universal fiber emptiness remain
+paper-level/open.  The exact conditional closure under exclusion of both
+walls is recorded as
+\texttt{no\_squarefree\_counterexample\_of\_no\_split\_and\_no\_explicit\_rows};
+its two open premises are visible in the theorem statement, and the
+two exclusion premises are quantified only over squarefree candidates.
+
 In particular, under H4 the two-factor case of
 Conjecture~\ref{conj:agrawal} at $r = 5$ is settled: every squarefree $n$
 with at most two prime factors passing the test is prime or
-$n^2 \equiv 1 \pmod 5$.
+$n^2 \equiv 1 \pmod 5$.  The reduction of a two-prime candidate to a split
+order-four witness is kernel-checked, without H4, as
+\texttt{two\_prime\_candidate\_has\_splitOrderFourWitness}; H4 is used only
+to exclude that final witness, in the kernel theorem
+\texttt{no\_two\_prime\_candidate\_of\_localH4}.
 
 \begin{theorem}[rigidity in the Frobenius branch]\label{thm:rigidity}
 For any branch and any $m \in S(p,5)$ with $m \bmod 5 \in
@@ -1053,6 +1179,29 @@ distinct Frobenius orbits can have distinct row orders; the lcm over all
 rows repairs this.)
 \end{proof}
 
+The order-row interface needed below is kernel-checked independently of the
+full set equality in Theorem~\ref{thm:rigidity}.
+The declaration \texttt{localS5\_modEq\_frobenius\_power} compares a literal
+local row with the matching Frobenius-power row and proves congruence modulo
+$\operatorname{ord}(\zeta_5-1)$.  Combining it with the already determined
+residue modulo $5$, \texttt{quarticOrderRow\_of\_local} obtains the
+congruence modulo $M=\operatorname{lcm}(\operatorname{ord}(\zeta_5-1),5)$,
+and \texttt{quarticOrderRows\_of\_skeleton} supplies it simultaneously at
+every prime factor.  Finally,
+{\small\texttt{inertQuotient\_residue\_determined}} proves which quotient
+residue occurs, and a companion kernel theorem assembles this fact across
+all factors.  Together they give the precise labelling $j_i=0$ for
+$p_i\equiv\nu\pmod5$ and $j_i=2$ otherwise.  These declarations prove
+necessity of the rows used in Theorem~\ref{thm:k3}.  The corresponding
+\texttt{ResultantTrap} declarations continue either literal final row to
+\(q^4\)-divisibility of its resultant, prove that the two fixed resultants
+are nonzero, and prove the closed estimate
+\(q^4\le|\operatorname{Res}|\le16\cdot5^A\).
+\texttt{ExplicitFiber} assembles the correct terminal branch at every
+skeleton factor.  These declarations do not prove compatible-prefix CRT
+sufficiency or emptiness of any terminal fiber; the exact declaration names
+are listed in Section~\ref{sec:fibers}.
+
 \begin{theorem}[explicit $k=3$ system]\label{thm:k3}
 Under H4, a three-factor counterexample $n = p_1p_2p_3$ (all
 $p_i \equiv \pm2 \bmod 5$) satisfies exactly
@@ -1066,6 +1215,12 @@ with $T_i = \ord(\zeta_5 - 1)$ in $\F_{p_i^4}^\times$. Moreover
 $\ord_{p_i}(5) \mid n/p_i - 1$ for every $i$ (base-$5$ Korselt condition
 shifted to $n/p$), and $M_i \le \max(n/p_i - 1, |n/p_i - p_i^2|)$.
 \end{theorem}
+
+The displayed branch-sensitive bound is now kernel-checked; its companion
+kernel theorem gives the universal exclusion when
+$n/p_i<p_i^2\le M_i$.  The declaration names are recorded in the public
+claim-status table.  These are universal consequences of the literal row,
+not claims that the residual finite cases are empty.
 
 The determination of the exponents uses Theorem~\ref{thm:structure}(a) and
 the four-element lemma $p^4 \equiv 1 \pmod{M}$; necessity uses
@@ -1100,10 +1255,15 @@ Both the conjugation identity $u_1^{p^2-1} = -\zeta^{-1}$ and the resulting
 bound $T_p \mid 10(p^2-1)$ already appear in the Lenstra--Pomerance notes
 \cite{LP}, and a ring version ($\rho \mid 10(\lambda^2-1)$ modulo $X^5-1$)
 in \cite{Vana2009}, Lemma~3.4: we claim no novelty for them. The exact
-$2$-adic law, the coprime tail decomposition, and the Kummer
-interpretation of the tail below were not found in the targeted search;
-their priority remains provisional. The binary
-consequence for the Korselt rows is a single bit:
+$2$-adic law is kernel-checked by
+\texttt{localCyclotomicUnit\_\allowbreak order\_\allowbreak factorization\_\allowbreak two}
+and
+\texttt{quarticOrderModulus\_\allowbreak factorization\_\allowbreak two}.
+The coprime odd-tail
+decomposition and the Kummer interpretation below remain paper-level.
+None of these refinements was found in the targeted search; their priority
+remains provisional. The binary consequence for the Korselt rows is a
+single bit:
 
 \begin{corollary}[binary rows]\label{cor:bit}
 Row $i$ of the system implies
@@ -1114,7 +1274,9 @@ associated ``at most one bit can hold'' candidate theorem is \emph{false}:
 an exhaustive enumeration modulo $2^7$ over the skeleton finds $96 + 18{,}720$
 configurations (out of $2^{21}$) where two, respectively three, bits hold
 simultaneously. Any universal incompatibility must therefore involve the
-odd tails.
+odd tails.  The later exact-ray corollary makes this binary compatibility
+completely explicit in the kernel; it is a classification of the binary
+projection, not an additional sieve after the full CRT triangle.
 \end{corollary}
 
 \section{Kummer identification of the tail}\label{sec:kummer}
@@ -1203,7 +1365,12 @@ Consequently $d_{p,5} = \ord_p(5)_{\mathrm{odd}}$ exactly, i.e.\
 \begin{proof}
 By the norm lemma (Lemma~\ref{lem:norm}), $5 = u^{S}$ with $u = \zeta - 1$
 and $S = 1 + p + p^2 + p^3 = (p^4-1)/(p-1)$, so in the cyclic group
-$\F_{p^4}^\times$ we have $\ord_p(5) = T_p/\gcd(T_p, S)$. For
+$\F_{p^4}^\times$ we have the two exact identities
+\[
+\ord_p(5)=\frac{T_p}{\gcd(T_p,S)},\qquad
+T_p=\ord_p(5)\gcd(T_p,S).
+\]
+For
 $\ell \mid p-1$: $S \equiv 4 \pmod \ell$, and $\ell$ is odd, so
 $\ell \nmid S$ and $v_\ell(\ord_p 5) = v_\ell(T_p)$. Since
 $\ell \nmid p+1$, $v_\ell(d_{p,+}) = 0$, so
@@ -1315,6 +1482,44 @@ The fiber of admissible third primes over a compatible pair is therefore
 finite and enumerable among the inert prime divisors of two explicit
 integers.
 \end{theorem}
+
+The row-to-fixed-nonzero-resultant part of this theorem is kernel-checked by
+\begin{center}
+\small
+\path{phi5_irreducible_of_inert},\qquad
+\path{prime_pow_natDegree_dvd_resultant_of_common_root},\\
+\path{pure_row_pow_four_dvd_resultant},\quad
+\path{twisted_row_pow_four_dvd_resultant},\\
+\path{pure_resultant_mod_five_eq_one},\quad
+\path{twisted_resultant_mod_five_eq_one},\\
+\path{pure_row_pow_four_le_resultant_natAbs},\quad
+\path{twisted_row_pow_four_le_resultant_natAbs},\\
+\path{pure_resultant_natAbs_le},\quad
+\path{twisted_resultant_natAbs_le},\\
+\path{pure_row_pow_four_le_sixteen_mul_five_pow},\quad
+\path{twisted_row_pow_four_le_sixteen_mul_five_pow},\\
+\path{explicitResultantRows_of_skeleton},\quad
+\path{squarefree_counterexample_explicit_resultant_dichotomy},\\
+\path{no_squarefree_counterexample_of_no_split_and_no_explicit_rows}.
+\end{center}
+The first declaration proves irreducibility in the inert branch.  The
+generic theorem identifies the reduction of \(\Phi_5\) with the minimal
+polynomial of the common root, proves that the integral division remainder
+is coefficientwise divisible by \(q\), and uses resultant homogeneity to
+extract \(q^{\deg\Phi_5}=q^4\).  The two
+\texttt{pow\_four\_dvd\_resultant} declarations supply the displayed pure
+and twisted vanishing relations from a literal
+\texttt{LocalS5} row.  The mod-\(5\) declarations then use
+\(\Phi_5=(X-1)^4\) and evaluation at \(X=1\) to prove
+\(\operatorname{Res}\equiv1\pmod5\), while the final pair combines
+nonvanishing with divisibility to obtain
+\(q^4\le|\operatorname{Res}|\).  The next four declarations evaluate the
+resultant over the four complex roots of \(\Phi_5\), prove that the product
+of the four distances \(|\zeta-1|\) is \(5\), and obtain the displayed
+closed bound \(q^4\le16\cdot5^A\).  The final two declarations show that
+every factor of the concrete quartic skeleton lands in the correct terminal
+resultant branch.  Compatible-prefix CRT sufficiency and universal
+emptiness of the resulting fibers remain paper-level/open.
 
 \begin{lemma}[quadratic descent]\label{lem:descent}
 Both norms are squares. With $t = \zeta_5 + \zeta_5^{-1} = (\sqrt5-1)/2$:
@@ -1435,6 +1640,44 @@ Theorem~\ref{thm:two-row-transport}, this is the complete triangle of
 pairwise CRT compatibility.
 \end{proof}
 
+\begin{corollary}[exact labelled dyadic rays]\label{cor:dyadic-rays}
+For each \(x\in\{p,q,r\}\), put
+\[
+ b_x=v_2(x^2-1),\qquad e_x=j_x+1\in\{1,3\},
+\]
+and let \(\delta(1)=0,\ \delta(3)=1\).  Every complete three-row triangle
+satisfies
+\[
+ b_p=b_q=b_r=:b
+\]
+and
+\[
+ p+\delta(e_p)2^b
+ \equiv q+\delta(e_q)2^b
+ \equiv r+\delta(e_r)2^b
+ \pmod{2^{b+1}}.
+\]
+In particular \(p\equiv q\equiv r\pmod{2^b}\).
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:decomposition} gives
+\(2^{b_x+1}\mid T_x\).  If two row targets are congruent modulo
+\(\gcd(T_x,T_y)\), comparison one level above the smaller exact depth
+forces \(b_x=b_y\).  At the common depth,
+\[
+ x^1\equiv x,\qquad x^3\equiv x+2^b\pmod{2^{b+1}},
+\]
+because \(x^2\equiv1+2^b\pmod{2^{b+1}}\).  Applying this to the two
+transported sides of the triangle proves the displayed chain.
+The complete literal-row statement is kernel-checked as
+\texttt{quarticThreeRows\_\allowbreak exact\_\allowbreak dyadicRays}; the
+intermediate declarations include
+\texttt{square\_\allowbreak modEq\_\allowbreak one\_\allowbreak add\_\allowbreak exactTwoPower}
+and
+\texttt{quarticTriangle\_\allowbreak exact\_\allowbreak dyadicRays}.
+\end{proof}
+
 \begin{corollary}[middle-prime defect cascade]\label{cor:defect-cascade}
 Let \(p<r<q\), and write
 \[
@@ -1492,6 +1735,15 @@ Moreover,
 \gcd(D_p,D_r)\mid r-p
 \]
 and cyclically for the other two pairs.
+For \(p<r<q\), equivalently,
+\[
+\boxed{
+\gcd(D_p,D_r)\le r-p,\quad
+\gcd(D_p,D_q)\le q-p,\quad
+\gcd(D_r,D_q)\le q-r.}
+\]
+Thus any reversed strict inequality is an exact certificate excluding the
+three-row triangle.
 \end{corollary}
 
 \begin{proof}
@@ -1500,7 +1752,90 @@ and \(x^2\) agree modulo \(D_x\).  For the last assertion, reduce two
 relations in~\eqref{eq:odd-shadow-three} modulo
 \(\gcd(D_p,D_r)\).  The common factor \(q\) is
 a unit because \(rq\equiv1\); cancellation gives \(p\equiv r\).
+The concrete definition of \(D_x\), the deduction
+\(T_x\mid10(x^2-1)\Rightarrow D_x\mid x^2-1\), the complete three-pair
+incidence matrix and the strict rejection criterion are kernel-checked as
+\texttt{quarticOddTail\_\allowbreak dvd\_\allowbreak sq\_\allowbreak sub\_\allowbreak one},
+\texttt{quarticOddTail\_\allowbreak incidenceTriangle},
+\texttt{quarticOddTail\_\allowbreak incidenceBounds}, and
+\texttt{quarticOddTail\_\allowbreak oversize\_\allowbreak exclusion}.
 \end{proof}
+
+\begin{corollary}[exact norm-visible two-jaw decomposition]
+\label{cor:norm-jaws}
+For a good inert prime \(x\), put \(u=\zeta_5-1\) and define
+\[
+D_{x,-}=\operatorname{ordCompl}_2(\operatorname{ord}_x(5)),
+\qquad
+D_{x,+}=\gcd(D_x,x+1).
+\]
+Then
+\[
+\boxed{
+u^{\,1+x+x^2+x^3}=5,\qquad
+D_{x,-}=\gcd(D_x,x-1),}
+\]
+and the complete odd tail factors as
+\[
+\boxed{
+D_x=D_{x,-}D_{x,+},\qquad
+D_{x,-}\mid x-1,\qquad
+D_{x,+}\mid x+1,\qquad
+\gcd(D_{x,-},D_{x,+})=1.}
+\]
+If two compatible rows are attached to \(p\le r\), every common odd
+prime has a consistent sign:
+\[
+\ell\mid D_{p,-},D_{r,+}\Longrightarrow\ell\mid2,
+\qquad
+\ell\mid D_{p,+},D_{r,-}\Longrightarrow\ell\mid2.
+\]
+In fact the complete common tail has the exact signed factorization
+\[
+\boxed{
+\gcd(D_p,D_r)=
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+}).}
+\]
+Consequently both same-sign overlaps occur simultaneously in the gap:
+\[
+\gcd(D_{p,-},D_{r,-})\,
+\gcd(D_{p,+},D_{r,+})\mid r-p.
+\]
+\end{corollary}
+
+\begin{proof}
+The norm exponent
+\[
+1+x+x^2+x^3=(x+1)(x^2+1)
+\]
+runs through the four Frobenius conjugates of \(u\), whose product is
+\(\Phi_5(1)=5\).  Every odd divisor of \(x-1\) is coprime to this exponent,
+so the norm cannot erase any odd \(x-1\)-component of
+\(\operatorname{ord}(u)\).  This proves the formula for \(D_{x,-}\).
+Since \(D_x\mid(x-1)(x+1)\) and \(D_x\) is odd, Euclidean cancellation
+gives the complementary factor and coprimality.
+
+For the cross-sign assertion, Corollary~\ref{cor:odd-shadow} gives
+\(\gcd(D_p,D_r)\mid r-p\).  A divisor of \(D_{p,-}\) and \(D_{r,+}\)
+therefore divides \(p-1\), \(r+1\), and \(r-p\), hence divides \(2\);
+the reverse orientation is identical.  The literal norm identity, exact
+order quotient and norm-kernel factorization are kernel-checked in
+\texttt{QuarticNormJaw.lean}.  Cancelling the two cross gcds gives the
+exact same-sign factorization and the signed incidence triangle,
+kernel-checked in \texttt{QuarticSignedIncidence.lean}.
+\end{proof}
+
+\begin{remark}[the exact remaining odd wall]
+Corollaries~\ref{cor:odd-shadow} and~\ref{cor:norm-jaws} are deterministic
+sieves, but they are not a universal contradiction.  The exact
+factorization forces a consistent sign on every shared odd prime, but it
+does not force two rows to share an odd prime or force a sign change.  Nor
+does the current theory force any one of the three shared gcds to exceed its
+corresponding prime gap.  A universal closure therefore still requires
+either a class-specific lower bound or mixing theorem for the joint jaws, or
+a theorem emptying every explicit terminal resultant fiber.
+\end{remark}
 
 The chain of reductions supports a correctness theorem for machine
 certificates, which a referee can audit once instead of trusting each
