@@ -117,5 +117,8 @@ introduced.
 #print axioms AgrawalCore.twistedSmallRow_lift_iff
 #print axioms AgrawalCore.boundedLift_exclusion
 #print axioms AgrawalCore.phi5_irreducible_of_inert
+#print axioms AgrawalCore.prime_pow_natDegree_dvd_resultant_of_common_root
 #print axioms AgrawalCore.pure_row_dvd_resultant
 #print axioms AgrawalCore.twisted_row_dvd_resultant
+#print axioms AgrawalCore.pure_row_pow_four_dvd_resultant
+#print axioms AgrawalCore.twisted_row_pow_four_dvd_resultant

@@ -8,13 +8,13 @@ root modulo `q` of `Φ₅` and the corresponding integer fiber polynomial:
   pure:    (X - 1)^A - 1,
   twisted: X (X - 1)^A + 1.
 
-The Sylvester resultant therefore vanishes modulo `q`.  This module proves
-the resulting integer divisibility by `q` in the Lean kernel.
-
-It does *not* assert the stronger paper-level divisibility by `q^4`; that
-step uses inert prime-ideal norms in the quartic number field.
+The Sylvester resultant therefore vanishes modulo `q`.  Irreducibility of
+`Φ₅ mod q` gives more: `Φ₅` divides the fiber polynomial modulo `q`, so the
+integral remainder has every coefficient divisible by `q`.  Homogeneity of
+the resultant in its second input then supplies the full factor `q^4`.
 -/
 import AgrawalCore.QuarticRigidity
+import Mathlib.FieldTheory.Minpoly.Field
 import Mathlib.RingTheory.Polynomial.Resultant.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Factorization
 
@@ -121,6 +121,78 @@ theorem prime_dvd_resultant_of_common_root
     simpa using hmap
   exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp hz
 
+/-- If the reduction of a monic integral polynomial is irreducible and has
+the same root as a second polynomial in a field extension of `ZMod q`, then
+the full `q ^ deg f` divides their integral resultant.
+
+The proof is coefficient-level.  Irreducibility identifies the reduction of
+`f` with the minimal polynomial of the common root.  Thus it divides the
+reduction of `g`; equivalently, the integral remainder of `g` modulo `f` is
+coefficientwise divisible by `q`.  Resultant invariance under adding a
+multiple of `f`, followed by homogeneity in the second input, produces one
+factor of `q` for each degree of `f`. -/
+theorem prime_pow_natDegree_dvd_resultant_of_common_root
+    {q : ℕ} [Fact q.Prime] {K : Type*} [Field K]
+    [Algebra (ZMod q) K]
+    {f g : ℤ[X]} (hf : f.Monic)
+    (hfirr : Irreducible (f.map (Int.castRingHom (ZMod q))))
+    {x : K}
+    (hfx : (f.map ((algebraMap (ZMod q) K).comp
+      (Int.castRingHom (ZMod q)))).eval x = 0)
+    (hgx : (g.map ((algebraMap (ZMod q) K).comp
+      (Int.castRingHom (ZMod q)))).eval x = 0) :
+    (q : ℤ) ^ f.natDegree ∣ f.resultant g := by
+  let φ : ℤ →+* ZMod q := Int.castRingHom (ZMod q)
+  let fbar : (ZMod q)[X] := f.map φ
+  let gbar : (ZMod q)[X] := g.map φ
+  have hfx' : Polynomial.aeval x fbar = 0 := by
+    simpa [Polynomial.aeval_def, fbar, φ, eval_map, eval₂_map] using hfx
+  have hgx' : Polynomial.aeval x gbar = 0 := by
+    simpa [Polynomial.aeval_def, gbar, φ, eval_map, eval₂_map] using hgx
+  have hmin : fbar = minpoly (ZMod q) x :=
+    minpoly.eq_of_irreducible_of_monic
+      (by simpa [fbar, φ] using hfirr) hfx' (hf.map φ)
+  have hfdvd : fbar ∣ gbar := by
+    rw [hmin]
+    exact minpoly.dvd (ZMod q) x hgx'
+  let rem : ℤ[X] := g %ₘ f
+  let quo : ℤ[X] := g /ₘ f
+  have hmaprem : rem.map φ = 0 := by
+    rw [show rem.map φ = gbar %ₘ fbar by
+      simpa [rem, fbar, gbar] using
+        (Polynomial.map_modByMonic φ hf)]
+    exact (Polynomial.modByMonic_eq_zero_iff_dvd (hf.map φ)).2 hfdvd
+  have hC : C (q : ℤ) ∣ rem := by
+    rw [Polynomial.C_dvd_iff_dvd_coeff]
+    intro i
+    have hz : ((rem.coeff i : ℤ) : ZMod q) = 0 := by
+      have hc := congrArg (fun P : (ZMod q)[X] => P.coeff i) hmaprem
+      simpa [φ] using hc
+    exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp hz
+  obtain ⟨scaledRem, hscaledRem⟩ := hC
+  let m := f.natDegree
+  let n := g.natDegree + f.natDegree
+  have hquoDegree : quo.natDegree + m ≤ n := by
+    rw [show quo.natDegree = g.natDegree - f.natDegree by
+      simpa [quo] using Polynomial.natDegree_divByMonic g hf]
+    simp [m, n]
+  have hdefault : f.resultant g m n = f.resultant g := by
+    simpa [m, n, Polynomial.coeff_natDegree, hf.leadingCoeff] using
+      (Polynomial.resultant_add_right_deg
+        f g m g.natDegree m (le_refl g.natDegree))
+  refine ⟨f.resultant scaledRem m n, ?_⟩
+  calc
+    f.resultant g = f.resultant g m n := hdefault.symm
+    _ = f.resultant (rem + f * quo) m n := by
+      rw [Polynomial.modByMonic_add_div]
+    _ = f.resultant rem m n :=
+      Polynomial.resultant_add_mul_right
+        f rem quo m n hquoDegree (le_refl f.natDegree)
+    _ = f.resultant (C (q : ℤ) * scaledRem) m n := by rw [hscaledRem]
+    _ = (q : ℤ) ^ m * f.resultant scaledRem m n :=
+      Polynomial.resultant_C_mul_right f scaledRem m n (q : ℤ)
+    _ = (q : ℤ) ^ f.natDegree * f.resultant scaledRem m n := rfl
+
 noncomputable def pureFiberPolynomial (A : ℕ) : ℤ[X] :=
   (X - 1) ^ A - 1
 
@@ -158,6 +230,13 @@ lemma twistedFiberPolynomial_monic (A : ℕ) :
 
 lemma intPhi5_monic : (cyclotomic 5 ℤ).Monic :=
   cyclotomic.monic 5 ℤ
+
+theorem intPhi5_map_irreducible_of_inert {q : ℕ} [Fact q.Prime]
+    (hq : InertModFive q) :
+    Irreducible
+      ((cyclotomic 5 ℤ).map (Int.castRingHom (ZMod q))) := by
+  rw [map_cyclotomic_int, ← phi5_eq_cyclotomic]
+  exact phi5_irreducible_of_inert hq
 
 theorem intPhi5_eval_zeta_of_inert {q : ℕ} [Fact q.Prime]
     (hq : InertModFive q) :
@@ -290,5 +369,43 @@ theorem twisted_row_dvd_resultant {q A : ℕ} [Fact q.Prime]
   · exact intPhi5_eval_zeta_of_inert hq
   · rw [twistedFiberPolynomial_eval_zeta,
       twisted_row_vanishing hq hres hrow]
+
+/-- The full inert-degree contribution for the pure final row:
+the quartic cyclotomic factor forces `q^4`, not merely `q`, to divide the
+explicit integer resultant. -/
+theorem pure_row_pow_four_dvd_resultant {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q)
+    (hres : (A + 1) % 5 = 1) (hrow : LocalS5 q (A + 1)) :
+    (q : ℤ) ^ 4 ∣
+      (cyclotomic 5 ℤ).resultant (pureFiberPolynomial A) := by
+  letI : Fact (Irreducible (phi5 q)) :=
+    ⟨phi5_irreducible_of_inert hq⟩
+  have hpow :=
+    prime_pow_natDegree_dvd_resultant_of_common_root
+      intPhi5_monic (intPhi5_map_irreducible_of_inert hq)
+      (x := (zeta5 : Phi5Ring q))
+      (intPhi5_eval_zeta_of_inert hq)
+      (by rw [pureFiberPolynomial_eval_zeta,
+          pure_row_power hq hres hrow, sub_self])
+  have htot : Nat.totient 5 = 4 := by decide
+  simpa [natDegree_cyclotomic, htot] using hpow
+
+/-- The full inert-degree contribution for the twisted final row. -/
+theorem twisted_row_pow_four_dvd_resultant {q A : ℕ} [Fact q.Prime]
+    (hq : InertModFive q)
+    (hres : (A + 1) % 5 = 4) (hrow : LocalS5 q (A + 1)) :
+    (q : ℤ) ^ 4 ∣
+      (cyclotomic 5 ℤ).resultant (twistedFiberPolynomial A) := by
+  letI : Fact (Irreducible (phi5 q)) :=
+    ⟨phi5_irreducible_of_inert hq⟩
+  have hpow :=
+    prime_pow_natDegree_dvd_resultant_of_common_root
+      intPhi5_monic (intPhi5_map_irreducible_of_inert hq)
+      (x := (zeta5 : Phi5Ring q))
+      (intPhi5_eval_zeta_of_inert hq)
+      (by rw [twistedFiberPolynomial_eval_zeta,
+          twisted_row_vanishing hq hres hrow])
+  have htot : Nat.totient 5 = 4 := by decide
+  simpa [natDegree_cyclotomic, htot] using hpow
 
 end AgrawalCore
